@@ -1,19 +1,22 @@
-1.npm create vite@latest 
 
-  -Project name → my-app
+1. Each create a branch locally on their machine by running:
 
-   -Framework → React
+git checkout -b branch-name
 
-    -Variant → JavaScript
-................................
-...after cloning...
+2. Push the branch to the remote repo
 
-2.cd my-app
+git push -u origin branch-name
 
-3.npm install
+3. Switch between branches
+To switch between branches locally:
 
-4.npm install react-router-dom
+git checkout branch-name
 
-5.npm run dev
+4. Collaborate and merge
+•	Each teammate works in their branch.
+•	Once a feature is ready, open a Pull Request on GitHub from their branch to main.
+•	Review and merge PR on GitHub.
 
-6.npm install gsap(later)
+•	Then teammates update their local repos with:
+
+git pull origin main
