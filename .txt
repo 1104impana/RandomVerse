@@ -1,0 +1,19 @@
+1.npm create vite@latest 
+
+  -Project name → my-app
+
+   -Framework → React
+
+    -Variant → JavaScript
+................................
+...after cloning...
+
+2.cd my-app
+
+3.npm install
+
+4.npm install react-router-dom
+
+5.npm run dev
+
+6.npm install gsap(later)
