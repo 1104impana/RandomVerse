@@ -12,7 +12,7 @@
       height = canvas.height = window.innerHeight;
       createSpaceBackground();
     }
-    
+
     // Track mouse position
     let mouseX = 0;
     let mouseY = 0;
@@ -31,6 +31,21 @@
     
     // Space background image
     let spaceBackground;
+
+    // Color settings
+    let activeColor = null;
+    let colorIntensity = 0;
+    let colorParticles = [];
+    let isColorActive = false;
+
+    // Purple color values
+    const purpleColor = {
+      r: 156,
+      g: 39,
+      b: 176,
+      a: 0.5
+    };
+    
     
     // Create initial space background with stars
     function createSpaceBackground() {
@@ -129,10 +144,24 @@
             displacementX: 0,
             displacementY: 0,
             velocityX: 0,
-            velocityY: 0
+            velocityY: 0,
+            colorIntensity: 0,
+            color: null
           };
         }
       }
+    }
+
+    // Add color particle
+    function addColorParticle(x, y, color) {
+      colorParticles.push({
+        x,
+        y,
+        color,
+        radius: 50,
+        life: 100,
+        maxLife: 100
+      });
     }
     
     // Animation loop
@@ -148,6 +177,22 @@
       
       lastMouseX = mouseX;
       lastMouseY = mouseY;
+
+      // Add color particles if color is active and mouse is moving
+      if (isColorActive && mouseSpeed > 0.5) {
+        addColorParticle(mouseX, mouseY, activeColor);
+      }
+
+       // Update color particles
+      for (let i = colorParticles.length - 1; i >= 0; i--) {
+        const particle = colorParticles[i];
+        particle.life -= 0.5;
+        
+        if (particle.life <= 0) {
+          colorParticles.splice(i, 1);
+          continue;
+        }
+      }
       
       // Update grid points based on mouse position
       for (let i = 0; i < cols; i++) {
@@ -169,7 +214,28 @@
             // Apply force away from mouse
             point.velocityX -= distX * influence;
             point.velocityY -= distY * influence;
+          
+
+          // Apply color if color is active
+            if (isColorActive) {
+              point.color = activeColor;
+              point.colorIntensity = Math.min(point.colorIntensity + 0.02, 0.5);
+            }
           }
+
+          // Check if point is near any color particles
+          colorParticles.forEach(particle => {
+            const particleDistX = particle.x - point.originalX;
+            const particleDistY = particle.y - point.originalY;
+            const particleDistance = Math.sqrt(particleDistX * particleDistX + particleDistY * particleDistY);
+            
+            if (particleDistance < particle.radius) {
+              const particleInfluence = (1 - particleDistance / particle.radius) * (particle.life / particle.maxLife) * 0.1;
+              point.color = particle.color;
+              point.colorIntensity = Math.min(point.colorIntensity + particleInfluence, 0.5);
+            }
+          });
+          
           
           // Apply return force to original position
           const returnForce = 0.03;
@@ -187,6 +253,15 @@
           // Update position
           point.x = point.originalX + point.displacementX;
           point.y = point.originalY + point.displacementY;
+
+          // Fade color intensity over time
+          if (point.colorIntensity > 0) {
+            point.colorIntensity *= 0.995;
+            if (point.colorIntensity < 0.01) {
+              point.colorIntensity = 0;
+              point.color = null;
+            }
+          }
         }
       }
       
@@ -237,6 +312,18 @@
             0, 0, meshSize, meshSize
           );
           
+          if ((p0.colorIntensity > 0 || p1.colorIntensity > 0 || p2.colorIntensity > 0 || p3.colorIntensity > 0) && 
+              (p0.color || p1.color || p2.color || p3.color)) {
+            // Use the average color intensity of the four corners
+            const avgIntensity = (p0.colorIntensity + p1.colorIntensity + p2.colorIntensity + p3.colorIntensity) / 4;
+            // Use the color from the first corner that has one
+            const color = p0.color || p1.color || p2.color || p3.color;
+            
+            // Apply color overlay
+            ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${avgIntensity * color.a})`;
+            ctx.fillRect(0, 0, meshSize, meshSize);
+          }
+          
           ctx.restore();
         }
       }
@@ -265,5 +352,23 @@
       mouseX = e.touches[0].clientX;
       mouseY = e.touches[0].clientY;
     }, { passive: false });
+
+    // Color palette functionality
+    const purpleColorButton = document.getElementById('purpleColor');
+    
+    // Add click event listener to the purple color button
+    purpleColorButton.addEventListener('click', function() {
+      if (isColorActive && activeColor === purpleColor) {
+        // Toggle off if already active
+        isColorActive = false;
+        activeColor = null;
+        this.classList.remove('active');
+      } else {
+        // Activate purple color
+        isColorActive = true;
+        activeColor = purpleColor;
+        this.classList.add('active');
+      }
+    });
   
 
