@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Magic Ball Fortune Teller</title>
+  <link rel="stylesheet" href="css/crystall.css">
+</head>
+<body>
+<div class="container">
+  <h1>🔮 Ask the Magic Ball 🔮</h1>
+  <p>Type your question and click the ball to reveal your fortune!</p>
+  <div class="crystal-container">
+     <div class="ball-wrapper">
+      <img id="magicBall" src="images/crystal-ball.gif" alt="Magic Ball" style="border-radius: 100%;" onclick="tellFortune()">
+      <div id="ballMessage">Ask your question!</div>
+    </div>
+    <input type="text" id="userQuestion" placeholder="eg: will I get a job?">
+    <button onclick="tellFortune()">Ask the Ball</button>
+    <h2>wanna check you fortune?
+    </h2>
+    <a href="fortune.html">click here :)</a>
+  </div>
+</div>
+  <script src="js/crystall.js"></script>
+</body>
+</html>
