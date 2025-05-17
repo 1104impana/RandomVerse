@@ -1,19 +1,19 @@
 
-    // Initialize canvas and context
+  
     const canvas = document.getElementById('spacePaint');
     const ctx = canvas.getContext('2d');
     
     // Canvas dimensions
     let width, height;
     
-    // Set canvas to full window size
+    
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       createSpaceBackground();
     }
 
-    // Track mouse position
+    // mouse 
     let mouseX = 0;
     let mouseY = 0;
     let lastMouseX = 0;
@@ -25,7 +25,7 @@
     let cols, rows;
     let grid = [];
     
-    // Background stars
+    // stars
     let stars = [];
     const numStars = 500;
     
@@ -47,19 +47,19 @@
     };
     
     
-    // Create initial space background with stars
+    
     function createSpaceBackground() {
-      // Create an offscreen canvas for the space background
+      
       spaceBackground = document.createElement('canvas');
       spaceBackground.width = width;
       spaceBackground.height = height;
       const bgCtx = spaceBackground.getContext('2d');
       
-      // Fill with black background
+      
       bgCtx.fillStyle = '#000';
       bgCtx.fillRect(0, 0, width, height);
       
-      // Generate stars with different sizes and colors
+      // Create stars
       stars = [];
       for (let i = 0; i < numStars; i++) {
         const size = Math.random() * 2 + 0.5;
@@ -86,14 +86,14 @@
         }
       }
       
-      // Add some nebula-like areas
+      
       addNebulaEffect(bgCtx);
       
       // Initialize water mesh grid
       initGrid();
     }
     
-    // Add nebula-like colored areas
+    
     function addNebulaEffect(bgCtx) {
       const nebulaColors = [
         'rgba(70, 0, 90, 0.1)',  // Purple
@@ -102,7 +102,7 @@
         'rgba(60, 0, 60, 0.1)'   // Magenta
       ];
       
-      // Create 5-8 nebula clouds
+      
       const numNebulas = Math.floor(Math.random() * 4) + 5;
       
       for (let i = 0; i < numNebulas; i++) {
@@ -111,7 +111,7 @@
         const nebulaRadius = Math.random() * (width/3) + width/6;
         const color = nebulaColors[Math.floor(Math.random() * nebulaColors.length)];
         
-        // Create radial gradient
+        
         const gradient = bgCtx.createRadialGradient(
           centerX, centerY, 0,
           centerX, centerY, nebulaRadius
