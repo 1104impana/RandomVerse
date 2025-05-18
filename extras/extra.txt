@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Random Verse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="greeting">
+            <h1 class="title">
+                <span class="word" id="welcome">Welcome</span>
+                <span class="word" id="to">to</span>
+                <span class="word" id="random">Random</span>
+                <span class="word" id="verse">Verse</span>
+            </h1>
+        </div>
+        <section class="content">
+            <h2 class="section-title">Explore Randomness</h2>
+            <p>This section introduces randomness in a creative way...</p>
+        </section>
+        <footer class="footer">
+            <p>Footer content here</p>
+        </footer>
+    </div>
+    <div class="lines-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!--other one-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Random Verse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="greeting">
+            <h1 class="title">Welcome to <span class="highlight">Random Verse</span></h1>
+            <p class="subheading">An adventure into randomness.</p>
+        </div>
+        <button class="explore-btn" onclick="animateText()">Explore</button>
+    </div>
+    <div class="particles"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+//css part
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    padding-top: 50px;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+.title {
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 5rem;
+    letter-spacing: 3px;
+    opacity: 0;
+    animation: fadeInText 2s forwards;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.word {
+    position: absolute;
+    opacity: 0;
+    animation: fadeInWords 2s forwards;
+}
+
+.word#to {
+    animation-delay: 1s;
+}
+
+.word#random {
+    animation-delay: 2s;
+}
+
+.word#verse {
+    animation-delay: 3s;
+}
+
+.explore-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4c4c;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInBtn 2s 2s forwards;
+}
+
+.explore-btn:hover {
+    background-color: #ff6363;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInWords {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInBtn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.content {
+    text-align: center;
+    margin-top: 80vh; /* Adds space after the title */
+    padding: 20px;
+    background-color: #222;
+    color: white;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #ff4c4c;
+}
+
+.footer {
+    background-color: #333;
+    padding: 30px;
+    color: white;
+    text-align: center;
+}
+
+.lines-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.line {
+    position: absolute;
+    background-color: #ff4c4c;
+    width: 2px;
+    opacity: 0.7;
+    animation: drawLine 2s ease-in-out forwards;
+}
+
+@keyframes drawLine {
+    0% {
+        height: 0;
+        transform: scaleY(0);
+    }
+    100% {
+        height: 100%;
+        transform: scaleY(1);
+    }
+}
+/* other thing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    animation: fadeIn 2s ease-out;
+}
+
+.title {
+    font-size: 3rem;
+    letter-spacing: 3px;
+    opacity: 0;
+    animation: fadeInText 2s forwards;
+}
+
+.highlight {
+    color: #ff4c4c;
+}
+
+.subheading {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeInText 2s 1s forwards;
+}
+
+.explore-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4c4c;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInBtn 2s 2s forwards;
+}
+
+.explore-btn:hover {
+    background-color: #ff6363;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInBtn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 5px 5px;
+    animation: particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+//javascript
+
+// Function to animate the greeting text
+function animateText() {
+    const words = document.querySelectorAll('.word');
+    words.forEach((word, index) => {
+        word.style.animation = 'none';
+        word.offsetHeight; // Trigger reflow to reset animation
+        word.style.animation = `fadeInWords 2s forwards`;
+    });
+
+    const button = document.querySelector('.explore-btn');
+    button.style.animation = 'none';
+    button.offsetHeight; // Trigger reflow to reset animation
+    button.style.animation = 'fadeInBtn 2s 2s forwards';
+}
+
+// Function to position words randomly and create connecting lines
+function positionWords() {
+    const titleWords = document.querySelectorAll('.word');
+    const linesContainer = document.querySelector('.lines-container');
+    const wordPositions = [];
+    
+    // Store positions of each word
+    titleWords.forEach((word, index) => {
+        const randomX = Math.random() * window.innerWidth;
+        const randomY = Math.random() * (window.innerHeight / 2); // Restrict random Y position to upper half of the screen
+        word.style.left = `${randomX}px`;
+        word.style.top = `${randomY}px`;
+        
+        wordPositions.push({ x: randomX, y: randomY });
+
+        if (index > 0) {
+            // Create line connecting the current word to the previous one
+            const line = document.createElement('div');
+            line.classList.add('line');
+            
+            const prevWord = wordPositions[index - 1];
+            const length = Math.sqrt(Math.pow(randomX - prevWord.x, 2) + Math.pow(randomY - prevWord.y, 2));
+            const angle = Math.atan2(randomY - prevWord.y, randomX - prevWord.x) * (180 / Math.PI);
+
+            // Position the line
+            line.style.height = `${length}px`;
+            line.style.transform = `rotate(${angle}deg)`;
+            line.style.left = `${prevWord.x}px`;
+            line.style.top = `${prevWord.y}px`;
+
+            linesContainer.appendChild(line);
+        }
+    });
+}
+
+// Initialize the random positions and lines
+positionWords();
+
+// Listen for window resize to reposition words and lines
+window.addEventListener('resize', positionWords);
+// other thing or code
+function animateText() {
+    const title = document.querySelector('.title');
+    const subheading = document.querySelector('.subheading');
+    const button = document.querySelector('.explore-btn');
+
+    // Triggering animation for greeting text when button is clicked
+    title.style.animation = 'none';
+    subheading.style.animation = 'none';
+    button.style.animation = 'none';
+
+    title.offsetHeight; // Trigger reflow to reset animation
+    subheading.offsetHeight; // Trigger reflow to reset animation
+    button.offsetHeight; // Trigger reflow to reset animation
+
+    // Re-apply animation after a brief reset
+    title.style.animation = 'fadeInText 2s forwards';
+    subheading.style.animation = 'fadeInText 2s 1s forwards';
+    button.style.animation = 'fadeInBtn 2s 2s forwards';
+
+    // Adding an interactive effect after clicking
+    button.textContent = 'Exploring...';
+    button.disabled = true;
+
+    setTimeout(() => {
+        button.textContent = 'Explore Again';
+        button.disabled = false;
+    }, 3000);
+}
+
+

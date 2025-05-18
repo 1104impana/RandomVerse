@@ -6,16 +6,24 @@
 }
 
 body {
+    background: linear-gradient(135deg, #46264F, #6C4677, #84588D,#95719D,#B08FBA);
+    -webkit-background-clip: text;
+    color: transparent;
     font-family: Arial, sans-serif;
-    background-color: rgb(100, 84, 156);
     overflow-x: hidden;
 }
 
 .welcome-message{
+    background: linear-gradient(135deg, #46264F, #6C4677, #84588D,#95719D,#B08FBA);
+    -webkit-background-clip: text;
+    color: transparent;
+
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 3rem;
     color: black;
-    font-size:150px;
+    font-size:120px;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
 /* Home Page */
@@ -25,11 +33,17 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background-color: rgb(100, 84, 156);
-    color: white;
+    background: linear-gradient(135deg, #46264F, #6C4677, #84588D,#95719D,#B08FBA);
+    -webkit-background-clip: text;
+    color: transparent;
+    color: rgb(17, 17, 17);
     text-align: center;
     opacity: 0;
     animation: fadeIn 7s forwards;
+}
+
+.footer-section {
+    color: black;
 }
 
 
