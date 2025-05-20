@@ -1,0 +1,50 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+}
+.bg-image {
+  width: 100%;
+  height: 100vh;
+  background:
+    linear-gradient(rgb(0, 0, 0,0.8), rgb(0, 0, 0,0.8)),
+    url("../images/9078.jpg") no-repeat center center;
+  background-size: cover;
+  z-index: 1;
+}
+#paintCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.color-palette {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  z-index: 5;
+}
+
+.color {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+}
+.color.active {
+      transform: scale(1.2);
+      box-shadow: 0 0 10px white;
+    }
+.drawing-cursor {
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="white" stroke-width="1"/></svg>') 8 8, auto;
+    }
+
