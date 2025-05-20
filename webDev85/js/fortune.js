@@ -1,6 +1,9 @@
-// Array of fortunes — wholesome, fun, sarcastic
-const fortunes = [
-  "You will have a great day!",
+
+
+  let isBroken = false;
+
+  const messages = [
+    "You will have a great day!",
   "Adventure awaits you.",
   "Good news is coming soon.",
   "Trust your instincts.",
@@ -27,24 +30,35 @@ const fortunes = [
   "You’ll find money on the ground soon. But it won’t be yours.",
   "Some days you eat the cookie, some days the cookie eats you.",
   "Destiny called. You didn’t pick up."
-];
+  ];
 
-// Function to pick a random fortune
-function getRandomFortune() {
-  const randomIndex = Math.floor(Math.random() * fortunes.length);
-  return fortunes[randomIndex];
-}
+  function breakCookie() {
+    const cookieBox = document.getElementById("cookieBox");
+    const cookieImg = document.getElementById("cookieImage");
+    const messageBox = document.getElementById("fortuneMessage");
 
-// Function to show the fortune on screen
-function showFortune() {
-  const fortuneText = getRandomFortune();
-  const messageBox = document.getElementById("fortuneMessage");
-  messageBox.innerText = fortuneText;
-  messageBox.style.display = "block";
-}
+    cookieBox.classList.add("shake");
 
-// Attach event listener to cookie image
-document.addEventListener("DOMContentLoaded", () => {
-  const cookieImg = document.getElementById("cookieImage");
-  cookieImg.addEventListener("click", showFortune);
-});
+    setTimeout(() => {
+      if (!isBroken) {
+        cookieImg.src = "images/cook2.png";
+        messageBox.textContent = messages[Math.floor(Math.random() * messages.length)];
+        messageBox.classList.add("show-message");
+      } else {
+        cookieImg.src = "images/cook1.png";
+        messageBox.classList.remove("show-message");
+      }
+      isBroken = !isBroken;
+    }, 200);
+
+    setTimeout(() => {
+      cookieBox.classList.remove("shake");
+    }, 400);
+  }
+
+  gsap.from("h1",{
+    scale:0,
+    rotate:360,
+    duration:1,
+    delay:0.5
+  })
