@@ -71,3 +71,30 @@ gsap.from("h1",{
   rotate:360
 })
 
+window.onload = function() {
+  var cookies = document.querySelectorAll('.cookie');
+  var count = cookies.length;
+  var segmentWidth = 1 / count;  // horizontal segments for spacing
+
+  cookies.forEach(function(cookie, index) {
+    // Random horizontal position inside the segment with padding
+    var paddingX = 0.1 * segmentWidth;
+    var minPosX = segmentWidth * index + paddingX;
+    var maxPosX = segmentWidth * (index + 1) - paddingX;
+    var randomX = Math.random() * (maxPosX - minPosX) + minPosX;
+    cookie.style.setProperty('--random-x', randomX);
+
+    // Random vertical start position between 100% (bottom) and 140% (below screen)
+    // Using 1.0 to 1.4 to represent 100% to 140% as multiplier
+    var minPosY = 1.0;
+    var maxPosY = 1.4;
+    var randomY = Math.random() * (maxPosY - minPosY) + minPosY;
+    cookie.style.setProperty('--random-y', randomY);
+
+    var randomSize = 20 + Math.random() * 20;
+    cookie.style.width = randomSize + "px";
+
+    var randomDelay = Math.random() * 5;
+    cookie.style.animationDelay = randomDelay + "s";
+  });
+};

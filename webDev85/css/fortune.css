@@ -117,3 +117,34 @@
     background-position: 0% 50%;
   }
 }
+
+.float-container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .cookie {
+  position: absolute;
+  width: 30px;
+  /* Use the random horizontal and vertical position variables */
+  top: calc(var(--random-y, 1) * 100%);
+  left: calc(100% * var(--random-x));
+  animation: floatCookie 10s linear infinite;
+}
+
+
+    @keyframes floatCookie {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
