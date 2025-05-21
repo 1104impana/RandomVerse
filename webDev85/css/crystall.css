@@ -1,11 +1,12 @@
 
 body {
-    background-color: #c208e7;
+    background-color: #000000;
     color: #f0f0f0;
     text-align: center;
     padding: 50px;
     font-family: 'Segoe UI', sans-serif;
     height: 100vh;
+   
 }
 
 .crystal-container {
@@ -47,16 +48,33 @@ body {
 
 #ballMessage {
     position: absolute;
-    top: 30%;
-    left: 50%;
+    top: 63%;
+    left: 46%;
     transform: translate(-50%, -50%);
     width: 220px;
     padding: 12px;
     font-size: 20px;
     text-align: center;
-    color: #fff;
+    color: #000000;
     font-weight: bold;
     pointer-events: none;
     line-height: 1.4;
     font-style: italic;
+}
+body {
+  background: linear-gradient(-45deg, #340279, #2d0036, #270004, #000000);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

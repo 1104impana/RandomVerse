@@ -7,11 +7,15 @@
 </head>
 <body>
 <div class="container">
+  <audio id="laughSound">
+  <source src="images/laugh.mp3" type="audio/mpeg">
+</audio>
+
   <h1>🔮 Ask the Magic Ball 🔮</h1>
   <p>Type your question and click the ball to reveal your fortune!</p>
   <div class="crystal-container">
      <div class="ball-wrapper">
-      <img id="magicBall" src="images/crystal-ball.gif" alt="Magic Ball" style="border-radius: 100%;" onclick="tellFortune()">
+      <img id="magicBall" src="images/image (2).jpg" alt="Magic Ball"  style="width: 1000px;" onclick="tellFortune()">
       <div id="ballMessage">Ask your question!</div>
     </div>
     <input type="text" id="userQuestion" placeholder="eg: will I get a job?">
@@ -22,5 +26,13 @@
   </div>
 </div>
   <script src="js/crystall.js"></script>
+  <script>
+  window.onload = function() {
+  var audio = document.getElementById("laughSound");
+  audio.play();
+};
+
+</script>
 </body>
+
 </html>

@@ -1,4 +1,7 @@
 function tellFortune() {
+    var audio = document.getElementById("laughSound");
+  audio.play();
+
   const question = document.getElementById("userQuestion").value.trim();
   const messageEl = document.getElementById("ballMessage");
 
