@@ -12,14 +12,18 @@
     <div class ="bg-image"></div>
 
     <canvas id="paintCanvas"></canvas>
-
-  <div class="color-palette">
+  <div class="controls-wrapper">
+    <div class="color-palette">
     <div class="color" style="background-color: rgba(255, 0, 0, 0.3);" data-color="rgba(255, 0, 0, 0.3)"></div>
     <div class="color" style="background-color: rgba(0, 0, 255, 0.3);" data-color="rgba(0, 0, 255, 0.3)"></div>
     <div class="color" style="background-color: rgba(0, 255, 0, 0.3);" data-color="rgba(0, 255, 0, 0.3)"></div>
     <div class="color" style="background-color: rgba(255, 255, 0, 0.3);" data-color="rgba(255, 255, 0, 0.3)"></div>
     <div class="color" style="background-color: rgba(255, 255, 255, 0.3);" data-color="rgba(255, 255, 255, 0.3)"></div>
-  </div>
+   </div>
+   
+   <button id="resetBtn" >Reset</button>
+ </button>
+</div>
 
 
     <!-- jQuery -->
@@ -28,6 +32,15 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
    
    <script src="js/ripple.js"></script>
+   <!--reset button-->
+   <script>
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
+</script>
+   
+ 
+
 </body>
 </html>
 
