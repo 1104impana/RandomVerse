@@ -1,50 +1,100 @@
-// Array of fortunes — wholesome, fun, sarcastic
-const fortunes = [
-  "You will have a great day!",
-  "Adventure awaits you.",
-  "Good news is coming soon.",
-  "Trust your instincts.",
-  "Something wonderful is about to happen.",
-  "The Wi-Fi will be extra fast today.",
-  "Don’t worry, nobody noticed that embarrassing thing you did.",
-  "Your future self is judging your current snack choices.",
-  "Someone is thinking about you... it's probably your mom.",
-  "A pleasant surprise is in store for you. Or not.",
-  "Today is a good day to stay in bed.",
-  "Your bank account will soon experience mild disappointment.",
-  "Your crush secretly knows you exist. Maybe.",
-  "A random cat will cross your path and improve your mood.",
-  "The fortune you seek is in another cookie.",
-  "Beware of Mondays. Always.",
-  "Your lucky number today is... not so lucky.",
-  "You will master JavaScript. Eventually.",
-  "An awkward conversation is approaching.",
-  "Smile. It confuses people.",
-  "Tomorrow, you might accidentally become a meme.",
-  "You're doing great. At pretending to be productive.",
-  "The universe is plotting something good for you. Hang in there.",
-  "Your next snack will be legendary.",
-  "You’ll find money on the ground soon. But it won’t be yours.",
-  "Some days you eat the cookie, some days the cookie eats you.",
-  "Destiny called. You didn’t pick up."
-];
 
-// Function to pick a random fortune
-function getRandomFortune() {
-  const randomIndex = Math.floor(Math.random() * fortunes.length);
-  return fortunes[randomIndex];
-}
 
-// Function to show the fortune on screen
-function showFortune() {
-  const fortuneText = getRandomFortune();
-  const messageBox = document.getElementById("fortuneMessage");
-  messageBox.innerText = fortuneText;
-  messageBox.style.display = "block";
-}
+let isBroken = false;
 
-// Attach event listener to cookie image
-document.addEventListener("DOMContentLoaded", () => {
+// const messages = [
+//   "You will have a great day!",
+// "Adventure awaits you.",
+// "Good news is coming soon.",
+// "Trust your instincts.",
+// "Something wonderful is about to happen.",
+// "The Wi-Fi will be extra fast today.",
+// "Don’t worry, nobody noticed that embarrassing thing you did.",
+// "Your future self is judging your current snack choices.",
+// "Someone is thinking about you... it's probably your mom.",
+// "A pleasant surprise is in store for you. Or not.",
+// "Today is a good day to stay in bed.",
+// "Your bank account will soon experience mild disappointment.",
+// "Your crush secretly knows you exist. Maybe.",
+// "A random cat will cross your path and improve your mood.",
+// "The fortune you seek is in another cookie.",
+// "Beware of Mondays. Always.",
+// "Your lucky number today is... not so lucky.",
+// "You will master JavaScript. Eventually.",
+// "An awkward conversation is approaching.",
+// "Smile. It confuses people.",
+// "Tomorrow, you might accidentally become a meme.",
+// "You're doing great. At pretending to be productive.",
+// "The universe is plotting something good for you. Hang in there.",
+// "Your next snack will be legendary.",
+// "You’ll find money on the ground soon. But it won’t be yours.",
+// "Some days you eat the cookie, some days the cookie eats you.",
+// "Destiny called. You didn’t pick up."
+// ];
+
+async function breakCookie() {
+  const cookieBox = document.getElementById("cookieBox");
   const cookieImg = document.getElementById("cookieImage");
-  cookieImg.addEventListener("click", showFortune);
-});
+  const messageBox = document.getElementById("fortuneMessage");
+
+  cookieBox.classList.add("shake");
+
+  setTimeout(async () => {
+    if (!isBroken) {
+      cookieImg.src = "images/cook2.png";
+
+      try {
+        const response = await fetch('http://localhost:5000/getRandomMessage'); // GET request
+        const data = await response.json();
+        messageBox.textContent = data.message;
+      } catch (error) {
+        messageBox.textContent = "Error fetching fortune.";
+        console.error(error);
+      }
+
+      messageBox.classList.add("show-message");
+    } else {
+      cookieImg.src = "images/cook1.png";
+      messageBox.classList.remove("show-message");
+    }
+    isBroken = !isBroken;
+  }, 50);
+
+  setTimeout(() => {
+    cookieBox.classList.remove("shake");
+  }, 400);
+}
+gsap.from("h1",{
+  scale:0,
+  duration:1,
+  delay:0,
+  rotate:360
+})
+
+window.onload = function() {
+  var cookies = document.querySelectorAll('.cookie');
+  var count = cookies.length;
+  var segmentWidth = 1 / count;  // horizontal segments for spacing
+
+  cookies.forEach(function(cookie, index) {
+    // Random horizontal position inside the segment with padding
+    var paddingX = 0.1 * segmentWidth;
+    var minPosX = segmentWidth * index + paddingX;
+    var maxPosX = segmentWidth * (index + 1) - paddingX;
+    var randomX = Math.random() * (maxPosX - minPosX) + minPosX;
+    cookie.style.setProperty('--random-x', randomX);
+
+    // Random vertical start position between 100% (bottom) and 140% (below screen)
+    // Using 1.0 to 1.4 to represent 100% to 140% as multiplier
+    var minPosY = 1.0;
+    var maxPosY = 1.4;
+    var randomY = Math.random() * (maxPosY - minPosY) + minPosY;
+    cookie.style.setProperty('--random-y', randomY);
+
+    var randomSize = 20 + Math.random() * 20;
+    cookie.style.width = randomSize + "px";
+
+    var randomDelay = Math.random() * 5;
+    cookie.style.animationDelay = randomDelay + "s";
+  });
+};
