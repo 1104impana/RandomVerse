@@ -1,0 +1,126 @@
+
+<html>
+<head>
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calming Sounds with Background</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:  #46264F;
+  }
+  h1 {
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 5px #000;
+  }
+  .sound-buttons, .background-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  button {
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 100px;
+    font-size: 30px;
+    cursor: pointer;
+    background-color: #B08FBA;
+    color: #403ca0;
+    box-shadow: rgb(250, 250, 250);
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: rgb(246, 245, 245);
+  }
+  .bg-thumb {
+    width: 200px;
+    height: 100px;
+    border-radius: 8px;
+    cursor: pointer;
+    object-fit: cover;
+    box-shadow: 0 0 5px #000;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .bg-thumb:hover, .bg-thumb.selected {
+    border-color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<h1>Calming Sounds</h1><br><br>
+
+<div class="sound-buttons">
+  <button data-sound="rain">Rain</button>
+  <button data-sound="ocean">Waves</button>
+  <button data-sound="birds">Birds Chirping</button>
+</div>
+
+<button id="togglePlay" disabled>Play</button>
+
+<h2>Select Background</h2>
+<div class="background-selector">
+  <img src="images/Lake Bled, Slovenia.jpg" alt="Lake" class="bg-thumb" data-bg="images/Lake Bled, Slovenia.jpg">
+  <img src="images/Sunset Scenery.jpg" alt="Sunset" class="bg-thumb" data-bg="images/Sunset Scenery.jpg">
+  <img src="images/download (1).jpg" alt="beach" class="bg-thumb" data-bg="images/download (1).jpg" >
+</div>
+
+<audio id="audioPlayer" loop></audio>
+
+<script>
+  const sounds = {
+    rain: "audio/WhatsApp Audio 2025-05-24 at 16.38.01_1de04cc2.waptt.opus",
+    ocean: "audio/WhatsApp Audio 2025-05-24 at 16.39.44_e010a2d8.waptt.opus",
+    birds: "audio/WhatsApp Audio 2025-05-24 at 16.38.53_bad586eb.waptt.opus",
+  };
+
+  const audioPlayer = document.getElementById("audioPlayer");
+  const buttons = document.querySelectorAll(".sound-buttons button");
+  const bgThumbs = document.querySelectorAll(".bg-thumb");
+   const togglePlayBtn = document.getElementById("togglePlay");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const sound = btn.getAttribute("data-sound");
+      if (sounds[sound]) {
+        audioPlayer.src = sounds[sound];
+        audioPlayer.play();
+        togglePlayBtn.textContent = "Pause";
+        togglePlayBtn.disabled = false;
+      }
+    });
+  });
+
+  togglePlayBtn.addEventListener("click", () => {
+    if (audioPlayer.paused) {
+      audioPlayer.play();
+      togglePlayBtn.textContent = "Pause";
+    } else {
+      audioPlayer.pause();
+      togglePlayBtn.textContent = "Play";
+    }
+  });
+
+  bgThumbs.forEach((img) => {
+    img.addEventListener("click", () => {
+      bgThumbs.forEach(i => i.classList.remove("selected"));
+      img.classList.add("selected");
+      document.body.style.backgroundImage = `url('${img.getAttribute("data-bg")}')`;
+    });
+  });
+</script>
+
+</body>
+</html>
