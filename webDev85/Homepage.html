@@ -18,16 +18,43 @@
       background-color: #000;
       min-height: 100vh;
       font-family: 'Arial', sans-serif;
-      padding-top: 300px;
+      padding-top: 100px;
     }
     .floating-text {
       color: #fff;
-      font-size: 6rem;
+      font-size: 5rem;
+        font-weight: bold;
       text-align: center;
       margin: 0;
       line-height: 1.2;
       text-shadow: 0 0 10px rgba(255,255,255,0.3);
+      position: relative;
+      z-index: 1;
     }
+    .hero-section {
+  background-image: url('images/start.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 100px 0; /* Adjust padding as needed */
+  margin-bottom: 50px; /* Creates space between this and next section */
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.185); /* Dark overlay */
+  z-index: 0;
+}
+
     .randomverse {
       display: inline-block;
       color: #f7f7f7;
@@ -45,7 +72,7 @@
           margin-top: 800px; 
     }
     .card {
-  height: 450px; /* set a fixed height for all cards */
+  height: 500px; /* set a fixed height for all cards */
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -72,9 +99,9 @@
   
   .about-section p {
     margin: 0 auto;
-    max-width: 800px; /* Prevents text from stretching too wide on large screens */
+    max-width: 1000px; /* Prevents text from stretching too wide on large screens */
     line-height: 1.6;
-     text-align: justify;
+    text-align: center;
    
   }
   .footer {
@@ -90,7 +117,7 @@
 
     </head>
         <body style="background-color: rgb(0, 0, 0);">
-        <div class="floating-text-container" style="margin-top: -100px;">
+        <div class="floating-text-container hero-section" style="margin-top: -100px;">
         <h1 class="floating-text">
          Welcome To <br>
          <span class="randomverse">RandomVerse</span>
