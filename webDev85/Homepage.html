@@ -11,6 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <!-- Google Fonts for elegant typography -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
             /* Add this custom CSS */
             /*body {
@@ -191,7 +192,7 @@
     }
   }
   .footer {
-    background-color: rgba(146, 142, 142, 0.13) !important;
+    background: linear-gradient(145deg, rgba(31, 101, 167, 0.164), rgba(50, 50, 50, 0.7));
     backdrop-filter: blur(8px);
     color: rgba(223, 205, 205, 0.7);
     z-index: 1;
@@ -232,28 +233,57 @@
             color: #ffffff;
             text-decoration: none;
   }
-  .footer .social-links a {
-            font-size: 1.2rem;
-            margin: 0 15px;
+  .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .social-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             color: #d5d5d5;
             text-decoration: none;
             transition: all 0.3s ease;
-            display: inline-block;
+            width: 80px;
         }
-  .footer .social-links a:hover {
+        .social-icon i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+        .social-icon span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
             color: #ffffff;
-            transform: translateY(-3px);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transform: translateY(-5px);
         }
-  .footer .border-top {
-            border-color: rgba(255, 255, 255, 0.1);
+        .social-icon:hover i {
+            transform: scale(1.2);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
-  .copyright {
+        .social-icon:hover span {
+            opacity: 1;
+        }
+        .instagram:hover i {
+            color: #e1306c !important;
+        }
+        .twitter:hover i {
+            color: #1da1f2 !important;
+        }
+        .facebook:hover i {
+            color: #1877f2 !important;
+        }
+        .copyright {
             text-align: center;
             margin-top: 40px;
             font-size: 0.9rem;
             opacity: 0.8;
-  }
+        }
         
   .card-row {
             display: flex;
@@ -280,6 +310,12 @@
   .card-row {
                 padding: 0 15px;
     }
+    .social-links {
+                gap: 15px;
+            }
+    .social-icon {
+                width: 70px;
+            }
   }
     </style>
 
@@ -346,10 +382,19 @@
         </div>
       <div class="col-md-5 text-center">
          <h4>Follow Us</h4>
-            <div class="social-links d-flex justify-content-center gap-4">
-              <a href="#">Instagram</a>
-              <a href="#">Twitter</a>
-              <a href="#">Facebook</a>
+            <div class="social-links">
+              <a href="https://www.instagram.com/" class="social-icon instagram" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://twitter.com/" class="social-icon twitter" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                        </a>
+                        <a href="https://www.facebook.com/" class="social-icon facebook" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </a>
         </div>
       </div>
     </div>
