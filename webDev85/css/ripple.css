@@ -9,8 +9,8 @@ body{
   width: 100%;
   height: 100vh;
   background:
-    linear-gradient(rgb(0, 0, 0,0.8), rgb(0, 0, 0,0.8)),
-    url("../images/9078.jpg") no-repeat center center;
+  linear-gradient(rgb(0, 0, 0,0.8), rgb(0, 0, 0,0.8)),
+  url("../images/9078.jpg") no-repeat center center;
   background-size: cover;
   z-index: 1;
 }
