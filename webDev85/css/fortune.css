@@ -3,13 +3,15 @@
    justify-content: center;
    align-items: center;
    height: 100vh;
+  /* background-image: url('../images/9078.jpg'); */
+  background-color: #000;
  }
 
 
  .cookie-container {
    position: relative;
-   width: 250px;
-   height: 250px;
+   width: 550px;
+   height: 350px;
    cursor: pointer;
    transition: transform 0.3s ease;
  }
@@ -82,28 +84,25 @@
    border-radius: 100%;
  }
 
- body {
-   background-color: rgb(202, 6, 232);
- }
-
  h1{
   font-weight: 1000;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   
  }
  h1{
-  position: absolute;
-  top:0;
-  left: 640px;
-  padding: 40px 0;
+  position: fixed;
+  top:10px;
+  right: 530px;
+  padding: 30px 0;
   color: rgb(187, 186, 186)
  
  }
-
+/*
  body {
-  background: linear-gradient(-45deg, #340279, #2d0036, #270004, #000000);
+  /* background: linear-gradient(-45deg, #340279, #2d0036, #270004, #000000);
   background-size: 400% 400%;
-  animation: gradientBG 10s ease infinite;
+  animation: gradientBG 10s ease infinite; 
+ 
 }
 
 @keyframes gradientBG {
@@ -117,6 +116,7 @@
     background-position: 0% 50%;
   }
 }
+*/
 
 .float-container {
       position: fixed;

@@ -34,7 +34,7 @@ async function breakCookie() {
 
   setTimeout(() => {
     cookieBox.classList.remove("shake");
-  }, 400);
+  }, 800);
 }
 
 // GSAP animation for header on page load
