@@ -350,12 +350,15 @@
         </div>
       </div>
     </div>
-    <div class="text-center pt-4 mt-4 border-top border-dark"style="border-color: rgba(255,255,255,0.1) ;"></div>
-      <p>&copy; 2025 Random Verse. All rights reserved.</p>
+     <div class="copyright">
+        <p>© 2025 Random Verse. All rights reserved.</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+
  <script>
+   gsap.registerPlugin(ScrollTrigger);
+        
     gsap.to(".floating-text", {
       y: -20,
       duration: 3,
@@ -363,6 +366,7 @@
       yoyo: true,
       ease: "sine.inOut"
     });
+
     gsap.to(".randomverse", {
       scale: 1.05,
       duration: 2,
@@ -370,6 +374,24 @@
       yoyo: true,
       ease: "power1.inOut"
     });
+
+   document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+    gsap.to(card, {
+                    y: -10,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, {
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+  });
+        
   </script>
         </body>
 </html>
