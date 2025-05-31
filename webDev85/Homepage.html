@@ -7,7 +7,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
+<!-- GSAP ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Google Fonts for elegant typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
             /* Add this custom CSS */
             /*body {
@@ -391,7 +394,74 @@
       });
     });
   });
+
+  gsap.to(".about-section", {
+  scrollTrigger: {
+    trigger: ".about-section",
+    start: "top bottom",
+    end: "bottom top",
+    scrub: 1,
+    },
+    y: -100,
+    ease: "none"
         
-  </script>
-        </body>
+  });
+  const aboutContent = document.querySelector(".about-section .content-wrapper");
+  gsap.set(aboutContent, { y: 50, opacity: 0 });
+  ScrollTrigger.create({
+    trigger: ".about-section",
+    start: "top 80%",
+    end: "bottom top",
+    onEnter: () => {
+      gsap.to(aboutContent, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.out"
+                
+      });
+    },
+    onLeaveBack: () => {
+    gsap.to(aboutContent, {
+    y: 50,
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.in"
+                
+   });
+            
+  }
+        
+});
+
+gsap.from(".footer h4, .footer p, .footer a", {
+  scrollTrigger: {
+    trigger: ".footer",
+    start: "top 80%",
+    toggleActions: "play none none none"
+            
+  },
+  y: 30,
+  opacity: 0,
+  duration: 1,
+  stagger: 0.1,
+  ease: "power2.out"
+        
+});
+        
+        
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+document.querySelector(this.getAttribute('href')).scrollIntoView({
+behavior: 'smooth'
+                
+   });
+            
+ });
+       
+});
+        
+   </script>
+ </body>
 </html>
