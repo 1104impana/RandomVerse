@@ -44,6 +44,9 @@
    </div>
    
    <button id="resetBtn" >Reset</button>
+   <button id="downloadBtn" class="download-btn" title="Download artwork">
+        <i class="fas fa-download"></i>
+      </button>
  </button>
 </div>
 
@@ -58,7 +61,31 @@
    <script>
   document.getElementById("resetBtn").addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   });
+  // Download button with black background
+    document.getElementById("downloadBtn").addEventListener("click", function() {
+      // Create temporary canvas
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      
+      // Set same dimensions as main canvas
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      
+      // Fill with black background
+      tempCtx.fillStyle = 'black';
+      tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+      
+      // Draw the painting canvas on top
+      tempCtx.drawImage(canvas, 0, 0);
+      
+      // Create download link
+      const link = document.createElement('a');
+      link.download = 'space-paint-' + new Date().getTime() + '.png';
+      link.href = tempCanvas.toDataURL('image/png');
+      link.click();
+    });
 </script>
    
  

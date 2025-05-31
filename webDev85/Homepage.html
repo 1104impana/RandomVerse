@@ -1,13 +1,17 @@
 <html>
-    <head>
-        <title>Random Verse</title>
-        <!-- Bootstrap CSS -->
+  <head>
+      <title>RandomVerse</title>
+<!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
+<!-- GSAP ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- Google Fonts for elegant typography -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
             /* Add this custom CSS */
             /*body {
@@ -17,8 +21,10 @@
     body {
       background-color: #000;
       min-height: 100vh;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       padding-top: 100px;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
     .floating-text {
       color: #fff;
@@ -36,6 +42,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   padding: 100px 0; /* Adjust padding as needed */
   margin-bottom: 50px; /* Creates space between this and next section */
   position: relative;
@@ -43,6 +50,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 0;
 }
 .hero-section::before {
   content: '';
@@ -69,9 +77,12 @@
     }
             
     .card-container {
-          margin-top: 800px; 
-    }
-    .card {
+      margin-top: 600px;
+      position: relative;
+      z-index: 1;
+      padding: 0 15px;
+  }
+  .card {
   height: 500px; /* set a fixed height for all cards */
   overflow: hidden;
   display: flex;
@@ -80,39 +91,232 @@
   border-radius: 15px;
   background-color: #111;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+  margin-bottom: 30px;
 }
+ .card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3);
+        
+  }
 
 .card img {
   height: 100%;
   width: 100%;
   object-fit: cover;
   border-radius: 15px;
+  transition: transform 0.5s ease;
 }
-
-    .about-section {
+.card:hover img {
+  transform: scale(1.05);
+        
+}
+.about-section {
     color: rgb(202, 197, 197);
-    text-align: center;
-    margin-top: 600px; /* Adjusted from 500px to something more reasonable */
-    padding: 20px 0;
+    text-align: justify;
+    margin-top: 600px; /*space above*/
+    padding: 80px 15px;
     margin-bottom: 600px;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(145deg, rgba(17, 111, 219, 0.082), rgba(40, 40, 40, 0.6));
+    border-radius: 0;
+    max-width: 100%;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0);
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: url('images/start.jpeg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    overflow: hidden;
+  }
+  .about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+        
+  }
+  .about-section .content-wrapper {
+    position: relative;
+    padding: 40px;
+    background: rgba(15, 15, 15, 0.6);
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+    max-width: 1200px;
+    margin: 0 auto;
+        
+  }
+  .about-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    margin-bottom: 25px;
+    text-align: center;
+    letter-spacing: 1px;
+        
   }
   
   .about-section p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    max-width: 1000px;
     margin: 0 auto;
-    max-width: 1000px; /* Prevents text from stretching too wide on large screens */
-    line-height: 1.6;
-    text-align: center;
+    color: #d5d5d5;
    
   }
+  .about-section p span {
+    color: #f0f0f0;
+    font-weight: 600;
+    display: block;
+    margin-top: 20px;
+    font-size: 1.4rem;
+    font-family: 'Playfair Display', serif;
+        
+  }
+  @media (max-width: 768px) {
+    .about-section h2 { font-size: 2.2rem; }
+    .about-section p { font-size: 1rem; }
+    .about-section { padding: 30px 10px; }
+    .about-section .content-wrapper {
+    padding: 20px;
+    }
+  }
   .footer {
-    background-color: rgba(146, 142, 142, 0.13) !important;
+    background: linear-gradient(145deg, rgba(31, 101, 167, 0.164), rgba(50, 50, 50, 0.7));
     backdrop-filter: blur(8px);
     color: rgba(223, 205, 205, 0.7);
+    z-index: 1;
+    padding: 80px 0 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+   background-image: url('images/start.jpeg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
   }
-  
-           
-    
-
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: -1;
+        
+  }
+  .footer h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #f5f5f5;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+   }
+  .footer p, .footer a {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            color: #d5d5d5;
+            transition: color 0.3s ease;
+            text-align: justify;
+  }
+  .footer a:hover {
+            color: #ffffff;
+            text-decoration: none;
+  }
+  .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .social-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #d5d5d5;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 80px;
+        }
+        .social-icon i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+        .social-icon span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            color: #ffffff;
+            transform: translateY(-5px);
+        }
+        .social-icon:hover i {
+            transform: scale(1.2);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        .social-icon:hover span {
+            opacity: 1;
+        }
+        .instagram:hover i {
+            color: #e1306c !important;
+        }
+        .twitter:hover i {
+            color: #1da1f2 !important;
+        }
+        .facebook:hover i {
+            color: #1877f2 !important;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+  .card-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 45px;
+            padding: 0 -2px;
+  }
+  .card-col {
+            flex: 0 0 calc(33.333% - 30px);
+            max-width: calc(33.333% - 30px);
+        }
+  @media (max-width: 992px) {
+  .card-col {
+                flex: 0 0 calc(50% - 30px);
+                max-width: calc(50% - 30px);
+            }
+  }
+  @media (max-width: 768px) {
+  .card-col {
+                flex: 0 0 100%;
+                max-width: 100%;
+        }
+  .card-row {
+                padding: 0 15px;
+    }
+    .social-links {
+                gap: 15px;
+            }
+    .social-icon {
+                width: 70px;
+            }
+  }
     </style>
 
     </head>
@@ -124,16 +328,16 @@
         </h1>
       </div>
             
-            <div class="card-container">
-            <div class="row">
-                <div class="col-lg-4 col-sm-8">
+            <div class="container card-container">
+            <div class="card-row">
+                <div class="card-col">
                  <a href="crystall.html" style="text-decoration: none;">
                     <div class="card">
                         <img src="images/fortune.jpg" style="width:100%;">
                     </div>
                     </a>
                 </div>
-                <div class="col-lg-4 col-sm-8">
+                <div class="card-col">
                  <a href="ripple.html" style="text-decoration: none;">
                     <div class="card">
                         <img src="images/paint.jpg" style="width:100%;">
@@ -141,68 +345,68 @@
                     </a>
                 </div>
                 
-                <div class="col-lg-4 col-sm-8">
-                 <a href="ripple.html" style="text-decoration: none;"></a>
+                <div class="card-col">
+                 <a href="ripple.html" style="text-decoration: none;">
                     <div class="card">
                         <img src="images/meditate.jpg" style="width:100%;">
                     </div>
+                  </a>
                 </div>
-                
             </div>
-            </div>
+        </div>
             
   <div class="about-section">
+    <div class="content-wrapper">
   <h2>About us</h2>
   <br>
-  <p>In a world of endless scrolling and digital fatigue, RandomVerse is your pocket-sized escape—a place for serendipity, creativity, and quiet moments of wonder.
-
-We craft micro-experiences designed to interrupt autopilot browsing with:
-
-<br>✨ Playful Discovery – Interactive visuals that respond to your touch, sparking curiosity
-<br>🌌 Cosmic Whispers – Gentle, uplifting messages (like fortune cookies from the universe)
-<br>🎨 Digital Daydreaming – A space to create, drift, and pause without pressure
-
-<br>No ads. No algorithms. Just small, intentional moments to:
-
-<br>Recharge your attention
-
-<br>Delight your senses
-
-<br>Remind you that the internet can still feel magical
-
-<br>Think of us as:
-<br>☁️ A deep breath between tabs
-<br>🌠 A friendly nudge to look up from your screen
-<br>💫 The digital equivalent of finding a seashell in your pocket
-<br>
-<br>Because joy should live in the in-between, too.
-
-</p>
+  <p>
+                RandomVerse is your pocket-sized escape from the relentless pace of endless scrolling—a sanctuary meticulously crafted to nurture creativity, inspire wonder, and provide a moment of calm amidst the digital storm. We specialize in designing micro-experiences that interrupt the autopilot nature of modern browsing, offering instead a space where serendipity and mindfulness can flourish. Our mission is to reintroduce a sense of magic to the internet, reminding users that technology can be a source of joy, reflection, and meaningful connection rather than just consumption.
+                <span>Playful Discovery</span>
+                We create interactive visuals that respond dynamically to your touch, igniting a sense of curiosity and encouraging exploration in a way that feels organic and delightful. These experiences are designed to draw you in, making you an active participant in a moment of digital wonder rather than a passive observer.
+                <span>Cosmic Whispers</span>
+                Our platform delivers gentle, uplifting messages that feel like fortune cookies from the universe. These thoughtful prompts are intended to inspire reflection, offer encouragement, and provide a brief respite from the noise of everyday life, helping you find clarity and inspiration in unexpected places.
+                <span>Digital Daydreaming</span>
+                RandomVerse provides a safe, pressure-free space where you can pause, create, and let your mind wander. Whether you're sketching a fleeting idea or simply soaking in a moment of calm, this feature allows you to reconnect with your imagination and embrace the joy of unstructured creativity.
+                We are committed to keeping RandomVerse free from the distractions that plague much of the internet today. There are no ads to interrupt your experience, and we deliberately avoid algorithms that dictate what you should see next. Instead, we focus on delivering small, intentional moments that recharge your attention and delight your senses. Our vision is to create a digital haven where you can rediscover the internet as a place of wonder—a space that feels as magical as it did when you first explored it. At RandomVerse, we believe in the power of the in-between: those quiet, often overlooked moments that can bring unexpected joy and a renewed sense of connection to the world around you.
+            </p>
+        </div>
 </div>
 
  <footer class="footer py-4 mt-5">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-5 text-center mb-4 mb-md-0">
-        <h4 class="text-white mb-4">Contact</h4>
-        <p>Email: randomverse@gmail.com</p>
-        <p>Phone: +91987654321</p>
-      </div>
+       <h4>Contact</h4>
+          <p>Email: randomverse@gmail.com</p>
+          <p>Phone: +91987654321</p>
+        </div>
       <div class="col-md-5 text-center">
-        <h4 class="text-white mb-4">Follow Us</h4>
-        <div class="d-flex justify-content-center gap-4 fs-3">
-          <a href="#" class="text-secondary">📱</a>
-          <a href="#" class="text-secondary">🐦</a>
-          <a href="#" class="text-secondary">📸</a>
+         <h4>Follow Us</h4>
+            <div class="social-links">
+              <a href="https://www.instagram.com/" class="social-icon instagram" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://twitter.com/" class="social-icon twitter" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                        </a>
+                        <a href="https://www.facebook.com/" class="social-icon facebook" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </a>
         </div>
       </div>
     </div>
-    <div class="text-center pt-4 mt-4 border-top border-dark"style="border-color: rgba(255,255,255,0.1) ;"></div>
-      <p>&copy; 2025 Random Verse. All rights reserved.</p>
+     <div class="copyright">
+        <p>© 2025 Random Verse. All rights reserved.</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+
  <script>
+   gsap.registerPlugin(ScrollTrigger);
+        
     gsap.to(".floating-text", {
       y: -20,
       duration: 3,
@@ -210,6 +414,7 @@ We craft micro-experiences designed to interrupt autopilot browsing with:
       yoyo: true,
       ease: "sine.inOut"
     });
+
     gsap.to(".randomverse", {
       scale: 1.05,
       duration: 2,
@@ -217,6 +422,91 @@ We craft micro-experiences designed to interrupt autopilot browsing with:
       yoyo: true,
       ease: "power1.inOut"
     });
-  </script>
-        </body>
+
+   document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+    gsap.to(card, {
+                    y: -10,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, {
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+  });
+
+  gsap.to(".about-section", {
+  scrollTrigger: {
+    trigger: ".about-section",
+    start: "top bottom",
+    end: "bottom top",
+    scrub: 1,
+    },
+    y: -100,
+    ease: "none"
+        
+  });
+  const aboutContent = document.querySelector(".about-section .content-wrapper");
+  gsap.set(aboutContent, { y: 50, opacity: 0 });
+  ScrollTrigger.create({
+    trigger: ".about-section",
+    start: "top 80%",
+    end: "bottom top",
+    onEnter: () => {
+      gsap.to(aboutContent, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.out"
+                
+      });
+    },
+    onLeaveBack: () => {
+    gsap.to(aboutContent, {
+    y: 50,
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.in"
+                
+   });
+            
+  }
+        
+});
+
+gsap.from(".footer h4, .footer p, .footer a", {
+  scrollTrigger: {
+    trigger: ".footer",
+    start: "top 80%",
+    toggleActions: "play none none none"
+            
+  },
+  y: 30,
+  opacity: 0,
+  duration: 1,
+  stagger: 0.1,
+  ease: "power2.out"
+        
+});
+        
+        
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+document.querySelector(this.getAttribute('href')).scrollIntoView({
+behavior: 'smooth'
+                
+   });
+            
+ });
+       
+});
+        
+   </script>
+ </body>
 </html>
