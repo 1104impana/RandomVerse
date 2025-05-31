@@ -1,0 +1,119 @@
+ body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: black;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content to top */
+    padding-top: 2rem;
+  }
+  h1 {
+    font-size: 4rem;  /* Bigger font */
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 5px #000;
+  }
+  .sound-buttons {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+  .sound-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .sound-item img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 2px #fdfdfd);
+    transition: transform 0.3s;
+  }
+  .sound-item:hover img {
+    transform: scale(1.1);
+  }
+  .sound-item span {
+    font-size: 2.5rem;
+    color: #f8f7f9;
+    transition: text-decoration 0.3s;
+  }
+  .sound-item:hover span {
+    text-decoration: underline;
+  }
+  .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 20px;
+    width: 300px;
+    max-width: 90vw;
+  }
+  .volume-control label {
+    min-width: 70px;
+  }
+  .volume-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #fcfbfc;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .volume-slider:hover {
+    background: #f0eef1;
+  }
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #403ca0;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(64,60,160,0.7);
+    transition: background 0.3s;
+  }
+  .volume-slider::-webkit-slider-thumb:hover {
+    background: #5a52c9;
+  }
+  /* Firefox */
+  .volume-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #403ca0;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(64,60,160,0.7);
+    transition: background 0.3s;
+  }
+  .volume-slider::-moz-range-thumb:hover {
+    background: #5a52c9;
+  }
+  #togglePlay {
+    margin-bottom: 1rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.5rem;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    background-color: #f9f5fa;
+    color: #403ca0;
+    transition: background 0.3s;
+  }
+  #togglePlay:hover:not(:disabled) {
+    background: rgb(246, 245, 245);
+  }
+  #togglePlay:disabled {
+    background-color: #f2f1f3;
+    cursor: not-allowed;
+  }
