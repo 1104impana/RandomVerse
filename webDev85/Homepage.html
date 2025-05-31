@@ -1,0 +1,222 @@
+<html>
+    <head>
+        <title>Random Verse</title>
+        <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+            /* Add this custom CSS */
+            /*body {
+                min-height: 170vh; /* Creates scrollable space */
+             /*   padding-top: 2px; /* Pushes everything down */
+            /*}*/ 
+    body {
+      background-color: #000;
+      min-height: 100vh;
+      font-family: 'Arial', sans-serif;
+      padding-top: 100px;
+    }
+    .floating-text {
+      color: #fff;
+      font-size: 5rem;
+        font-weight: bold;
+      text-align: center;
+      margin: 0;
+      line-height: 1.2;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
+      position: relative;
+      z-index: 1;
+    }
+    .hero-section {
+  background-image: url('images/start.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 100px 0; /* Adjust padding as needed */
+  margin-bottom: 50px; /* Creates space between this and next section */
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.185); /* Dark overlay */
+  z-index: 0;
+}
+
+    .randomverse {
+      display: inline-block;
+      color: #f7f7f7;
+      text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    }
+    @media (max-width: 768px) {
+      .floating-text { font-size: 3rem; }
+    }
+  
+    .header-container {
+        margin-bottom: 300px; 
+    }
+            
+    .card-container {
+          margin-top: 800px; 
+    }
+    .card {
+  height: 500px; /* set a fixed height for all cards */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: #111;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.card img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+    .about-section {
+    color: rgb(202, 197, 197);
+    text-align: center;
+    margin-top: 600px; /* Adjusted from 500px to something more reasonable */
+    padding: 20px 0;
+    margin-bottom: 600px;
+  }
+  
+  .about-section p {
+    margin: 0 auto;
+    max-width: 1000px; /* Prevents text from stretching too wide on large screens */
+    line-height: 1.6;
+    text-align: center;
+   
+  }
+  .footer {
+    background-color: rgba(146, 142, 142, 0.13) !important;
+    backdrop-filter: blur(8px);
+    color: rgba(223, 205, 205, 0.7);
+  }
+  
+           
+    
+
+    </style>
+
+    </head>
+        <body style="background-color: rgb(0, 0, 0);">
+        <div class="floating-text-container hero-section" style="margin-top: -100px;">
+        <h1 class="floating-text">
+         Welcome To <br>
+         <span class="randomverse">RandomVerse</span>
+        </h1>
+      </div>
+            
+            <div class="card-container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-8">
+                 <a href="crystall.html" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="images/fortune.jpg" style="width:100%;">
+                    </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-8">
+                 <a href="ripple.html" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="images/paint.jpg" style="width:100%;">
+                    </div>
+                    </a>
+                </div>
+                
+                <div class="col-lg-4 col-sm-8">
+                 <a href="meditation.html" style="text-decoration: none;"></a>
+                    <div class="card">
+                        <img src="images/meditate.jpg" style="width:100%;">
+                    </div>
+                </div>
+                
+            </div>
+            </div>
+            
+  <div class="about-section">
+  <h2>About us</h2>
+  <br>
+  <p>In a world of endless scrolling and digital fatigue, RandomVerse is your pocket-sized escape—a place for serendipity, creativity, and quiet moments of wonder.
+
+We craft micro-experiences designed to interrupt autopilot browsing with:
+
+<br>✨ Playful Discovery – Interactive visuals that respond to your touch, sparking curiosity
+<br>🌌 Cosmic Whispers – Gentle, uplifting messages (like fortune cookies from the universe)
+<br>🎨 Digital Daydreaming – A space to create, drift, and pause without pressure
+
+<br>No ads. No algorithms. Just small, intentional moments to:
+
+<br>Recharge your attention
+
+<br>Delight your senses
+
+<br>Remind you that the internet can still feel magical
+
+<br>Think of us as:
+<br>☁️ A deep breath between tabs
+<br>🌠 A friendly nudge to look up from your screen
+<br>💫 The digital equivalent of finding a seashell in your pocket
+<br>
+<br>Because joy should live in the in-between, too.
+
+</p>
+</div>
+
+ <footer class="footer py-4 mt-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5 text-center mb-4 mb-md-0">
+        <h4 class="text-white mb-4">Contact</h4>
+        <p>Email: randomverse@gmail.com</p>
+        <p>Phone: +91987654321</p>
+      </div>
+      <div class="col-md-5 text-center">
+        <h4 class="text-white mb-4">Follow Us</h4>
+        <div class="d-flex justify-content-center gap-4 fs-3">
+          <a href="#" class="text-secondary">📱</a>
+          <a href="#" class="text-secondary">🐦</a>
+          <a href="#" class="text-secondary">📸</a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center pt-4 mt-4 border-top border-dark"style="border-color: rgba(255,255,255,0.1) ;"></div>
+      <p>&copy; 2025 Random Verse. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+ <script>
+    gsap.to(".floating-text", {
+      y: -20,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+    gsap.to(".randomverse", {
+      scale: 1.05,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut"
+    });
+  </script>
+        </body>
+</html>

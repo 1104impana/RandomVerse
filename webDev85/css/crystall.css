@@ -1,0 +1,80 @@
+
+body {
+    background-color: #000000;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 50px;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+   
+}
+
+.crystal-container {
+    position: relative;
+    display: inline-block;
+}
+
+#magicBall {
+    cursor: pointer;
+    width: 300px;
+    border-radius: 0%;
+}
+
+#message {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    text-align: center;
+    color: #ffea00;
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+    animation: fadeIn 0.8s ease-in-out;
+    pointer-events: none;
+    text-shadow: 0 0 10px #ffea00;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#ballMessage {
+    position: absolute;
+    top: 63%;
+    left: 46%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    padding: 12px;
+    font-size: 20px;
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+    pointer-events: none;
+    line-height: 1.4;
+    font-style: italic;
+}
+body {
+  background: linear-gradient(-45deg, #340279, #2d0036, #270004, #000000);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
