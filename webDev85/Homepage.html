@@ -1,16 +1,16 @@
 <html>
-    <head>
-        <title>Random Verse</title>
-        <!-- Bootstrap CSS -->
+  <head>
+      <title>RandomVerse</title>
+<!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <!-- GSAP ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Google Fonts for elegant typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- Google Fonts for elegant typography -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
             /* Add this custom CSS */
             /*body {
@@ -20,7 +20,7 @@
     body {
       background-color: #000;
       min-height: 100vh;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       padding-top: 100px;
       overflow-x: hidden;
       scroll-behavior: smooth;
@@ -41,6 +41,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   padding: 100px 0; /* Adjust padding as needed */
   margin-bottom: 50px; /* Creates space between this and next section */
   position: relative;
@@ -79,8 +80,8 @@
       position: relative;
       z-index: 1;
       padding: 0 15px;
-    }
-    .card {
+  }
+  .card {
   height: 500px; /* set a fixed height for all cards */
   overflow: hidden;
   display: flex;
@@ -111,8 +112,8 @@
 }
 .about-section {
     color: rgb(202, 197, 197);
-    text-align: center;
-    margin-top: 600px; /* Adjusted from 500px to something more reasonable */
+    text-align: justify;
+    margin-top: 600px; /*space above*/
     padding: 80px 15px;
     margin-bottom: 600px;
     position: relative;
@@ -164,10 +165,12 @@
   }
   
   .about-section p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    max-width: 1000px;
     margin: 0 auto;
-    max-width: 1000px; /* Prevents text from stretching too wide on large screens */
-    line-height: 1.6;
-    text-align: center;
+    color: #d5d5d5;
    
   }
   .about-section p span {
@@ -185,8 +188,8 @@
     .about-section { padding: 30px 10px; }
     .about-section .content-wrapper {
     padding: 20px;
-            }
-        }
+    }
+  }
   .footer {
     background-color: rgba(146, 142, 142, 0.13) !important;
     backdrop-filter: blur(8px);
@@ -208,27 +211,28 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.8);
     z-index: -1;
-        }
-        .footer h4 {
+        
+  }
+  .footer h4 {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             font-weight: 700;
             color: #f5f5f5;
             margin-bottom: 20px;
             letter-spacing: 0.5px;
-        }
-        .footer p, .footer a {
+   }
+  .footer p, .footer a {
             font-family: 'Open Sans', sans-serif;
             font-size: 1rem;
             color: #d5d5d5;
             transition: color 0.3s ease;
             text-align: justify;
-        }
-        .footer a:hover {
+  }
+  .footer a:hover {
             color: #ffffff;
             text-decoration: none;
-        }
-        .footer .social-links a {
+  }
+  .footer .social-links a {
             font-size: 1.2rem;
             margin: 0 15px;
             color: #d5d5d5;
@@ -236,50 +240,47 @@
             transition: all 0.3s ease;
             display: inline-block;
         }
-        .footer .social-links a:hover {
+  .footer .social-links a:hover {
             color: #ffffff;
             transform: translateY(-3px);
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
-        .footer .border-top {
+  .footer .border-top {
             border-color: rgba(255, 255, 255, 0.1);
         }
-        .copyright {
+  .copyright {
             text-align: center;
             margin-top: 40px;
             font-size: 0.9rem;
             opacity: 0.8;
-        }
+  }
         
-        .card-row {
+  .card-row {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 45px;
             padding: 0 -2px;
-        }
-        .card-col {
+  }
+  .card-col {
             flex: 0 0 calc(33.333% - 30px);
             max-width: calc(33.333% - 30px);
         }
-        @media (max-width: 992px) {
-            .card-col {
+  @media (max-width: 992px) {
+  .card-col {
                 flex: 0 0 calc(50% - 30px);
                 max-width: calc(50% - 30px);
             }
-        }
-        @media (max-width: 768px) {
-            .card-col {
+  }
+  @media (max-width: 768px) {
+  .card-col {
                 flex: 0 0 100%;
                 max-width: 100%;
-            }
-            .card-row {
-                padding: 0 15px;
-            }
         }
-           
-    
-
+  .card-row {
+                padding: 0 15px;
+    }
+  }
     </style>
 
     </head>
@@ -291,16 +292,16 @@
         </h1>
       </div>
             
-            <div class="card-container">
-            <div class="row">
-                <div class="col-lg-4 col-sm-8">
+            <div class="container card-container">
+            <div class="card-row">
+                <div class="card-col">
                  <a href="crystall.html" style="text-decoration: none;">
                     <div class="card">
                         <img src="images/fortune.jpg" style="width:100%;">
                     </div>
                     </a>
                 </div>
-                <div class="col-lg-4 col-sm-8">
+                <div class="card-col">
                  <a href="ripple.html" style="text-decoration: none;">
                     <div class="card">
                         <img src="images/paint.jpg" style="width:100%;">
@@ -308,7 +309,7 @@
                     </a>
                 </div>
                 
-                <div class="col-lg-4 col-sm-8">
+                <div class="card-col">
                  <a href="ripple.html" style="text-decoration: none;">
                     <div class="card">
                         <img src="images/meditate.jpg" style="width:100%;">
@@ -344,7 +345,6 @@
           <p>Phone: +91987654321</p>
         </div>
       <div class="col-md-5 text-center">
-        <h4 class="text-white mb-4">Follow Us</h4>
          <h4>Follow Us</h4>
             <div class="social-links d-flex justify-content-center gap-4">
               <a href="#">Instagram</a>
