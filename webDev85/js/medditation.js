@@ -2,6 +2,8 @@
     rain: "audio/rain-sounds-ambience-351115.mp3",
     ocean: "audio/ocean-waves-112906.mp3",
     birds: "audio/chirping-birds-ambience-217410.mp3",
+    bowl: "audio/singing-bowl-hit-3-33366.mp3",
+    fire: "audio/firewood-burning-sound-179862.mp3",
   };
 
   const audioPlayer = document.getElementById("audioPlayer");
