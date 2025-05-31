@@ -67,41 +67,44 @@ body {
 }
 /*nav bar*/
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000000;
-    padding: 15px 30px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    box-shadow: 0 2px 5px rgba(255, 234, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-.nav-left, .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.nav-left img {
+  height: 50px;
 }
 
-.nav-button {
-    background-color: #1a1a1a;
-    color: #faf9f1;
-    border: 2px solid #fdfcf9;
-    padding: 8px 16px;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;  /* Adds space between icons */
 }
 
-.nav-button:hover {
-    background-color: #f7f7f4;
-    color: #000000;
+.nav-right a {
+  display: inline-block;
 }
 
+.nav-icon {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-icon:hover {
+  transform: scale(1.15);
+}
+
+/* To avoid content getting hidden behind the fixed navbar */
 body {
-    padding-top: 70px; /* To prevent content hiding under the fixed navbar */
+  padding-top: 70px;
 }
