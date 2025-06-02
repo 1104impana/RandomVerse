@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Magic Ball Fortune Teller</title>
   <link rel="stylesheet" href="css/crystall.css">
-</head>
-<body>
-<div class="container">
-  <audio id="laughSound">
-  <source src="images/laugh.mp3" type="audio/mpeg">
-</audio>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <h1>Welcome to the crystal ball. Try not to be disappointed.</h1>
- <h3>Type your question—because the ball loves ruining your day</h3>
-  <div class="crystal-container">
-     <div class="ball-wrapper">
-      <img id="magicBall" src="images/image (2).jpg" alt="Magic Ball"  style="width: 1000px;" onclick="askCrystalBall()">
-      <div id="ballMessage">Ask your question!</div>
-    </div>
-    <input type="text" id="userQuestion" placeholder="eg: will I get a job?">
-    <button onclick="askCrystalBall()">Ask the Ball</button>
-    <h2>wanna check you fortune?
-    </h2>
-    <a href="fortune.html">click here :)</a>
+</head>
+
+<body>
+ <nav class="navbar">
+  <div class="nav-left">
+    <a href="Homepage.html">
+    <img src="../images/witch.png" alt="icon" class="responsive-img">
+    </a>
   </div>
-</div>
+  <div class="nav-right">
+    <a href="ripple.html">
+      <img src="../images/galaxy.png" alt="Paint" class="nav-icon">
+    </a>
+    <a href="crystall.html">
+      <img src="../images/crystal-ball.png" alt="Crystal" class="nav-icon">
+    </a>
+    <a href="fortune.html">
+      <img src="../images/fornav.png" alt="Fortune" class="nav-icon">
+    </a>
+    <a href="meditation.html">
+      <img src="../images/relaxed.png" alt="Meditation" class="nav-icon">
+    </a>
+  </div>
+</nav>
+
+
+
+  <div class="container">
+    <audio id="laughSound">
+      <source src="images/laugh.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1>Welcome to the crystal ball. Try not to be disappointed.</h1>
+    <h3>Type your question—because the ball loves ruining your day</h3>
+    <div class="crystal-container">
+      <div class="ball-wrapper">
+        <img id="magicBall" src="images/lady2.jpg" alt="Magic Ball" style="width: 1000px;;" onclick="askCrystalBall()">
+        <div id="ballMessage">Ask your question!</div>
+      </div>
+      <input type="text" id="userQuestion" placeholder="eg: will I get a job?">
+      <button onclick="askCrystalBall()">Ask the Ball</button>
+      <h2>wanna check you fortune?
+      </h2>
+      <a href="fortune.html">click here :)</a>
+    </div>
+  </div>
   <script src="js/crystall.js"></script>
   <script>
-  window.onload = function() {
-  var audio = document.getElementById("laughSound");
-  audio.play();
-};
+    window.onload = function () {
+      var audio = document.getElementById("laughSound");
+      audio.play();
+    };
 
-</script>
+  </script>
 </body>
 
 </html>
