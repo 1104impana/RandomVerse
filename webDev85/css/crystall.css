@@ -6,8 +6,12 @@ body {
     padding: 50px;
     font-family: 'Segoe UI', sans-serif;
     height: 100vh;
-     background-image: url('../images/9078.jpg'); 
-   
+     background-image: url('../images/download.jpg'); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+   overflow: hidden;
 }
 
 .crystal-container {
