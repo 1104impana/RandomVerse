@@ -37,13 +37,6 @@ async function breakCookie() {
   }, 800);
 }
 
-// GSAP animation for header on page load
-gsap.from("h1", {
-  scale: 0,
-  duration: 1,
-  delay: 0,
-  rotate: 360
-});
 
 // On window load, randomize cookies' position, size, animation delay
 window.onload = function () {
