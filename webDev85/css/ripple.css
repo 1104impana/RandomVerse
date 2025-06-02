@@ -64,34 +64,47 @@ body{
   cursor: pointer;
   box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
 }
+/*nav bar*/
 .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  background-color: #000;
   position: fixed;
   top: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 10px 20px;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  backdrop-filter: blur(10px);
 }
 
-.nav-links {
+.nav-left img {
+  height: 50px;
+}
+
+.nav-right {
   display: flex;
-  justify-content: flex-start;
-  gap: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  gap: 25px;  /* Adds space between icons */
 }
 
-.nav-links li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1em;
-  transition: color 0.3s;
+.nav-right a {
+  display: inline-block;
 }
 
-.nav-links li a:hover {
-  color: #0e807a96;
+.nav-icon {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-icon:hover {
+  transform: scale(1.15);
+}
+
+/* To avoid content getting hidden behind the fixed navbar */
+body {
+  padding-top: 70px;
 }
 

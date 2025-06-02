@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calming Sounds with Volume Slider</title>
+<link rel="stylesheet" href="css/meditation.css">
+</head>
+<body>
+  <nav class="navbar">
+  <div class="nav-left">
+    <a href="Homepage.html">
+    <img src="../images/witch.png" alt="icon" class="responsive-img">
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="ripple.html">
+      <img src="../images/galaxy.png" alt="Paint" class="nav-icon">
+    </a>
+    <a href="crystall.html">
+      <img src="../images/crystal-ball.png" alt="Crystal" class="nav-icon">
+    </a>
+    <a href="fortune.html">
+      <img src="../images/fornav.png" alt="Fortune" class="nav-icon">
+    </a>
+    <a href="meditation.html">
+      <img src="../images/relaxed.png" alt="Meditation" class="nav-icon">
+    </a>
+  </div>
+</nav>
+
+
+<h1>Calming Sounds</h1>
+
+<div class="sound-buttons">
+  <div class="sound-item" data-sound="rain" tabindex="0" role="button" aria-label="Play Rain Sound">
+    <img src="images/Screenshot (76).png" alt="Rain Animation" />
+    <span>Rain</span>
+  </div>
+  <div class="sound-item" data-sound="ocean" tabindex="0" role="button" aria-label="Play Waves Sound">
+    <img src="images/Screenshot 2025-05-31 225257.png" alt="Waves Animation" />
+    <span>Waves</span>
+  </div>
+  <div class="sound-item" data-sound="birds" tabindex="0" role="button" aria-label="Play Birds Chirping Sound">
+    <img src="images/Screenshot (77).png" alt="Birds Animation" />
+    <span>Birds</span>
+  </div>
+  <div class="sound-item" data-sound="bowl" tabindex="0" role="button" aria-label="Play Singing bowl Sound">
+    <img src="images/Screenshot (75).png" alt="Bowl Animation" />
+    <span>Bowl</span>
+  </div>
+  <div class="sound-item" data-sound="fire" tabindex="0" role="button" aria-label="Fire Sound">
+    <img src="images/Screenshot (74).png" alt="Fire Animation" />
+    <span>Fire</span>
+  </div>
+</div>
+
+<button id="togglePlay" disabled>Play</button>
+
+<div class="volume-control">
+  <label for="volumeSlider">Volume:</label>
+  <input type="range" min="0" max="100" value="50" id="volumeSlider" class="volume-slider" />
+  <span id="volumeValue">50%</span>
+</div>
+
+<audio id="audioPlayer" loop></audio>
+<script src="js/medditation.js"></script>
+
+</body>
+</html>
