@@ -11,6 +11,7 @@ html, body {
   justify-content: flex-start;
   padding-top: 70px; /* To avoid navbar overlap */
   overflow-x: hidden;
+  /* background-image: url('../images/start.jpeg'); */
 }
 
 /* Navbar */
