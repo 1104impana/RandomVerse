@@ -5,32 +5,76 @@
   <meta charset="UTF-8">
   <title>Magic Ball Fortune Teller</title>
   <link rel="stylesheet" href="css/crystall.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+    }
+
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .left-section input {
+      padding: 10px;
+      width: 250px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .left-section button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .right-section img {
+      max-width: 280px;
+      cursor: pointer;
+    }
+  </style>
 
 </head>
 
 <body>
- <nav class="navbar">
-  <div class="nav-left">
-    <a href="Homepage.html">
-    <img src="../images/witch.png" alt="icon" class="responsive-img">
-    </a>
-  </div>
-  <div class="nav-right">
-    <a href="ripple.html">
-      <img src="../images/galaxy.png" alt="Paint" class="nav-icon">
-    </a>
-    <a href="crystall.html">
-      <img src="../images/crystal-ball.png" alt="Crystal" class="nav-icon">
-    </a>
-    <a href="fortune.html">
-      <img src="../images/fornav.png" alt="Fortune" class="nav-icon">
-    </a>
-    <a href="meditation.html">
-      <img src="../images/relaxed.png" alt="Meditation" class="nav-icon">
-    </a>
-  </div>
-</nav>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="Homepage.html">
+        <img src="../images/witch.png" alt="icon" class="responsive-img">
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="ripple.html">
+        <img src="../images/galaxy.png" alt="Paint" class="nav-icon">
+      </a>
+      <a href="crystall.html">
+        <img src="../images/crystal-ball.png" alt="Crystal" class="nav-icon">
+      </a>
+      <a href="fortune.html">
+        <img src="../images/fornav.png" alt="Fortune" class="nav-icon">
+      </a>
+      <a href="meditation.html">
+        <img src="../images/relaxed.png" alt="Meditation" class="nav-icon">
+      </a>
+    </div>
+  </nav>
 
 
 
@@ -38,20 +82,33 @@
     <audio id="laughSound">
       <source src="images/laugh.mp3" type="audio/mpeg">
     </audio>
+  </div>
 
+  <div class="text-container">
     <h1>Welcome to the crystal ball. Try not to be disappointed.</h1>
     <h3>Type your question—because the ball loves ruining your day</h3>
-    <div class="crystal-container">
-      <div class="ball-wrapper">
-        <img id="magicBall" src="images/2lady.png" alt="Magic Ball" style="width: 1000px;;" onclick="askCrystalBall()">
-        <div id="ballMessage">Ask your question!</div>
-      </div>
+  </div>
+
+  <div class="main-container">
+    <div class="left-section">
       <input type="text" id="userQuestion" placeholder="eg: will I get a job?">
       <button onclick="askCrystalBall()">Ask the Ball</button>
       <h2>wanna check you fortune?
       </h2>
       <a href="fortune.html">click here :)</a>
     </div>
+    <div class="right-container">
+      <div class="crystal-container">
+
+        <div class="ball-wrapper">
+          <img id="magicBall" src="../images/ball.png" alt="Magic Ball" style="width: 900px;;"
+            onclick="askCrystalBall()">
+          <div id="ballMessage">Ask your question!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </div>
   <script src="js/crystall.js"></script>
   <script>
