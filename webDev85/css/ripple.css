@@ -10,6 +10,9 @@ body{
 
 }
 canvas {
+  touch-action: none; /* Prevents browser scrolling during drawing */
+}
+canvas {
   display: block;
   position: absolute;
   top: 0;
