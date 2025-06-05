@@ -2,13 +2,28 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow:hidden;
+    overflow: hidden;
+    height: 100vh; /* Ensure body takes full viewport height */
+    width: 100vw;
+    background-color: black; 
 
 
 }
+canvas {
+  touch-action: none; /* Prevents browser scrolling during drawing */
+}
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .bg-image {
-  width: 100%;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   background:
   linear-gradient(rgb(0, 0, 0,0.8), rgb(0, 0, 0,0.8)),
   url("../images/9078.jpg") no-repeat center center;
@@ -24,23 +39,65 @@ body{
 }
 
 .controls-wrapper {
-  position: absolute;
-  bottom: 20px;
+  position: fixed;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  z-index: 10;
+  gap: 8px;
+  padding: 10px 8px;
+  max-width: 95vw;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  z-index: 1000;
+  overflow-x: hidden; 
 }
+
 
 
 .color-palette {
  
   display: flex;
   gap: 15px;
+  flex-wrap: nowrap;
   
 }
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .controls-wrapper {
+    width: 90%; /* Take more width on small screens */
+    min-width: unset; /* Remove fixed minimum width */
+    gap: 10px; /* Reduce gap between items */
+    padding: 8px 15px; /* Smaller padding */
+  }
+  
+  .color {
+    width: 25px;
+    height: 25px; /* Slightly smaller colors on mobile */
+  }
+  
+  #resetBtn {
+    padding: 8px 12px; /* Smaller button */
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .color-palette {
+    gap: 8px; /* Even smaller gap for tiny screens */
+  }
+  
+  .color {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 
 .color {
   width: 30px;
@@ -56,15 +113,7 @@ body{
 .drawing-cursor {
       cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="white" stroke-width="1"/></svg>') 8 8, auto;
     }
-#resetBtn {
-  padding: 10px 16px;
-  background-color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
-}
+
 /*nav bar*/
 .navbar {
   display: flex;
@@ -104,8 +153,119 @@ body{
   transform: scale(1.15);
 }
 
-/* To avoid content getting hidden behind the fixed navbar */
-body {
-  padding-top: 70px;
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .controls-wrapper {
+        flex-direction: row;
+        width: 95vw;
+        gap: 6px;
+        padding: 8px 10px;
+    }
+    .color-palette {
+    gap: 6px;
+  }
+  
+  .color {
+    width: 25px;
+    height: 25px;
+  }
+  
+  #resetBtn, #downloadBtn {
+    padding: 5px 10px;
+    font-size: 13px;
+    min-width: 65px;
+  }
+
+
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .nav-left img {
+        height: 40px;
+    }
+
+    .nav-icon {
+        height: 30px;
+        width: 30px;
+    }
+}
+@media (max-width: 480px) {
+  .controls-wrapper {
+    gap: 4px;
+    padding: 6px 8px;
+  }
+  
+  .color {
+    width: 22px;
+    height: 22px;
+  }
+  
+  #resetBtn, #downloadBtn {
+    padding: 4px 8px;
+    font-size: 12px;
+    min-width: 60px;
+  }
+}
+
+/* Extreme small screens */
+@media (max-width: 360px) {
+  .color {
+    width: 20px;
+    height: 20px;
+  }
+  
+  #resetBtn, #downloadBtn {
+    font-size: 11px;
+    min-width: 55px;
+  }
+}
+.controls-wrapper button,
+.controls-wrapper .color {
+  flex: 0 0 auto;
+  max-width: 48px;
+  max-height: 48px;
+}
+#resetBtn {
+  background-color: rgba(255, 255, 255, 0.1); /* semi-transparent */
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 6px 15px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;
+}
+
+#resetBtn:hover {
+  background-color: white;
+  color: black;
+  transform: scale(1.05);
+}
+#downloadBtn {
+  background-color: rgba(255, 255, 255, 0.1); /* semi-transparent */
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 6px 35px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;
+   width: auto;
+}
+
+#downloadBtn:hover {
+  background-color: white;
+  color: black;
+  transform: scale(1.05);
 }
 
