@@ -2,9 +2,10 @@ body {
     background-color: #000000;
     color: #f0f0f0;
     text-align: center;
+    width: 100vw;
+    height: 100vh;
     padding: 50px;
     font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
      background-image: url('../images/start.jpeg'); 
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,7 +17,8 @@ body {
 .crystal-container {
     position: relative;
     display: inline-block;
-    left: 0;
+    left: 700px;
+    
 }
 
 #magicBall {
@@ -28,18 +30,20 @@ body {
 
 #ballMessage {
     position: absolute;
-    top: 670px;
-    left: 380px;
+    top: 399px;
+    left: 220px;
     transform: translate(-50%, -50%);
     width: 220px;
     padding: 12px;
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
-    color: #000000;
+    color: black;
     font-weight: bold;
     pointer-events: none;
     line-height: 1.4;
     font-style: italic;
+    
+ text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 /*nav bar*/
 .navbar {
@@ -84,3 +88,85 @@ body {
 body {
   padding-top: 70px;
 }
+
+.text-container{
+  position: absolute;
+  left: 60px;
+  
+}
+.main-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.left-section{
+  position: absolute;
+}
+.input-section {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    #userQuestion {
+      padding: 15px 20px;
+      font-size: 16px;
+      border: 2px solid #fff;
+      border-radius: 25px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      min-width: 300px;
+      text-align: center;
+      box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.3),
+        inset 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    #userQuestion:focus {
+      outline: none;
+      border-color: #fff;
+      box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.8),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    #userQuestion::placeholder {
+      color: #bbb;
+      font-style: italic;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: 700;
+      border: 2px solid #fff;
+      border-radius: 25px;
+      background: linear-gradient(45deg, #000, #333);
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Orbitron', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #333, #000);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
+      border-color: #fff;
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+
+
