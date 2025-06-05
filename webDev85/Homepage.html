@@ -14,7 +14,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     /* Add this custom CSS */
     /*body {
@@ -28,7 +29,10 @@
       padding-top: 100px;
       overflow-x: hidden;
       scroll-behavior: smooth;
+      
     }
+   
+
 
     .floating-text {
       color: #fff;
@@ -42,32 +46,41 @@
       z-index: 1;
     }
 
-    .hero-section {
-      background-image: url('images/start.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      padding: 100px 0;
-      /* Adjust padding as needed */
-      margin-bottom: 50px;
-      /* Creates space between this and next section */
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 0;
-    }
+   .hero-section {
+ 
+  position: relative;
+  width: 100vw;
+  height: 110vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  z-index: 0;
+  overflow: hidden;
+   background-image: url('images/black1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
+/* Remove any conflicting body padding/margin */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
     .hero-section::before {
       content: '';
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.185);
+      background: rgba(0, 0, 0, 0.37);
       /* Dark overlay */
       z-index: 0;
     }
@@ -131,10 +144,10 @@
     .about-section {
       color: rgb(202, 197, 197);
       text-align: justify;
-      margin-top: 600px;
+      margin-top: 300px;
       /*space above*/
       padding: 80px 15px;
-      margin-bottom: 600px;
+      margin-bottom: 400px;
       position: relative;
       z-index: 1;
       background: linear-gradient(145deg, rgba(17, 111, 219, 0.082), rgba(40, 40, 40, 0.6));
@@ -144,7 +157,7 @@
       width: 100vw;
       left: 50%;
       transform: translateX(-50%);
-      background-image: url('images/start.jpeg');
+      background-image: url('images/ab.jpg');
       background-size: cover;
       background-attachment: fixed;
       background-position: center;
@@ -158,7 +171,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.432);
       z-index: -1;
 
     }
@@ -166,7 +179,7 @@
     .about-section .content-wrapper {
       position: relative;
       padding: 40px;
-      background: rgba(15, 15, 15, 0.6);
+      background: rgba(15, 15, 15, 0.308);
       border-radius: 15px;
       backdrop-filter: blur(8px);
       max-width: 1200px;
@@ -231,7 +244,7 @@
       z-index: 1;
       padding: 80px 0 30px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      background-image: url('images/start.jpeg');
+      background-image: url('images/ab.jpg');
       background-size: cover;
       background-attachment: fixed;
       background-position: center;
@@ -378,7 +391,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 25px;
-  background-color: #000;
+  background-color: #00000067;
   position: fixed;
   top: 0;
   left: 0;
@@ -415,7 +428,90 @@
 body {
   padding-top: 70px;
 }
+ /* Styles for the new buttons */
+    .hero-buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 50px;
+      justify-content: center;
+      z-index: 1;
+    }
 
+    .hero-btn {
+      padding: 12px 30px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(255, 255, 255, 0); /* Translucent background */
+       border: 2px solid #fff; /* White outline */
+      border-radius: 25px; /* Rounded edges */
+      border-radius: 25px; /* Rounded edges */
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      backdrop-filter: blur(5px);
+    }
+
+    .hero-btn:hover {
+      background: #0000008c; /* Black background on hover */
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .hero-buttons {
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .hero-btn {
+        font-size: 1rem;
+        padding: 10px 25px;
+      }
+    }
+.card-text-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.836);
+  color: #fff;
+  display: flex;
+  flex-direction: column; /* Stack title and description vertically */
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-family: 'Open Sans', sans-serif;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  text-align: center; /* Ensure text alignment */
+  padding: 20px; /* Add padding for spacing */
+}
+
+.card-text-box .title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px; /* Space between title and description */
+}
+
+.card-text-box .description {
+  font-size: 1rem; /* Smaller font for the description */
+  line-height: 1.4; /* Improve readability */
+  max-width: 80%; /* Prevent text from touching edges */
+}
+
+.card:hover .card-text-box {
+  opacity: 1;
+  transform: translateY(0);
+}
   </style>
 
 </head>
@@ -424,45 +520,59 @@ body {
   <nav class="navbar">
   <div class="nav-left">
     <a href="Homepage.html">
-    <img src="../images/witch.png" alt="icon" class="responsive-img">
+    <img src="images/hm.png" alt="icon" class="responsive-img">
     </a>
   </div>
   <div class="nav-right">
     <a href="ripple.html">
-      <img src="../images/galaxy.png" alt="Paint" class="nav-icon">
+      <img src="images/galaxy.png" alt="Paint" class="nav-icon">
     </a>
     <a href="crystall.html">
-      <img src="../images/crystal-ball.png" alt="Crystal" class="nav-icon">
+      <img src="images/crystal-ball.png" alt="Crystal" class="nav-icon">
     </a>
     <a href="fortune.html">
-      <img src="../images/fornav.png" alt="Fortune" class="nav-icon">
+      <img src="images/fornav.png" alt="Fortune" class="nav-icon">
     </a>
     <a href="meditation.html">
-      <img src="../images/relaxed.png" alt="Meditation" class="nav-icon">
+      <img src="images/relaxed.png" alt="Meditation" class="nav-icon">
     </a>
   </div>
 </nav>
 
   <div class="floating-text-container hero-section" style="margin-top: -100px;">
-    <h1 class="floating-text">
+    <div>
+      <h1 class="floating-text">
       Welcome To <br>
       <span class="randomverse">RandomVerse</span>
-    </h1>
+      </h1>
+     <div class="hero-buttons">
+        <a href="#about-section" class="hero-btn">About Us</a>
+        <a href="#card-section" class="hero-btn">Explore</a>
+      </div>
+   </div>
   </div>
 
-  <div class="container card-container">
+  <div class="container card-container"id="card-section">
     <div class="card-row">
       <div class="card-col">
         <a href="crystall.html" style="text-decoration: none;">
           <div class="card">
             <img src="images/fortune.jpg" style="width:100%;">
+            <div class="card-text-box">
+              <div class="title">Fortune Teller</div>
+              <div class="description">Enter a magical realm where the mysterious witch gazes into her glowing fortune ball and answers your questions with eerie wisdom and cryptic charm.</div>
+            </div>
           </div>
         </a>
       </div>
       <div class="card-col">
         <a href="ripple.html" style="text-decoration: none;">
           <div class="card">
-            <img src="images/paint.jpg" style="width:100%;">
+            <img src="images/paint.jpeg" style="width:100%;">
+            <div class="card-text-box">
+              <div class="title">ColorTide</div>
+              <div class="description">Unleash your creativity on a cosmic ripple canvas. Simple, smooth, and flowing—paint your imagination</div>
+            </div>
           </div>
         </a>
       </div>
@@ -470,14 +580,21 @@ body {
       <div class="card-col">
         <a href="meditation.html" style="text-decoration: none;">
           <div class="card">
-            <img src="images/meditate.jpg" style="width:100%;">
+            <img src="images/med.jpeg" style="width:100%;">
+            <div class="card-text-box">
+              <div class="title">Nature’s Whisper</div>
+              <div class="description">Escape the noise, embrace the stillness.
+Your peaceful pocket of nature awaits.
+
+</div>
+            </div>
           </div>
         </a>
       </div>
     </div>
   </div>
 
-  <div class="about-section">
+  <div class="about-section" id="about-section">
     <div class="content-wrapper">
       <h2>About us</h2>
       <br>
