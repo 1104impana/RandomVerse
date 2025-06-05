@@ -9,15 +9,24 @@ body{
 
 
 }
-canvas {
-  touch-action: none; /* Prevents browser scrolling during drawing */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: fixed; /* This prevents scrolling completely */
 }
 canvas {
-  display: block;
+  touch-action: none;
+   /* Prevents browser scrolling during drawing */
+    display: block;
   position: absolute;
   top: 0;
   left: 0;
+  pointer-events: none;
 }
+
 .bg-image {
   position: fixed;
   top: 0;
@@ -28,7 +37,7 @@ canvas {
   linear-gradient(rgb(0, 0, 0,0.8), rgb(0, 0, 0,0.8)),
   url("../images/9078.jpg") no-repeat center center;
   background-size: cover;
-  z-index: 1;
+  z-index: 0;
 }
 #paintCanvas {
   position: absolute;
@@ -36,6 +45,7 @@ canvas {
   left: 0;
   z-index: 1;
   pointer-events: none;
+ 
 }
 
 .controls-wrapper {
@@ -53,8 +63,10 @@ canvas {
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
-  z-index: 1000;
+  z-index: 9999;
   overflow-x: hidden; 
+  pointer-events: auto; /* Ensure controls are interactive */
+   
 }
 
 
