@@ -13,6 +13,46 @@
     <img src="images/witch.png" alt="icon" class="responsive-img">
     </a>
   </div>
+  <style>
+    .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  background-color: #00000067;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.nav-left img {
+  height: 50px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;  /* Adds space between icons */
+}
+
+.nav-right a {
+  display: inline-block;
+}
+
+.nav-icon {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-icon:hover {
+  transform: scale(1.15);
+}
+
+  </style>
   <div class="nav-right">
     <a href="ripple.html">
       <img src="images/galaxy.png" alt="Paint" class="nav-icon">
