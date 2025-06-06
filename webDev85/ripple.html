@@ -4,93 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Space Paint</title>
-
   <link rel="stylesheet" href="css/ripple.css" />
-  </head>
-  <body>
-    <nav class="navbar">
-  <div class="nav-left">
-    <a href="Homepage.html">
-    <img src="images/witch.png" alt="icon" class="responsive-img">
-    </a>
-  </div>
-  <div class="nav-right">
-    <a href="ripple.html">
-      <img src="images/galaxy.png" alt="Paint" class="nav-icon">
-    </a>
-    <a href="crystall.html">
-      <img src="images/crystal-ball.png" alt="Crystal" class="nav-icon">
-    </a>
-    <a href="fortune.html">
-      <img src="images/fornav.png" alt="Fortune" class="nav-icon">
-    </a>
-    <a href="meditation.html">
-      <img src="images/relaxed.png" alt="Meditation" class="nav-icon">
-    </a>
-  </div>
-</nav>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="Homepage.html">
+        <img src="images/witch.png" alt="icon" class="responsive-img">
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="ripple.html">
+        <img src="images/galaxy.png" alt="Paint" class="nav-icon">
+      </a>
+      <a href="crystall.html">
+        <img src="images/crystal-ball.png" alt="Crystal" class="nav-icon">
+      </a>
+      <a href="fortune.html">
+        <img src="images/fornav.png" alt="Fortune" class="nav-icon">
+      </a>
+      <a href="meditation.html">
+        <img src="images/relaxed.png" alt="Meditation" class="nav-icon">
+      </a>
+    </div>
+  </nav>
 
-
-    <div class ="bg-image"></div>
-
-    <canvas id="paintCanvas"></canvas>
+  <div class="bg-image"></div>
+  <canvas id="paintCanvas"></canvas>
   <div class="controls-wrapper">
     <div class="color-palette">
-    <div class="color" style="background-color: rgba(255, 0, 0, 0.3);" data-color="rgba(255, 0, 0, 0.3)"></div>
-    <div class="color" style="background-color: rgba(0, 0, 255, 0.3);" data-color="rgba(0, 0, 255, 0.3)"></div>
-    <div class="color" style="background-color: rgba(0, 255, 0, 0.3);" data-color="rgba(0, 255, 0, 0.3)"></div>
-    <div class="color" style="background-color: rgba(255, 255, 0, 0.3);" data-color="rgba(255, 255, 0, 0.3)"></div>
-    <div class="color" style="background-color: rgba(255, 255, 255, 0.3);" data-color="rgba(255, 255, 255, 0.3)"></div>
-    
-   </div>
-   
-   <button id="resetBtn" >Reset</button>
-   <button id="downloadBtn" >Download</button>
-      </button>
- 
-</div>
+      <div class="color" style="background-color: rgba(255, 0, 0, 0.3);" data-color="rgba(255, 0, 0, 0.3)"></div>
+      <div class="color" style="background-color: rgba(0, 0, 255, 0.3);" data-color="rgba(0, 0, 255, 0.3)"></div>
+      <div class="color" style="background-color: rgba(0, 255, 0, 0.3);" data-color="rgba(0, 255, 0, 0.3)"></div>
+      <div class="color" style="background-color: rgba(255, 255, 0, 0.3);" data-color="rgba(255, 255, 0, 0.3)"></div>
+      <div class="color" style="background-color: rgba(255, 255, 255, 0.3);" data-color="rgba(255, 255, 255, 0.3)"></div>
+    </div>
+    <button id="resetBtn">Reset</button>
+    <button id="downloadBtn">Download</button>
+  </div>
 
-
-    <!-- jQuery -->
-   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-   <!-- jQuery Ripples JS -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
-   
-   <script src="js/ripple.js"></script>
-   <!--reset button-->
-   <script>
-  document.getElementById("resetBtn").addEventListener("click", () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  });
-  // Download button with black background
-    document.getElementById("downloadBtn").addEventListener("click", function() {
-      // Create temporary canvas
-      const tempCanvas = document.createElement('canvas');
-      const tempCtx = tempCanvas.getContext('2d');
-      
-      // Set same dimensions as main canvas
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
-      
-      // Fill with black background
-      tempCtx.fillStyle = 'black';
-      tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-      
-      // Draw the painting canvas on top
-      tempCtx.drawImage(canvas, 0, 0);
-      
-      // Create download link
-      const link = document.createElement('a');
-      link.download = 'space-paint-' + new Date().getTime() + '.png';
-      link.href = tempCanvas.toDataURL('image/png');
-      link.click();
-    });
-</script>
-   
- 
-
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+  <script src="js/ripple.js"></script>
 </body>
 </html>
-
-   
