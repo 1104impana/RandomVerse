@@ -1,118 +1,223 @@
- body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: black;
-    color: #fff;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Align content to top */
-    padding-top: 2rem;
-  }
+body {
+  background-image: url('images/download (4).jpg');
+  background-repeat: no-repeat;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: black;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to top */
+  padding: 2rem 1rem 3rem;
+  background-size: cover;
+  background-position: center center;
+}
+
+h1 {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 1px 1px 5px #000;
+  max-width: 90vw;
+  word-break: break-word;
+}
+
+/* Make the sound buttons container flexible and wrap on smaller screens */
+.sound-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vw;
+  padding: 0 1rem;
+}
+
+/* Each sound item is flexible */
+.sound-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  flex: 1 1 120px; /* grow/shrink, min width 120px */
+  max-width: 160px;
+}
+
+.sound-item img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 2px #fdfdfd);
+  transition: transform 0.3s;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+
+.sound-item:focus img {
+  transform: scale(1.1);
+  outline: none;
+}
+
+.sound-item span {
+  font-size: 2rem;
+  color: #f8f7f9;
+  transition: text-decoration 0.3s;
+  white-space: nowrap;
+}
+
+.sound-item:focus span {
+  text-decoration: underline;
+}
+
+/* Volume control container */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  width: 300px;
+  max-width: 90vw;
+  padding: 0 1rem;
+}
+
+.volume-control label {
+  min-width: 70px;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background: #fcfbfc;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.volume-slider:hover {
+  background: #f0eef1;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #131314;
+  cursor: pointer;
+  box-shadow: 0 0 5px #131314;
+  transition: background 0.3s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  background: #131314;
+}
+
+
+
+/* Play button */
+#pauseAll {
+  margin-bottom: 2rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.7rem;
+  border-radius: 80px;
+  border: none;
+  cursor: pointer;
+  background-color: #faf7f8;
+  color: #101010;
+  transition: background 0.3s, transform 0.2s;
+  max-width: 90vw;
+  width: 220px;
+  font-weight: bold;
+}
+
+#pauseAll:hover:not(:disabled) {
+  background-color: #faf7f8;
+  transform: scale(1.05);
+}
+
+#pauseAll:disabled {
+  background-color: #faf7f8;
+  cursor: not-allowed;
+}
+
+
+#togglePlay:hover:not(:disabled) {
+  background: rgb(246, 245, 245);
+}
+
+#togglePlay:disabled {
+  background-color: #f2f1f3;
+  cursor: not-allowed;
+}
+
+/* Media Queries for responsiveness */
+
+/* Tablets and small desktops */
+@media (max-width: 900px) {
   h1 {
-    font-size: 4rem;  /* Bigger font */
-    text-align: center;
-    margin-bottom: 3rem;
-    text-shadow: 1px 1px 5px #000;
+    font-size: 3rem;
   }
+  
   .sound-buttons {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 2rem;
-    align-items: center;
+    gap: 4rem;
   }
+
   .sound-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
+    max-width: 140px;
   }
-  .sound-item img {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 0.5rem;
-    filter: drop-shadow(0 0 2px #fdfdfd);
-    transition: transform 0.3s;
-  }
-  .sound-item:hover img {
-    transform: scale(1.1);
-  }
+  
   .sound-item span {
-    font-size: 2.5rem;
-    color: #f8f7f9;
-    transition: text-decoration 0.3s;
+    font-size: 1.7rem;
   }
-  .sound-item:hover span {
-    text-decoration: underline;
-  }
-  .volume-control {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-    font-size: 20px;
-    width: 300px;
-    max-width: 90vw;
-  }
-  .volume-control label {
-    min-width: 70px;
-  }
-  .volume-slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 8px;
-    border-radius: 5px;
-    background: #fcfbfc;
-    outline: none;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .volume-slider:hover {
-    background: #f0eef1;
-  }
-  .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #403ca0;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(64,60,160,0.7);
-    transition: background 0.3s;
-  }
-  .volume-slider::-webkit-slider-thumb:hover {
-    background: #5a52c9;
-  }
-  /* Firefox */
-  .volume-slider::-moz-range-thumb {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #403ca0;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(64,60,160,0.7);
-    transition: background 0.3s;
-  }
-  .volume-slider::-moz-range-thumb:hover {
-    background: #5a52c9;
-  }
+  
   #togglePlay {
-    margin-bottom: 1rem;
-    padding: 0.8rem 2rem;
+    width: 180px;
+    font-size: 1.3rem;
+  }
+  
+  .volume-control {
+    width: 250px;
+  }
+}
+
+/* Small tablets and large phones */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .sound-buttons {
+    gap: 3rem;
+  }
+
+  .sound-item {
+    max-width: 130px;
+    flex: 1 1 45%; /* two items per row */
+  }
+
+  .sound-item img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .sound-item span {
     font-size: 1.5rem;
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    background-color: #f9f5fa;
-    color: #403ca0;
-    transition: background 0.3s;
   }
-  #togglePlay:hover:not(:disabled) {
-    background: rgb(246, 245, 245);
+
+  .volume-control {
+    width: 100%;
+    justify-content: center;
   }
+<<<<<<< HEAD
   #togglePlay:disabled {
     background-color: #f2f1f3;
     cursor: not-allowed;
@@ -160,3 +265,55 @@
 body {
   padding-top: 70px;
 }
+=======
+
+  #togglePlay {
+    width: 150px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Phones and very small screens */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .sound-buttons {
+    gap: 2rem;
+  }
+
+  .sound-item {
+    flex: 1 1 100%; /* one item per row */
+    max-width: 100%;
+  }
+
+  .sound-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .sound-item span {
+    font-size: 1.3rem;
+  }
+
+
+  .volume-control {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 90vw;
+    align-items: flex-start;
+  }
+
+  #togglePlay {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+}
+
+.sound-item.playing img {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ffffffaa;
+}
+
+>>>>>>> homepage
