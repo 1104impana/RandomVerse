@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+# from pymongo import MongoClient  # 🔸 Commented out MongoDB for now
+
+# 🔮 LLM things
 import httpx
 import os
 from dotenv import load_dotenv
@@ -67,8 +70,6 @@ CORS(app)
 @app.route('/crystalBallAnswer', methods=['GET'])
 def crystal_ball_answer_route():
     user_question = request.args.get('question')
-    print("Question received:", user_question)
-
     
     if not user_question:
         return jsonify({"error": "Please provide a question as a query parameter."}), 400
