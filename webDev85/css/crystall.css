@@ -53,6 +53,12 @@ body {
 .nav-icon:hover {
   transform: scale(1.15);
 }
+.nav-item p {
+  margin-top: 5px;
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+}
 
 /* Main content layout */
 .main-container {
