@@ -1,41 +1,50 @@
-body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    height: 100vh; /* Ensure body takes full viewport height */
-    width: 100vw;
-    background-color: black; 
-
-
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
 }
-canvas {
-  touch-action: none; /* Prevents browser scrolling during drawing */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: fixed;
 }
+
 canvas {
+  touch-action: none;
   display: block;
   position: absolute;
   top: 0;
   left: 0;
+  pointer-events: none;
 }
+
 .bg-image {
   position: fixed;
   top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background:
-  linear-gradient(rgb(0, 0, 0,0.8), rgb(0, 0, 0,0.8)),
-  url("../images/9078.jpg") no-repeat center center;
+    linear-gradient(rgb(0, 0, 0, 0.8), rgb(0, 0, 0, 0.8)),
+    url("../images/9078.jpg") no-repeat center center;
   background-size: cover;
-  z-index: 1;
+  z-index: 0;
+  pointer-events: auto;
 }
+
 #paintCanvas {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
-  pointer-events: none;
 }
 
 .controls-wrapper {
@@ -53,43 +62,39 @@ canvas {
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
-  z-index: 1000;
-  overflow-x: hidden; 
+  z-index: 9999;
+  overflow-x: hidden;
+  pointer-events: auto;
 }
 
-
-
 .color-palette {
- 
   display: flex;
   gap: 15px;
   flex-wrap: nowrap;
-  
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
   .controls-wrapper {
-    width: 90%; /* Take more width on small screens */
-    min-width: unset; /* Remove fixed minimum width */
-    gap: 10px; /* Reduce gap between items */
-    padding: 8px 15px; /* Smaller padding */
+    width: 90%;
+    min-width: unset;
+    gap: 10px;
+    padding: 8px 15px;
   }
   
   .color {
     width: 25px;
-    height: 25px; /* Slightly smaller colors on mobile */
+    height: 25px;
   }
   
-  #resetBtn {
-    padding: 8px 12px; /* Smaller button */
+  #resetBtn, #downloadBtn {
+    padding: 8px 12px;
     font-size: 14px;
   }
 }
 
 @media (max-width: 400px) {
   .color-palette {
-    gap: 8px; /* Even smaller gap for tiny screens */
+    gap: 8px;
   }
   
   .color {
@@ -98,23 +103,24 @@ canvas {
   }
 }
 
-
 .color {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid white;
+  pointer-events: auto;
 }
-.color.active {
-      transform: scale(1.2);
-      box-shadow: 0 0 10px white;
-    }
-.drawing-cursor {
-      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="white" stroke-width="1"/></svg>') 8 8, auto;
-    }
 
-/*nav bar*/
+.color.active {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px white;
+}
+
+.drawing-cursor {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="white" stroke-width="1"/></svg>') 8 8, auto;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -126,6 +132,7 @@ canvas {
   left: 0;
   right: 0;
   z-index: 1000;
+  pointer-events: auto;
 }
 
 .nav-left img {
@@ -135,11 +142,12 @@ canvas {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 25px;  /* Adds space between icons */
+  gap: 25px;
 }
 
 .nav-right a {
   display: inline-block;
+  pointer-events: auto;
 }
 
 .nav-icon {
@@ -153,16 +161,21 @@ canvas {
   transform: scale(1.15);
 }
 
+@media (hover: none) {
+  .nav-icon:hover {
+    transform: none;
+  }
+}
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
-    .controls-wrapper {
-        flex-direction: row;
-        width: 95vw;
-        gap: 6px;
-        padding: 8px 10px;
-    }
-    .color-palette {
+  .controls-wrapper {
+    flex-direction: row;
+    width: 95vw;
+    gap: 6px;
+    padding: 8px 10px;
+  }
+  
+  .color-palette {
     gap: 6px;
   }
   
@@ -177,20 +190,20 @@ canvas {
     min-width: 65px;
   }
 
+  .navbar {
+    padding: 10px 15px;
+  }
 
-    .navbar {
-        padding: 10px 15px;
-    }
+  .nav-left img {
+    height: 40px;
+  }
 
-    .nav-left img {
-        height: 40px;
-    }
-
-    .nav-icon {
-        height: 30px;
-        width: 30px;
-    }
+  .nav-icon {
+    height: 30px;
+    width: 30px;
+  }
 }
+
 @media (max-width: 480px) {
   .controls-wrapper {
     gap: 4px;
@@ -209,11 +222,10 @@ canvas {
   }
 }
 
-/* Extreme small screens */
 @media (max-width: 360px) {
   .color {
     width: 20px;
-    height: 20px;
+    height: 22px;
   }
   
   #resetBtn, #downloadBtn {
@@ -221,14 +233,16 @@ canvas {
     min-width: 55px;
   }
 }
+
 .controls-wrapper button,
 .controls-wrapper .color {
   flex: 0 0 auto;
   max-width: 48px;
   max-height: 48px;
 }
+
 #resetBtn {
-  background-color: rgba(255, 255, 255, 0.1); /* semi-transparent */
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
   border: 1px solid white;
   border-radius: 10px;
@@ -238,8 +252,9 @@ canvas {
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
-  justify-content: center; /* horizontal centering */
+  justify-content: center;
   align-items: center;
+  pointer-events: auto;
 }
 
 #resetBtn:hover {
@@ -247,8 +262,9 @@ canvas {
   color: black;
   transform: scale(1.05);
 }
+
 #downloadBtn {
-  background-color: rgba(255, 255, 255, 0.1); /* semi-transparent */
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
   border: 1px solid white;
   border-radius: 10px;
@@ -258,9 +274,10 @@ canvas {
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
-  justify-content: center; /* horizontal centering */
+  justify-content: center;
   align-items: center;
-   width: auto;
+  width: auto;
+  pointer-events: auto;
 }
 
 #downloadBtn:hover {
@@ -268,4 +285,3 @@ canvas {
   color: black;
   transform: scale(1.05);
 }
-
