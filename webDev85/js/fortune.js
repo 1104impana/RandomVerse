@@ -9,7 +9,7 @@ async function breakCookie() {
 
   setTimeout(async () => {
     if (!isBroken) {
-      cookieImg.src = "images/cook2.png";
+      cookieImg.src = "images/break.png";
 
       try {
         // Fetch fortune from Flask LLM endpoint
