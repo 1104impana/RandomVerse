@@ -29,9 +29,8 @@
       </a>
     </div>
   </nav>
-
-  <div class="float-container">
-    <!-- Floating cookies with random positions assigned by CSS variables -->
+ <!-- Floating cookies with random positions assigned by CSS variables -->
+  <!-- <div class="float-container">
     <img src="images/cook1.png" class="cookie" style="--random-x:0.1; --random-y:0.9" />
     <img src="images/cook1.png" class="cookie" style="--random-x:0.3; --random-y:0.8" />
     <img src="images/cook1.png" class="cookie" style="--random-x:0.5; --random-y:0.7" />
@@ -41,7 +40,7 @@
     <img src="images/cook1.png" class="cookie" style="--random-x:0.4; --random-y:0.5" />
     <img src="images/cook1.png" class="cookie" style="--random-x:0.6; --random-y:0.65" />
     <img src="images/cook1.png" class="cookie" style="--random-x:0.8; --random-y:0.55" />
-  </div>
+  </div> -->
 
   <div class="container">
     <h1>CRACK YOUR FORTUNE</h1>
@@ -53,25 +52,31 @@
 </div>
 </div>
 
-<div class="cookie-container corner-cookie" id="cookieBoxCorner" onclick="breakCookie('corner')">
-  <img src="images/cook4.png" id="cookieImageCorner" class="cookie-img" alt="Fortune Cookie" style="width: 150px;"/>
-  <div class="message-box" id="fortuneMessageCorner"></div>
+<div class="cookie-container cookie-main" onclick="breakCookie('main')">
+  <img src="images/cook4.png" id="cookieImageMain" class="cookie-img" alt="Fortune Cookie" style="width: 350px ;"/>
+  <div class="message-box" id="fortuneMessageMain"></div>
 </div>
 
-<div class="cookie-container right-corner-cookie"  onclick="breakCookie('right-corner')">
-  <img src="images/cook4.png"  class="cookie-img" alt="Fortune Cookie" style="width: 220px;"/>
-  <div class="message-box" ></div>
+<div class="cookie-container corner-cookie" onclick="breakCookie('corner1')">
+  <img src="images/cook4.png" id="cookieImageCorner1" class="cookie-img" alt="Fortune Cookie" style="width: 150px;"/>
+  <div class="message-box" id="fortuneMessageCorner1"></div>
 </div>
 
-<div class="cookie-container between-corner-cookie" onclick="breakCookie('between-corner')">
-  <img src="images/cook4.png"  class="cookie-img" alt="Fortune Cookie" style="width: 100px;"/>
-  <div class="message-box" ></div>
+<div class="cookie-container right-corner-cookie" onclick="breakCookie('corner2')">
+  <img src="images/cook4.png" id="cookieImageCorner2" class="cookie-img" alt="Fortune Cookie" style="width: 220px;"/>
+  <div class="message-box" id="fortuneMessageCorner2"></div>
 </div>
 
-<div class="cookie-container place-corner-cookie" onclick="breakCookie('place-corner')">
-  <img src="images/cook4.png" class="cookie-img" alt="Fortune Cookie" style="width: 130px;"/>
-  <div class="message-box"></div>
+<div class="cookie-container between-corner-cookie" onclick="breakCookie('corner3')">
+  <img src="images/cook4.png" id="cookieImageCorner3" class="cookie-img" alt="Fortune Cookie" style="width: 100px;"/>
+  <div class="message-box" id="fortuneMessageCorner3"></div>
 </div>
+
+<div class="cookie-container place-corner-cookie" onclick="breakCookie('corner4')">
+  <img src="images/cook4.png" id="cookieImageCorner4" class="cookie-img" alt="Fortune Cookie" style="width: 130px;"/>
+  <div class="message-box" id="fortuneMessageCorner4"></div>
+</div>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/fortune.js"></script>
