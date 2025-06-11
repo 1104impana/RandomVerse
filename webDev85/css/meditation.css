@@ -1,5 +1,5 @@
 body {
-  background-image: url('../images/ab.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.767), rgba(0, 0, 0, 0.555)), url('../images/ab.jpg');
   background-repeat: no-repeat;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -51,7 +51,7 @@ h1 {
   width: 100px;
   height: 100px;
   margin-bottom: 0.5rem;
-  filter: drop-shadow(0 0 2px #fdfdfd);
+  filter: drop-shadow(0 0 2px #fdfdfd07);
   transition: transform 0.3s;
   border-radius: 12px;
   object-fit: cover;

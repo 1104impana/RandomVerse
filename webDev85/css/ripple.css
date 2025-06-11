@@ -81,12 +81,12 @@ canvas {
     padding: 8px 15px;
   }
   
-  .color {
+  .color, .eraser, .reset {
     width: 25px;
     height: 25px;
   }
   
-  #resetBtn, #downloadBtn {
+   #downloadBtn {
     padding: 8px 12px;
     font-size: 14px;
   }
@@ -97,13 +97,13 @@ canvas {
     gap: 8px;
   }
   
-  .color {
+  .color, .eraser, .reset {
     width: 22px;
     height: 22px;
   }
 }
 
-.color {
+.color, .eraser, .reset {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -112,7 +112,7 @@ canvas {
   pointer-events: auto;
 }
 
-.color.active {
+.color.active, .eraser.active, .reset.active {
   transform: scale(1.2);
   box-shadow: 0 0 10px white;
 }
@@ -126,7 +126,7 @@ canvas {
   justify-content: space-between;
   align-items: center;
   padding: 12px 25px;
-  background-color: #000;
+  background-color: #00000018;
   position: fixed;
   top: 0;
   left: 0;
@@ -179,12 +179,12 @@ canvas {
     gap: 6px;
   }
   
-  .color {
+  .color, .eraser, .reset {
     width: 25px;
     height: 25px;
   }
   
-  #resetBtn, #downloadBtn {
+   #downloadBtn {
     padding: 5px 10px;
     font-size: 13px;
     min-width: 65px;
@@ -210,12 +210,12 @@ canvas {
     padding: 6px 8px;
   }
   
-  .color {
+  .color, .eraser, .reset {
     width: 22px;
     height: 22px;
   }
   
-  #resetBtn, #downloadBtn {
+ #downloadBtn {
     padding: 4px 8px;
     font-size: 12px;
     min-width: 60px;
@@ -228,40 +228,24 @@ canvas {
     height: 22px;
   }
   
-  #resetBtn, #downloadBtn {
+  #downloadBtn {
     font-size: 11px;
     min-width: 55px;
   }
 }
 
 .controls-wrapper button,
-.controls-wrapper .color {
+.controls-wrapper .color,
+.controls-wrapper .eraser,
+.controls-wrapper .reset {
   flex: 0 0 auto;
   max-width: 48px;
   max-height: 48px;
 }
 
-#resetBtn {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 6px 15px;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: auto;
-}
 
-#resetBtn:hover {
-  background-color: white;
-  color: black;
-  transform: scale(1.05);
-}
+
+
 
 #downloadBtn {
   background-color: rgba(255, 255, 255, 0.1);
@@ -284,4 +268,13 @@ canvas {
   background-color: white;
   color: black;
   transform: scale(1.05);
+}
+.eraser {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M16.24 3.51l4.25 4.25c.39.39.39 1.02 0 1.41l-8.49 8.49-4.25-4.25c-.39-.39-.39-1.02 0-1.41l8.49-8.49c.39-.39 1.02-.39 1.41 0zm-10.59 12.83l4.25 4.25c.39.39 1.02.39 1.41 0l8.49-8.49-4.25-4.25-8.49 8.49c-.39.39-.39 1.02 0 1.41zm-1.41 1.41l-2.12 2.12c-.39.39-.39 1.02 0 1.41l2.83 2.83c.39.39 1.02.39 1.41 0l2.12-2.12-4.24-4.24z"/></svg>') no-repeat center center;
+  background-size: 20px 20px;
+}
+
+.reset {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>') no-repeat center center;
+  background-size: 20px 20px;
 }
