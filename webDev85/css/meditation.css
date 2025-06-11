@@ -21,14 +21,17 @@ h2, .subheading {
   font-size: 1.4rem;       /* smaller size */
   font-weight: 400;
   color: #ffffff;
+  text-align: center;
 }
 h1 {
-  font-size: 3.5rem;
+  font-size: 4rem;
   text-align: center;
+  margin-top: 5.5rem;
   margin-bottom: 2rem;
   text-shadow: 1px 1px 5px #000;
   max-width: 90vw;
   word-break: break-word;
+  text-align: center;
 }
 
 /* Make the sound buttons container flexible and wrap on smaller screens */
