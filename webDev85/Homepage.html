@@ -387,44 +387,72 @@ body {
     }
     /*nav bar*/
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 25px;
-  background-color: #00000018;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
+    background-color: #00000018;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: auto;
+  }
 
-.nav-left img {
-  height: 50px;
-}
+  .nav-left img {
+    height: 50px;
+  }
 
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 25px;  /* Adds space between icons */
-}
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
 
-.nav-right a {
-  display: inline-block;
-}
+  .nav-right a {
+    display: inline-block;
+    pointer-events: auto;
+  }
 
-.nav-icon {
-  height: 35px;
-  width: 35px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
+  .nav-icon {
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
 
-.nav-icon:hover {
-  transform: scale(1.15);
-}
+  .nav-icon:hover {
+    transform: scale(1.15);
+  }
 
-/* To avoid content getting hidden behind the fixed navbar */
+  @media (hover: none) {
+    .nav-icon:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 10px 15px;
+    }
+    .nav-left img {
+      height: 40px;
+    }
+    .nav-icon {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  /* Ensure no further reduction in icon size for smaller screens */
+  @media (max-width: 480px) {
+    .nav-icon {
+      height: 30px !important;
+      width: 30px !important;
+    }
+  }
+  /* To avoid content getting hidden behind the fixed navbar */
 body {
   padding-top: 70px;
 }
