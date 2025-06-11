@@ -1,321 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Magic Ball Fortune Teller</title>
-  <style>
-    body {
-      background-color: #000000;
-      color: #f0f0f0;
-      text-align: center;
-      padding: 50px;
-      font-family: 'Segoe UI', sans-serif;
-      height: 100vh;
-      /* background-image: url('../images/9078.jpg'); */
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      padding-top: 70px;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 25px;
-      background-color: #000;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-    }
-
-    .nav-left img {
-      height: 50px;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
-
-    .nav-right a {
-      display: inline-block;
-    }
-
-    .nav-icon {
-      height: 35px;
-      width: 35px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .nav-icon:hover {
-      transform: scale(1.15);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .heading {
-      display: flex;
-      justify-content: flex-start;
-      margin-bottom: 30px;
-    }
-
-    .crystal-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 50px;
-      margin-top: 50px;
-    }
-
-    .left-section {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 25px;
-      width: 40%;
-    }
-
-    .ball-wrapper {
-      width: 50%;
-      text-align: center;
-    }
-
-    #magicBall {
-      cursor: pointer;
-      width: 100%;
-      max-width: 500px;
-      border-radius: 0%;
-      z-index: 1;
-      transition: all 0.3s ease;
-    }
-
-    #magicBall:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
-    }
-
-    #ballMessage {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 50px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      font-size: 18px;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      margin-top: 20px;
-    }
-
-    .input-section {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-
-    #userQuestion {
-      padding: 15px 20px;
-      font-size: 16px;
-      border: 2px solid #fff;
-      border-radius: 25px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      font-family: 'Orbitron', monospace;
-      min-width: 300px;
-      text-align: center;
-      box-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.3),
-        inset 0 0 10px rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    #userQuestion:focus {
-      outline: none;
-      border-color: #fff;
-      box-shadow: 
-        0 0 20px rgba(255, 255, 255, 0.8),
-        inset 0 0 20px rgba(255, 255, 255, 0.2);
-      transform: scale(1.05);
-    }
-
-    #userQuestion::placeholder {
-      color: #bbb;
-      font-style: italic;
-    }
-
-    button {
-      padding: 15px 30px;
-      font-size: 16px;
-      font-weight: 700;
-      border: 2px solid #fff;
-      border-radius: 25px;
-      background: linear-gradient(45deg, #000, #333);
-      color: #fff;
-      cursor: pointer;
-      font-family: 'Orbitron', monospace;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
-
-    button:hover {
-      background: linear-gradient(45deg, #333, #000);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
-      border-color: #fff;
-    }
-
-    button:active {
-      transform: translateY(0);
-    }
-
-    .right-section h2 {
-      font-family: 'Orbitron', monospace;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      margin: 20px 0 10px 0;
-      font-size: 1.5em;
-    }
-
-    .right-section a {
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      padding: 10px 20px;
-      border: 2px solid #fff;
-      border-radius: 20px;
-      transition: all 0.3s ease;
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .right-section a:hover {
-      background: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 768px) {
-      .crystal-container {
-        flex-direction: column;
-      }
-      .left-section, .ball-wrapper {
-        width: 100%;
-      }
-      .left-section {
-        align-items: center;
-        margin-bottom: 30px;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GSAP Cookie Tearing Effect</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<style>
+  body {
+    background: #222;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 40px;
+  }
+  #cookieBox {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+  }
+  #cookieImage {
+    width: 200px;
+    border-radius: 20px;
+    user-select: none;
+  }
+  #fortuneMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    color: #333;
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: none;
+    width: 180px;
+    opacity: 0;
+    font-weight: bold;
+  }
+</style>
 </head>
-
 <body>
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="Homepage.html">
-        <img src="../images/witch.png" alt="icon" class="responsive-img">
-      </a>
-    </div>
-    <div class="nav-right">
-      <a href="ripple.html">
-        <img src="../images/galaxy.png" alt="Paint" class="nav-icon">
-      </a>
-      <a href="crystall.html">
-        <img src="../images/crystal-ball.png" alt="Crystal" class="nav-icon">
-      </a>
-      <a href="fortune.html">
-        <img src="../images/fornav.png" alt="Fortune" class="nav-icon">
-      </a>
-      <a href="meditation.html">
-        <img src="../images/relaxed.png" alt="Meditation" class="nav-icon">
-      </a>
-    </div>
-  </nav>
 
-  <div class="container">
-    <audio id="laughSound">
-      <source src="images/laugh.mp3" type="audio/mpeg">
-    </audio>
+<h1>Click the Cookie to Crack Your Fortune (GSAP)</h1>
 
-    <div class="heading">
-      <h1>Welcome, lets answer your questions</h1>
-    </div>
-    
-    <div class="crystal-container">
-      <div class="left-section">
-        <input type="text" id="userQuestion" placeholder="eg: will I get a job?" />
-        <button onclick="askCrystalBall()">Ask the Ball</button>
-        <h2>Wanna check your fortune?</h2>
-        <a href="fortune.html">Click here :)</a>
-      </div>
+<div id="cookieBox">
+  <img id="cookieImage" src="../images/cook4.png" alt="Whole Cookie" />
+  <div id="fortuneMessage"></div>
+</div>
 
-      <div class="ball-wrapper">
-        <img id="magicBall" src="images/2lady.png" alt="Magic Ball" onclick="askCrystalBall()">
-        <div id="ballMessage">Ask your question!</div>
-      </div>
-    </div>
-  </div>
+<script>
+  const cookieBox = document.getElementById('cookieBox');
+  const cookieImg = document.getElementById('cookieImage');
+  const messageBox = document.getElementById('fortuneMessage');
 
-  <script>
-    function askCrystalBall() {
-      const question = document.getElementById('userQuestion').value;
-      const ballMessage = document.getElementById('ballMessage');
-      const responses = [
-        "It is certain.",
-        "It is decidedly so.",
-        "Without a doubt.",
-        "Yes - definitely.",
-        "You may rely on it.",
-        "As I see it, yes.",
-        "Most likely.",
-        "Outlook good.",
-        "Yes.",
-        "Signs point to yes.",
-        "Reply hazy, try again.",
-        "Ask again later.",
-        "Better not tell you now.",
-        "Cannot predict now.",
-        "Concentrate and ask again.",
-        "Don't count on it.",
-        "My reply is no.",
-        "My sources say no.",
-        "Outlook not so good.",
-        "Very doubtful."
-      ];
-      
-      if (question.trim() === '') {
-        ballMessage.textContent = "Please ask a question!";
-        return;
-      }
-      
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      ballMessage.textContent = randomResponse;
-      
-      // Play laugh sound
-      const audio = document.getElementById("laughSound");
-      audio.play();
+  const breakImages = [
+    "../images/break1.png",
+    "../images/break2.png",
+    "../images/break3.png",
+    "../images/break4.png"
+  ];
+
+  const wholeCookie = "../images/cook4.png";
+
+  // Preload images
+  [wholeCookie, ...breakImages].forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+
+  let isBroken = false;
+  let tl;
+
+  cookieBox.addEventListener('click', () => {
+    if (isBroken) {
+      if (tl) tl.kill();
+
+      gsap.to(messageBox, {
+        duration: 0.3,
+        opacity: 0,
+        onComplete: () => {
+          messageBox.style.display = 'none';
+          messageBox.textContent = '';
+        }
+      });
+
+      gsap.to(cookieImg, {
+        duration: 0.3,
+        opacity: 0,
+        rotation: 0,
+        onComplete: () => {
+          cookieImg.src = wholeCookie;
+          gsap.to(cookieImg, { duration: 0.3, opacity: 1 });
+        }
+      });
+
+      isBroken = false;
+      return;
     }
 
-    window.onload = function () {
-      var audio = document.getElementById("laughSound");
-      audio.play();
-    };
-  </script>
+    messageBox.style.display = 'none';
+    messageBox.style.opacity = 0;
+    messageBox.textContent = '';
+
+    tl = gsap.timeline();
+
+    breakImages.forEach((imgSrc, i) => {
+      // Set the new image instantly
+      tl.set(cookieImg, { attr: { src: imgSrc } });
+
+      // Shake effect
+      tl.to(cookieImg, {
+        duration: 0.3,
+        rotation: 0,
+        onStart: () => {
+          gsap.fromTo(cookieImg,
+            { rotation: -5 },
+            { rotation: 5, duration: 0.15, yoyo: true, repeat: 1, ease: "power1.inOut" }
+          );
+        }
+      });
+
+      if (i !== breakImages.length - 1) {
+        tl.to({}, { duration: 0.3 });
+      }
+    });
+
+    // Pause before showing message
+    tl.to({}, { duration: 0.5 });
+
+    tl.to(messageBox, {
+      duration: 0.5,
+      opacity: 1,
+      onStart: () => {
+        messageBox.style.display = 'block';
+        messageBox.textContent = "Your fortune message here! 🍪";
+      }
+    });
+
+    isBroken = true;
+  });
+</script>
+
 </body>
 </html>

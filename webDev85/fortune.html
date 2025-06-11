@@ -45,12 +45,33 @@
 
   <div class="container">
     <h1>CRACK YOUR FORTUNE</h1>
-  </div>
-
+<div class="cookie-wrapper">
   <div class="cookie-container" id="cookieBox" onclick="breakCookie()">
-    <img src="images/cook4.png" id="cookieImage" class="cookie-img" alt="Fortune Cookie" style="width: 500 ;"/>
+    <img src="images/cook4.png" id="cookieImage" class="cookie-img" alt="Fortune Cookie" style="width: 350px ;"/>
     <div class="message-box" id="fortuneMessage"></div>
   </div>
+</div>
+</div>
+
+<div class="cookie-container corner-cookie" id="cookieBoxCorner" onclick="breakCookie('corner')">
+  <img src="images/cook4.png" id="cookieImageCorner" class="cookie-img" alt="Fortune Cookie" style="width: 150px;"/>
+  <div class="message-box" id="fortuneMessageCorner"></div>
+</div>
+
+<div class="cookie-container right-corner-cookie"  onclick="breakCookie('right-corner')">
+  <img src="images/cook4.png"  class="cookie-img" alt="Fortune Cookie" style="width: 220px;"/>
+  <div class="message-box" ></div>
+</div>
+
+<div class="cookie-container between-corner-cookie" onclick="breakCookie('between-corner')">
+  <img src="images/cook4.png"  class="cookie-img" alt="Fortune Cookie" style="width: 100px;"/>
+  <div class="message-box" ></div>
+</div>
+
+<div class="cookie-container place-corner-cookie" onclick="breakCookie('place-corner')">
+  <img src="images/cook4.png" class="cookie-img" alt="Fortune Cookie" style="width: 130px;"/>
+  <div class="message-box"></div>
+</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/fortune.js"></script>
