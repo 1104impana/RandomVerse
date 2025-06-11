@@ -19,73 +19,41 @@ html, body {
   overflow-x: hidden;
 }
 
- /*nav bar*/
+/* Navbar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 25px;
-    background-color: #00000018;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    pointer-events: auto;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
 
-  .nav-left img {
-    height: 50px;
-  }
+.nav-left img {
+  height: 50px;
+  cursor: pointer;
+}
 
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-  }
+.nav-right {
+  display: flex;
+  gap: 25px;
+}
 
-  .nav-right a {
-    display: inline-block;
-    pointer-events: auto;
-  }
+.nav-icon {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
-  .nav-icon {
-    height: 35px;
-    width: 35px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-
-  .nav-icon:hover {
-    transform: scale(1.15);
-  }
-
-  @media (hover: none) {
-    .nav-icon:hover {
-      transform: none;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .navbar {
-      padding: 10px 15px;
-    }
-    .nav-left img {
-      height: 40px;
-    }
-    .nav-icon {
-      height: 30px;
-      width: 30px;
-    }
-  }
-
-  /* Ensure no further reduction in icon size for smaller screens */
-  @media (max-width: 480px) {
-    .nav-icon {
-      height: 30px !important;
-      width: 30px !important;
-    }
-  }
+.nav-icon:hover {
+  transform: scale(1.15);
+}
 
 /* Floating cookies background container */
 .float-container {
@@ -123,13 +91,9 @@ html, body {
 .container {
   margin: 30px 20px 10px;
   text-align: center;
-  
 }
 
 h1 {
-  position: absolute;
-  top: 70px;
-  right: 380px;
   font-weight: 900;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: rgb(187, 186, 186);
@@ -139,21 +103,15 @@ h1 {
 
 /* Cookie container with fortune message */
 .cookie-container {
-  position: absolute;
+  position: relative;
   width: 90vw;
   max-width: 500px;
   height: auto;
   max-height: 350px;
   cursor: pointer;
-  margin: 0;
+  margin: 0 auto 40px;
   transition: transform 0.3s ease;
-  /* Added these to avoid overflow issues & random positioning room */
-  top: 170px; /* navbar offset */
-  left: 0;
-  right: 0;
-  margin: 0 auto;
 }
-
 
 .cookie-img {
   width: 100%;
@@ -167,7 +125,6 @@ h1 {
   margin: 0 auto;
   z-index: 1;
 }
-
 
 .message-box {
   position: absolute;
@@ -249,13 +206,12 @@ img {
     height: 40px;
   }
 }
-/*------------------------------*/
+/*-----------------------------------*/
 .corner-cookie {
   position: absolute;
-  bottom: 800px;
   top: 300px;
-  right: 900px;
-  width: 100px;
+  left: 250px;
+  width: 120px;
   max-width: 100px;
   cursor: pointer;
   z-index: 1001; /* Above other elements */
@@ -264,10 +220,9 @@ img {
 
 .right-corner-cookie {
   position: absolute;
-  bottom: 100px;
-  top: 150px;
-  left:800px;      /* bottom-right corner */
-  width: 100px;
+  top: 250px;
+  left:1000px;      /* bottom-right corner */
+  width: 120px;
   cursor: pointer;
   z-index: 1001;
   transform: rotate(-70deg);
@@ -275,8 +230,8 @@ img {
 
 .between-corner-cookie {
   position: absolute;
-  top: 70%;
-  right: 600px;      /* right side center vertically */
+  top: 500px;
+  left: 300px;      /* right side center vertically */
   width: 100px;
   cursor: pointer;
   transform: rotate(150deg);
@@ -286,8 +241,8 @@ img {
 
 .place-corner-cookie {
   position: absolute;
-  top:390px;
-  left: 70%;      
+  top:500px;
+  left:1000px;     
     /* top center */
 transform: rotate(90deg);
   width: 100px;
