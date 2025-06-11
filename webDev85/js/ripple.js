@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(".bg-image").ripples({
     resolution: 200,
-    perturbance: 0.004,
+    perturbance: 0.003,
     interactive: true
   });
 });
@@ -23,6 +23,7 @@ window.addEventListener('resize', resizeCanvas);
 let painting = false;
 let currentColor = null;
 let isDrawing = false;
+let isErasing = false;
 let lastX = 0;
 let lastY = 0;
 
@@ -36,7 +37,7 @@ function getSmoothPoints(e) {
 }
 
 function startPosition(e) {
-  if (!isDrawing) return;
+  if (!isDrawing && !isErasing) return;
   painting = true;
   const pos = getSmoothPoints(e);
   lastX = pos.x;
@@ -53,9 +54,9 @@ function endPosition(e) {
 }
 
 function draw(x, y, isStart = false) {
-  if (!painting || !isDrawing) return;
+  if (!painting || (!isDrawing && !isErasing)) return;
 
-  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalCompositeOperation = isErasing ? 'destination-out' : 'source-over';
   
   ctx.beginPath();
   if (isStart) {
@@ -68,14 +69,17 @@ function draw(x, y, isStart = false) {
     ctx.quadraticCurveTo(lastX, lastY, midX, midY);
   }
   
-  ctx.lineWidth = 10;
+  ctx.lineWidth = isErasing ? 20 : 10; // 20px for eraser, 10px for drawing
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
+  // ctx.strokeStyle = currentColor;
+  if (!isErasing) {
   ctx.strokeStyle = currentColor;
+  }
   ctx.stroke();
   
-  if (!isStart) {
-    const radius = 10;
+   if (!isErasing && !isStart) {
+    const radius = 5; // Fixed radius for drawing (10px / 2)
     const startX = Math.max(0, x - radius);
     const startY = Math.max(0, y - radius);
     const endX = Math.min(canvas.width, x + radius);
@@ -106,7 +110,6 @@ function draw(x, y, isStart = false) {
       }
     }
   }
-  
   lastX = x;
   lastY = y;
 }
@@ -134,23 +137,52 @@ function dispatchEventToBgImage(e) {
 
 document.querySelectorAll(".color").forEach(colorBtn => {
   colorBtn.addEventListener("click", (e) => {
-    document.querySelectorAll('.color').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
     currentColor = colorBtn.getAttribute("data-color");
     colorBtn.classList.add('active');
     isDrawing = true;
+    isErasing = false;
     body.classList.add('drawing-cursor');
     canvas.style.pointerEvents = 'auto';
     e.stopPropagation();
   });
 });
 
+
+document.querySelectorAll(".eraser").forEach(eraserBtn => {
+  eraserBtn.addEventListener("click", (e) => {
+    document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
+    eraserBtn.classList.add('active');
+    isDrawing = false;
+    isErasing = true;
+    body.classList.add('drawing-cursor');
+    canvas.style.pointerEvents = 'auto';
+    e.stopPropagation();
+  });
+});
+
+document.querySelectorAll(".reset").forEach(resetBtn => {
+  resetBtn.addEventListener("click", (e) => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
+    isDrawing = false;
+    isErasing = false;
+    body.classList.remove('drawing-cursor');
+    canvas.style.pointerEvents = 'none';
+    e.stopPropagation();
+  });
+});
+
 document.addEventListener('click', (e) => {
   if (!e.target.classList.contains('color') &&
+      !e.target.classList.contains('eraser') &&
+      !e.target.classList.contains('reset') &&
       !e.target.closest('.controls-wrapper') &&
       !e.target.closest('.navbar')) {
     isDrawing = false;
+    isErasing = false;
     body.classList.remove('drawing-cursor');
-    document.querySelectorAll('.color').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
     canvas.style.pointerEvents = 'none';
     dispatchEventToBgImage(e);
   }
@@ -162,7 +194,7 @@ canvas.addEventListener("mouseout", endPosition);
 canvas.addEventListener("mousemove", handleMove);
 
 canvas.addEventListener("touchstart", (e) => {
-  if (!isDrawing) return;
+  if (!isDrawing && !isErasing) return;
   e.preventDefault();
   const touch = e.touches[0];
   const mouseEvent = new MouseEvent("mousedown", {
@@ -173,13 +205,13 @@ canvas.addEventListener("touchstart", (e) => {
 });
 
 canvas.addEventListener("touchend", (e) => {
-  if (!isDrawing) return;
+  if (!isDrawing && !isErasing) return;
   e.preventDefault();
   endPosition();
 });
 
 canvas.addEventListener("touchmove", (e) => {
-  if (!isDrawing || !painting) return;
+  if (!isDrawing && !isErasing || !painting) return;
   e.preventDefault();
   const touch = e.touches[0];
   const mouseEvent = new MouseEvent("mousemove", {
@@ -187,10 +219,6 @@ canvas.addEventListener("touchmove", (e) => {
     clientY: touch.clientY
   });
   handleMove(mouseEvent);
-});
-
-document.getElementById("resetBtn").addEventListener("click", () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
 document.getElementById("downloadBtn").addEventListener("click", function() {
