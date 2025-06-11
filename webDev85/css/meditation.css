@@ -1,24 +1,31 @@
 body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.767), rgba(0, 0, 0, 0.555)), url('../images/ab.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.644), rgba(0, 0, 0, 0.555)), url('../images/ab.jpg');
   background-repeat: no-repeat;
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: black;
   color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align content to top */
+  justify-content: center;
   padding: 2rem 1rem 3rem;
   background-size: cover;
   background-position: center center;
 }
 
+
+h2, .subheading {
+  margin-top: 0; /* remove top space of subheading */
+  font-size: 1.4rem;       /* smaller size */
+  font-weight: 400;
+  color: #ffffff;
+}
 h1 {
-  font-size: 4rem;
+  font-size: 3.5rem;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-shadow: 1px 1px 5px #000;
   max-width: 90vw;
   word-break: break-word;
