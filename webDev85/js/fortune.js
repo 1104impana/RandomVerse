@@ -1,42 +1,34 @@
-let isBroken = false;
+let isBrokenMain = false;
+let isBrokenCorner = false;
 
-async function breakCookie() {
-  const cookieBox = document.getElementById("cookieBox");
-  const cookieImg = document.getElementById("cookieImage");
-  const messageBox = document.getElementById("fortuneMessage");
+async function breakCookie(position = "main") {
+  let cookieImg, messageBox, isBroken;
 
-  cookieBox.classList.add("shake");
+  if(position === "main") {
+    cookieImg = document.getElementById("cookieImage");
+    messageBox = document.getElementById("fortuneMessage");
+    isBroken = isBrokenMain;
+  } else if(position === "corner") {
+    cookieImg = document.getElementById("cookieImageCorner");
+    messageBox = document.getElementById("fortuneMessageCorner");
+    isBroken = isBrokenCorner;
+  }
+
+  cookieImg.classList.add("shake");
 
   setTimeout(async () => {
     if (!isBroken) {
-      cookieImg.src = "images/break.png";
-
-      try {
-        // Fetch fortune from Flask LLM endpoint
-        const response = await fetch('http://localhost:5000/getFortuneLLM'); // Change to your LLM endpoint
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-
-        // Assuming your Flask returns { "message": "fortune text" }
-        messageBox.textContent = data.message || "No fortune received.";
-      } catch (error) {
-        messageBox.textContent = "Error fetching fortune.";
-        console.error("Fetch error:", error);
-      }
-
+      cookieImg.src = "images/break4.png"; // or broken cookie image
+      // fetch/display fortune message logic here, e.g.
+      messageBox.textContent = "Your fortune message here!";
       messageBox.classList.add("show-message");
-    } else {
-      cookieImg.src = "images/cook1.png";
-      messageBox.classList.remove("show-message");
+
+      if(position === "main") isBrokenMain = true;
+      else if(position === "corner") isBrokenCorner = true;
     }
-    isBroken = !isBroken;
-  }, 50);
+  }, 400);
 
-  setTimeout(() => {
-    cookieBox.classList.remove("shake");
-  }, 800);
 }
-
 
 // On window load, randomize cookies' position, size, animation delay
 window.onload = function () {
