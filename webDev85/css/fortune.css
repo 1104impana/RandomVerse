@@ -19,41 +19,73 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Navbar */
+ /*nav bar*/
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background-color: #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  z-index: 1000;
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
+    background-color: #00000018;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: auto;
+  }
 
-.nav-left img {
-  height: 50px;
-  cursor: pointer;
-}
+  .nav-left img {
+    height: 50px;
+  }
 
-.nav-right {
-  display: flex;
-  gap: 25px;
-}
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
 
-.nav-icon {
-  height: 35px;
-  width: 35px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
+  .nav-right a {
+    display: inline-block;
+    pointer-events: auto;
+  }
 
-.nav-icon:hover {
-  transform: scale(1.15);
-}
+  .nav-icon {
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-icon:hover {
+    transform: scale(1.15);
+  }
+
+  @media (hover: none) {
+    .nav-icon:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 10px 15px;
+    }
+    .nav-left img {
+      height: 40px;
+    }
+    .nav-icon {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  /* Ensure no further reduction in icon size for smaller screens */
+  @media (max-width: 480px) {
+    .nav-icon {
+      height: 30px !important;
+      width: 30px !important;
+    }
+  }
 
 /* Floating cookies background container */
 .float-container {
@@ -221,13 +253,13 @@ img {
 .corner-cookie {
   position: absolute;
   bottom: 800px;
-  top: 70PX;
+  top: 300px;
   right: 900px;
   width: 100px;
   max-width: 100px;
   cursor: pointer;
   z-index: 1001; /* Above other elements */
-  transform: rotate(30deg);
+  transform: rotate(220deg);
 }
 
 .right-corner-cookie {
@@ -238,16 +270,16 @@ img {
   width: 100px;
   cursor: pointer;
   z-index: 1001;
-  transform: rotate(-20deg);
+  transform: rotate(-70deg);
 }
 
 .between-corner-cookie {
   position: absolute;
-  top: 60%;
-  right: 700px;      /* right side center vertically */
+  top: 70%;
+  right: 600px;      /* right side center vertically */
   width: 100px;
   cursor: pointer;
-  transform: rotate(45deg);
+  transform: rotate(150deg);
   z-index: 1001;
 
 }
@@ -257,7 +289,7 @@ img {
   top:390px;
   left: 70%;      
     /* top center */
-transform: rotate(-15deg);
+transform: rotate(90deg);
   width: 100px;
  
   cursor: pointer;
