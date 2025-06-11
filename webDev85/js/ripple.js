@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(".bg-image").ripples({
     resolution: 200,
-    perturbance: 0.004,
+    perturbance: 0.003,
     interactive: true
   });
 });
@@ -23,6 +23,7 @@ window.addEventListener('resize', resizeCanvas);
 let painting = false;
 let currentColor = null;
 let isDrawing = false;
+let isErasing = false;
 let lastX = 0;
 let lastY = 0;
 
@@ -36,7 +37,7 @@ function getSmoothPoints(e) {
 }
 
 function startPosition(e) {
-  if (!isDrawing) return;
+  if (!isDrawing && !isErasing) return;
   painting = true;
   const pos = getSmoothPoints(e);
   lastX = pos.x;
@@ -53,9 +54,9 @@ function endPosition(e) {
 }
 
 function draw(x, y, isStart = false) {
-  if (!painting || !isDrawing) return;
+  if (!painting || (!isDrawing && !isErasing)) return;
 
-  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalCompositeOperation = isErasing ? 'destination-out' : 'source-over';
   
   ctx.beginPath();
   if (isStart) {
@@ -68,10 +69,13 @@ function draw(x, y, isStart = false) {
     ctx.quadraticCurveTo(lastX, lastY, midX, midY);
   }
   
-  ctx.lineWidth = 10;
+  ctx.lineWidth = isErasing ? 20 : 10; // 20px for eraser, 10px for drawing
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
+  // ctx.strokeStyle = currentColor;
+  if (!isErasing) {
   ctx.strokeStyle = currentColor;
+  }
   ctx.stroke();
   
    if (!isErasing && !isStart) {
@@ -133,15 +137,17 @@ function dispatchEventToBgImage(e) {
 
 document.querySelectorAll(".color").forEach(colorBtn => {
   colorBtn.addEventListener("click", (e) => {
-    document.querySelectorAll('.color').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
     currentColor = colorBtn.getAttribute("data-color");
     colorBtn.classList.add('active');
     isDrawing = true;
+    isErasing = false;
     body.classList.add('drawing-cursor');
     canvas.style.pointerEvents = 'auto';
     e.stopPropagation();
   });
 });
+
 
 document.querySelectorAll(".eraser").forEach(eraserBtn => {
   eraserBtn.addEventListener("click", (e) => {
