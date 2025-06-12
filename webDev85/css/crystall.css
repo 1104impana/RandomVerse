@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  overflow-x: hidden;
+  overflow: hidden;
   padding-top: 70px; /* For navbar spacing */
 }
 .navbar {

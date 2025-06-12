@@ -1,1 +1,255 @@
 pip install flask,flask-cors,httpx,dotenv
+
+/* Reset margin and padding for body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: #000;
+  font-family: 'Great Vibes', cursive, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 70px; /* To avoid navbar overlap */
+  overflow: hidden;
+  background-image: url('../images/ab.jpg');
+   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin-top: 40px;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+.nav-left img {
+  height: 50px;
+  cursor: pointer;
+}
+
+.nav-right {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-icon {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-icon:hover {
+  transform: scale(1.15);
+}
+
+
+
+
+/* Main container and heading */
+.container {
+  margin: 30px 20px 10px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+h1 {
+  font-weight: 900;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(187, 186, 186);
+  font-size: 2.5rem;
+  margin-top: -60px;
+  user-select: none;
+}
+
+/* Cookie container with fortune message */
+.cookie-container {
+  position: relative;
+  width: 90vw;
+  max-width: 500px;
+  height: auto;
+  max-height: 350px;
+  cursor: pointer;
+  margin: 0px auto 40px;
+
+ transition: transform 0.3s ease;
+  transform-origin: center;
+
+}
+
+.cookie-img {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: contain;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  border-radius: 50%;
+  user-select: none;
+  display: block;
+  margin: 0 auto;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.message-box {
+  position: absolute;
+  top: 50%;
+  left: 53%;
+  transform: translate(-50%, -50%) rotate(0deg) !important;
+  background: #fff;
+  padding: 15px 25px;
+  border: 2px dashed #aaa;
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  opacity: 0;
+  max-width: 85%;
+  white-space: normal;
+  line-height: 1.4;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 2;
+  user-select: text;
+   max-height: 150px;   /* added this */
+  overflow-y: auto;    /* added this */
+}
+
+.show-message {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Shake animation for the cookie */
+.shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: rotate(-7deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+/* Responsive typography and layout */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  .cookie-container {
+    
+    max-width: 90vw;
+    max-height: 300px;
+  }
+  .message-box {
+    font-size: 0.9rem;
+    max-width: 90%;
+  }
+  .nav-right {
+    gap: 15px;
+  }
+  .nav-icon {
+    height: 28px;
+    width: 28px;
+  }
+  .nav-left img {
+    height: 40px;
+  }
+}
+/*-----------------------------------*/
+.corner-cookie {
+  position: absolute;
+  top: 300px;
+  left: 250px;
+  width: 120px;
+  max-width: 100px;
+  cursor: pointer;
+  z-index: 1001; /* Above other elements */
+  transform: rotate(220deg);
+}
+
+.right-corner-cookie {
+  position: absolute;
+  top: 250px;
+  left:1000px;      /* bottom-right corner */
+  width: 120px;
+  cursor: pointer;
+  z-index: 1001;
+  transform: rotate(-70deg);
+}
+
+.between-corner-cookie {
+  position: absolute;
+  top: 500px;
+  left: 300px;      /* right side center vertically */
+  width: 100px;
+  cursor: pointer;
+  transform: rotate(150deg);
+  z-index: 1001;
+
+}
+
+.place-corner-cookie {
+  position: absolute;
+  top:500px;
+  left:1000px;     
+    /* top center */
+transform: rotate(90deg);
+  width: 100px;
+ 
+  cursor: pointer;
+  z-index: 1001;
+}
+@media (max-width: 600px) {
+  .corner-cookie {
+    top: 150px;
+    left: 20vw;
+    width: 80px;
+  }
+
+  .right-corner-cookie {
+    top: 120px;
+    left: 65vw;
+    width: 80px;
+  }
+
+  .between-corner-cookie {
+    top: 300px;
+    left: 25vw;
+    width: 70px;
+  }
+
+  .place-corner-cookie {
+    top: 300px;
+    left: 65vw;
+    width: 70px;
+  }
+}
