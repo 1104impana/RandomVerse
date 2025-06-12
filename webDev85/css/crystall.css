@@ -14,51 +14,72 @@ body {
   overflow-x: hidden;
   padding-top: 70px; /* For navbar spacing */
 }
-
-/* Navbar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 25px;
-  background-color: #000;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
+    background-color: #00000018;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: auto;
+  }
 
-.nav-left img {
-  height: 50px;
-}
+  .nav-left img {
+    height: 50px;
+  }
 
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
 
-.nav-right a {
-  display: inline-block;
-}
+  .nav-right a {
+    display: inline-block;
+    pointer-events: auto;
+  }
 
-.nav-icon {
-  height: 35px;
-  width: 35px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
+  .nav-icon {
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
 
-.nav-icon:hover {
-  transform: scale(1.15);
-}
-.nav-item p {
-  margin-top: 5px;
-  font-size: 14px;
-  color: white;
-  text-decoration: none;
-}
+  .nav-icon:hover {
+    transform: scale(1.15);
+  }
+
+  @media (hover: none) {
+    .nav-icon:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 10px 15px;
+    }
+    .nav-left img {
+      height: 40px;
+    }
+    .nav-icon {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  /* Ensure no further reduction in icon size for smaller screens */
+  @media (max-width: 480px) {
+    .nav-icon {
+      height: 30px !important;
+      width: 30px !important;
+    }
+  }
 
 /* Main content layout */
 .main-container {
@@ -70,6 +91,7 @@ body {
 .text-container {
   position: absolute;
   left: 60px;
+  margin-left: 50px;
 }
 
 /* Input and button section */
@@ -80,6 +102,8 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+  
+  
 }
 
 #userQuestion {

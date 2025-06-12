@@ -1,321 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Magic Ball Fortune Teller</title>
-  <style>
-    body {
-      background-color: #000000;
-      color: #f0f0f0;
-      text-align: center;
-      padding: 50px;
-      font-family: 'Segoe UI', sans-serif;
-      height: 100vh;
-      /* background-image: url('../images/9078.jpg'); */
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      padding-top: 70px;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookie Fortune Break</title>
+  <link rel="stylesheet" href="css/fortune.css" />
+<style>
+  /* Reset margin and padding for body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000;
+  font-family: 'Great Vibes', cursive, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 70px; /* To avoid navbar overlap */
+  overflow-x: hidden;
+  background-image: url('../images/ab.jpg');
+   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 25px;
-      background-color: #000;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-    }
+ /*nav bar*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
+    background-color: #00000018;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: auto;
+  }
 
-    .nav-left img {
-      height: 50px;
-    }
+  .nav-left img {
+    height: 50px;
+  }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
 
-    .nav-right a {
-      display: inline-block;
-    }
+  .nav-right a {
+    display: inline-block;
+    pointer-events: auto;
+  }
 
-    .nav-icon {
-      height: 35px;
-      width: 35px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
+  .nav-icon {
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
 
+  .nav-icon:hover {
+    transform: scale(1.15);
+  }
+
+  @media (hover: none) {
     .nav-icon:hover {
-      transform: scale(1.15);
+      transform: none;
     }
+  }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 10px 15px;
     }
+    .nav-left img {
+      height: 40px;
+    }
+    .nav-icon {
+      height: 30px;
+      width: 30px;
+    }
+  }
 
-    .heading {
-      display: flex;
-      justify-content: flex-start;
-      margin-bottom: 30px;
+  /* Ensure no further reduction in icon size for smaller screens */
+  @media (max-width: 480px) {
+    .nav-icon {
+      height: 30px !important;
+      width: 30px !important;
     }
+  }
 
-    .crystal-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 50px;
-      margin-top: 50px;
-    }
+/* Floating cookies background container */
+.float-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 
-    .left-section {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 25px;
-      width: 40%;
-    }
+.cookie {
+  position: absolute;
+  width: 30px;
+  top: calc(var(--random-y, 1) * 100%);
+  left: calc(100% * var(--random-x));
+  animation: floatCookie 10s linear infinite;
+  opacity: 0.8;
+  user-select: none;
+}
 
-    .ball-wrapper {
-      width: 50%;
-      text-align: center;
-    }
+@keyframes floatCookie {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    #magicBall {
-      cursor: pointer;
-      width: 100%;
-      max-width: 500px;
-      border-radius: 0%;
-      z-index: 1;
-      transition: all 0.3s ease;
-    }
+/* Main container and heading */
+.container {
+  margin: 30px 20px 10px;
+  text-align: center;
+  
+}
 
-    #magicBall:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
-    }
+h1 {
+  position: absolute;
+  top: 70px;
+  right: 380px;
+  font-weight: 900;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(187, 186, 186);
+  font-size: 2.5rem;
+  user-select: none;
+}
 
-    #ballMessage {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 50px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      font-size: 18px;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      margin-top: 20px;
-    }
+/* Cookie container with fortune message */
+.cookie-container {
+  position: absolute;
+  width: 90vw;
+  max-width: 500px;
+  height: auto;
+  max-height: 350px;
+  cursor: pointer;
+  margin: 0;
+  transition: transform 0.3s ease;
+  /* Added these to avoid overflow issues & random positioning room */
+  top: 170px; /* navbar offset */
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
 
-    .input-section {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-    }
 
-    #userQuestion {
-      padding: 15px 20px;
-      font-size: 16px;
-      border: 2px solid #fff;
-      border-radius: 25px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      font-family: 'Orbitron', monospace;
-      min-width: 300px;
-      text-align: center;
-      box-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.3),
-        inset 0 0 10px rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
+.cookie-img {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: contain;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  border-radius: 50%;
+  user-select: none;
+  display: block;
+  margin: 0 auto;
+  z-index: 1;
+}
 
-    #userQuestion:focus {
-      outline: none;
-      border-color: #fff;
-      box-shadow: 
-        0 0 20px rgba(255, 255, 255, 0.8),
-        inset 0 0 20px rgba(255, 255, 255, 0.2);
-      transform: scale(1.05);
-    }
 
-    #userQuestion::placeholder {
-      color: #bbb;
-      font-style: italic;
-    }
+.message-box {
+  position: absolute;
+  top: 50%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 15px 25px;
+  border: 2px dashed #aaa;
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  opacity: 0;
+  max-width: 85%;
+  white-space: normal;
+  line-height: 1.4;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 2;
+  user-select: text;
+}
 
-    button {
-      padding: 15px 30px;
-      font-size: 16px;
-      font-weight: 700;
-      border: 2px solid #fff;
-      border-radius: 25px;
-      background: linear-gradient(45deg, #000, #333);
-      color: #fff;
-      cursor: pointer;
-      font-family: 'Orbitron', monospace;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
+.show-message {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.05);
+}
 
-    button:hover {
-      background: linear-gradient(45deg, #333, #000);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
-      border-color: #fff;
-    }
+/* Shake animation for the cookie */
+.shake {
+  animation: shake 0.4s ease;
+}
 
-    button:active {
-      transform: translateY(0);
-    }
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: rotate(-7deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 
-    .right-section h2 {
-      font-family: 'Orbitron', monospace;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      margin: 20px 0 10px 0;
-      font-size: 1.5em;
-    }
+/* Rounded images */
+img {
+  border-radius: 50%;
+}
 
-    .right-section a {
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      padding: 10px 20px;
-      border: 2px solid #fff;
-      border-radius: 20px;
-      transition: all 0.3s ease;
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.1);
-    }
+/* Responsive typography and layout */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  .cookie-container {
+    max-width: 90vw;
+    max-height: 300px;
+  }
+  .message-box {
+    font-size: 0.9rem;
+    max-width: 90%;
+  }
+  .nav-right {
+    gap: 15px;
+  }
+  .nav-icon {
+    height: 28px;
+    width: 28px;
+  }
+  .nav-left img {
+    height: 40px;
+  }
+}
+/*------------------------------*/
+.corner-cookie {
+  position: absolute;
+  bottom: 800px;
+  top: 300px;
+  right: 900px;
+  width: 100px;
+  max-width: 100px;
+  cursor: pointer;
+  z-index: 1001; /* Above other elements */
+  transform: rotate(220deg);
+}
 
-    .right-section a:hover {
-      background: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-      transform: scale(1.05);
-    }
+.right-corner-cookie {
+  position: absolute;
+  bottom: 100px;
+  top: 150px;
+  left:800px;      /* bottom-right corner */
+  width: 100px;
+  cursor: pointer;
+  z-index: 1001;
+  transform: rotate(-70deg);
+}
 
-    @media (max-width: 768px) {
-      .crystal-container {
-        flex-direction: column;
-      }
-      .left-section, .ball-wrapper {
-        width: 100%;
-      }
-      .left-section {
-        align-items: center;
-        margin-bottom: 30px;
-      }
-    }
-  </style>
+.between-corner-cookie {
+  position: absolute;
+  top: 70%;
+  right: 600px;      /* right side center vertically */
+  width: 100px;
+  cursor: pointer;
+  transform: rotate(150deg);
+  z-index: 1001;
+
+}
+
+.place-corner-cookie {
+  position: absolute;
+  top:390px;
+  left: 70%;      
+    /* top center */
+transform: rotate(90deg);
+  width: 100px;
+ 
+  cursor: pointer;
+  z-index: 1001;
+}
+</style>
 </head>
-
 <body>
   <nav class="navbar">
     <div class="nav-left">
       <a href="Homepage.html">
-        <img src="../images/witch.png" alt="icon" class="responsive-img">
+        <img src="images/witch.png" alt="icon" class="responsive-img" />
       </a>
     </div>
     <div class="nav-right">
       <a href="ripple.html">
-        <img src="../images/galaxy.png" alt="Paint" class="nav-icon">
+        <img src="images/galaxy.png" alt="Paint" class="nav-icon" />
       </a>
       <a href="crystall.html">
-        <img src="../images/crystal-ball.png" alt="Crystal" class="nav-icon">
+        <img src="images/crystal-ball.png" alt="Crystal" class="nav-icon" />
       </a>
       <a href="fortune.html">
-        <img src="../images/fornav.png" alt="Fortune" class="nav-icon">
+        <img src="images/fornav.png" alt="Fortune" class="nav-icon" />
       </a>
       <a href="meditation.html">
-        <img src="../images/relaxed.png" alt="Meditation" class="nav-icon">
+        <img src="images/relaxed.png" alt="Meditation" class="nav-icon" />
       </a>
     </div>
   </nav>
+ <!-- Floating cookies with random positions assigned by CSS variables -->
+  <!-- <div class="float-container">
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.1; --random-y:0.9" />
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.3; --random-y:0.8" />
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.5; --random-y:0.7" />
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.7; --random-y:0.85" />
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.9; --random-y:0.75" />
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.2; --random-y:0.6" />
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.4; --random-y:0.5" />
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.6; --random-y:0.65" />
+    <img src="images/cook1.png" class="cookie" style="--random-x:0.8; --random-y:0.55" />
+  </div> -->
 
   <div class="container">
-    <audio id="laughSound">
-      <source src="images/laugh.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="heading">
-      <h1>Welcome, lets answer your questions</h1>
-    </div>
-    
-    <div class="crystal-container">
-      <div class="left-section">
-        <input type="text" id="userQuestion" placeholder="eg: will I get a job?" />
-        <button onclick="askCrystalBall()">Ask the Ball</button>
-        <h2>Wanna check your fortune?</h2>
-        <a href="fortune.html">Click here :)</a>
-      </div>
-
-      <div class="ball-wrapper">
-        <img id="magicBall" src="images/2lady.png" alt="Magic Ball" onclick="askCrystalBall()">
-        <div id="ballMessage">Ask your question!</div>
-      </div>
-    </div>
+    <h1>CRACK YOUR FORTUNE</h1>
+<div class="cookie-wrapper">
+  <div class="cookie-container" id="cookieBox" onclick="breakCookie()">
+    <img src="images/cook4.png" id="cookieImage" class="cookie-img" alt="Fortune Cookie" style="width: 350px ;"/>
+    <div class="message-box" id="fortuneMessage"></div>
   </div>
+</div>
+</div>
 
-  <script>
-    function askCrystalBall() {
-      const question = document.getElementById('userQuestion').value;
-      const ballMessage = document.getElementById('ballMessage');
-      const responses = [
-        "It is certain.",
-        "It is decidedly so.",
-        "Without a doubt.",
-        "Yes - definitely.",
-        "You may rely on it.",
-        "As I see it, yes.",
-        "Most likely.",
-        "Outlook good.",
-        "Yes.",
-        "Signs point to yes.",
-        "Reply hazy, try again.",
-        "Ask again later.",
-        "Better not tell you now.",
-        "Cannot predict now.",
-        "Concentrate and ask again.",
-        "Don't count on it.",
-        "My reply is no.",
-        "My sources say no.",
-        "Outlook not so good.",
-        "Very doubtful."
-      ];
-      
-      if (question.trim() === '') {
-        ballMessage.textContent = "Please ask a question!";
-        return;
-      }
-      
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      ballMessage.textContent = randomResponse;
-      
-      // Play laugh sound
-      const audio = document.getElementById("laughSound");
-      audio.play();
-    }
+<div class="cookie-container cookie-main" onclick="breakCookie('main')">
+  <img src="images/cook4.png" id="cookieImageMain" class="cookie-img" alt="Fortune Cookie" style="width: 350px ;"/>
+  <div class="message-box" id="fortuneMessageMain"></div>
+</div>
 
-    window.onload = function () {
-      var audio = document.getElementById("laughSound");
-      audio.play();
-    };
-  </script>
+<div class="cookie-container corner-cookie" onclick="breakCookie('corner1')">
+  <img src="images/cook4.png" id="cookieImageCorner1" class="cookie-img" alt="Fortune Cookie" style="width: 150px;"/>
+  <div class="message-box" id="fortuneMessageCorner1"></div>
+</div>
+
+<div class="cookie-container right-corner-cookie" onclick="breakCookie('corner2')">
+  <img src="images/cook4.png" id="cookieImageCorner2" class="cookie-img" alt="Fortune Cookie" style="width: 220px;"/>
+  <div class="message-box" id="fortuneMessageCorner2"></div>
+</div>
+
+<div class="cookie-container between-corner-cookie" onclick="breakCookie('corner3')">
+  <img src="images/cook4.png" id="cookieImageCorner3" class="cookie-img" alt="Fortune Cookie" style="width: 100px;"/>
+  <div class="message-box" id="fortuneMessageCorner3"></div>
+</div>
+
+<div class="cookie-container place-corner-cookie" onclick="breakCookie('corner4')">
+  <img src="images/cook4.png" id="cookieImageCorner4" class="cookie-img" alt="Fortune Cookie" style="width: 130px;"/>
+  <div class="message-box" id="fortuneMessageCorner4"></div>
+</div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/fortune.js"></script>
 </body>
 </html>
+
+
