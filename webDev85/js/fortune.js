@@ -1,40 +1,76 @@
 let brokenCookies = {};
+let autoCloseTimeouts = {}; // to track individual cookie auto-close timers
 
 async function breakCookie(position) {
   const cookieImg = document.getElementById("cookieImage" + position);
   const messageBox = document.getElementById("fortuneMessage" + position);
   const cookieBox = cookieImg.parentElement;
 
-  // Add shake animation
-  cookieBox.classList.add("shake");
+  if (!brokenCookies[position]) {
+    // Start continuous shake animation
+    cookieBox.classList.add("shake");
+    const shakeInterval = setInterval(() => {
+      cookieBox.classList.remove("shake");
+      void cookieBox.offsetWidth;
+      cookieBox.classList.add("shake");
+    }, 600);
 
-  setTimeout(async () => {
-    if (!brokenCookies[position]) {
+    try {
+      // Fetch fortune from Flask LLM endpoint
+      const response = await fetch('http://localhost:5000/getFortuneLLM');
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+
+      // Clear shake
+      clearInterval(shakeInterval);
+      cookieBox.classList.remove("shake");
+
+      // Break cookie image
       cookieImg.src = "images/break4.png";
 
-      try {
-        // Fetch fortune from Flask LLM endpoint
-        const response = await fetch('http://localhost:5000/getFortuneLLM');
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-
+      // Show message after slight delay
+      setTimeout(() => {
         messageBox.textContent = data.message || "No fortune received.";
-      } catch (error) {
-        messageBox.textContent = "Error fetching fortune.";
-        console.error("Fetch error:", error);
-      }
+        messageBox.classList.add("show-message");
 
-      messageBox.classList.add("show-message");
-    } else {
-      cookieImg.src = "images/cook4.png";
-      messageBox.classList.remove("show-message");
+        // Auto-close after 5 seconds if user doesn't click
+        autoCloseTimeouts[position] = setTimeout(() => {
+          closeCookie(position);
+        }, 5000);
+
+      }, 400);
+
+    } catch (error) {
+      clearInterval(shakeInterval);
+      cookieBox.classList.remove("shake");
+      messageBox.textContent = "Error fetching fortune.";
+      console.error("Fetch error:", error);
     }
 
-    // Toggle state
-    brokenCookies[position] = !brokenCookies[position];
-  }, 50);
+  } else {
+    // If already broken, restore immediately
+    closeCookie(position);
+  }
 
-  setTimeout(() => {
-    cookieBox.classList.remove("shake");
-  }, 800);
+  // Toggle state
+  brokenCookies[position] = !brokenCookies[position];
+}
+
+// Function to reset cookie image & message
+function closeCookie(position) {
+  const cookieImg = document.getElementById("cookieImage" + position);
+  const messageBox = document.getElementById("fortuneMessage" + position);
+
+  // Restore cookie image and hide message
+  cookieImg.src = "images/cook4.png";
+  messageBox.classList.remove("show-message");
+
+  // Clear any existing timeout if closing manually
+  if (autoCloseTimeouts[position]) {
+    clearTimeout(autoCloseTimeouts[position]);
+    delete autoCloseTimeouts[position];
+  }
+
+  // Mark cookie as closed
+  brokenCookies[position] = false;
 }
