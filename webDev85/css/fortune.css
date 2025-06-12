@@ -1,15 +1,14 @@
-/* Ensure all elements use border-box for consistent sizing */
+/* Global Reset & Variables */
 * {
   box-sizing: border-box;
 }
 
-/* Define CSS custom property for navbar height */
 :root {
-  --navbar-height: clamp(40px, 8vh, 60px);
+  --navbar-height: 60px;
   --navbar-top: 10px;
 }
 
-/* Reset margin and padding for body and html */
+/* Base Styles */
 html, body {
   margin: 0;
   padding: 0;
@@ -21,7 +20,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: calc(var(--navbar-height) + var(--navbar-top)); /* Dynamic padding to avoid navbar overlap */
+  padding-top: calc(var(--navbar-height) + var(--navbar-top));
   overflow: hidden;
   background-image: url('../images/ab.jpg');
   background-repeat: no-repeat;
@@ -30,7 +29,7 @@ html, body {
   background-attachment: fixed;
 }
 
-/* Wrapper to constrain all content */
+/* Wrapper */
 .content-wrapper {
   position: relative;
   width: 100vw;
@@ -39,6 +38,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -40px;
 }
 
 /* Navbar */
@@ -48,28 +48,27 @@ html, body {
   left: 0;
   right: 0;
   height: var(--navbar-height);
-  background-color: transparent;
+  background: transparent;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 clamp(10px, 2vw, 20px);
+  padding: 0 20px;
   z-index: 1000;
-  margin-top: 5px;
 }
 
 .nav-left img {
-  height: clamp(30px, 6vw, 50px); /* Scale logo size */
+  height: 50px;
   cursor: pointer;
 }
 
 .nav-right {
   display: flex;
-  gap: clamp(15px, 2vw, 25px); /* Scale gap between icons */
+  gap: 25px;
 }
 
 .nav-icon {
-  height: clamp(25px, 4vw, 35px); /* Scale icon size */
-  width: clamp(25px, 4vw, 35px);
+  height: 35px;
+  width: 35px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -78,45 +77,38 @@ html, body {
   transform: scale(1.15);
 }
 
-/* Main container and heading */
+/* Main Content */
 .container {
-  margin: 1px clamp(10px, 2vw, 20px) 10px; /* Scale margins */
+  margin: 40px 20px 10px;
   text-align: center;
-  margin-top: 40px;
 }
 
 h1 {
   font-weight: 900;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: rgb(255, 255, 255);
-  font-size: clamp(1.5rem, 5vw, 2.5rem); /* Adjusted minimum size for smaller screens */
+  color: #fff;
+  font-size: 3rem;
   user-select: none;
+  margin-top: -40px;
 }
 
-/* Cookie container with fortune message */
+/* Cookie Container */
 .cookie-container {
   position: relative;
-  width: 90vw;
-  max-width: clamp(250px, 50vw, 500px); /* Reduced minimum width */
-  height: auto;
-  max-height: clamp(150px, 35vh, 350px); /* Reduced minimum height for smaller screens */
+  max-width: 600px;
+  max-height: 400px;
+  margin: 0 auto 20px;
   cursor: pointer;
-  margin: 0 auto clamp(10px, 2vh, 20px);
   transition: transform 0.3s ease;
   transform-origin: center;
-  .place-corner-cookie .message-box {
-  transform: translate(-50%, -50%) rotate(-90deg);
-}
 }
 
 .cookie-img {
   width: 100%;
   height: auto;
-  max-height: clamp(150px, 35vh, 350px);
+  max-height: 400px;
   object-fit: contain;
-  transition: opacity 0.3s ease, transform 0.4s ease;
   border-radius: 50%;
-  user-select: none;
   display: block;
   margin: 0 auto;
   z-index: 1;
@@ -129,308 +121,137 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
-  padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
+  padding: 15px 20px;
   border: 2px dashed #aaa;
   border-radius: 8px;
   font-family: 'Arial', sans-serif;
-  font-size: clamp(0.7rem, 2vw, 1rem); /* Adjusted minimum font size */
+  font-size: 1.2rem;
   color: #333;
   text-align: center;
   opacity: 0;
-  max-width: 85%;
-  white-space: normal;
-  line-height: 1.4;
+  line-height: 1.5;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   transition: opacity 0.4s ease, transform 0.4s ease;
   z-index: 2;
   user-select: text;
-  max-height: 150px;
-  overflow-y: auto;
+  max-width: 220px;
+  min-width: 150px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .show-message {
   opacity: 1;
-  transform: translate(-50%, -50%) rotate(0deg) scale(1.05);;
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
-/* Shake animation for the cookie */
+/* Shake Animation */
 .shake {
   animation: shake 0.4s ease;
 }
 
 @keyframes shake {
-  0% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(7deg);
-  }
-  50% {
-    transform: rotate(-7deg);
-  }
-  75% {
-    transform: rotate(5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
+  0%   { transform: rotate(var(--base-rotation, 0deg)); }
+  25%  { transform: rotate(calc(var(--base-rotation, 0deg) + 7deg)); }
+  50%  { transform: rotate(calc(var(--base-rotation, 0deg) - 7deg)); }
+  75%  { transform: rotate(calc(var(--base-rotation, 0deg) + 5deg)); }
+  100% { transform: rotate(var(--base-rotation, 0deg)); }
 }
 
-/* Corner cookies with responsive positioning */
-.corner-cookie {
+/* Corner Cookies */
+.corner-cookie,
+.right-corner-cookie,
+.between-corner-cookie,
+.place-corner-cookie {
   position: absolute;
-  top: clamp(80px, 15vh, 200px); /* Added minimum to prevent overlap with navbar */
-  left: clamp(5vw, 10vw, 15vw);
-  width: clamp(60px, 12vw, 100px);
   cursor: pointer;
   z-index: 1001;
-  transform: rotate(220deg);
+  margin-top: -40px;
 }
 
-.corner-cookie .message-box {
-  transform: translate(-50%, -50%) rotate(-220deg);
-}
-
-.corner-cookie .show-message {
-  transform: translate(-50%, -50%) rotate(-220deg) scale(1.05);
+.corner-cookie {
+  top: 150px;
+  left: 10vw;
+  width: 100px;
+  --base-rotation: -110deg;
+  transform: rotate(var(--base-rotation));
 }
 
 .right-corner-cookie {
-  position: absolute;
-  top: clamp(70px, 10vh, 180px); /* Added minimum to prevent overlap */
-  right: clamp(5vw, 10vw, 15vw);
-  width: clamp(60px, 12vw, 120px);
-  cursor: pointer;
-  z-index: 1001;
-  transform: rotate(-70deg);
+  top: 190px;
+  right: 10vw;
+  width: 120px;
+  --base-rotation: -70deg;
+  transform: rotate(var(--base-rotation));
+}
+
+.between-corner-cookie {
+  top: 350px;
+  left: 15vw;
+  right: 750px;
+  bottom: -60px;
+  width: 80px;
+  --base-rotation: 150deg;
+  transform: rotate(var(--base-rotation));
+}
+
+.place-corner-cookie {
+  top: 350px;
+  bottom: -30px;
+  right: 250px;
+  width: 90px;
+  --base-rotation: 90deg;
+  transform: rotate(var(--base-rotation));
+}
+
+/* Corner Cookie Messages */
+.corner-cookie .message-box {
+  transform: translate(-50%, -50%) rotate(110deg);
 }
 
 .right-corner-cookie .message-box {
   transform: translate(-50%, -50%) rotate(70deg);
 }
 
-.right-corner-cookie .show-message {
-  transform: translate(-50%, -50%) rotate(70deg) scale(1.05);
-}
-
-.between-corner-cookie {
-  position: absolute;
-  top: clamp(200px, 35vh, 400px); /* Added minimum to avoid overlap with main cookie */
-  left: clamp(5vw, 15vw, 20vw);
-  width: clamp(50px, 10vw, 80px);
-  cursor: pointer;
-  z-index: 1001;
-  transform: rotate(150deg);
-}
-
 .between-corner-cookie .message-box {
   transform: translate(-50%, -50%) rotate(-150deg);
-}
-
-.between-corner-cookie .show-message {
-  transform: translate(-50%, -50%) rotate(-150deg) scale(1.05);
-}
-
-.place-corner-cookie {
-  position: absolute;
-  top: clamp(200px, 35vh, 400px);
-  right: clamp(5vw, 15vw, 20vw);
-  width: clamp(50px, 10vw, 90px);
-  cursor: pointer;
-  z-index: 1001;
-  transform: rotate(90deg);
 }
 
 .place-corner-cookie .message-box {
   transform: translate(-50%, -50%) rotate(-90deg);
 }
 
+.corner-cookie .show-message {
+  transform: translate(-50%, -50%) rotate(110deg) scale(1.05);
+}
+
+.right-corner-cookie .show-message {
+  transform: translate(-50%, -50%) rotate(70deg) scale(1.05);
+}
+
+.between-corner-cookie .show-message {
+  transform: translate(-50%, -50%) rotate(-150deg) scale(1.05);
+}
+
 .place-corner-cookie .show-message {
   transform: translate(-50%, -50%) rotate(-90deg) scale(1.05);
 }
 
-/* Responsive typography and layout */
-@media (max-width: 768px) {
-  h1 {
-    font-size: clamp(1.4rem, 4vw, 2rem);
-  }
-  .cookie-container {
-    max-width: 80vw;
-    max-height: clamp(120px, 30vh, 250px);
-  }
-  .message-box {
-    font-size: clamp(0.65rem, 1.8vw, 0.9rem);
-    max-width: 90%;
-  }
-  .nav-right {
-    gap: clamp(10px, 1.5vw, 15px);
-  }
-  .nav-icon {
-    height: clamp(20px, 3vw, 28px);
-    width: clamp(20px, 3vw, 28px);
-  }
-  .nav-left img {
-    height: clamp(25px, 5vw, 40px);
-  }
-  .corner-cookie {
-    top: clamp(70px, 12vh, 150px);
-    left: clamp(3vw, 5vw, 7vw);
-    width: clamp(50px, 10vw, 80px);
-  }
-  .right-corner-cookie {
-    top: clamp(60px, 8vh, 120px);
-    right: clamp(3vw, 5vw, 7vw);
-    width: clamp(50px, 10vw, 80px);
-  }
-  .between-corner-cookie {
-    top: clamp(180px, 30vh, 300px);
-    left: clamp(3vw, 10vw, 12vw);
-    width: clamp(40px, 8vw, 70px);
-  }
-  .place-corner-cookie {
-    top: clamp(180px, 30vh, 300px);
-    right: clamp(3vw, 10vw, 12vw);
-    width: clamp(40px, 8vw, 70px);
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: clamp(1.1rem, 3.5vw, 1.8rem);
-  }
-  .cookie-container {
-    max-width: 85vw;
-    max-height: clamp(100px, 25vh, 200px);
-  }
-  .message-box {
-    font-size: clamp(0.6rem, 1.5vw, 0.8rem);
-    padding: clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 15px);
-  }
-  .nav-right {
-    gap: clamp(8px, 1vw, 10px);
-  }
-  .nav-icon {
-    height: clamp(18px, 2.5vw, 25px);
-    width: clamp(18px, 2.5vw, 25px);
-  }
-  .nav-left img {
-    height: clamp(20px, 4vw, 35px);
-  }
-  .corner-cookie {
-    top: clamp(60px, 10vh, 120px);
-    left: clamp(2vw, 4vw, 6vw);
-    width: clamp(40px, 8vw, 60px);
-  }
-  .right-corner-cookie {
-    top: clamp(50px, 6vh, 100px);
-    right: clamp(2vw, 4vw, 6vw);
-    width: clamp(40px, 8vw, 60px);
-  }
-  .between-corner-cookie {
-    top: clamp(150px, 28vh, 250px);
-    left: clamp(2vw, 8vw, 10vw);
-    width: clamp(35px, 7vw, 50px);
-  }
-  .place-corner-cookie {
-    top: clamp(150px, 28vh, 250px);
-    right: clamp(2vw, 8vw, 10vw);
-    width: clamp(35px, 7vw, 50px);
-  }
-}
-
-@media (max-width: 360px) {
-  h1 {
-    font-size: clamp(1rem, 3vw, 1.5rem);
-  }
-  .cookie-container {
-    max-width: 90vw;
-    max-height: clamp(80px, 20vh, 150px);
-  }
-  .message-box {
-    font-size: clamp(0.55rem, 1.2vw, 0.7rem);
-    padding: clamp(6px, 1vw, 8px) clamp(8px, 1.5vw, 12px);
-  }
-  .nav-right {
-    gap: clamp(6px, 0.8vw, 8px);
-  }
-  .nav-icon {
-    height: clamp(16px, 2vw, 20px);
-    width: clamp(16px, 2vw, 20px);
-  }
-  .nav-left img {
-    height: clamp(18px, 3.5vw, 30px);
-  }
-}
-
-/* For very tall screens (short height) */
-@media (max-height: 600px) {
-  .corner-cookie {
-    top: clamp(50px, 10vh, 100px);
-  }
-  .right-corner-cookie {
-    top: clamp(50px, 8vh, 90px);
-  }
-  .between-corner-cookie {
-    top: clamp(120px, 25vh, 200px);
-  }
-  .place-corner-cookie {
-    top: clamp(120px, 25vh, 200px);
-  }
-  .cookie-container {
-    max-height: clamp(100px, 25vh, 200px);
-  }
-}
-
-/* For ultra-wide screens */
+/* Large Screens (1600px+) */
 @media (min-width: 1600px) {
-  h1 {
-    font-size: clamp(2.5rem, 3vw, 3.5rem);
-  }
-  .cookie-container {
-    max-width: 700px;
-    max-height: 450px;
-  }
-  .message-box {
-    font-size: clamp(1.1rem, 1.2vw, 1.3rem);
-    padding: clamp(15px, 1.5vw, 20px) clamp(20px, 2vw, 30px);
-  }
-  .corner-cookie {
-    width: clamp(90px, 10vw, 130px);
-  }
-  .right-corner-cookie {
-    width: clamp(90px, 10vw, 150px);
-  }
-  .between-corner-cookie {
-    width: clamp(70px, 8vw, 110px);
-  }
-  .place-corner-cookie {
-    width: clamp(70px, 8vw, 120px);
+  h1 { font-size: 3.5rem; }
+  .cookie-container { max-width: 700px; max-height: 450px; }
+  .message-box { font-size: 1.3rem; padding: 20px 30px; }
+  .corner-cookie, .right-corner-cookie, .between-corner-cookie, .place-corner-cookie {
+    width: 130px;
   }
 }
 
-/* For large screens (already defined, just for completeness) */
-@media (min-width: 1200px) {
-  h1 {
-    font-size: clamp(2.5rem, 3vw, 3rem);
-  }
-  .cookie-container {
-    max-width: 600px;
-    max-height: 400px;
-  }
-  .message-box {
-    font-size: clamp(1rem, 1.2vw, 1.2rem);
-    padding: clamp(15px, 1.5vw, 20px) clamp(20px, 2vw, 30px);
-  }
-  .corner-cookie {
-    width: clamp(80px, 10vw, 120px);
-  }
-  .right-corner-cookie {
-    width: clamp(80px, 10vw, 140px);
-  }
-  .between-corner-cookie {
-    width: clamp(60px, 8vw, 100px);
-  }
-  .place-corner-cookie {
-    width: clamp(60px, 8vw, 110px);
-  }
+/* Tall Screens */
+@media (max-height: 600px) {
+  .corner-cookie { top: 100px; }
+  .right-corner-cookie { top: 90px; }
+  .between-corner-cookie, .place-corner-cookie { top: 200px; }
+  .cookie-container { max-height: 200px; }
 }
