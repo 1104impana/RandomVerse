@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  overflow-x: hidden;
+  overflow: hidden;
   padding-top: 70px; /* For navbar spacing */
 }
 .navbar {
@@ -200,10 +200,17 @@ button:active {
 
 /* Responsiveness */
 @media (max-width: 1024px) {
+  html, body {
+    overflow-y: auto; /* Allow vertical scrolling */
+    height: auto;
+    min-height: 100vh;
+  }
+
   .main-container {
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
+     overflow: auto; /* Allow scrolling */
   }
 
   .left-section {
