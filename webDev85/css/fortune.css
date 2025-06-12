@@ -1,52 +1,75 @@
+/* Ensure all elements use border-box for consistent sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Define CSS custom property for navbar height */
+:root {
+  --navbar-height: clamp(40px, 8vh, 60px);
+  --navbar-top: 10px;
+}
+
 /* Reset margin and padding for body and html */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   background-color: #000;
-  font-family: 'Great Vibes', cursive, sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 70px;
+  padding-top: calc(var(--navbar-height) + var(--navbar-top)); /* Dynamic padding to avoid navbar overlap */
   overflow: hidden;
   background-image: url('../images/ab.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  margin-top: 0px;
+}
+
+/* Wrapper to constrain all content */
+.content-wrapper {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - (var(--navbar-height) + var(--navbar-top)));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Navbar */
 .navbar {
   position: fixed;
-  top: 0;
+  top: var(--navbar-top);
   left: 0;
   right: 0;
-  height: 60px;
+  height: var(--navbar-height);
   background-color: transparent;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 clamp(10px, 2vw, 20px);
   z-index: 1000;
+  margin-top: 5px;
 }
 
 .nav-left img {
-  height: 50px;
+  height: clamp(30px, 6vw, 50px); /* Scale logo size */
   cursor: pointer;
 }
 
 .nav-right {
   display: flex;
-  gap: 25px;
+  gap: clamp(15px, 2vw, 25px); /* Scale gap between icons */
 }
 
 .nav-icon {
-  height: 35px;
-  width: 35px;
+  height: clamp(25px, 4vw, 35px); /* Scale icon size */
+  width: clamp(25px, 4vw, 35px);
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -57,7 +80,7 @@ html, body {
 
 /* Main container and heading */
 .container {
-  margin: 30px 20px 10px;
+  margin: 1px clamp(10px, 2vw, 20px) 10px; /* Scale margins */
   text-align: center;
   margin-top: 40px;
 }
@@ -65,9 +88,8 @@ html, body {
 h1 {
   font-weight: 900;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: rgb(187, 186, 186);
-  font-size: 2.5rem;
-  margin-top: -60px;
+  color: rgb(255, 255, 255);
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* Adjusted minimum size for smaller screens */
   user-select: none;
 }
 
@@ -75,11 +97,11 @@ h1 {
 .cookie-container {
   position: relative;
   width: 90vw;
-  max-width: 500px;
+  max-width: clamp(250px, 50vw, 500px); /* Reduced minimum width */
   height: auto;
-  max-height: 350px;
+  max-height: clamp(150px, 35vh, 350px); /* Reduced minimum height for smaller screens */
   cursor: pointer;
-  margin: 0px auto 40px;
+  margin: 0 auto clamp(10px, 2vh, 20px);
   transition: transform 0.3s ease;
   transform-origin: center;
   .place-corner-cookie .message-box {
@@ -90,7 +112,7 @@ h1 {
 .cookie-img {
   width: 100%;
   height: auto;
-  max-height: 350px;
+  max-height: clamp(150px, 35vh, 350px);
   object-fit: contain;
   transition: opacity 0.3s ease, transform 0.4s ease;
   border-radius: 50%;
@@ -104,14 +126,14 @@ h1 {
 .message-box {
   position: absolute;
   top: 50%;
-  left: 53%;
-  transform: translate(-50%, -50%) rotate(0deg) !important;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #fff;
-  padding: 15px 25px;
+  padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
   border: 2px dashed #aaa;
   border-radius: 8px;
   font-family: 'Arial', sans-serif;
-  font-size: 1rem;
+  font-size: clamp(0.7rem, 2vw, 1rem); /* Adjusted minimum font size */
   color: #333;
   text-align: center;
   opacity: 0;
@@ -137,115 +159,278 @@ h1 {
 }
 
 @keyframes shake {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(7deg); }
-  50% { transform: rotate(-7deg); }
-  75% { transform: rotate(5deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: rotate(-7deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
-/* Corner cookies — converted to responsive positioning */
+/* Corner cookies with responsive positioning */
 .corner-cookie {
   position: absolute;
-  top: 35vh;
-  left: 18vw;
-  width: 12vw;
-  max-width: 100px;
+  top: clamp(80px, 15vh, 200px); /* Added minimum to prevent overlap with navbar */
+  left: clamp(5vw, 10vw, 15vw);
+  width: clamp(60px, 12vw, 100px);
   cursor: pointer;
   z-index: 1001;
   transform: rotate(220deg);
 }
 
+.corner-cookie .message-box {
+  transform: translate(-50%, -50%) rotate(-220deg);
+}
+
+.corner-cookie .show-message {
+  transform: translate(-50%, -50%) rotate(-220deg) scale(1.05);
+}
+
 .right-corner-cookie {
   position: absolute;
-  top: 30vh;
-  left: 70vw;
-  width: 12vw;
-  max-width: 100px;
+  top: clamp(70px, 10vh, 180px); /* Added minimum to prevent overlap */
+  right: clamp(5vw, 10vw, 15vw);
+  width: clamp(60px, 12vw, 120px);
   cursor: pointer;
   z-index: 1001;
   transform: rotate(-70deg);
-  
 }
 
+.right-corner-cookie .message-box {
+  transform: translate(-50%, -50%) rotate(70deg);
+}
+
+.right-corner-cookie .show-message {
+  transform: translate(-50%, -50%) rotate(70deg) scale(1.05);
+}
 
 .between-corner-cookie {
   position: absolute;
-  top: 65vh;
-  left: 22vw;
-  width: 10vw;
-  max-width: 100px;
+  top: clamp(200px, 35vh, 400px); /* Added minimum to avoid overlap with main cookie */
+  left: clamp(5vw, 15vw, 20vw);
+  width: clamp(50px, 10vw, 80px);
   cursor: pointer;
-  transform: rotate(150deg);
   z-index: 1001;
+  transform: rotate(150deg);
+}
+
+.between-corner-cookie .message-box {
+  transform: translate(-50%, -50%) rotate(-150deg);
+}
+
+.between-corner-cookie .show-message {
+  transform: translate(-50%, -50%) rotate(-150deg) scale(1.05);
 }
 
 .place-corner-cookie {
   position: absolute;
-  top: 65vh;
-  left: 70vw;
-  width: 10vw;
-  max-width: 100px;
+  top: clamp(200px, 35vh, 400px);
+  right: clamp(5vw, 15vw, 20vw);
+  width: clamp(50px, 10vw, 90px);
   cursor: pointer;
-  transform: rotate(90deg);
   z-index: 1001;
+  transform: rotate(90deg);
+}
+
+.place-corner-cookie .message-box {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.place-corner-cookie .show-message {
+  transform: translate(-50%, -50%) rotate(-90deg) scale(1.05);
 }
 
 /* Responsive typography and layout */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   h1 {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 4vw, 2rem);
   }
-
   .cookie-container {
-    max-width: 90vw;
-    max-height: 300px;
+    max-width: 80vw;
+    max-height: clamp(120px, 30vh, 250px);
   }
-
   .message-box {
-    font-size: 0.9rem;
+    font-size: clamp(0.65rem, 1.8vw, 0.9rem);
     max-width: 90%;
   }
-
   .nav-right {
-    gap: 15px;
+    gap: clamp(10px, 1.5vw, 15px);
   }
-
   .nav-icon {
-    height: 28px;
-    width: 28px;
+    height: clamp(20px, 3vw, 28px);
+    width: clamp(20px, 3vw, 28px);
   }
-
   .nav-left img {
-    height: 40px;
+    height: clamp(25px, 5vw, 40px);
   }
-
-  /* Adjust corner cookies on small screens */
   .corner-cookie {
-    top: 25vh;
-    left: 20vw;
-    width: 20vw;
-    max-width: 80px;
+    top: clamp(70px, 12vh, 150px);
+    left: clamp(3vw, 5vw, 7vw);
+    width: clamp(50px, 10vw, 80px);
   }
-
   .right-corner-cookie {
-    top: 20vh;
-    left: 60vw;
-    width: 20vw;
-    max-width: 80px;
+    top: clamp(60px, 8vh, 120px);
+    right: clamp(3vw, 5vw, 7vw);
+    width: clamp(50px, 10vw, 80px);
   }
-
   .between-corner-cookie {
-    top: 50vh;
-    left: 20vw;
-    width: 18vw;
-    max-width: 70px;
+    top: clamp(180px, 30vh, 300px);
+    left: clamp(3vw, 10vw, 12vw);
+    width: clamp(40px, 8vw, 70px);
   }
-
   .place-corner-cookie {
-    top: 50vh;
-    left: 60vw;
-    width: 18vw;
-    max-width: 70px;
+    top: clamp(180px, 30vh, 300px);
+    right: clamp(3vw, 10vw, 12vw);
+    width: clamp(40px, 8vw, 70px);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+  }
+  .cookie-container {
+    max-width: 85vw;
+    max-height: clamp(100px, 25vh, 200px);
+  }
+  .message-box {
+    font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+    padding: clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 15px);
+  }
+  .nav-right {
+    gap: clamp(8px, 1vw, 10px);
+  }
+  .nav-icon {
+    height: clamp(18px, 2.5vw, 25px);
+    width: clamp(18px, 2.5vw, 25px);
+  }
+  .nav-left img {
+    height: clamp(20px, 4vw, 35px);
+  }
+  .corner-cookie {
+    top: clamp(60px, 10vh, 120px);
+    left: clamp(2vw, 4vw, 6vw);
+    width: clamp(40px, 8vw, 60px);
+  }
+  .right-corner-cookie {
+    top: clamp(50px, 6vh, 100px);
+    right: clamp(2vw, 4vw, 6vw);
+    width: clamp(40px, 8vw, 60px);
+  }
+  .between-corner-cookie {
+    top: clamp(150px, 28vh, 250px);
+    left: clamp(2vw, 8vw, 10vw);
+    width: clamp(35px, 7vw, 50px);
+  }
+  .place-corner-cookie {
+    top: clamp(150px, 28vh, 250px);
+    right: clamp(2vw, 8vw, 10vw);
+    width: clamp(35px, 7vw, 50px);
+  }
+}
+
+@media (max-width: 360px) {
+  h1 {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+  }
+  .cookie-container {
+    max-width: 90vw;
+    max-height: clamp(80px, 20vh, 150px);
+  }
+  .message-box {
+    font-size: clamp(0.55rem, 1.2vw, 0.7rem);
+    padding: clamp(6px, 1vw, 8px) clamp(8px, 1.5vw, 12px);
+  }
+  .nav-right {
+    gap: clamp(6px, 0.8vw, 8px);
+  }
+  .nav-icon {
+    height: clamp(16px, 2vw, 20px);
+    width: clamp(16px, 2vw, 20px);
+  }
+  .nav-left img {
+    height: clamp(18px, 3.5vw, 30px);
+  }
+}
+
+/* For very tall screens (short height) */
+@media (max-height: 600px) {
+  .corner-cookie {
+    top: clamp(50px, 10vh, 100px);
+  }
+  .right-corner-cookie {
+    top: clamp(50px, 8vh, 90px);
+  }
+  .between-corner-cookie {
+    top: clamp(120px, 25vh, 200px);
+  }
+  .place-corner-cookie {
+    top: clamp(120px, 25vh, 200px);
+  }
+  .cookie-container {
+    max-height: clamp(100px, 25vh, 200px);
+  }
+}
+
+/* For ultra-wide screens */
+@media (min-width: 1600px) {
+  h1 {
+    font-size: clamp(2.5rem, 3vw, 3.5rem);
+  }
+  .cookie-container {
+    max-width: 700px;
+    max-height: 450px;
+  }
+  .message-box {
+    font-size: clamp(1.1rem, 1.2vw, 1.3rem);
+    padding: clamp(15px, 1.5vw, 20px) clamp(20px, 2vw, 30px);
+  }
+  .corner-cookie {
+    width: clamp(90px, 10vw, 130px);
+  }
+  .right-corner-cookie {
+    width: clamp(90px, 10vw, 150px);
+  }
+  .between-corner-cookie {
+    width: clamp(70px, 8vw, 110px);
+  }
+  .place-corner-cookie {
+    width: clamp(70px, 8vw, 120px);
+  }
+}
+
+/* For large screens (already defined, just for completeness) */
+@media (min-width: 1200px) {
+  h1 {
+    font-size: clamp(2.5rem, 3vw, 3rem);
+  }
+  .cookie-container {
+    max-width: 600px;
+    max-height: 400px;
+  }
+  .message-box {
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    padding: clamp(15px, 1.5vw, 20px) clamp(20px, 2vw, 30px);
+  }
+  .corner-cookie {
+    width: clamp(80px, 10vw, 120px);
+  }
+  .right-corner-cookie {
+    width: clamp(80px, 10vw, 140px);
+  }
+  .between-corner-cookie {
+    width: clamp(60px, 8vw, 100px);
+  }
+  .place-corner-cookie {
+    width: clamp(60px, 8vw, 110px);
   }
 }
