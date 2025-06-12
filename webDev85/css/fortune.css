@@ -82,6 +82,9 @@ h1 {
   margin: 0px auto 40px;
   transition: transform 0.3s ease;
   transform-origin: center;
+  .place-corner-cookie .message-box {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
 }
 
 .cookie-img {
@@ -162,7 +165,9 @@ h1 {
   cursor: pointer;
   z-index: 1001;
   transform: rotate(-70deg);
+  
 }
+
 
 .between-corner-cookie {
   position: absolute;
