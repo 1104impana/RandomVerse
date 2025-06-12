@@ -1,3 +1,6 @@
+html, body {
+  overflow: hidden; /* Disable scrolling by default */
+}
 body {
   background-color: #000000;
   color: #f0f0f0;
@@ -203,14 +206,13 @@ button:active {
   html, body {
     overflow-y: auto; /* Allow vertical scrolling */
     height: auto;
-    min-height: 100vh;
   }
 
   .main-container {
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
-     overflow: auto; /* Allow scrolling */
+    overflow: auto; /* Allow scrolling */
   }
 
   .left-section {
