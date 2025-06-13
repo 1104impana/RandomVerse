@@ -1,1 +1,1 @@
-pip install flask,flask-cors,httpx,dotenv
+ flask,flask-cors,httpx,dotenv
