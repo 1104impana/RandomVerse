@@ -382,3 +382,112 @@ transform: rotate(90deg);
 </html>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookie Fortune Break</title>
+  <link rel="stylesheet" href="css/fortune.css" />
+
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="Homepage.html">
+        <img src="images/witch.png" alt="icon" class="responsive-img" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="ripple.html">
+        <img src="images/galaxy.png" alt="Paint" class="nav-icon" />
+      </a>
+      <a href="crystall.html">
+        <img src="images/crystal-ball.png" alt="Crystal" class="nav-icon" />
+      </a>
+      <a href="fortune.html">
+        <img src="images/fornav.png" alt="Fortune" class="nav-icon" />
+      </a>
+      <a href="meditation.html">
+        <img src="images/relaxed.png" alt="Meditation" class="nav-icon" />
+      </a>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    <h1>CRACK YOUR FORTUNE</h1>
+  </div>
+
+  <div class="cookie-container" id="cookieBox" onclick="breakCookie('')">
+    <img src="images/cook4.png" id="cookieImage" class="cookie-img" alt="Fortune Cookie" style="width: 500 ;"/>
+    <div class="message-box" id="fortuneMessage"></div>
+  </div>
+
+<div class="cookie-container corner-cookie" onclick="breakCookie('Corner1')">
+  <img src="images/cook4.png" id="cookieImageCorner1" class="cookie-img" alt="Fortune Cookie" style="width: 150px;"/>
+  <div class="message-box" id="fortuneMessageCorner1"></div>
+</div>
+
+<div class="cookie-container right-corner-cookie" onclick="breakCookie('Corner2')">
+  <img src="images/cook4.png" id="cookieImageCorner2" class="cookie-img" alt="Fortune Cookie" style="width: 220px;"/>
+  <div class="message-box" id="fortuneMessageCorner2"></div>
+</div>
+
+<div class="cookie-container between-corner-cookie" onclick="breakCookie('Corner3')">
+  <img src="images/cook4.png" id="cookieImageCorner3" class="cookie-img" alt="Fortune Cookie" style="width: 100px;"/>
+  <div class="message-box" id="fortuneMessageCorner3"></div>
+</div>
+
+<div class="cookie-container place-corner-cookie" onclick="breakCookie('Corner4')">
+  <img src="images/cook4.png" id="cookieImageCorner4" class="cookie-img" alt="Fortune Cookie" style="width: 130px;"/>
+  <div class="message-box" id="fortuneMessageCorner4"></div>
+</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/fortune.js"></script>
+</body>
+</html>
+
+let brokenCookies = {};
+
+async function breakCookie(position) {
+  const cookieImg = document.getElementById("cookieImage" + position);
+  const messageBox = document.getElementById("fortuneMessage" + position);
+  const cookieBox = cookieImg.parentElement;
+
+  // Add shake animation
+  cookieBox.classList.add("shake");
+
+  setTimeout(async () => {
+    if (!brokenCookies[position]) {
+      cookieImg.src = "images/break4.png";
+
+      try {
+        // Fetch fortune from Flask LLM endpoint
+        const response = await fetch('http://localhost:5000/getFortuneLLM');
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+
+        messageBox.textContent = data.message || "No fortune received.";
+      } catch (error) {
+        messageBox.textContent = "Error fetching fortune.";
+        console.error("Fetch error:", error);
+      }
+
+      messageBox.classList.add("show-message");
+    } else {
+      cookieImg.src = "images/cook4.png";
+      messageBox.classList.remove("show-message");
+    }
+
+    // Toggle state
+    brokenCookies[position] = !brokenCookies[position];
+  }, 50);
+
+  setTimeout(() => {
+    cookieBox.classList.remove("shake");
+  }, 800);
+}
+
+
