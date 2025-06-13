@@ -266,13 +266,14 @@ h1 {
     max-width: 100px;
   }
   .between-corner-cookie {
-    top: 65vh;
+    
+    bottom: 20px;
     left: 3vw;
     width: 8vw;
     max-width: 60px;
   }
   .place-corner-cookie {
-    top: 65vh;
+    bottom: 20px;
     right: 3vw;
     width: 9vw;
     max-width: 70px;
@@ -333,22 +334,21 @@ h1 {
 }
 
 /* Very Short Screens (height < 600px) */
-@media (max-height: 600px) {
-  h1 { 
-    font-size: 1.2rem;
-    margin-top: 5px; /* Changed: Slightly reduced for shorter screens */
-  }
-  .container { 
-    margin: 5px 5px 5px; /* Changed: Further reduced margin */
-  }
-  .cookie-container { 
-    max-height: 150px; /* Adjusted for short screens */
-  }
-  .message-box { 
-    font-size: 0.7rem;
-    padding: 6px 10px;
-    max-width: 120px;
-  }
+.corner-cookie,
+.right-corner-cookie,
+.between-corner-cookie,
+.place-corner-cookie {
+  max-width: 60px;
+}
+
+.between-corner-cookie {
+  bottom: 10px;
+  left: 8vw;
+}
+
+.place-corner-cookie {
+  bottom: 10px;
+  right: 20vw;
 }
 
 /* Very Small Viewports (height < 400px) */
