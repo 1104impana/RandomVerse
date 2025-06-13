@@ -1,5 +1,5 @@
 html, body {
-  overflow: hidden; /* Disable scrolling by default */
+  overflow: hidden; 
 }
 body {
   background-color: #000000;
@@ -244,39 +244,145 @@ button:active {
   }
 }
 
+/* Add these media queries to your existing CSS */
+
 @media (max-width: 768px) {
-  .main-container {
-    padding-top: 100px; /* Increased from 30px to push content down */
+  body {
+    padding-top: 100px;
+    height: auto;
+    position: relative; /* Ensures proper positioning context */
+  }
+
+  .text-container {
+    position: static;
+    text-align: center;
+    margin: 30px auto 20px;
+    width: 90%;
+  }
+
+  .text-container h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .text-container h2 {
+    font-size: 20px;
+    margin-top: 0;
+  }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 20px;
+    min-height: calc(100vh - 250px); /* Prevents content cutoff */
+  }
+
+  .left-section {
+    order: 2; /* Moves below crystal ball without column-reverse */
+    margin: 30px auto 0;
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 30px; /* Adds space between sections */
+    position: static; /* Removes any conflicting positioning */
   }
-  .text-container h1 {
-    margin-top: 100px; /* Adds space above title */
-    padding-bottom: 100px;
+
+  .left-section input {
+    width: 80%;
+    max-width: 300px;
+    margin: 0 auto 15px;
   }
-  .left-section {
-    margin-top: 250px; /* Brings witch down */
+
+  .right-container {
+    order: 1; /* Crystal ball stays on top */
+    margin: 0 auto;
+    width: 100%;
   }
+
   #magicBall {
-    width: 220px;
+    width: 250px !important;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
 
   #ballMessage {
-    width: 150px;
+    width: 160px;
     font-size: 16px;
+    left: 50%;
+    transform: translateX(-50%);
   }
-   #userQuestion {
-    width: 90%;
-    max-width: 280px;
-    min-width: 220px;
-    padding: 14px 18px;
-    font-size: 16px;
-    margin: 30px auto;
+
+  /* Ensure no overlapping elements */
+  .main-container {
+    overflow: visible;
+    padding-bottom: 50px;
   }
 }
 
+/* Smaller mobile devices */
+@media (max-width: 480px) {
+  .text-container h1 {
+    font-size: 28px;
+  }
+  
+  .text-container h2 {
+    font-size: 18px;
+  }
+  
+  #magicBall {
+    width: 220px !important;
+  }
+  
+  #ballMessage {
+    width: 140px;
+    font-size: 14px;
+  }
+  
+  .left-section input {
+    width: 90%;
+    padding: 12px;
+  }
+  
+  button {
+    padding: 12px 24px;
+  }
+  
+  .main-content {
+    gap: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .text-container h1 {
+    font-size: 28px;
+  }
+
+  .text-container h2 {
+    font-size: 18px;
+  }
+
+  #magicBall {
+    width: 220px !important;
+  }
+
+  #ballMessage {
+    width: 140px;
+    font-size: 14px;
+  }
+
+  .left-section input {
+    width: 90%;
+    padding: 12px;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
 @media (max-width: 600px) {
   .navbar {
     flex-direction: column;
