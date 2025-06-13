@@ -55,7 +55,7 @@ body {
   color: white;
   z-index: 0;
   overflow: hidden;
-  background-image: url('images/black1.jpg');
+  background-image: url("{{url_for('static',filename='images/black1.jpg')}}");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -175,7 +175,7 @@ body {
   width: 100vw;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url('images/ab.jpg');
+  background-image: url("{{url_for('static',filename='images/ab.jpg')}}");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -239,7 +239,7 @@ body {
   z-index: 1;
   padding: 80px 0 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background-image: url('images/ab.jpg');
+  background-image: url("{{url_for('static',filename='images/ab.jpg')}}");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -598,42 +598,43 @@ body {
 </head>
 
 <body style="background-color: rgb(0, 0, 0);">
-  <nav class="navbar">
+ <nav class="navbar">
   <div class="nav-left">
     <div class="nav-item">
-      <a href="Homepage.html">
-        <img src="images/witch.png" alt="icon" class="responsive-img" />
+      <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/witch.png') }}" alt="icon" class="responsive-img" />
       </a>
       <span class="tooltip-text">Home</span>
     </div>
   </div>
   <div class="nav-right">
     <div class="nav-item">
-      <a href="ripple.html">
-        <img src="images/galaxy.png" alt="Paint" class="nav-icon" />
+      <a href="{{ url_for('ripple') }}">
+        <img src="{{ url_for('static', filename='images/galaxy.png') }}" alt="Paint" class="nav-icon" />
       </a>
       <span class="tooltip-text">Paint</span>
     </div>
     <div class="nav-item">
-      <a href="crystall.html">
-        <img src="images/crystal-ball.png" alt="Crystal" class="nav-icon" />
+      <a href="{{ url_for('crystal') }}">
+        <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" alt="Crystal" class="nav-icon" />
       </a>
       <span class="tooltip-text">Crystal Ball</span>
     </div>
     <div class="nav-item">
-      <a href="fortune.html">
-        <img src="images/fornav.png" alt="Fortune" class="nav-icon" />
+      <a href="{{ url_for('fortune') }}">
+        <img src="{{ url_for('static', filename='images/fornav.png') }}" alt="Fortune" class="nav-icon" />
       </a>
       <span class="tooltip-text">Fortune Cookie</span>
     </div>
     <div class="nav-item">
-      <a href="meditation.html">
-        <img src="images/relaxed.png" alt="Meditation" class="nav-icon" />
+      <a href="{{ url_for('meditation') }}">
+        <img src="{{ url_for('static', filename='images/relaxed.png') }}" alt="Meditation" class="nav-icon" />
       </a>
       <span class="tooltip-text">Calm Sounds</span>
     </div>
   </div>
 </nav>
+
 
   <div class="floating-text-container hero-section" style="margin-top: -100px;">
     <div>
@@ -651,9 +652,9 @@ body {
   <div class="container card-container"id="card-section">
     <div class="card-row">
       <div class="card-col">
-        <a href="crystall.html" style="text-decoration: none;">
+        <a href="{{url_for('crystal')}}" style="text-decoration: none;">
           <div class="card">
-            <img src="images/fortune.jpg" style="width:100%;">
+            <img src="{{url_for('static',filename='images/fortune.jpg')}}" style="width:100%;">
             <div class="card-text-box">
               <div class="title">Fortune Teller</div>
               <div class="description">Enter a magical realm where the mysterious witch gazes into her glowing fortune ball and answers your questions with eerie wisdom and cryptic charm.</div>
@@ -662,9 +663,9 @@ body {
         </a>
       </div>
       <div class="card-col">
-        <a href="ripple.html" style="text-decoration: none;">
+        <a href="{{ url_for('ripple') }}" style="text-decoration: none;">
           <div class="card">
-            <img src="images/paint.jpeg" style="width:100%;">
+            <img src="{{url_for('static',filename='images/paint.jpeg')}}" style="width:100%;">
             <div class="card-text-box">
               <div class="title">ColorTide</div>
               <div class="description">Unleash your creativity on a cosmic ripple canvas. Simple, smooth, and flowing—paint your imagination</div>
@@ -674,9 +675,9 @@ body {
       </div>
 
       <div class="card-col">
-        <a href="meditation.html" style="text-decoration: none;">
+        <a href="{{url_for('meditation')}}" style="text-decoration: none;">
           <div class="card">
-            <img src="images/med.jpeg" style="width:100%;">
+            <img src="{{url_for('static',filename='images/med.jpeg')}}" style="width:100%;">
             <div class="card-text-box">
               <div class="title">Nature’s Whisper</div>
               <div class="description">Escape the noise, embrace the stillness.

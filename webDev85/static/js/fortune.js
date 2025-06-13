@@ -26,7 +26,10 @@ async function breakCookie(position) {
       cookieBox.classList.remove("shake");
 
       // Break cookie image
-      cookieImg.src = "images/break4.png";
+      cookieImg.src = "/static/images/break4.png";
+
+      const crackSound = new Audio("/static/images/crunch.mp3");
+crackSound.play();
 
       // Show message after slight delay
       setTimeout(() => {
@@ -62,7 +65,7 @@ function closeCookie(position) {
   const messageBox = document.getElementById("fortuneMessage" + position);
 
   // Restore cookie image and hide message
-  cookieImg.src = "images/cook4.png";
+  cookieImg.src = "/static/images/cook4.png";
   messageBox.classList.remove("show-message");
 
   // Clear any existing timeout if closing manually

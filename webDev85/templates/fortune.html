@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookie Fortune Break</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fortune.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="nav-item">
+        <a href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='images/witch.png') }}" alt="icon" class="responsive-img" />
+        </a>
+        <span class="tooltip-text">Home</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-item">
+        <a href="{{ url_for('ripple') }}">
+          <img src="{{ url_for('static', filename='images/galaxy.png') }}" alt="Paint" class="nav-icon" />
+        </a>
+        <span class="tooltip-text">Paint</span>
+      </div>
+      <div class="nav-item">
+        <a href="{{ url_for('crystal') }}">
+          <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" alt="Crystal" class="nav-icon" />
+        </a>
+        <span class="tooltip-text">Crystal Ball</span>
+      </div>
+      <div class="nav-item">
+        <a href="{{ url_for('fortune') }}">
+          <img src="{{ url_for('static', filename='images/fornav.png') }}" alt="Fortune" class="nav-icon" />
+        </a>
+        <span class="tooltip-text">Fortune Cookie</span>
+      </div>
+      <div class="nav-item">
+        <a href="{{ url_for('meditation') }}">
+          <img src="{{ url_for('static', filename='images/relaxed.png') }}" alt="Meditation" class="nav-icon" />
+        </a>
+        <span class="tooltip-text">Calm Sounds</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content-wrapper">
+    <div class="container">
+      <h1>CRACK YOUR FORTUNE</h1>
+    </div>
+
+    <div class="cookie-container" id="cookieBox" onclick="breakCookie('')">
+      <img src="{{ url_for('static', filename='images/cook4.png') }}" id="cookieImage" class="cookie-img" alt="Fortune Cookie" style="width: 280px;" />
+      <div class="message-box" id="fortuneMessage"></div>
+    </div>
+
+    <div class="cookie-container corner-cookie" onclick="breakCookie('Corner1')">
+      <img src="{{ url_for('static', filename='images/cook4.png') }}" id="cookieImageCorner1" class="cookie-img" style="width: 160px;" alt="Fortune Cookie" />
+      <div class="message-box" id="fortuneMessageCorner1"></div>
+    </div>
+
+    <div class="cookie-container right-corner-cookie" onclick="breakCookie('Corner2')">
+      <img src="{{ url_for('static', filename='images/cook4.png') }}" id="cookieImageCorner2" class="cookie-img" style="width: 180px;" alt="Fortune Cookie" />
+      <div class="message-box" id="fortuneMessageCorner2"></div>
+    </div>
+
+    <div class="cookie-container between-corner-cookie" onclick="breakCookie('Corner3')">
+      <img src="{{ url_for('static', filename='images/cook4.png') }}" id="cookieImageCorner3" class="cookie-img" style="width: 100px;" alt="Fortune Cookie" />
+      <div class="message-box" id="fortuneMessageCorner3"></div>
+    </div>
+
+    <div class="cookie-container place-corner-cookie" onclick="breakCookie('Corner4')">
+      <img src="{{ url_for('static', filename='images/cook4.png') }}" id="cookieImageCorner4" class="cookie-img" style="width: 170px;" alt="Fortune Cookie" />
+      <div class="message-box" id="fortuneMessageCorner4"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="{{ url_for('static', filename='js/fortune.js') }}"></script>
+</body>
+</html>
