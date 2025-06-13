@@ -7,9 +7,34 @@ import httpx
 import os
 from dotenv import load_dotenv
 
+
+app = Flask(__name__)
+CORS(app)
+
+
 # Load API key from .env file
 load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+@app.route('/')
+def home():
+    return render_template('Homepage.html')
+
+@app.route('/ripple')
+def ripple():
+    return render_template('ripple.html')
+
+@app.route('/crystal')
+def crystal():
+    return render_template('crystall.html')
+
+@app.route('/fortune')
+def fortune():
+    return render_template('fortune.html')
+
+@app.route('/meditation')
+def meditation():
+    return render_template('meditation.html')
 
 # Function to call Groq API
 def get_crystal_ball_llm_response(user_question):
@@ -61,9 +86,6 @@ def get_fortune_cookie_response():
 
 
 
-
-app = Flask(__name__)
-CORS(app)
 
 
 # 🔮 New Crystal Ball LLM Route

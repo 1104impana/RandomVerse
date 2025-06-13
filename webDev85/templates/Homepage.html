@@ -55,7 +55,7 @@ body {
   color: white;
   z-index: 0;
   overflow: hidden;
-  background-image: url('images/black1.jpg');
+  background-image: url("{{url_for('static',filename='images/black1.jpg')}}");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -175,7 +175,7 @@ body {
   width: 100vw;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url('images/ab.jpg');
+  background-image: url("{{url_for('static',filename='images/ab.jpg')}}");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -239,7 +239,7 @@ body {
   z-index: 1;
   padding: 80px 0 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background-image: url('images/ab.jpg');
+  background-image: url("{{url_for('static',filename='images/ab.jpg')}}");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -518,77 +518,123 @@ body {
     align-items: center;
   }
 
-  .hero-btn {
-    font-size: 1.4rem;
-    padding: 14px 35px;
-    min-width: 200px;
-  }
+      .hero-btn {
+        font-size: 1rem;
+        padding: 10px 25px;
+      }
+    }
+.card-text-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.836);
+  color: #fff;
+  display: flex;
+  flex-direction: column; /* Stack title and description vertically */
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-family: 'Open Sans', sans-serif;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  text-align: center; /* Ensure text alignment */
+  padding: 20px; /* Add padding for spacing */
 }
 
-/* Very Small Screens (below 480px) */
-@media (max-width: 480px) {
-  .floating-text {
-    font-size: 3.5rem;
-  }
-
-  .about-section h2 {
-    font-size: 2.4rem;
-  }
-
-  .nav-icon {
-    height: 75px !important;
-    width: 75px !important;
-    min-height: 75px !important;
-    min-width: 75px !important;
-  }
-
-  .social-icon {
-    width: 75px;
-    height: 75px;
-  }
-
-  .social-icon i {
-    font-size: 3rem;
-  }
-
-  .hero-btn {
-    font-size: 1.2rem;
-    padding: 12px 28px;
-    min-width: 180px;
-  }
-
-  .card {
-    margin-bottom: 28px;
-    max-width: 95%;
-  }
+.card-text-box .title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px; /* Space between title and description */
 }
 
+.card-text-box .description {
+  font-size: 1rem; /* Smaller font for the description */
+  line-height: 1.4; /* Improve readability */
+  max-width: 80%; /* Prevent text from touching edges */
+}
+
+.card:hover .card-text-box {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-item {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  max-width: 140px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 8px;
+  position: absolute;
+  z-index: 99;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: opacity 0.3s, bottom 0.3s;
+}
+
+.nav-item:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  bottom: -25px;
+}
   </style>
 
 </head>
 
 <body style="background-color: rgb(0, 0, 0);">
-  <nav class="navbar">
+ <nav class="navbar">
   <div class="nav-left">
-    <a href="Homepage.html">
-    <img src="images/witch.png" alt="icon" class="responsive-img">
-    </a>
+    <div class="nav-item">
+      <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/witch.png') }}" alt="icon" class="responsive-img" />
+      </a>
+      <span class="tooltip-text">Home</span>
+    </div>
   </div>
   <div class="nav-right">
-    <a href="ripple.html">
-      <img src="images/galaxy.png" alt="Paint" class="nav-icon">
-    </a>
-    <a href="crystall.html">
-      <img src="images/crystal-ball.png" alt="Crystal" class="nav-icon">
-    </a>
-    <a href="fortune.html">
-      <img src="images/fornav.png" alt="Fortune" class="nav-icon">
-    </a>
-    <a href="meditation.html">
-      <img src="images/relaxed.png" alt="Meditation" class="nav-icon">
-    </a>
+    <div class="nav-item">
+      <a href="{{ url_for('ripple') }}">
+        <img src="{{ url_for('static', filename='images/galaxy.png') }}" alt="Paint" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Paint</span>
+    </div>
+    <div class="nav-item">
+      <a href="{{ url_for('crystal') }}">
+        <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" alt="Crystal" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Crystal Ball</span>
+    </div>
+    <div class="nav-item">
+      <a href="{{ url_for('fortune') }}">
+        <img src="{{ url_for('static', filename='images/fornav.png') }}" alt="Fortune" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Fortune Cookie</span>
+    </div>
+    <div class="nav-item">
+      <a href="{{ url_for('meditation') }}">
+        <img src="{{ url_for('static', filename='images/relaxed.png') }}" alt="Meditation" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Calm Sounds</span>
+    </div>
   </div>
 </nav>
+
 
   <div class="floating-text-container hero-section" style="margin-top: -100px;">
     <div>
@@ -606,9 +652,9 @@ body {
   <div class="container card-container"id="card-section">
     <div class="card-row">
       <div class="card-col">
-        <a href="crystall.html" style="text-decoration: none;">
+        <a href="{{url_for('crystal')}}" style="text-decoration: none;">
           <div class="card">
-            <img src="images/fortune.jpg" style="width:100%;">
+            <img src="{{url_for('static',filename='images/fortune.jpg')}}" style="width:100%;">
             <div class="card-text-box">
               <div class="title">Fortune Teller</div>
               <div class="description">Enter a magical realm where the mysterious witch gazes into her glowing fortune ball and answers your questions with eerie wisdom and cryptic charm.</div>
@@ -617,9 +663,9 @@ body {
         </a>
       </div>
       <div class="card-col">
-        <a href="ripple.html" style="text-decoration: none;">
+        <a href="{{ url_for('ripple') }}" style="text-decoration: none;">
           <div class="card">
-            <img src="images/paint.jpeg" style="width:100%;">
+            <img src="{{url_for('static',filename='images/paint.jpeg')}}" style="width:100%;">
             <div class="card-text-box">
               <div class="title">ColorTide</div>
               <div class="description">Unleash your creativity on a cosmic ripple canvas. Simple, smooth, and flowing—paint your imagination</div>
@@ -629,9 +675,9 @@ body {
       </div>
 
       <div class="card-col">
-        <a href="meditation.html" style="text-decoration: none;">
+        <a href="{{url_for('meditation')}}" style="text-decoration: none;">
           <div class="card">
-            <img src="images/med.jpeg" style="width:100%;">
+            <img src="{{url_for('static',filename='images/med.jpeg')}}" style="width:100%;">
             <div class="card-text-box">
               <div class="title">Nature’s Whisper</div>
               <div class="description">Escape the noise, embrace the stillness.

@@ -57,6 +57,38 @@ body {
     transform: scale(1.15);
   }
 
+  
+.nav-item {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  max-width: 140px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 8px;
+  position: absolute;
+  z-index: 99;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: opacity 0.3s, bottom 0.3s;
+}
+
+.nav-item:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  bottom: -25px;
+}
+
   @media (hover: none) {
     .nav-icon:hover {
       transform: none;

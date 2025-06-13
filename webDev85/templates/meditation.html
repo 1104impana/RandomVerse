@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calming Sounds with Volume Slider</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/meditation.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 25px;
+      background-color: #00000018;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .nav-left img {
+      height: 50px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-right a {
+      display: inline-block;
+    }
+
+    .nav-icon {
+      height: 35px;
+      width: 35px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-icon:hover {
+      transform: scale(1.15);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="nav-item">
+        <a href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='images/witch.png') }}" alt="icon" class="responsive-img" />
+        </a>
+        <span class="tooltip-text">Home</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-item">
+        <a href="{{ url_for('ripple') }}">
+          <img src="{{ url_for('static', filename='images/galaxy.png') }}" alt="Paint" class="nav-icon" />
+        </a>
+        <span class="tooltip-text">Paint</span>
+      </div>
+      <div class="nav-item">
+        <a href="{{ url_for('crystal') }}">
+          <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" alt="Crystal" class="nav-icon" />
+        </a>
+        <span class="tooltip-text">Crystal Ball</span>
+      </div>
+      <div class="nav-item">
+        <a href="{{ url_for('fortune') }}">
+          <img src="{{ url_for('static', filename='images/fornav.png') }}" alt="Fortune" class="nav-icon" />
+        </a>
+        <span class="tooltip-text">Fortune Cookie</span>
+      </div>
+      <div class="nav-item">
+        <a href="{{ url_for('meditation') }}">
+          <img src="{{ url_for('static', filename='images/relaxed.png') }}" alt="Meditation" class="nav-icon" />
+        </a>
+        <span class="tooltip-text">Calm Sounds</span>
+      </div>
+    </div>
+  </nav>
+
+  <h1>Whispers of Peace</h1>
+  <h2>Ambient sounds to wash away distraction</h2>
+
+  <br><br>
+
+  <div class="sound-buttons">
+    <div class="sound-item" data-sound="rain" tabindex="0" role="button" aria-label="Play Rain Sound">
+      <img src="{{ url_for('static', filename='images/rain1.png') }}" alt="Rain Animation" />
+      <span>Rain</span><br>
+      <input type="range" min="0" max="100" value="50" class="volume-slider" />
+    </div>
+
+    <div class="sound-item" data-sound="ocean" tabindex="0" role="button" aria-label="Play Waves Sound">
+      <img src="{{ url_for('static', filename='images/wave1.png') }}" alt="Waves Animation" />
+      <span>Waves</span><br>
+      <input type="range" min="0" max="100" value="50" class="volume-slider" />
+    </div>
+
+    <div class="sound-item" data-sound="birds" tabindex="0" role="button" aria-label="Play Birds Chirping Sound">
+      <img src="{{ url_for('static', filename='images/birds1.png') }}" alt="Birds Animation" />
+      <span>Birds</span><br>
+      <input type="range" min="0" max="100" value="50" class="volume-slider" />
+    </div>
+
+    <div class="sound-item" data-sound="bowl" tabindex="0" role="button" aria-label="Play Singing Bowl Sound">
+      <img src="{{ url_for('static', filename='images/singing-bowl1.png') }}" alt="Bowl Animation" />
+      <span>Bowl</span><br>
+      <input type="range" min="0" max="100" value="50" class="volume-slider" />
+    </div>
+
+    <div class="sound-item" data-sound="fire" tabindex="0" role="button" aria-label="Fire Sound">
+      <img src="{{ url_for('static', filename='images/fire1.png') }}" alt="Fire Animation" />
+      <span>Fire</span><br>
+      <input type="range" min="0" max="100" value="50" class="volume-slider" />
+    </div>
+  </div>
+
+  <br><br>
+
+  <button id="pauseAll">Pause All</button><br><br>
+
+  <audio id="audioPlayer" loop></audio>
+  
+  <script src="{{ url_for('static', filename='js/medditation.js') }}"></script>
+
+</body>
+
+</html>

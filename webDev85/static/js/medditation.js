@@ -1,9 +1,9 @@
 const sounds = {
-  rain: "audio/rain-sounds-ambience-351115.mp3",
-  ocean: "audio/ocean-waves-112906.mp3",
-  birds: "audio/chirping-birds-ambience-217410.mp3",
-  bowl: "audio/singing-bowl-hit-3-33366.mp3",
-  fire: "audio/firewood-burning-sound-179862.mp3",
+  rain: "/static/images/rain.mp3",
+  ocean: "/static/images/waves.mp3",
+  birds: "/static/images/birds.mp3",
+  bowl: "/static/images/bowl.mp3",
+  fire: "/static/images/fire.mp3",
 };
 
 const audioPlayers = {}; // Store Audio objects for each sound
@@ -30,12 +30,12 @@ document.querySelectorAll(".sound-item").forEach((item) => {
     }
   });
 
-
+  // Volume slider control
   volumeSlider.addEventListener("input", () => {
     audio.volume = volumeSlider.value / 100;
   });
 
-  // Keyboard support
+  // Keyboard accessibility: toggle on Enter or Space
   item.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -43,12 +43,14 @@ document.querySelectorAll(".sound-item").forEach((item) => {
     }
   });
 });
+
+// Pause All button logic
 document.getElementById("pauseAll").addEventListener("click", () => {
   for (const audio of Object.values(audioPlayers)) {
     audio.pause();
   }
 
-  document.querySelectorAll(".sound-item").forEach(item => {
+  document.querySelectorAll(".sound-item").forEach((item) => {
     item.classList.remove("playing");
   });
 });
