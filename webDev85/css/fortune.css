@@ -218,9 +218,9 @@ h1 {
 }
 
 .between-corner-cookie {
-  top: 350px;
-  left: 15vw;
-  right: 750px;
+  top: 150px;
+  left: 10vw;
+  right: 800px;
   bottom: -60px;
   width: 80px;
   --base-rotation: 150deg;
@@ -228,9 +228,9 @@ h1 {
 }
 
 .place-corner-cookie {
-  top: 350px;
+  top: 250px;
   bottom: -30px;
-  right: 250px;
+  right: 400px;
   width: 90px;
   --base-rotation: 90deg;
   transform: rotate(var(--base-rotation));
@@ -269,20 +269,134 @@ h1 {
   transform: translate(-50%, -50%) rotate(-90deg) scale(1.05);
 }
 
+/* Responsive Adjustments */
+
 /* Large Screens (1600px+) */
 @media (min-width: 1600px) {
   h1 { font-size: 3.5rem; }
   .cookie-container { max-width: 700px; max-height: 450px; }
   .message-box { font-size: 1.3rem; padding: 20px 30px; }
-  .corner-cookie, .right-corner-cookie, .between-corner-cookie, .place-corner-cookie {
-    width: 130px;
+  .corner-cookie { width: 100px; }
+  .right-corner-cookie { width: 120px; }
+  .between-corner-cookie { width: 80px; }
+  .place-corner-cookie { width: 90px; }
+}
+
+/* Medium Screens (Tablets, 768px - 1024px) */
+@media (max-width: 1024px) {
+  .corner-cookie {
+    top: 10vh;
+    left: 3vw;
+    width: 10vw;
+    max-width: 80px;
+  }
+  .right-corner-cookie {
+    top: 10vh;
+    right: 3vw;
+    width: 12vw;
+    max-width: 100px;
+  }
+  .between-corner-cookie {
+    
+    bottom: 20px;
+    left: 3vw;
+    width: 8vw;
+    max-width: 60px;
+  }
+  .place-corner-cookie {
+    bottom: 20px;
+    right: 3vw;
+    width: 9vw;
+    max-width: 70px;
+  }
+  h1 { font-size: 2.5rem; }
+  .cookie-container { max-width: 500px; max-height: 350px; }
+}
+
+/* Small Screens (Mobile, below 767px) */
+@media (max-width: 767px) {
+  /* Changed: Center content vertically and adjust layout for small screens */
+  .content-wrapper {
+    justify-content: center; /* Center content vertically */
+    margin-top: 0; /* Remove negative margin to allow proper centering */
+  }
+  .corner-cookie,
+  .right-corner-cookie,
+  .between-corner-cookie,
+  .place-corner-cookie {
+    display: none; /* Corner cookies remain hidden on small screens */
+  }
+  h1 { 
+    font-size: 1.5rem;
+    margin-top: -155px; /* Changed: Increased margin-top to bring heading lower */
+  }
+  .container {
+    margin: 10px 10px 5px; /* Changed: Reduced top margin to fit layout */
+  }
+  .cookie-container { 
+     max-width: 180px; /* Changed: Reduced to prevent cutoff on the right */
+    max-height: 160px; /* Changed: Adjusted to maintain proportions */
+    margin: 10px auto 10px 20px; /* Changed: Shifted left by adjusting margin-left */
+    margin-top: -70px;
+  }
+  .message-box { 
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    max-width: 140px;
+  }
+  .nav-left img {
+    height: 35px;
+  }
+  .nav-right {
+    gap: 10px;
+  }
+  .nav-icon {
+    height: 20px;
+    width: 20px;
   }
 }
 
-/* Tall Screens */
-@media (max-height: 600px) {
-  .corner-cookie { top: 100px; }
-  .right-corner-cookie { top: 90px; }
-  .between-corner-cookie, .place-corner-cookie { top: 200px; }
-  .cookie-container { max-height: 200px; }
+/* Very Tall Screens (height > 1000px) */
+@media (min-height: 1000px) {
+  .corner-cookie { top: 10vh; }
+  .right-corner-cookie { top: 10vh; }
+  .between-corner-cookie { top: 70vh; }
+  .place-corner-cookie { top: 70vh; }
+}
+
+/* Very Short Screens (height < 600px) */
+.corner-cookie,
+.right-corner-cookie,
+.between-corner-cookie,
+.place-corner-cookie {
+  max-width: 60px;
+}
+
+.between-corner-cookie {
+  bottom: 10px;
+  left: 8vw;
+}
+
+.place-corner-cookie {
+  bottom: 10px;
+  right: 20vw;
+}
+
+/* Very Small Viewports (height < 400px) */
+@media (max-height: 400px) {
+  h1 { 
+    font-size: 1rem;
+    margin-top: 10px; /* Changed: Adjusted for very short screens */
+  }
+  .cookie-container { 
+    max-width: 180px; /* Changed: Slightly reduced for very short screens */
+    max-height: 120px;
+  }
+  .nav-left img {
+    height: 30px;
+  }
+  .nav-icon {
+    height: 18px;
+    width: 18px;
+  }
 }
