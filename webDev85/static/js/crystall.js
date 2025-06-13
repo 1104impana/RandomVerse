@@ -14,7 +14,7 @@ function askCrystalBall() {
     return;
   }
 
-  fetch(`http://localhost:5000/crystalBallAnswer?question=${encodeURIComponent(question)}`)
+  fetch(`https://randomverse.onrender.com/crystalBallAnswer?question=${encodeURIComponent(question)}`)
     .then(response => response.json())
     .then(data => {
       if (data.crystalBallAnswer) {
