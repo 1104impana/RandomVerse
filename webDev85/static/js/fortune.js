@@ -17,7 +17,7 @@ async function breakCookie(position) {
 
     try {
       // Fetch fortune from Flask LLM endpoint
-      const response = await fetch('http://localhost:5000/getFortuneLLM');
+      const response = await fetch('https://randomverse.onrender.com/getFortuneLLM');
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
 
