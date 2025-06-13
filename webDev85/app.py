@@ -66,7 +66,7 @@ def get_fortune_cookie_response():
     prompt = (
     "You are a fortune cookie oracle. "
     "Reply with exactly one short, witty, sarcastic, or positive fortune. "
-    "The fortune must be ONE sentence only, under 10 words, with no extra text or greetings and no repetitions."
+    "The fortune must be ONE sentence only, under 10 words, with no extra text or greetings and no repetitions. with no repetitions"
     )
 
     payload = {
