@@ -14,7 +14,7 @@ html, body {
   overflow: hidden;
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: relative;
 }
 
 canvas {
@@ -27,7 +27,7 @@ canvas {
 }
 
 .bg-image {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -222,17 +222,19 @@ canvas {
     min-width: 65px;
   }
 
-  .navbar {
-    padding: 10px 15px;
+   .navbar {
+    padding: 15px;
   }
 
   .nav-left img {
-    height: 40px;
+    height: 50px;
   }
 
   .nav-icon {
-    height: 30px;
-    width: 30px;
+    width: clamp(35px, 10vw, 50px);
+    height: clamp(35px, 10vw, 50px);
+    min-width: unset;
+    min-height: unset;
   }
 }
 
