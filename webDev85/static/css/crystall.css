@@ -308,7 +308,7 @@ button:active {
 
   .left-section {
     order: 2; /* Moves below crystal ball without column-reverse */
-     margin-top: 20px !important;  /* or 120px */
+     margin-top: 0 !important;  /* or 120px */
     margin-left: 0 !important; 
     width: 100%;
     padding: 0 20px;
@@ -336,7 +336,9 @@ button:active {
     max-width: 250px;
     height: auto;
     display: block;
-    margin: 0 auto;
+    
+    margin-top: 0 !important;
+  margin-bottom: 0 !important;
   }
 
   #ballMessage {
