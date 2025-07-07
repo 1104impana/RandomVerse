@@ -238,6 +238,20 @@ h1 {
     width: 150px;
     font-size: 1.2rem;
   }
+    .navbar {
+    padding: 15px;
+  }
+
+  .nav-left img {
+    height: 50px;
+  }
+
+  .nav-icon {
+    width: clamp(35px, 10vw, 50px);
+    height: clamp(35px, 10vw, 50px);
+    min-width: unset;
+    min-height: unset;
+  }
 }
 
 /* Phones and very small screens */

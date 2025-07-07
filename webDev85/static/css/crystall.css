@@ -96,16 +96,20 @@ body {
   }
 
   @media (max-width: 768px) {
-    .navbar {
-      padding: 10px 15px;
-    }
-    .nav-left img {
-      height: 40px;
-    }
-    .nav-icon {
-      height: 30px;
-      width: 30px;
-    }
+      .navbar {
+    padding: 15px;
+  }
+
+  .nav-left img {
+    height: 50px;
+  }
+
+  .nav-icon {
+    width: clamp(35px, 10vw, 50px);
+    height: clamp(35px, 10vw, 50px);
+    min-width: unset;
+    min-height: unset;
+  }
   }
 
   /* Ensure no further reduction in icon size for smaller screens */
