@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(".bg-image").ripples({
     resolution: 200,
-    perturbance: 0.003,
+    perturbance: 0.002,
     interactive: true
   });
 });
