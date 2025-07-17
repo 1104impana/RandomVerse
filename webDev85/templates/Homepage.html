@@ -603,6 +603,33 @@ body {
   opacity: 1;
   bottom: -25px;
 }
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  color: #ffffff;
+  font-family: "Courier New", monospace;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#typing-text::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
   </style>
 
 </head>
@@ -873,9 +900,47 @@ Your peaceful pocket of nature awaits.
     });
 
  
+ 
   
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.querySelector("a.hero-btn[href='/random']");
 
+    button.addEventListener("click", function (e) {
+      e.preventDefault(); // Prevent immediate navigation
+
+      const loadingScreen = document.getElementById("loading-screen");
+      const typingText = document.getElementById("typing-text");
+      const fullText = "Loading random verse...";
+      let index = 0;
+
+      loadingScreen.style.display = "flex";
+      typingText.innerHTML = "";
+
+      const interval = setInterval(() => {
+        typingText.innerHTML += fullText.charAt(index);
+        index++;
+        if (index >= fullText.length) {
+          clearInterval(interval);
+        }
+      }, 100); // Typing speed
+
+      setTimeout(() => {
+        window.location.href = "/random";
+      }, 2000); // Wait 2 seconds then go to page
+    });
+  });
+
+
+
+
+ 
   </script>
+
+ <div id="loading-screen" style="display: none;">
+  <div id="typing-text"></div>
+</div>
+
+
 </body>
 
 </html>
