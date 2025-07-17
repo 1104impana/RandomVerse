@@ -77,3 +77,5 @@ function closeCookie(position) {
   // Mark cookie as closed
   brokenCookies[position] = false;
 }
+
+ 

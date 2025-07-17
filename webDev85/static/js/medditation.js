@@ -54,3 +54,4 @@ document.getElementById("pauseAll").addEventListener("click", () => {
     item.classList.remove("playing");
   });
 });
+

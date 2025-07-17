@@ -79,6 +79,25 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="{{ url_for('static', filename='js/fortune.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/fortune.js') }}">
+
+   
+  </script>
+
+ 
+<!-- Next Verse Button -->
+<a href="{{ url_for('next_verse', current=current_file, r=random()) }}"
+   class="hero-btn"
+   style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
+  Next Verse
+</a>
+
+
+
+<!-- Transition Overlay -->
+<div id="transition-overlay">
+  <h1>Traveling to next verse...</h1>
+</div>
+
 </body>
 </html>

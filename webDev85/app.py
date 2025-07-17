@@ -1,15 +1,19 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+from flask import session  
 # from pymongo import MongoClient  # 🔸 Commented out MongoDB for now
 
 # 🔮 LLM things
 import httpx
 import os
 from dotenv import load_dotenv
+import random
 
 
 app = Flask(__name__)
 CORS(app)
+app.jinja_env.globals.update(random=random.random)
+app.secret_key = 'supersecretkey123'
 
 
 # Load API key from .env file
@@ -18,23 +22,70 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 @app.route('/')
 def home():
-    return render_template('Homepage.html')
+    return render_template('Homepage.html', current_file='Homepage.html')
+@app.route('/random')
+def random_page():
+    template_folder = app.template_folder or 'templates'
+
+    html_files = [
+        f for f in os.listdir(template_folder)
+        if f.endswith('.html') and not f.startswith('_') and f != 'Homepage.html'
+    ]
+
+    if not html_files:
+        return "No HTML files found!", 404
+
+    selected = random.choice(html_files)
+
+    return render_template(selected, current_file=selected)
+
+
+@app.route('/next_verse')
+def next_verse():
+    current = request.args.get('current')  # e.g. meditation.html
+    template_folder = app.template_folder or 'templates'
+
+    # Get all HTML files excluding Homepage and current
+    all_html_files = [
+        f for f in os.listdir(template_folder)
+        if f.endswith('.html') and f not in ['Homepage.html', current]
+    ]
+
+    # Load visited files from session, or initialize
+    visited = session.get('visited', [])
+
+    # Get unvisited ones
+    unvisited = [f for f in all_html_files if f not in visited]
+
+    # If all visited, reset
+    if not unvisited:
+        visited = []
+        unvisited = all_html_files
+
+    # Pick next verse
+    next_file = random.choice(unvisited)
+
+    # Update session
+    visited.append(next_file)
+    session['visited'] = visited
+
+    return render_template(next_file, current_file=next_file)
 
 @app.route('/ripple')
 def ripple():
-    return render_template('ripple.html')
+    return render_template('ripple.html', current_file='ripple.html')
 
 @app.route('/crystal')
 def crystal():
-    return render_template('crystall.html')
+    return render_template('crystall.html', current_file='crystall.html')
 
 @app.route('/fortune')
 def fortune():
-    return render_template('fortune.html')
+    return render_template('fortune.html', current_file='fortune.html')
 
 @app.route('/meditation')
 def meditation():
-    return render_template('meditation.html')
+    return render_template('meditation.html', current_file='meditation.html')
 
 # Function to call Groq API
 def get_crystal_ball_llm_response(user_question):

@@ -132,7 +132,40 @@
       var audio = document.getElementById("laughSound");
       audio.play();
     };
+
+  
+  const pages = ["/ripple", "/fortune", "/meditation"]; // Exclude /crystall since you're already on it
+
+  function goToNextVerse() {
+    const currentPath = window.location.pathname;
+    const otherPages = pages.filter(path => currentPath !== path);
+    const nextPage = otherPages[Math.floor(Math.random() * otherPages.length)];
+
+    const overlay = document.getElementById("transition-overlay");
+    overlay.style.pointerEvents = "auto";
+    overlay.style.opacity = "1";
+
+   setTimeout(() => {
+  window.location.replace(nextPage);  // ✅ replaces current entry instead of adding a new one
+}, 1000);
+  }
+
+ 
   </script>
+
+
+<a href="{{ url_for('next_verse', current=current_file, r=random()) }}"
+   class="hero-btn"
+   style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
+  Next Verse
+</a>
+
+
+<!-- Transition Overlay -->
+<div id="transition-overlay">
+  <h1>Traveling to next verse...</h1>
+</div>
+
 </body>
 
 </html>
