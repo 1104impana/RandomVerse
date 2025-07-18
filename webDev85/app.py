@@ -87,6 +87,10 @@ def fortune():
 def meditation():
     return render_template('meditation.html', current_file='meditation.html')
 
+@app.route('/snake')
+def snake():
+    return render_template('snake.html', current_file='snake.html')
+
 # Function to call Groq API
 def get_crystal_ball_llm_response(user_question):
     headers = {
