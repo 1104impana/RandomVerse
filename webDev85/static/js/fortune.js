@@ -78,4 +78,25 @@ function closeCookie(position) {
   brokenCookies[position] = false;
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const nextBtn = document.querySelector('.hero-btn[href*="next_verse"]');
+    const overlay = document.getElementById('transition-overlay');
+
+    if (nextBtn && overlay) {
+      nextBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // Show the overlay
+        overlay.style.pointerEvents = "auto";
+        overlay.style.opacity = "1";
+
+        // Redirect after animation
+        setTimeout(() => {
+          window.location.href = nextBtn.href;
+        }, 1600); // Match with your CSS transition
+      });
+    }
+  });
+
+
  
