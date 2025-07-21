@@ -438,33 +438,53 @@ button:active {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  color: white;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 999999;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.5s ease;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
-#transition-overlay h1 {
-  font-size: 2em;
-  font-family: sans-serif;
-  background: linear-gradient(90deg, #fff, #ccc, #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 2s infinite;
+#typewriter-text {
+  font-size: 5vw; /* Responsive font size */
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  text-align: center;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -100%;
+#typewriter-text::after {
+  content: '|';
+  position: absolute;
+  right: -0.2em;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 🔧 Optional fine-tuning with media queries */
+@media (min-width: 768px) {
+  #typewriter-text {
+    font-size: 3vw;
   }
-  100% {
-    background-position: 200%;
+}
+
+@media (min-width: 1024px) {
+  #typewriter-text {
+    font-size: 2vw;
   }
 }
