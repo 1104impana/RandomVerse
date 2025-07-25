@@ -79,6 +79,8 @@ body {
   display: inline-block;
   color: #f7f7f7;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  font-size: clamp(3rem, 6vw, 5rem);
+  
 }
 
 .header-container {
@@ -165,19 +167,19 @@ body {
 .about-section {
   color: rgb(202, 197, 197);
   text-align: justify;
-  margin-top: 300px;
-  padding: 80px 15px;
-  margin-bottom: 400px;
+  margin-top: 100px;
+  padding: 50px 50px;
+  
   position: relative;
   z-index: 1;
-  background: linear-gradient(145deg, rgba(17, 111, 219, 0.082), rgba(40, 40, 40, 0.6));
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.966), rgb(0, 0, 0));
   border-radius: 0;
   max-width: 100%;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0);
-  width: 100vw;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0);
+  width: 65vw;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url("{{url_for('static',filename='images/ab.jpg')}}");
+
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -198,9 +200,9 @@ body {
 .about-section .content-wrapper {
   position: relative;
   padding: 40px;
-  background: rgba(15, 15, 15, 0.308);
+  background: rgb(0, 0, 0);
   border-radius: 15px;
-  backdrop-filter: blur(8px);
+  
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -235,17 +237,17 @@ body {
 }
 
 .footer {
-  background: linear-gradient(145deg, rgba(31, 101, 167, 0.164), rgba(50, 50, 50, 0.7));
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.164), rgba(50, 50, 50, 0.7));
   backdrop-filter: blur(8px);
   color: rgba(223, 205, 205, 0.7);
   z-index: 1;
   padding: 80px 0 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background-image: url("{{url_for('static',filename='images/ab.jpg')}}");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   position: relative;
+  width: 100%;
 }
 
 .footer::before {
@@ -344,18 +346,6 @@ body {
   opacity: 0.8;
 }
 
-.card-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 45px;
-  padding: 0 -2px;
-}
-
-.card-col {
-  flex: 0 0 calc(33.333% - 30px);
-  max-width: calc(33.333% - 30px);
-}
 
 /* Navbar */
 .navbar {
@@ -388,12 +378,13 @@ body {
 }
 
 .nav-icon {
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   cursor: pointer;
   transition: transform 0.2s ease;
   min-height: 35px;
   min-width: 35px;
+   margin-top: 10px;
 }
 
 .nav-icon:hover {
@@ -437,15 +428,6 @@ body {
   box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
-
-/* Medium Screens (below 992px) */
-@media (max-width: 992px) {
-  .card-col {
-    flex: 0 0 calc(50% - 30px);
-    max-width: calc(50% - 30px);
-  }
-}
-
 /* Small Screens (Mobile, below 768px) */
 @media (max-width: 768px) {
   
@@ -468,33 +450,6 @@ body {
     padding: 30px;
   }
 
-  .card-col {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
-  .card-row {
-    padding: 0 10px;
-    gap: 30px;
-    flex-direction: column;
-    align-items: stretch; /* Center cards */
-          /* Already there – keeps cards centered horizontally */
-  justify-content: center;
-  margin: 0 auto; /* Center the row itself */
-    width: 100%; /* Ensure it takes full width */
-  }
-
-  .card {
-    margin-bottom: 30px;
-    width: 100%;
-    max-width: 90%;
-    display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 450px;
-  margin-left: auto; /* Push to center */
-    margin-right: auto;
-  }
 
   .social-links {
     gap: 24px;
@@ -510,67 +465,60 @@ body {
   }
 
   .navbar {
-    padding: 15px;
+    padding: 15px 15px;
   }
 
   .nav-left img {
-    height: 50px;
+    height: 60px;
   }
 
-  .nav-icon {
+ .nav-icon {
+    width: clamp(40px, 12vw, 60px);
+    height: clamp(40px, 12vw, 60px);
+  }
+  
+.about-section {
+    width: 95vw;
+    padding: 40px 20px;
+    margin-top: 150px;
+    margin-bottom: 200px;
+    text-align: left;
+  }
+   .popup {
+    width: 85%;
     
-  width: clamp(35px, 10vw, 50px);
-  height: clamp(35px, 10vw, 50px);
-  min-width: unset;
-  min-height: unset;
-
-
+    border-radius: 12px;
+    
+    height: auto;
+    max-height: 60vh;      /* reduced from 70vh to 60vh */
+    padding: 12px;         /* smaller padding */
+    font-size: 13px;
+   
+  }
+ 
+  .popup-title {
+    font-size: 8px;
   }
 
-  .hero-buttons {
-    gap: 25px;
-    flex-direction: column; /* Stack buttons vertically if needed */
-    align-items: center;
+  .popup-subtitle {
+    font-size: 14px;
   }
 
-      .hero-btn {
-        font-size: 1rem;
-        padding: 10px 25px;
-      }
-      .card-text-box {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 150px;
-  background: rgba(0, 0, 0, 0.836);
-  color: #fff;
-  display: flex;
-  flex-direction: column; /* Stack title and description vertically */
-  align-items: flex-end;
-  justify-content: center;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  font-family: 'Open Sans', sans-serif;
-  opacity: 1;
-  transform:none;
-  pointer-events: none;
-  text-align: center; /* Ensure text alignment */
-  padding: 20px; /* Add padding for spacing */
-}
+  .popup-content {
+    font-size: 13px;
+    line-height: 1.4;
+  }
 
-.card-text-box .title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 10px; /* Space between title and description */
-}
-
-.card-text-box .description {
-  display: none;
-}
-
-
-
+  .close-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+  }
+.welcome-emoji {
+    font-size: 6px;
+  }
 
 }
 
@@ -631,10 +579,12 @@ body {
 }
 
 
- .container {
+ .portal-container {
             position: relative;
             width: 100vw;
             height: 100vh;
+            margin-top: 100px;
+            padding-top: 80px;
         }
 
         .floating-images {
@@ -646,15 +596,15 @@ body {
 
         .floating-img {
             position: absolute;
-            width: clamp(40px, 8vw, 80px);
-            height: clamp(40px, 8vw, 80px);
+            width: clamp(30px, 5vw, 60px);
+            height: clamp(30px, 5vw, 60px);
             border-radius: 8px;
             opacity: 0.8;
             animation: float 6s ease-in-out infinite;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0);
             transition: all 0.3s ease;
             background-color: transparent;
         }
@@ -684,7 +634,7 @@ body {
             cursor: pointer;
             z-index: 10;
             box-shadow: 
-                0 0 30px rgba(102, 126, 234, 0.6),
+                0 0 30px rgba(170, 102, 234, 0.6),
                 inset 0 0 30px rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             font-size: clamp(12px, 2.5vw, 18px);
@@ -757,7 +707,42 @@ body {
                 width: 100%;
                 height: 100%;
             }
-        }
+   .floating-img {
+    width: clamp(40px, 12vw, 70px);
+    height: clamp(40px, 12vw, 70px);
+    animation-duration: 8s;
+  }
+
+  .portal-button {
+    width: clamp(100px, 35vw, 140px);
+    height: clamp(100px, 35vw, 140px);
+    font-size: clamp(14px, 5vw, 20px);
+  }
+  .floating-text-container {
+    margin-top: -60px;
+    padding: 0 15px;
+  }
+
+  .floating-text {
+    line-height: 1.3;
+  }
+   .icon-container {
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  .info-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .info-image {
+    width: 100%;
+    height: 100%;
+  }
+}
+        
 
         @media screen and (max-width: 480px) {
             .time-travel-overlay {
@@ -956,6 +941,196 @@ body {
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }
+        
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    z-index: 1000;
+}
+
+
+
+.info-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  
+  background: none; /* Remove background color */
+  padding: 0;
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+@keyframes wiggle {
+  0%   { transform: rotate(0deg) translateX(0); }
+  15%  { transform: rotate(-5deg) translateX(-2px); }
+  30%  { transform: rotate(5deg) translateX(2px); }
+  45%  { transform: rotate(-5deg) translateX(-2px); }
+  60%  { transform: rotate(5deg) translateX(2px); }
+  75%  { transform: rotate(-3deg) translateX(-1px); }
+  90%  { transform: rotate(3deg) translateX(1px); }
+  100% { transform: rotate(0deg) translateX(0); }
+}
+
+
+  
+
+.info-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or "cover" if you want full fill */
+  animation: wiggle 1.2s infinite;
+  transform-origin: center center;
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.info-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.info-icon::before {
+   
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.popup {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    display: none;
+}
+
+.popup.show {
+    display: block;
+    animation: popupIn 0.3s ease-out forwards;
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    color: #ff6b6b;
+    background: #f8f9fa;
+}
+
+.popup-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.popup-title {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.popup-subtitle {
+    color: #666;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.popup-content {
+    color: #555;
+    line-height: 1.6;
+    font-size: 15px;
+    text-align: center;
+}
+
+.welcome-emoji {
+    font-size: 40px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popupIn {
+    from { 
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    to { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+.demo-content {
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+}
+
+.demo-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.demo-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.arrow {
+    position: fixed;
+    top: 80px;
+    right: 80px;
+    color: white;
+    font-size: 24px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+
   </style>
 
 </head>
@@ -963,38 +1138,40 @@ body {
 <body style="background-color: rgb(0, 0, 0);">
  <nav class="navbar">
   <div class="nav-left">
+    
+  </div>
+ 
+  <div class="nav-right">
+    
+
     <div class="nav-item">
       <a href="{{ url_for('home') }}">
-        <img src="{{ url_for('static', filename='images/witch.png') }}" alt="icon" class="responsive-img" />
+        <img src="{{ url_for('static', filename='images/witch.png') }}" alt="Home" class="nav-icon" />
       </a>
       <span class="tooltip-text">Home</span>
     </div>
-  </div>
-  <div class="nav-right">
+
     <div class="nav-item">
-      <a href="{{ url_for('ripple') }}">
-        <img src="{{ url_for('static', filename='images/galaxy.png') }}" alt="Paint" class="nav-icon" />
-      </a>
-      <span class="tooltip-text">Paint</span>
-    </div>
+  <a href="#about-section">
+    <img src="{{ url_for('static', filename='images/about-us.png') }}" alt="About Us" class="nav-icon" />
+  </a>
+  <span class="tooltip-text">About Us</span>
+</div>
+    
+   <!-- 🟢 Explore -->
     <div class="nav-item">
-      <a href="{{ url_for('crystal') }}">
-        <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" alt="Crystal" class="nav-icon" />
+      <a href="#portal-container">
+        <img src="{{ url_for('static', filename='images/blackhole.png') }}" alt="Explore" class="nav-icon" />
       </a>
-      <span class="tooltip-text">Crystal Ball</span>
-    </div>
-    <div class="nav-item">
-      <a href="{{ url_for('fortune') }}">
-        <img src="{{ url_for('static', filename='images/fornav.png') }}" alt="Fortune" class="nav-icon" />
-      </a>
-      <span class="tooltip-text">Fortune Cookie</span>
+      <span class="tooltip-text">Explore</span>
     </div>
     <div class="nav-item">
       <a href="{{ url_for('meditation') }}">
-        <img src="{{ url_for('static', filename='images/relaxed.png') }}" alt="Meditation" class="nav-icon" />
+        <img src="{{ url_for('static', filename='images/coffee-cup.png') }}" alt="Meditation" class="nav-icon" />
       </a>
-      <span class="tooltip-text">Calm Sounds</span>
+      <span class="tooltip-text">Support us</span>
     </div>
+    
   </div>
 </nav>
 
@@ -1005,15 +1182,46 @@ body {
       Welcome To <br>
       <span class="randomverse">RandomVerse</span>
       </h1>
-     <div class="hero-buttons">
+     <!-- <div class="hero-buttons">
         <a href="#about-section" class="hero-btn">About Us</a>
         <a href="#container" class="hero-btn">Explore</a>
         <a href="/random" class="hero-btn">Open Random Page</a>
-      </div>
+      </div>-->
+
+      <!-- Info Icon -->
+    <div class="icon-container">
+        <div class="info-icon" onclick="showPopup()">
+          <img src="static/images/open.png" alt="Info" class="info-image">
+        </div>
+    </div>
+
+    <!-- Popup Overlay -->
+    
+        <div class="popup" id="popup">
+            <button class="close-btn" onclick="hidePopup()">&times;</button>
+            
+            <div class="popup-header">
+                <span class="welcome-emoji">🎭</span>
+                <h2 class="popup-title">Welcome to Random Verse</h2>
+                <p class="popup-subtitle">Discover the beauty of poetry</p>
+            </div>
+            
+            <div class="popup-content">
+                <p>Welcome to Random Verse, your gateway to discovering beautiful poetry from around the world. Our curated collection features verses that inspire, provoke thought, and touch the soul.</p>
+                <br>
+                <p>Whether you're seeking inspiration, looking for the perfect quote, or simply want to explore the art of poetry, Random Verse offers you a new discovery with every visit.</p>
+                <br>
+                <p><strong>✨ Explore • Discover • Be Inspired ✨</strong></p>
+            </div>
+        </div>
+    
+
    </div>
   </div>
 
- <div class="container" id="container">
+  
+
+ <div class="portal-container" id="portal-container">
 
         <div class="stars" id="stars"></div>
         
@@ -1058,32 +1266,22 @@ body {
       <h2>About us</h2>
       <br>
       <p>
-        RandomVerse is your pocket-sized escape from the relentless pace of endless scrolling—a sanctuary meticulously
-        crafted to nurture creativity, inspire wonder, and provide a moment of calm amidst the digital storm. We
-        specialize in designing micro-experiences that interrupt the autopilot nature of modern browsing, offering
-        instead a space where serendipity and mindfulness can flourish. Our mission is to reintroduce a sense of magic
-        to the internet, reminding users that technology can be a source of joy, reflection, and meaningful connection
-        rather than just consumption.
-        <span>Playful Discovery</span>
-        We create interactive visuals that respond dynamically to your touch, igniting a sense of curiosity and
-        encouraging exploration in a way that feels organic and delightful. These experiences are designed to draw you
-        in, making you an active participant in a moment of digital wonder rather than a passive observer.
-        <span>Cosmic Whispers</span>
-        Our platform delivers gentle, uplifting messages that feel like fortune cookies from the universe. These
-        thoughtful prompts are intended to inspire reflection, offer encouragement, and provide a brief respite from the
-        noise of everyday life, helping you find clarity and inspiration in unexpected places.
-        <span>Digital Daydreaming</span>
-        RandomVerse provides a safe, pressure-free space where you can pause, create, and let your mind wander. Whether
-        you're sketching a fleeting idea or simply soaking in a moment of calm, this feature allows you to reconnect
-        with your imagination and embrace the joy of unstructured creativity.
-        We are committed to keeping RandomVerse free from the distractions that plague much of the internet today. There
-        are no ads to interrupt your experience, and we deliberately avoid algorithms that dictate what you should see
-        next. Instead, we focus on delivering small, intentional moments that recharge your attention and delight your
-        senses. Our vision is to create a digital haven where you can rediscover the internet as a place of wonder—a
-        space that feels as magical as it did when you first explored it. At RandomVerse, we believe in the power of the
-        in-between: those quiet, often overlooked moments that can bring unexpected joy and a renewed sense of
-        connection to the world around you.
-      </p>
+        Hi Explorers! <br><br>
+       We’re the creators of <strong>RandomVerse</strong>, your quirky corner of the internet built to surprise, 
+       delight, and teleport you into playful portals filled with wonder.  
+       This isn’t just a website—it’s a magical wormhole of randomness created with love and goofiness, 
+       made just for you.
+        <br><br>
+      Ever felt like escaping the same old boring scroll? Here, you’ll enter different "verses"—each one unique, weird, 
+      creative, and totally unexpected. One click, and *bam!* you’re in a new universe.
+      
+      <br><br>
+         At RandomVerse, you’re not just a visitor—you’re an interdimensional traveler! 
+         So go ahead, click that portal, and let the madness unfold.
+        <br><br>
+        Let us know which one was your favorite!
+
+        
     </div>
   </div>
 
@@ -1324,7 +1522,28 @@ body {
             });
         }, 8000);
 
- 
+
+function showPopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.add('show');
+}
+
+function hidePopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.remove('show');
+}
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        hidePopup();
+    }
+});
+
+   
+        
+
+  
   </script>
 
  <div id="loading-screen" style="display: none;">
