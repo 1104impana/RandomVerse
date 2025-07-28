@@ -1179,6 +1179,28 @@ body {
     60% { transform: translateY(-5px); }
 }
 
+#image-popup {
+  position: absolute;
+  display: none;
+  background-color: rgba(48, 47, 47, 0.897);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  max-width: 100px;
+  word-wrap: break-word;
+  font-size: 14px;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Adjust for small screens */
+@media (max-width: 480px) {
+  #image-popup {
+    max-width: 80vw;
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+}
 
   </style>
 
@@ -1291,20 +1313,38 @@ body {
                 <img 
                     src="{{ url_for('static', filename='images/relaxed.png') }}" 
                     class="floating-img" 
-                    alt="witch" 
+                    alt="meditate" 
                     data-description="Fly through the haunted skies in this spooky broom game!" 
                     onclick="showImagePopup(this)"
                 />
                 <img 
                     src="{{ url_for('static', filename='images/cook4.png') }}" 
                     class="floating-img" 
+                    alt="cookie" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+                 <img 
+                    src="{{ url_for('static', filename='images/starry-night.png') }}" 
+                    class="floating-img" 
+                    alt="paint" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+                 <img 
+                    src="{{ url_for('static', filename='images/crystal-ball.png') }}" 
+                    class="floating-img" 
+                    alt="fortune" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+                 <img 
+                    src="{{ url_for('static', filename='images/snake.png') }}" 
+                    class="floating-img" 
                     alt="witch" 
                     data-description="Fly through the haunted skies in this spooky broom game!" 
                     onclick="showImagePopup(this)"
                 />
-                <img src="{{ url_for('static', filename='images/starry-night.png') }}" class="floating-img" alt="paint" />
-                <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" class="floating-img" alt="ball" />
-                <div class="floating-img" style="background-image: url('images/image6.jpg');"></div>
                 <div class="floating-img" style="background-image: url('images/image7.jpg');"></div>
                 <div class="floating-img" style="background-image: url('images/image8.jpg');"></div>
                 <div class="floating-img" style="background-image: url('images/image9.jpg');"></div>
@@ -1614,35 +1654,57 @@ document.addEventListener('keydown', function(e) {
 });
 
    
-        
-
-   function hidePopup() {
-    document.getElementById("popup").style.display = "none";
-  }
 
   //for images//
 
-   function showImagePopup(img) {
-    const popup = document.getElementById("image-popup");
-    const desc = img.getAttribute("data-description");
+  function showImagePopup(img) {
+  const popup = document.getElementById("image-popup");
+  const desc = img.getAttribute("data-description");
+  popup.innerText = desc;
 
-    popup.innerText = desc;
+  const rect = img.getBoundingClientRect();
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
 
-    const rect = img.getBoundingClientRect();
+  popup.style.display = "block";
+  popup.style.maxWidth = "250px"; // Ensure width is capped
 
-    popup.style.left = (rect.left + window.scrollX + img.offsetWidth + 10) + "px";
-    popup.style.top = (rect.top + window.scrollY) + "px";
-    popup.style.display = "block";
+  // First set off-screen to measure actual popup width
+  popup.style.left = "-9999px";
+  popup.style.top = "-9999px";
+
+  // Measure actual width
+  const popupWidth = popup.offsetWidth;
+  const popupHeight = popup.offsetHeight;
+
+  // Default: right of image
+  let top = rect.top + scrollTop;
+  let left = rect.left + scrollLeft + img.offsetWidth + 10;
+
+  // If it goes off the right edge, move it to the left
+  if (left + popupWidth > window.innerWidth) {
+    left = rect.left + scrollLeft - popupWidth - 10;
   }
 
-  // Optional: Hide when clicking anywhere else
-  document.addEventListener("click", function (e) {
-    const popup = document.getElementById("image-popup");
-    if (!e.target.classList.contains("floating-img")) {
-      popup.style.display = "none";
-    }
-  });
+  // If it goes off the left edge, center above the image
+  if (left < 0) {
+    left = rect.left + scrollLeft + (img.offsetWidth / 2) - (popupWidth / 2);
+    top = rect.top + scrollTop - popupHeight - 10;
+  }
 
+  popup.style.left = `${left}px`;
+  popup.style.top = `${top}px`;
+}
+// Hide popup when clicking outside
+document.addEventListener("click", function (e) {
+  const popup = document.getElementById("image-popup");
+  const isImg = e.target.classList.contains("floating-img");
+  const isPopup = popup.contains(e.target);
+
+  if (!isImg && !isPopup) {
+    popup.style.display = "none";
+  }
+});
 
   </script>
 
