@@ -32,13 +32,15 @@ canvas {
   left: 0;
   width: 100%;
   height: 100%;
-  background:
-    linear-gradient(rgb(0, 0, 0, 0.8), rgb(0, 0, 0, 0.8)),
-    url("../images/9078.jpg") no-repeat center center;
+  background-image: url('/static/images/9078.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
   z-index: 0;
   pointer-events: auto;
+  opacity: 0.8; /* Replaces the linear-gradient overlay for better compatibility */
 }
+
 
 #paintCanvas {
   position: absolute;
