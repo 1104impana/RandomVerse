@@ -36,11 +36,14 @@ canvas {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  background-color: #1a1a1a; /* Fallback color for debugging */
   z-index: 0;
   pointer-events: auto;
-  opacity: 0.8; /* Replaces the linear-gradient overlay for better compatibility */
+  opacity: 0.8;
+  -webkit-background-size: cover; /* Vendor prefix for older Android browsers */
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
-
 
 #paintCanvas {
   position: absolute;
