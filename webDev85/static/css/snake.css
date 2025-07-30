@@ -18,7 +18,7 @@
     align-items: center;
  }
  #board{
-    background: linear-gradient(rgb(15, 13, 13) );
+    background: transparent;
     width: 90vmin;
     height: 92vmin;
     border : 3px solid white;
@@ -49,14 +49,14 @@
 
 .head{
     background: linear-gradient(rgb(198, 3, 198));
-    border: 2px solid rgb(34, 4, 34); 
+    border: .25vmin solid rgb(34, 4, 34); 
     transform: scale(1.02);
     border-radius: 9px;
 }
 
 .snake{
     background-color: rgb(198, 3, 198);
-    border: .25vmin solid white;
+    border: .25vmin solid black;
     border-radius: 12px;
 }
 

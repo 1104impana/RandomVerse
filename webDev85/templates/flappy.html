@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: black;
+
+            font-family: 'Creepster', cursive, Arial, sans-serif;
+            animation: spookyGlow 3s ease-in-out infinite alternate;
+        }
+    /*         
+            @keyframes spookyGlow {
+                0% { background: linear-gradient(to bottom, #1a0a2e, #16213e, #0f3460); }
+                100% { background: linear-gradient(to bottom, #2d1b4e, #1e2951, #153a6f); }
+            } */
+        
+        #gameContainer {
+            text-align: center;
+            background: rgba(20, 20, 30, 0.9);
+            border: 3px solid white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(240, 238, 237, 0.5), inset 0 0 20px rgba(0,0,0,0.7);
+        }
+        
+        canvas {
+            border: 3px solid white;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, #1a0a2e, #16213e);
+            box-shadow: 0 0 20px rgba(240, 238,237, 0.3);
+        }
+        
+        #score {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(251, 247, 246, 0.8);
+        }
+        
+        #instructions {
+            margin-top: 10px;
+            color: white;
+            font-size: 14px;
+            text-shadow: 0 0 5px rgba(240, 238, 236, 0.5);
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(20, 20, 30, 0.95);
+            color: white;
+            padding: 25px;
+            border: 2px solid white;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+            box-shadow: 0 0 30px rgba(242, 241, 241, 0.7);
+            text-shadow: 0 0 10px rgba(232, 224, 220, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="score">Score: 0</div>
+        <canvas id="gameCanvas" width="700" height="500"></canvas>
+        <div id="instructions">
+            Press SPACE or click to make the ghost float!<br>
+            Press R to restart when spooked
+        </div>
+        <div class="game-over" id="gameOver">
+            <h2>Game Over!</h2>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <p>Press R to restart</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const gameOverElement = document.getElementById('gameOver');
+        const finalScoreElement = document.getElementById('finalScore');
+
+        // Game variables
+        let gameState = 'playing'; // 'playing' or 'gameOver'
+        let score = 0;
+        let frames = 0;
+        let ghostFloat = 0; // For ghost floating animation
+
+        // Ghost object (formerly bird)
+        const ghost = {
+            x: 80,
+            y: canvas.height / 2,
+            width: 35,
+            height: 40,
+            velocity: 0,
+            gravity: 0.4,
+            jumpPower: -7,
+            
+            update() {
+                if (gameState === 'playing') {
+                    this.velocity += this.gravity;
+                    this.y += this.velocity;
+                    ghostFloat += 0.1; // For floating animation
+                    
+                    // Prevent ghost from going off screen
+                    if (this.y < 0) {
+                        this.y = 0;
+                        this.velocity = 0;
+                    }
+                    if (this.y + this.height > canvas.height) {
+                        this.y = canvas.height - this.height;
+                        this.gameOver();
+                    }
+                }
+            },
+            
+            jump() {
+                if (gameState === 'playing') {
+                    this.velocity = this.jumpPower;
+                }
+            },
+            
+            draw() {
+                const floatOffset = Math.sin(ghostFloat) * 3;
+                const drawY = this.y + floatOffset;
+                
+                // Draw ghost body with glow effect
+                ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+                ctx.shadowBlur = 15;
+                
+                // Ghost body
+                ctx.fillStyle = 'rgba(240, 240, 255, 0.9)';
+                ctx.beginPath();
+                ctx.arc(this.x + this.width/2, drawY + this.height/3, this.width/2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Ghost tail (wavy bottom)
+                ctx.beginPath();
+                ctx.moveTo(this.x + 5, drawY + this.height/2);
+                ctx.lineTo(this.x + 8, drawY + this.height - 5);
+                ctx.lineTo(this.x + 13, drawY + this.height - 8);
+                ctx.lineTo(this.x + 18, drawY + this.height - 2);
+                ctx.lineTo(this.x + 23, drawY + this.height - 7);
+                ctx.lineTo(this.x + 28, drawY + this.height - 3);
+                ctx.lineTo(this.x + this.width - 5, drawY + this.height/2);
+                ctx.arc(this.x + this.width/2, drawY + this.height/3, this.width/2, 0, Math.PI);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Reset shadow
+                ctx.shadowBlur = 0;
+                
+                // Ghost eyes
+                ctx.fillStyle = '#1a0a2e';
+                ctx.beginPath();
+                ctx.arc(this.x + 12, drawY + 12, 4, 0, Math.PI * 2);
+                ctx.arc(this.x + 23, drawY + 12, 4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Spooky eye glow
+                ctx.fillStyle = '#ff6b35';
+                ctx.beginPath();
+                ctx.arc(this.x + 12, drawY + 12, 1.5, 0, Math.PI * 2);
+                ctx.arc(this.x + 23, drawY + 12, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Ghost mouth (spooky)
+                ctx.fillStyle = '#1a0a2e';
+                ctx.beginPath();
+                ctx.arc(this.x + this.width/2, drawY + 22, 3, 0, Math.PI);
+                ctx.fill();
+            },
+            
+            gameOver() {
+                gameState = 'gameOver';
+                gameOverElement.style.display = 'block';
+                finalScoreElement.textContent = score;
+            }
+        };
+
+        // Tombstones array (formerly pipes)
+        const tombstones = [];
+        const tombstoneWidth = 70;
+        const tombstoneGap = 160;
+        const tombstoneSpeed = 1.8;
+
+        function createTombstone() {
+            const minHeight = 60;
+            const maxHeight = canvas.height - tombstoneGap - minHeight;
+            const topHeight = Math.random() * (maxHeight - minHeight) + minHeight;
+            
+            tombstones.push({
+                x: canvas.width,
+                topHeight: topHeight,
+                bottomY: topHeight + tombstoneGap,
+                bottomHeight: canvas.height - (topHeight + tombstoneGap),
+                passed: false
+            });
+        }
+
+        function updateTombstones() {
+            // Create new tombstones
+            if (frames % 140 === 0) { // Slightly slower spawn
+                createTombstone();
+            }
+            
+            // Update existing tombstones
+            for (let i = tombstones.length - 1; i >= 0; i--) {
+                const tombstone = tombstones[i];
+                tombstone.x -= tombstoneSpeed;
+                
+                // Check if ghost passed the tombstone
+                if (!tombstone.passed && tombstone.x + tombstoneWidth < ghost.x) {
+                    tombstone.passed = true;
+                    score++;
+                    scoreElement.textContent = `Score: ${score}`;
+                }
+                
+                // Check collision
+                if (checkCollision(ghost, tombstone)) {
+                    ghost.gameOver();
+                }
+                
+                // Remove tombstones that are off screen
+                if (tombstone.x + tombstoneWidth < 0) {
+                    tombstones.splice(i, 1);
+                }
+            }
+        }
+
+        function checkCollision(ghost, tombstone) {
+            // Check if ghost is horizontally aligned with tombstone
+            if (ghost.x < tombstone.x + tombstoneWidth && ghost.x + ghost.width > tombstone.x) {
+                // Check if ghost hits top or bottom tombstone
+                if (ghost.y < tombstone.topHeight || ghost.y + ghost.height > tombstone.bottomY) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function drawTombstones() {
+            tombstones.forEach(tombstone => {
+                // Draw top tombstone
+                ctx.fillStyle = '#2d2d2d';
+                ctx.fillRect(tombstone.x, 0, tombstoneWidth, tombstone.topHeight);
+                
+                // Top tombstone rounded top
+                ctx.beginPath();
+                ctx.arc(tombstone.x + tombstoneWidth/2, tombstone.topHeight - 20, tombstoneWidth/2, Math.PI, 0);
+                ctx.fill();
+                
+                // Draw bottom tombstone
+                ctx.fillRect(tombstone.x, tombstone.bottomY, tombstoneWidth, tombstone.bottomHeight);
+                
+                // Bottom tombstone rounded top
+                ctx.beginPath();
+                ctx.arc(tombstone.x + tombstoneWidth/2, tombstone.bottomY + 20, tombstoneWidth/2, 0, Math.PI);
+                ctx.fill();
+                
+                // Add spooky details
+                ctx.fillStyle = '#ff6b35';
+                ctx.font = '20px serif';
+                ctx.textAlign = 'center';
+                
+                // RIP text on tombstones
+                if (tombstone.topHeight > 40) {
+                    ctx.fillText('RIP', tombstone.x + tombstoneWidth/2, tombstone.topHeight - 15);
+                }
+                if (tombstone.bottomHeight > 40) {
+                    ctx.fillText('RIP', tombstone.x + tombstoneWidth/2, tombstone.bottomY + 35);
+                }
+                
+                // Tombstone borders/shadows
+                ctx.strokeStyle = '#1a1a1a';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(tombstone.x, 0, tombstoneWidth, tombstone.topHeight);
+                ctx.strokeRect(tombstone.x, tombstone.bottomY, tombstoneWidth, tombstone.bottomHeight);
+            });
+        }
+
+        function drawBackground() {
+            // Spooky night sky gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#1a0a2e');
+            gradient.addColorStop(0.3, '#16213e');
+            gradient.addColorStop(1, '#0f3460');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw spooky moon
+            ctx.fillStyle = '#ffa500';
+            ctx.shadowColor = '#ffa500';
+            ctx.shadowBlur = 20;
+            ctx.beginPath();
+            ctx.arc(320, 80, 25, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            
+            // Draw some bats
+            const batPositions = [
+                {x: 50, y: 120}, {x: 150, y: 80}, {x: 250, y: 140}, 
+                {x: 350, y: 100}, {x: 180, y: 200}
+            ];
+            
+            ctx.fillStyle = '#1a1a1a';
+            batPositions.forEach((bat, index) => {
+                const wingFlap = Math.sin(frames * 0.3 + index) * 3;
+                
+                // Bat body
+                ctx.fillRect(bat.x, bat.y, 8, 4);
+                
+                // Bat wings
+                ctx.beginPath();
+                ctx.moveTo(bat.x - 5, bat.y + 2);
+                ctx.lineTo(bat.x - 8, bat.y + wingFlap);
+                ctx.lineTo(bat.x - 3, bat.y + 1);
+                ctx.lineTo(bat.x, bat.y + wingFlap + 1);
+                ctx.lineTo(bat.x + 3, bat.y + 1);
+                ctx.lineTo(bat.x + 8, bat.y + wingFlap);
+                ctx.lineTo(bat.x + 13, bat.y + 2);
+                ctx.fill();
+            });
+            
+            // Draw spooky fog at bottom
+            // ctx.fillStyle = 'rgba(100, 100, 120, 0.3)';
+            // for (let i = 0; i < 5; i++) {
+            //     ctx.beginPath();
+            //     ctx.arc(i * 100 - 20, canvas.height - 30 + Math.sin(frames * 0.05 + i) * 5, 40, 0, Math.PI);
+            //     ctx.fill();
+            // }
+            
+            // Add some stars
+            ctx.fillStyle = '#ffffff';
+            const stars = [
+                {x: 80, y: 60}, {x: 180, y: 40}, {x: 280, y: 70}, 
+                {x: 120, y: 90}, {x: 300, y: 45}
+            ];
+            
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, 1, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        function gameLoop() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw background
+            drawBackground();
+            
+            if (gameState === 'playing') {
+                frames++;
+                
+                // Update game objects
+                ghost.update();
+                updateTombstones();
+            }
+            
+            // Draw game objects
+            drawTombstones();
+            ghost.draw();
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        function resetGame() {
+            gameState = 'playing';
+            score = 0;
+            frames = 0;
+            ghostFloat = 0;
+            ghost.y = canvas.height / 2;
+            ghost.velocity = 0;
+            tombstones.length = 0;
+            scoreElement.textContent = 'Score: 0';
+            gameOverElement.style.display = 'none';
+        }
+
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                ghost.jump();
+            } else if (e.code === 'KeyR' && gameState === 'gameOver') {
+                resetGame();
+            }
+        });
+
+        canvas.addEventListener('click', () => {
+            ghost.jump();
+        });
+
+        // Start the game
+        gameLoop();
+    </script>
+</body>
+</html>
