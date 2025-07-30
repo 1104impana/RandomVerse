@@ -78,4 +78,45 @@ function closeCookie(position) {
   brokenCookies[position] = false;
 }
 
+
+document.addEventListener("DOMContentLoaded", function () {
+  const nextBtn = document.querySelector('.hero-btn[href*="next_verse"]');
+  const overlay = document.getElementById('transition-overlay');
+  const typewriter = document.getElementById('typewriter-text');
+
+  function typeText(text, element, speed, callback) {
+    let index = 0;
+    function typeChar() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeChar, speed);
+      } else {
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  if (nextBtn && overlay && typewriter) {
+    nextBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      overlay.style.opacity = "1";
+      overlay.style.pointerEvents = "auto";
+      typewriter.textContent = ""; // Clear any previous text
+
+      const fullText = "Travelling to next verse...";
+      const typingSpeed = 80; // in milliseconds
+
+      typeText(fullText, typewriter, typingSpeed, function () {
+        // Redirect after typing completes
+        setTimeout(() => {
+          window.location.href = nextBtn.href;
+        }, 500);
+      });
+    });
+  }
+});
+
  

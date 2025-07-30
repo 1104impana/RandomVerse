@@ -65,3 +65,59 @@
     border: .25vmin solid black;
     border-radius: 8px;
 }
+
+#transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+#typewriter-text {
+  font-size: 5vw; /* Responsive font size */
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+}
+
+#typewriter-text::after {
+  content: '|';
+  position: absolute;
+  right: -0.2em;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 🔧 Optional fine-tuning with media queries */
+@media (min-width: 768px) {
+  #typewriter-text {
+    font-size: 3vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  #typewriter-text {
+    font-size: 2vw;
+  }
+}
+

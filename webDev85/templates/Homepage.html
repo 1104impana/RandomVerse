@@ -79,6 +79,8 @@ body {
   display: inline-block;
   color: #f7f7f7;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  font-size: clamp(3rem, 6vw, 5rem);
+  
 }
 
 .header-container {
@@ -165,19 +167,19 @@ body {
 .about-section {
   color: rgb(202, 197, 197);
   text-align: justify;
-  margin-top: 300px;
-  padding: 80px 15px;
-  margin-bottom: 400px;
+  margin-top: 100px;
+  padding: 50px 50px;
+  
   position: relative;
   z-index: 1;
-  background: linear-gradient(145deg, rgba(17, 111, 219, 0.082), rgba(40, 40, 40, 0.6));
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.966), rgb(0, 0, 0));
   border-radius: 0;
   max-width: 100%;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0);
-  width: 100vw;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0);
+  width: 65vw;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url("{{url_for('static',filename='images/ab.jpg')}}");
+
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -198,9 +200,9 @@ body {
 .about-section .content-wrapper {
   position: relative;
   padding: 40px;
-  background: rgba(15, 15, 15, 0.308);
+  background: rgb(0, 0, 0);
   border-radius: 15px;
-  backdrop-filter: blur(8px);
+  
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -235,17 +237,17 @@ body {
 }
 
 .footer {
-  background: linear-gradient(145deg, rgba(31, 101, 167, 0.164), rgba(50, 50, 50, 0.7));
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.164), rgba(50, 50, 50, 0.7));
   backdrop-filter: blur(8px);
   color: rgba(223, 205, 205, 0.7);
   z-index: 1;
   padding: 80px 0 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background-image: url("{{url_for('static',filename='images/ab.jpg')}}");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   position: relative;
+  width: 100%;
 }
 
 .footer::before {
@@ -344,18 +346,6 @@ body {
   opacity: 0.8;
 }
 
-.card-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 45px;
-  padding: 0 -2px;
-}
-
-.card-col {
-  flex: 0 0 calc(33.333% - 30px);
-  max-width: calc(33.333% - 30px);
-}
 
 /* Navbar */
 .navbar {
@@ -388,12 +378,13 @@ body {
 }
 
 .nav-icon {
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   cursor: pointer;
   transition: transform 0.2s ease;
   min-height: 35px;
   min-width: 35px;
+   margin-top: 10px;
 }
 
 .nav-icon:hover {
@@ -437,15 +428,6 @@ body {
   box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
-
-/* Medium Screens (below 992px) */
-@media (max-width: 992px) {
-  .card-col {
-    flex: 0 0 calc(50% - 30px);
-    max-width: calc(50% - 30px);
-  }
-}
-
 /* Small Screens (Mobile, below 768px) */
 @media (max-width: 768px) {
   
@@ -468,33 +450,6 @@ body {
     padding: 30px;
   }
 
-  .card-col {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
-  .card-row {
-    padding: 0 10px;
-    gap: 30px;
-    flex-direction: column;
-    align-items: stretch; /* Center cards */
-          /* Already there – keeps cards centered horizontally */
-  justify-content: center;
-  margin: 0 auto; /* Center the row itself */
-    width: 100%; /* Ensure it takes full width */
-  }
-
-  .card {
-    margin-bottom: 30px;
-    width: 100%;
-    max-width: 90%;
-    display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 450px;
-  margin-left: auto; /* Push to center */
-    margin-right: auto;
-  }
 
   .social-links {
     gap: 24px;
@@ -510,67 +465,60 @@ body {
   }
 
   .navbar {
-    padding: 15px;
+    padding: 15px 15px;
   }
 
   .nav-left img {
-    height: 50px;
+    height: 60px;
   }
 
-  .nav-icon {
+ .nav-icon {
+    width: clamp(40px, 12vw, 60px);
+    height: clamp(40px, 12vw, 60px);
+  }
+  
+.about-section {
+    width: 95vw;
+    padding: 40px 20px;
+    margin-top: 150px;
+    margin-bottom: 200px;
+    text-align: left;
+  }
+   .popup {
+    width: 85%;
     
-  width: clamp(35px, 10vw, 50px);
-  height: clamp(35px, 10vw, 50px);
-  min-width: unset;
-  min-height: unset;
-
-
+    border-radius: 12px;
+    
+    height: auto;
+    max-height: 60vh;      /* reduced from 70vh to 60vh */
+    padding: 12px;         /* smaller padding */
+    font-size: 13px;
+   
+  }
+ 
+  .popup-title {
+    font-size: 8px;
   }
 
-  .hero-buttons {
-    gap: 25px;
-    flex-direction: column; /* Stack buttons vertically if needed */
-    align-items: center;
+  .popup-subtitle {
+    font-size: 14px;
   }
 
-      .hero-btn {
-        font-size: 1rem;
-        padding: 10px 25px;
-      }
-      .card-text-box {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 150px;
-  background: rgba(0, 0, 0, 0.836);
-  color: #fff;
-  display: flex;
-  flex-direction: column; /* Stack title and description vertically */
-  align-items: flex-end;
-  justify-content: center;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  font-family: 'Open Sans', sans-serif;
-  opacity: 1;
-  transform:none;
-  pointer-events: none;
-  text-align: center; /* Ensure text alignment */
-  padding: 20px; /* Add padding for spacing */
-}
+  .popup-content {
+    font-size: 13px;
+    line-height: 1.4;
+  }
 
-.card-text-box .title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 10px; /* Space between title and description */
-}
-
-.card-text-box .description {
-  display: none;
-}
-
-
-
+  .close-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+  }
+.welcome-emoji {
+    font-size: 6px;
+  }
 
 }
 
@@ -630,6 +578,630 @@ body {
   50% { opacity: 0; }
 }
 
+
+ .portal-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            margin-top: 100px;
+            padding-top: 80px;
+        }
+
+        .floating-images {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .floating-img {
+            position: absolute;
+            width: clamp(30px, 5vw, 60px);
+            height: clamp(30px, 5vw, 60px);
+            border-radius: 8px;
+            opacity: 0.8;
+            animation: float 6s ease-in-out infinite;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0);
+            transition: all 0.3s ease;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .floating-img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+            75% { transform: translateY(-15px) rotate(270deg); }
+        }
+
+        .portal-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(120px, 20vw, 180px);
+            height: clamp(120px, 20vw, 180px);
+            border: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, #667eea 0%, #764ba2 50%, #1e3c72 100%);
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 
+                0 0 30px rgba(170, 102, 234, 0.6),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-size: clamp(12px, 2.5vw, 18px);
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.6); }
+            50% { box-shadow: 0 0 50px rgba(102, 126, 234, 0.9), 0 0 80px rgba(102, 126, 234, 0.4); }
+            100% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.6); }
+        }
+
+        .portal-button:hover:not(.active) {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 
+                0 0 50px rgba(102, 126, 234, 0.8),
+                inset 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .portal-button:active:not(.active) {
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        .portal-button.active {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+            pointer-events: none;
+        }
+
+        .time-travel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            min-width: 100vw;
+            min-height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+            background: #000000;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+
+        .time-travel-overlay.active {
+            opacity: 0.85;
+            pointer-events: all;
+            animation: timeWarp 3s ease-in-out;
+        }
+
+        .game-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Hide by default */
+.hidden {
+  display: none;
+}
+
+/* Popup content box */
+.game-popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+  text-align: center;
+  position: relative;
+}
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+        /* Responsive overlay adjustments */
+        @media screen and (max-width: 768px) {
+            .time-travel-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+            }
+   .floating-img {
+    width: clamp(40px, 12vw, 70px);
+    height: clamp(40px, 12vw, 70px);
+    animation-duration: 8s;
+  }
+
+  .portal-button {
+    width: clamp(100px, 35vw, 140px);
+    height: clamp(100px, 35vw, 140px);
+    font-size: clamp(14px, 5vw, 20px);
+  }
+  .floating-text-container {
+    margin-top: -60px;
+    padding: 0 15px;
+  }
+
+  .floating-text {
+    line-height: 1.3;
+  }
+   .icon-container {
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  .info-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .info-image {
+    width: 100%;
+    height: 100%;
+  }
+}
+        
+
+        @media screen and (max-width: 480px) {
+            .time-travel-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        @media screen and (orientation: landscape) and (max-height: 500px) {
+            .time-travel-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        @keyframes timeWarp {
+            0% { 
+                background: radial-gradient(circle, transparent 0%, #000000 70%);
+                transform: scale(1);
+            }
+            25% { 
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 20%, #000000 80%);
+                transform: scale(1.05);
+            }
+            50% { 
+                background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 10%, rgba(255,255,255,0.1) 30%, #000000 85%);
+                transform: scale(0.95);
+            }
+            75% { 
+                background: radial-gradient(circle, rgba(255,255,255,0.3) 5%, rgba(102, 126, 234, 0.3) 20%, #000000 80%);
+                transform: scale(1.02);
+            }
+            100% { 
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(102, 126, 234, 0.2) 10%, #000000 70%);
+                transform: scale(1);
+            }
+        }
+
+        .travel-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.8);
+            z-index: 101;
+            opacity: 0;
+            text-align: center;
+            line-height: 1.2;
+            pointer-events: none;
+        }
+
+        .travel-text.active {
+            opacity: 1;
+            animation: textGlow 3s ease-in-out;
+        }
+
+        @keyframes textGlow {
+            0% { 
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+                text-shadow: 0 0 20px rgba(255,255,255,0.8);
+            }
+            30% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+                text-shadow: 0 0 40px rgba(102, 126, 234, 1);
+            }
+            70% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+                text-shadow: 0 0 60px rgba(255,255,255,1);
+            }
+            100% { 
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+                text-shadow: 0 0 80px rgba(102, 126, 234, 0.5);
+            }
+        }
+
+        .spinning-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .spinning-elements.active {
+            animation: universeRotate 3s ease-in-out;
+        }
+
+        @keyframes universeRotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.5); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* Unevenly scattered floating elements covering most of the screen */
+        .floating-img:nth-child(1) { top: 5%; left: 12%; animation-delay: 0s; }
+        .floating-img:nth-child(2) { top: 8%; left: 28%; animation-delay: 0.5s; }
+        .floating-img:nth-child(3) { top: 15%; left: 65%; animation-delay: 1s; }
+        .floating-img:nth-child(4) { top: 12%; right: 8%; animation-delay: 1.5s; }
+        .floating-img:nth-child(5) { top: 25%; left: 5%; animation-delay: 2s; }
+        .floating-img:nth-child(6) { top: 30%; left: 18%; animation-delay: 2.5s; }
+        .floating-img:nth-child(7) { top: 22%; right: 22%; animation-delay: 3s; }
+        .floating-img:nth-child(8) { top: 35%; right: 5%; animation-delay: 3.5s; }
+        .floating-img:nth-child(9) { top: 45%; left: 8%; animation-delay: 4s; }
+        .floating-img:nth-child(10) { top: 55%; left: 15%; animation-delay: 4.5s; }
+        .floating-img:nth-child(11) { top: 48%; right: 12%; animation-delay: 5s; }
+        .floating-img:nth-child(12) { top: 62%; right: 25%; animation-delay: 0.2s; }
+        .floating-img:nth-child(13) { bottom: 25%; left: 10%; animation-delay: 0.7s; }
+        .floating-img:nth-child(14) { bottom: 30%; left: 35%; animation-delay: 1.2s; }
+        .floating-img:nth-child(15) { bottom: 18%; right: 15%; animation-delay: 1.7s; }
+        .floating-img:nth-child(16) { bottom: 12%; right: 35%; animation-delay: 2.2s; }
+        .floating-img:nth-child(17) { bottom: 8%; left: 25%; animation-delay: 2.7s; }
+        .floating-img:nth-child(18) { bottom: 5%; right: 8%; animation-delay: 3.2s; }
+        .floating-img:nth-child(19) { top: 18%; left: 45%; animation-delay: 3.7s; }
+        .floating-img:nth-child(20) { bottom: 35%; left: 58%; animation-delay: 4.2s; }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .floating-img:nth-child(1) { top: 3%; left: 8%; }
+            .floating-img:nth-child(2) { top: 6%; left: 25%; }
+            .floating-img:nth-child(3) { top: 12%; right: 15%; }
+            .floating-img:nth-child(4) { top: 9%; right: 5%; }
+            .floating-img:nth-child(5) { top: 20%; left: 3%; }
+            .floating-img:nth-child(6) { top: 25%; left: 15%; }
+            .floating-img:nth-child(7) { top: 18%; right: 18%; }
+            .floating-img:nth-child(8) { top: 32%; right: 3%; }
+            .floating-img:nth-child(9) { top: 40%; left: 5%; }
+            .floating-img:nth-child(10) { top: 50%; left: 12%; }
+            .floating-img:nth-child(11) { top: 45%; right: 8%; }
+            .floating-img:nth-child(12) { top: 58%; right: 20%; }
+            .floating-img:nth-child(13) { bottom: 20%; left: 8%; }
+            .floating-img:nth-child(14) { bottom: 25%; left: 30%; }
+            .floating-img:nth-child(15) { bottom: 15%; right: 12%; }
+            .floating-img:nth-child(16) { bottom: 10%; right: 30%; }
+            .floating-img:nth-child(17) { bottom: 6%; left: 20%; }
+            .floating-img:nth-child(18) { bottom: 3%; right: 5%; }
+            .floating-img:nth-child(19) { top: 15%; left: 40%; }
+            .floating-img:nth-child(20) { bottom: 30%; right: 45%; }
+        }
+
+        @media (max-width: 480px) {
+            .floating-img:nth-child(1) { top: 2%; left: 5%; }
+            .floating-img:nth-child(2) { top: 5%; left: 22%; }
+            .floating-img:nth-child(3) { top: 10%; right: 12%; }
+            .floating-img:nth-child(4) { top: 7%; right: 3%; }
+            .floating-img:nth-child(5) { top: 18%; left: 2%; }
+            .floating-img:nth-child(6) { top: 22%; left: 12%; }
+            .floating-img:nth-child(7) { top: 16%; right: 15%; }
+            .floating-img:nth-child(8) { top: 28%; right: 2%; }
+            .floating-img:nth-child(9) { top: 38%; left: 3%; }
+            .floating-img:nth-child(10) { top: 48%; left: 8%; }
+            .floating-img:nth-child(11) { top: 42%; right: 5%; }
+            .floating-img:nth-child(12) { top: 55%; right: 18%; }
+            .floating-img:nth-child(13) { bottom: 18%; left: 5%; }
+            .floating-img:nth-child(14) { bottom: 22%; left: 25%; }
+            .floating-img:nth-child(15) { bottom: 12%; right: 8%; }
+            .floating-img:nth-child(16) { bottom: 8%; right: 25%; }
+            .floating-img:nth-child(17) { bottom: 4%; left: 15%; }
+            .floating-img:nth-child(18) { bottom: 2%; right: 3%; }
+            .floating-img:nth-child(19) { top: 12%; left: 35%; }
+            .floating-img:nth-child(20) { bottom: 25%; right: 40%; }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    z-index: 1000;
+}
+
+
+
+.info-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  
+  background: none; /* Remove background color */
+  padding: 0;
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+@keyframes wiggle {
+  0%   { transform: rotate(0deg) translateX(0); }
+  15%  { transform: rotate(-5deg) translateX(-2px); }
+  30%  { transform: rotate(5deg) translateX(2px); }
+  45%  { transform: rotate(-5deg) translateX(-2px); }
+  60%  { transform: rotate(5deg) translateX(2px); }
+  75%  { transform: rotate(-3deg) translateX(-1px); }
+  90%  { transform: rotate(3deg) translateX(1px); }
+  100% { transform: rotate(0deg) translateX(0); }
+}
+
+
+  
+
+.info-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or "cover" if you want full fill */
+  animation: wiggle 1.2s infinite;
+  transform-origin: center center;
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.info-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.info-icon::before {
+   
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.popup {
+    background: rgb(0, 0, 0);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    display: none;
+}
+
+.popup.show {
+    display: block;
+    animation: popupIn 0.3s ease-out forwards;
+}
+.image-popup {
+  position: absolute;
+  background-color: white;
+  color: black;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: none;
+  z-index: 10000;
+  max-width: 200px;
+  font-size: 14px;
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #8a01ca;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    color: #5c02a7;
+    background: #f8f9fa;
+}
+
+.popup-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.popup-title {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ffffff, #875db1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.popup-subtitle {
+    color: #ffffff;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.popup-content {
+    color: #ffffff;
+    line-height: 1.6;
+    font-size: 15px;
+    text-align: center;
+}
+
+.welcome-emoji {
+    font-size: 40px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popupIn {
+    from { 
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    to { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+.demo-content {
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+}
+
+.demo-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.demo-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.arrow {
+    position: fixed;
+    top: 80px;
+    right: 80px;
+    color: white;
+    font-size: 24px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+#image-popup {
+  position: absolute;
+  display: none;
+  background-color: rgba(48, 47, 47, 0.897);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  max-width: 100px;
+  word-wrap: break-word;
+  font-size: 14px;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Adjust for small screens */
+@media (max-width: 480px) {
+  #image-popup {
+    max-width: 80vw;
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+}
+
   </style>
 
 </head>
@@ -637,38 +1209,40 @@ body {
 <body style="background-color: rgb(0, 0, 0);">
  <nav class="navbar">
   <div class="nav-left">
+    
+  </div>
+ 
+  <div class="nav-right">
+    
+
     <div class="nav-item">
       <a href="{{ url_for('home') }}">
-        <img src="{{ url_for('static', filename='images/witch.png') }}" alt="icon" class="responsive-img" />
+        <img src="{{ url_for('static', filename='images/witch.png') }}" alt="Home" class="nav-icon" />
       </a>
       <span class="tooltip-text">Home</span>
     </div>
-  </div>
-  <div class="nav-right">
+
     <div class="nav-item">
-      <a href="{{ url_for('ripple') }}">
-        <img src="{{ url_for('static', filename='images/galaxy.png') }}" alt="Paint" class="nav-icon" />
-      </a>
-      <span class="tooltip-text">Paint</span>
-    </div>
+  <a href="#about-section">
+    <img src="{{ url_for('static', filename='images/about-us.png') }}" alt="About Us" class="nav-icon" />
+  </a>
+  <span class="tooltip-text">About Us</span>
+</div>
+    
+   <!-- 🟢 Explore -->
     <div class="nav-item">
-      <a href="{{ url_for('crystal') }}">
-        <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" alt="Crystal" class="nav-icon" />
+      <a href="#portal-container">
+        <img src="{{ url_for('static', filename='images/blackhole.png') }}" alt="Explore" class="nav-icon" />
       </a>
-      <span class="tooltip-text">Crystal Ball</span>
-    </div>
-    <div class="nav-item">
-      <a href="{{ url_for('fortune') }}">
-        <img src="{{ url_for('static', filename='images/fornav.png') }}" alt="Fortune" class="nav-icon" />
-      </a>
-      <span class="tooltip-text">Fortune Cookie</span>
+      <span class="tooltip-text">Explore</span>
     </div>
     <div class="nav-item">
       <a href="{{ url_for('meditation') }}">
-        <img src="{{ url_for('static', filename='images/relaxed.png') }}" alt="Meditation" class="nav-icon" />
+        <img src="{{ url_for('static', filename='images/coffee-cup.png') }}" alt="Meditation" class="nav-icon" />
       </a>
-      <span class="tooltip-text">Calm Sounds</span>
+      <span class="tooltip-text">Support us</span>
     </div>
+    
   </div>
 </nav>
 
@@ -679,87 +1253,146 @@ body {
       Welcome To <br>
       <span class="randomverse">RandomVerse</span>
       </h1>
-     <div class="hero-buttons">
+     <!-- <div class="hero-buttons">
         <a href="#about-section" class="hero-btn">About Us</a>
-        <a href="#card-section" class="hero-btn">Explore</a>
+        <a href="#container" class="hero-btn">Explore</a>
         <a href="/random" class="hero-btn">Open Random Page</a>
-      </div>
+      </div>-->
+
+      <!-- Info Icon -->
+    <div class="icon-container">
+        <div class="info-icon" onclick="showPopup()">
+          <img src="static/images/open.png" alt="Info" class="info-image">
+        </div>
+    </div>
+
+    <!-- Popup Overlay -->
+    
+        <div class="popup" id="popup">
+            <button class="close-btn" onclick="hidePopup()">&times;</button>
+            
+            <div class="popup-header">
+                <span class="welcome-emoji">🎭</span>
+                <h2 class="popup-title">Welcome to Random Verse</h2>
+                <p class="popup-subtitle">Enter the portal of randomness</p>
+            </div>
+            
+            <div class="popup-content">
+                <p>Welcome to Random Verse, your easy escape. Our curated collection features verses that lighten your stress and make you smile.</p>
+                <br>
+                <p>Random Verse offers you a new discovery with every visit.</p>
+                <br>
+                <p>Now, what are you waiting for?! click the explore button below and begin your journey..</p>
+                <a href="#portal-container" onclick="hidePopup()">
+  <img src="{{ url_for('static', filename='images/blackhole.png') }}" alt="Explore" class="nav-icon" />
+</a>
+            </div>
+        </div>
+    
+
    </div>
   </div>
 
-  <div class="container card-container"id="card-section">
-    <div class="card-row">
-      <div class="card-col">
-        <a href="{{url_for('crystal')}}" style="text-decoration: none;">
-          <div class="card">
-            <img src="{{url_for('static',filename='images/fortune.jpg')}}" style="width:100%;">
-            <div class="card-text-box">
-              <div class="title">Fortune Teller</div>
-              <div class="description">Enter a magical realm where the mysterious witch gazes into her glowing fortune ball and answers your questions with eerie wisdom and cryptic charm.</div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="card-col">
-        <a href="{{ url_for('ripple') }}" style="text-decoration: none;">
-          <div class="card">
-            <img src="{{url_for('static',filename='images/paint.jpeg')}}" style="width:100%;">
-            <div class="card-text-box">
-              <div class="title">ColorTide</div>
-              <div class="description">Unleash your creativity on a cosmic ripple canvas. Simple, smooth, and flowing—paint your imagination</div>
-            </div>
-          </div>
-        </a>
-      </div>
+  
 
-      <div class="card-col">
-        <a href="{{url_for('meditation')}}" style="text-decoration: none;">
-          <div class="card">
-            <img src="{{url_for('static',filename='images/med.jpeg')}}" style="width:100%;">
-            <div class="card-text-box">
-              <div class="title">Nature’s Whisper</div>
-              <div class="description">Escape the noise, embrace the stillness.
-Your peaceful pocket of nature awaits.
+ <div class="portal-container" id="portal-container">
 
-</div>
+        <div class="stars" id="stars"></div>
+        
+        <div class="spinning-elements" id="spinningElements">
+            <div class="floating-images">
+                <!-- Replace with your own images -->
+                <img 
+                    src="{{ url_for('static', filename='images/flyingwitch.png') }}" 
+                    class="floating-img" 
+                    alt="witch" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+  
+                <img 
+                    src="{{ url_for('static', filename='images/relaxed.png') }}" 
+                    class="floating-img" 
+                    alt="meditate" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+                <img 
+                    src="{{ url_for('static', filename='images/cook4.png') }}" 
+                    class="floating-img" 
+                    alt="cookie" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+                 <img 
+                    src="{{ url_for('static', filename='images/starry-night.png') }}" 
+                    class="floating-img" 
+                    alt="paint" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+                 <img 
+                    src="{{ url_for('static', filename='images/crystal-ball.png') }}" 
+                    class="floating-img" 
+                    alt="fortune" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+                 <img 
+                    src="{{ url_for('static', filename='images/snake.png') }}" 
+                    class="floating-img" 
+                    alt="witch" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
+                <div class="floating-img" style="background-image: url('images/image7.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image8.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image9.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image10.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image11.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image12.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image13.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image14.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image15.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image16.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image17.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image18.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image19.jpg');"></div>
+                <div class="floating-img" style="background-image: url('images/image20.jpg');"></div>
             </div>
-          </div>
-        </a>
-      </div>
+        </div>
+
+        <button class="portal-button" id="portalBtn">
+            ENTER<br>PORTAL
+        </button>
+
+        <div class="time-travel-overlay" id="overlay"></div>
+        <div class="travel-text" id="travelText">
+            TRAVELLING TO<br>A RANDOM VERSE
+        </div>
     </div>
-  </div>
-
+   <div id="image-popup" class="image-popup"></div>
   <div class="about-section" id="about-section">
     <div class="content-wrapper">
       <h2>About us</h2>
       <br>
       <p>
-        RandomVerse is your pocket-sized escape from the relentless pace of endless scrolling—a sanctuary meticulously
-        crafted to nurture creativity, inspire wonder, and provide a moment of calm amidst the digital storm. We
-        specialize in designing micro-experiences that interrupt the autopilot nature of modern browsing, offering
-        instead a space where serendipity and mindfulness can flourish. Our mission is to reintroduce a sense of magic
-        to the internet, reminding users that technology can be a source of joy, reflection, and meaningful connection
-        rather than just consumption.
-        <span>Playful Discovery</span>
-        We create interactive visuals that respond dynamically to your touch, igniting a sense of curiosity and
-        encouraging exploration in a way that feels organic and delightful. These experiences are designed to draw you
-        in, making you an active participant in a moment of digital wonder rather than a passive observer.
-        <span>Cosmic Whispers</span>
-        Our platform delivers gentle, uplifting messages that feel like fortune cookies from the universe. These
-        thoughtful prompts are intended to inspire reflection, offer encouragement, and provide a brief respite from the
-        noise of everyday life, helping you find clarity and inspiration in unexpected places.
-        <span>Digital Daydreaming</span>
-        RandomVerse provides a safe, pressure-free space where you can pause, create, and let your mind wander. Whether
-        you're sketching a fleeting idea or simply soaking in a moment of calm, this feature allows you to reconnect
-        with your imagination and embrace the joy of unstructured creativity.
-        We are committed to keeping RandomVerse free from the distractions that plague much of the internet today. There
-        are no ads to interrupt your experience, and we deliberately avoid algorithms that dictate what you should see
-        next. Instead, we focus on delivering small, intentional moments that recharge your attention and delight your
-        senses. Our vision is to create a digital haven where you can rediscover the internet as a place of wonder—a
-        space that feels as magical as it did when you first explored it. At RandomVerse, we believe in the power of the
-        in-between: those quiet, often overlooked moments that can bring unexpected joy and a renewed sense of
-        connection to the world around you.
-      </p>
+        Hi Explorers! <br><br>
+       We’re the creators of <strong>RandomVerse</strong>, your quirky corner of the internet built to surprise, 
+       delight, and teleport you into playful portals filled with wonder.  
+       This isn’t just a website—it’s a magical wormhole of randomness created with love and goofiness, 
+       made just for you.
+        <br><br>
+      Ever felt like escaping the same old boring scroll? Here, you’ll enter different "verses"—each one unique, weird, 
+      creative, and totally unexpected. One click, and *bam!* you’re in a new universe.
+      
+      <br><br>
+         At RandomVerse, you’re not just a visitor—you’re an interdimensional traveler! 
+         So go ahead, click that portal, and let the madness unfold.
+        <br><br>
+        Let us know which one was your favorite!
+
+        
     </div>
   </div>
 
@@ -795,6 +1428,8 @@ Your peaceful pocket of nature awaits.
       </div>
     </div>
   </footer>
+
+  
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
@@ -932,8 +1567,145 @@ Your peaceful pocket of nature awaits.
 
 
 
+ // Create random stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
 
- 
+        // Time travel animation
+        function startTimeTravel() {
+            const overlay = document.getElementById('overlay');
+            const travelText = document.getElementById('travelText');
+            const spinningElements = document.getElementById('spinningElements');
+            const portalBtn = document.getElementById('portalBtn');
+
+            // Check if animation is already running
+            if (portalBtn.classList.contains('active')) {
+                return;
+            }
+
+            // Disable button and hide it during animation
+            portalBtn.disabled = true;
+            portalBtn.classList.add('active');
+
+            // Start animations
+            overlay.classList.add('active');
+            travelText.classList.add('active');
+            spinningElements.classList.add('active');
+
+            // Reset after animation completes
+            setTimeout(() => {
+                overlay.classList.remove('active');
+                travelText.classList.remove('active');
+                spinningElements.classList.remove('active');
+                portalBtn.classList.remove('active');
+                portalBtn.disabled = false;
+            }, 3000);
+
+            setTimeout(() => {
+        window.location.href = "/random";
+      }, 2000); // Wait 2 seconds then go to page
+    
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            const portalBtn = document.getElementById('portalBtn');
+            if (portalBtn) {
+                portalBtn.addEventListener('click', startTimeTravel);
+            }
+        });
+
+        // Add some random movement to floating elements
+        setInterval(() => {
+            const floatingImgs = document.querySelectorAll('.floating-img');
+            floatingImgs.forEach(img => {
+                const randomX = (Math.random() - 0.5) * 20;
+                const randomY = (Math.random() - 0.5) * 20;
+                img.style.transform += ` translate(${randomX}px, ${randomY}px)`;
+            });
+        }, 8000);
+
+
+function showPopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.add('show');
+}
+
+function hidePopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.remove('show');
+}
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        hidePopup();
+    }
+});
+
+   
+
+  //for images//
+
+  function showImagePopup(img) {
+  const popup = document.getElementById("image-popup");
+  const desc = img.getAttribute("data-description");
+  popup.innerText = desc;
+
+  const rect = img.getBoundingClientRect();
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+
+  popup.style.display = "block";
+  popup.style.maxWidth = "250px"; // Ensure width is capped
+
+  // First set off-screen to measure actual popup width
+  popup.style.left = "-9999px";
+  popup.style.top = "-9999px";
+
+  // Measure actual width
+  const popupWidth = popup.offsetWidth;
+  const popupHeight = popup.offsetHeight;
+
+  // Default: right of image
+  let top = rect.top + scrollTop;
+  let left = rect.left + scrollLeft + img.offsetWidth + 10;
+
+  // If it goes off the right edge, move it to the left
+  if (left + popupWidth > window.innerWidth) {
+    left = rect.left + scrollLeft - popupWidth - 10;
+  }
+
+  // If it goes off the left edge, center above the image
+  if (left < 0) {
+    left = rect.left + scrollLeft + (img.offsetWidth / 2) - (popupWidth / 2);
+    top = rect.top + scrollTop - popupHeight - 10;
+  }
+
+  popup.style.left = `${left}px`;
+  popup.style.top = `${top}px`;
+}
+// Hide popup when clicking outside
+document.addEventListener("click", function (e) {
+  const popup = document.getElementById("image-popup");
+  const isImg = e.target.classList.contains("floating-img");
+  const isPopup = popup.contains(e.target);
+
+  if (!isImg && !isPopup) {
+    popup.style.display = "none";
+  }
+});
+
   </script>
 
  <div id="loading-screen" style="display: none;">
