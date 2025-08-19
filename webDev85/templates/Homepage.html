@@ -57,7 +57,7 @@ body {
   color: white;
   z-index: 0;
   overflow: hidden;
-  background-image: url("{{url_for('static',filename='images/black1.jpg')}}");
+  background-image: url("{{url_for('static',filename='images/bgfinal.png')}}");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -71,7 +71,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.37);
+  background: rgba(0, 0, 0, 0.116);
   z-index: 0;
 }
 
@@ -1639,11 +1639,13 @@ body {
 function showPopup() {
     const popup = document.getElementById('popup');
     popup.classList.add('show');
+    
 }
 
 function hidePopup() {
     const popup = document.getElementById('popup');
     popup.classList.remove('show');
+    
 }
 
 // Close popup with Escape key
@@ -1700,7 +1702,7 @@ document.addEventListener("click", function (e) {
   const popup = document.getElementById("image-popup");
   const isImg = e.target.classList.contains("floating-img");
   const isPopup = popup.contains(e.target);
-
+ 
   if (!isImg && !isPopup) {
     popup.style.display = "none";
   }
