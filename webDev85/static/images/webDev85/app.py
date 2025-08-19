@@ -91,10 +91,6 @@ def meditation():
 def snake():
     return render_template('snake.html', current_file='snake.html')
 
-@app.route('/flappy')
-def flappy():
-    return render_template('flappy.html',current_file='flappy.html')
-
 # Function to call Groq API
 def get_crystal_ball_llm_response(user_question):
     headers = {

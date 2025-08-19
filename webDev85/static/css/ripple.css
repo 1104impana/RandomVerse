@@ -317,3 +317,59 @@ canvas {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>') no-repeat center center;
   background-size: 20px 20px;
 }
+
+#transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+#typewriter-text {
+  font-size: 5vw; /* Responsive font size */
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+}
+
+#typewriter-text::after {
+  content: '|';
+  position: absolute;
+  right: -0.2em;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 🔧 Optional fine-tuning with media queries */
+@media (min-width: 768px) {
+  #typewriter-text {
+    font-size: 3vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  #typewriter-text {
+    font-size: 2vw;
+  }
+}
+
