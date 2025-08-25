@@ -16,33 +16,14 @@
         <span class="tooltip-text">Home</span>
       </div>
     </div>
-    <div class="nav-right">
-      <div class="nav-item">
-        <a href="{{ url_for('ripple') }}">
-          <img src="{{ url_for('static', filename='images/galaxy.png') }}" alt="Paint" class="nav-icon" />
-        </a>
-        <span class="tooltip-text">Paint</span>
-      </div>
-      <div class="nav-item">
-        <a href="{{ url_for('crystal') }}">
-          <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" alt="Crystal" class="nav-icon" />
-        </a>
-        <span class="tooltip-text">Crystal Ball</span>
-      </div>
-      <div class="nav-item">
-        <a href="{{ url_for('fortune') }}">
-          <img src="{{ url_for('static', filename='images/fornav.png') }}" alt="Fortune" class="nav-icon" />
-        </a>
-        <span class="tooltip-text">Fortune Cookie</span>
-      </div>
-      <div class="nav-item">
-        <a href="{{ url_for('meditation') }}">
-          <img src="{{ url_for('static', filename='images/relaxed.png') }}" alt="Meditation" class="nav-icon" />
-        </a>
-        <span class="tooltip-text">Calm Sounds</span>
-      </div>
-    </div>
+    
   </nav>
+
+  <!-- 🎨 Hint Box -->
+  <div class="hint-box">
+    Paint away!<br>
+    Layer colours, scribble and have fun !!
+  </div>
 
   <div class="bg-image"></div> 
   <canvas id="paintCanvas"></canvas>

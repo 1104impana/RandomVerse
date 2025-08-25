@@ -120,26 +120,30 @@ canvas {
 
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 25px;
-  background-color: #00000018;
+  flex-direction: column;       /* stack items vertically */
+  justify-content: flex-start;  /* align from top */
+  align-items: center;          /* center horizontally */
+  width: 80px;                  /* sidebar width */
+  height: 100vh;                /* full screen height */
+  background-color: #00000023;
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   z-index: 1000;
   pointer-events: auto;
+  padding: 20px 0;
 }
 
 .nav-left img {
   height: 50px;
+  margin-bottom: 30px;          /* space below logo */
 }
 
 .nav-right {
   display: flex;
+  flex-direction: column;       /* stack icons vertically */
   align-items: center;
-  gap: 25px;
+  gap: 25px;                    /* space between icons */
 }
 
 .nav-right a {
@@ -351,6 +355,23 @@ canvas {
     font-size: 2vw;
   }
 }
+
+.hint-box {
+  position: absolute;
+  top: 20px;
+  left: 75px;
+  background: rgba(43, 40, 40, 0.459); /* translucent */
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+  z-index: 999; /* stays on top */
+  backdrop-filter: blur(4px); /* makes it glassy */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
 
 .next-verse-btn {
   position: fixed;
