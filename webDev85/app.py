@@ -170,7 +170,8 @@ def get_fortune_llm():
         fortune = get_fortune_cookie_response()
         return jsonify({"message": fortune})
     except Exception as e:
-        return jsonify({"message": "Fortune cookie is empty today."}), 500
+     print("FORTUNE ERROR:", e)   # add this line
+     return jsonify({"message": str(e)}), 500
 
 
 
