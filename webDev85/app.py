@@ -101,7 +101,7 @@ def get_crystal_ball_llm_response(user_question):
     prompt = f"You are a sarcastic and funny crystal ball oracle. When answering the user's question, reply with witty sarcasm, humor ansd some roasts. Keep it short and clever. answer in 1 sentence and less than 10 words. Question: '{user_question}'"
 
     payload = {
-        "model": "llama3-8b-8192",  # You can swap the model here if needed
+        "model": "llama-3.1-8b-instant",  # You can swap the model here if needed
         "messages": [
             {"role": "user", "content": prompt}
         ],
