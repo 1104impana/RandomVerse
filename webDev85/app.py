@@ -129,7 +129,7 @@ def get_fortune_cookie_response():
     )
 
     payload = {
-        "model": "llama3-8b-8192",  # You can swap the model here if needed
+        "model": "llama-3.1-8b-instant",  # You can swap the model here if needed
         "messages": [
             {"role": "user", "content": prompt}
         ],
