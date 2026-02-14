@@ -86,15 +86,12 @@ canvas {
     padding: 8px 15px;
   }
   
-  .color, .eraser, .reset {
+  .color, .eraser, .reset,.downloadBtn {
     width: 25px;
     height: 25px;
   }
   
-   #downloadBtn {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
+   
 }
 
 @media (max-width: 400px) {
@@ -102,13 +99,13 @@ canvas {
     gap: 8px;
   }
   
-  .color, .eraser, .reset {
+  .color, .eraser, .reset,.downloadBtn {
     width: 22px;
     height: 22px;
   }
 }
 
-.color, .eraser, .reset {
+.color, .eraser, .reset,.downloadBtn {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -128,26 +125,30 @@ canvas {
 
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 25px;
-  background-color: #00000018;
+  flex-direction: column;       /* stack items vertically */
+  justify-content: flex-start;  /* align from top */
+  align-items: center;          /* center horizontally */
+  width: 80px;                  /* sidebar width */
+  height: 100vh;                /* full screen height */
+  background-color: #00000023;
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   z-index: 1000;
   pointer-events: auto;
+  padding: 20px 0;
 }
 
 .nav-left img {
   height: 50px;
+  margin-bottom: 30px;          /* space below logo */
 }
 
 .nav-right {
   display: flex;
+  flex-direction: column;       /* stack icons vertically */
   align-items: center;
-  gap: 25px;
+  gap: 25px;                    /* space between icons */
 }
 
 .nav-right a {
@@ -216,16 +217,12 @@ canvas {
     gap: 6px;
   }
   
-  .color, .eraser, .reset {
+  .color, .eraser, .reset,.downloadBtn {
     width: 25px;
     height: 25px;
   }
   
-   #downloadBtn {
-    padding: 5px 10px;
-    font-size: 13px;
-    min-width: 65px;
-  }
+   
 
    .navbar {
     padding: 15px;
@@ -249,16 +246,12 @@ canvas {
     padding: 6px 8px;
   }
   
-  .color, .eraser, .reset {
+  .color, .eraser, .reset,.downloadBtn {
     width: 22px;
     height: 22px;
   }
   
- #downloadBtn {
-    padding: 4px 8px;
-    font-size: 12px;
-    min-width: 60px;
-  }
+
 }
 
 @media (max-width: 360px) {
@@ -267,16 +260,14 @@ canvas {
     height: 22px;
   }
   
-  #downloadBtn {
-    font-size: 11px;
-    min-width: 55px;
-  }
+  
 }
 
 .controls-wrapper button,
 .controls-wrapper .color,
 .controls-wrapper .eraser,
-.controls-wrapper .reset {
+.controls-wrapper .reset,
+.controls-wrapper .downloadBtn {
   flex: 0 0 auto;
   max-width: 48px;
   max-height: 48px;
@@ -284,30 +275,27 @@ canvas {
 
 
 
-
-
 #downloadBtn {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 6px 35px;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 14px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M12 16.5l4-4h-3v-6h-2v6H8l4 4zM5 20h14v-2H5v2z"/></svg>') no-repeat center center;
+  background-size: 20px 20px;
+  background-color: rgba(255, 255, 255, 0);
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  padding: 0;
   cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  pointer-events: auto;
+  overflow: hidden;
+  color: transparent;
 }
+
 
 #downloadBtn:hover {
-  background-color: white;
-  color: black;
-  transform: scale(1.05);
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" d="M12 16.5l4-4h-3v-6h-2v6H8l4 4zM5 20h14v-2H5v2z"/></svg>') no-repeat center center;
+  background-color: rgb(150, 148, 148);
 }
+
+
 .eraser {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M16.24 3.51l4.25 4.25c.39.39.39 1.02 0 1.41l-8.49 8.49-4.25-4.25c-.39-.39-.39-1.02 0-1.41l8.49-8.49c.39-.39 1.02-.39 1.41 0zm-10.59 12.83l4.25 4.25c.39.39 1.02.39 1.41 0l8.49-8.49-4.25-4.25-8.49 8.49c-.39.39-.39 1.02 0 1.41zm-1.41 1.41l-2.12 2.12c-.39.39-.39 1.02 0 1.41l2.83 2.83c.39.39 1.02.39 1.41 0l2.12-2.12-4.24-4.24z"/></svg>') no-repeat center center;
   background-size: 20px 20px;
@@ -370,6 +358,64 @@ canvas {
 @media (min-width: 1024px) {
   #typewriter-text {
     font-size: 2vw;
+  }
+}
+
+.hint-box {
+  position: absolute;
+  top: 20px;
+  left: 75px;
+  background: rgba(43, 40, 40, 0.459); /* translucent */
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+  z-index: 999; /* stays on top */
+  backdrop-filter: blur(4px); /* makes it glassy */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+
+.next-verse-btn {
+  position: fixed;
+  bottom: 80px; /* Moved above the control bar */
+  right: 20px;
+  z-index: 10000;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.next-verse-btn:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+/* 📱 Responsive adjustments */
+@media (max-width: 600px) {
+  .next-verse-btn {
+    bottom: 85px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .next-verse-btn {
+    bottom: 90px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
   }
 }
 

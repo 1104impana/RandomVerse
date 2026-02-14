@@ -58,6 +58,7 @@ body {
   z-index: 0;
   overflow: hidden;
   
+  background-image: url("{{url_for('static',filename='images/bgfinal.png')}}");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -155,7 +156,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.37);
+  background: rgba(0, 0, 0, 0.116);
   z-index: 0;
 }
 
@@ -1469,7 +1470,13 @@ body {
                     data-description="Fly through the haunted skies in this spooky broom game!" 
                     onclick="showImagePopup(this)"
                 />
-                <div class="floating-img" style="background-image: url('images/image7.jpg');"></div>
+                <img 
+                    src="{{ url_for('static', filename='images/tyrannosaurus-rex.png') }}" 
+                    class="floating-img" 
+                    alt="witch" 
+                    data-description="Fly through the haunted skies in this spooky broom game!" 
+                    onclick="showImagePopup(this)"
+                />
                 <div class="floating-img" style="background-image: url('images/image8.jpg');"></div>
                 <div class="floating-img" style="background-image: url('images/image9.jpg');"></div>
                 <div class="floating-img" style="background-image: url('images/image10.jpg');"></div>
@@ -1763,11 +1770,13 @@ body {
 function showPopup() {
     const popup = document.getElementById('popup');
     popup.classList.add('show');
+    
 }
 
 function hidePopup() {
     const popup = document.getElementById('popup');
     popup.classList.remove('show');
+    
 }
 
 // Close popup with Escape key
@@ -1824,7 +1833,7 @@ document.addEventListener("click", function (e) {
   const popup = document.getElementById("image-popup");
   const isImg = e.target.classList.contains("floating-img");
   const isPopup = popup.contains(e.target);
-
+ 
   if (!isImg && !isPopup) {
     popup.style.display = "none";
   }

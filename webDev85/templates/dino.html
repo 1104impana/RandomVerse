@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Builder</title>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #2c5c2c, #143814);
+            color: #e6e6e6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: rgba(20, 40, 20, 0.9);
+            border: 4px solid #8b4513;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 3px solid #8b4513;
+        }
+        .navbar {
+  display: flex;
+  flex-direction: column;       /* stack items vertically */
+  justify-content: flex-start;  /* align from top */
+  align-items: center;          /* center horizontally */
+  width: 80px;                  /* sidebar width */
+  height: 100vh;                /* full screen height */
+  background-color: #00000023;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: auto;
+  padding: 20px 0;
+}
+
+.nav-left img {
+  height: 50px;
+  margin-bottom: 30px;          /* space below logo */
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: column;       /* stack icons vertically */
+  align-items: center;
+  gap: 25px;                    /* space between icons */
+}
+
+.nav-right a {
+  display: inline-block;
+  pointer-events: auto;
+}
+
+.nav-icon {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-icon:hover {
+  transform: scale(1.15);
+}
+
+@media (hover: none) {
+  .nav-icon:hover {
+    transform: none;
+  }
+}
+
+
+.nav-item {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  max-width: 140px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 8px;
+  position: absolute;
+  z-index: 99;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: opacity 0.3s, bottom 0.3s;
+}
+
+.nav-item:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  bottom: -25px;
+}
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            text-shadow: 3px 3px 0 #8b4513;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: #e6e6e6;
+            margin-bottom: 20px;
+        }
+        
+        .app-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .input-section {
+            flex: 1;
+            min-width: 300px;
+            background: #1a3c24;
+            padding: 20px;
+            border: 3px solid #8b4513;
+            border-radius: 8px;
+        }
+        
+        .dino-display {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #ffcc00;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #8b4513;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            background-color: #0d3018;
+            color: #e6e6e6;
+        }
+        
+        button {
+            background-color: #ffcc00;
+            color: #8b4513;
+            border: none;
+            padding: 15px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 0 #8b4513;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #ffd54f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #8b4513;
+        }
+        
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #8b4513;
+        }
+        
+        .dino-name {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #ffcc00;
+            margin: 20px 0;
+            min-height: 60px;
+            text-shadow: 2px 2px 0 #8b4513;
+            background: #1a3c24;
+            padding: 10px;
+            border: 3px solid #8b4513;
+            border-radius: 8px;
+            width: 100%;
+        }
+        
+        .dino-image {
+            width: 300px;
+            height: 300px;
+            border: 4px solid #8b4513;
+            background: #1a3c24;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            image-rendering: pixelated;
+        }
+        
+        .dino-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .dino-description {
+            margin: 20px 0;
+            padding: 15px;
+            background: #1a3c24;
+            border-radius: 8px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #e6e6e6;
+            border: 2px solid #8b4513;
+        }
+        
+        .adopt-btn {
+            background-color: #38b000;
+            box-shadow: 0 4px 0 #2b8c00;
+            margin-top: 20px;
+        }
+        
+        .adopt-btn:hover {
+            background-color: #4cdb0e;
+            box-shadow: 0 6px 0 #2b8c00;
+        }
+        
+        .certificate {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            text-align: center;
+            color: #333;
+        }
+        
+        .certificate h2 {
+            color: #8b4513;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .certificate-content {
+            border: 15px solid #ffcc00;
+            padding: 30px;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+        
+        .certificate-dino {
+            font-size: 2.5rem;
+            margin: 10px 0;
+            color: #8b4513;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+        }
+        
+        .close-btn {
+            background: #ff4d4d;
+            margin-top: 20px;
+            padding: 10px 20px;
+            width: auto;
+            box-shadow: 0 4px 0 #cc0000;
+        }
+        
+        .download-btn {
+            background: #38b000;
+            margin-top: 10px;
+            padding: 10px 20px;
+            width: auto;
+            box-shadow: 0 4px 0 #2b8c00;
+        }
+        
+        .name-prompt {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            background: #1a3c24;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            z-index: 101;
+            text-align: center;
+            border: 3px solid #8b4513;
+        }
+        
+        .name-prompt h3 {
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #ffcc00;
+            font-size: 0.7rem;
+            text-shadow: 1px 1px 0 #8b4513;
+        }
+        
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .next-verse-btn {
+  position: fixed;
+  bottom: 80px; /* Moved above the control bar */
+  right: 20px;
+  z-index: 10000;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.next-verse-btn:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+/* 📱 Responsive adjustments */
+@media (max-width: 600px) {
+  .next-verse-btn {
+    bottom: 85px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .next-verse-btn {
+    bottom: 90px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+#transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+#typewriter-text {
+  font-size: 5vw; /* Responsive font size */
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+}
+
+#typewriter-text::after {
+  content: '|';
+  position: absolute;
+  right: -0.2em;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 🔧 Optional fine-tuning with media queries */
+@media (min-width: 768px) {
+  #typewriter-text {
+    font-size: 3vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  #typewriter-text {
+    font-size: 2vw;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="nav-left">
+      <div class="nav-item">
+        <a href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='images/witch.png') }}" alt="icon" class="responsive-img" />
+        </a>
+        <span class="tooltip-text">Home</span>
+      </div>
+    </div>
+    
+  </nav>
+    <div class="container">
+        <header>
+            <h1>DINO BUILDER</h1>
+            <p class="subtitle">Build Your Own DINOSAUR</p>
+        </header>
+        
+        <div class="app-container">
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="type">DINOSAUR TYPE:</label>
+                    <select id="type">
+                        <option value="carnivore">CARNIVORE</option>
+                        <option value="herbivore">HERBIVORE</option>
+                        <option value="aquatic">AQUATIC</option>
+                        <option value="flying">FLYING</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="habitat">HABITAT:</label>
+                    <select id="habitat">
+                        <option value="land">LAND</option>
+                        <option value="forest">FOREST</option>
+                        <option value="mountains">MOUNTAINS</option>
+                        <option value="swamp">SWAMP</option>
+                        <option value="coastal">COASTAL</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="teeth">TEETH TYPE:</label>
+                    <select id="teeth">
+                        <option value="sharp">SHARP</option>
+                        <option value="serrated">SERRATED</option>
+                        <option value="flat">FLAT</option>
+                        <option value="pointed">POINTED</option>
+                        <option value="none">NONE</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="size">SIZE:</label>
+                    <select id="size">
+                        <option value="small">SMALL</option>
+                        <option value="medium" selected>MEDIUM</option>
+                        <option value="large">LARGE</option>
+                    </select>
+                </div>
+                
+                <button id="generate-btn">GENERATE DINOSAUR</button>
+            </div>
+            
+            <div class="dino-display">
+                <div class="dino-name" id="dino-name">YOUR DINO NAME</div>
+                <div class="dino-image" id="dino-image">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzFhM2MyNCIvPjx0ZXh0IHg9IjEwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iQ291cmllciIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2U2ZTZlNiI+UElYRUwgRElOTyBJTUFHRTwvdGV4dD48L3N2Zz4=" alt="Dinosaur Image" id="dino-img">
+                </div>
+                
+                <div class="dino-description" id="dino-description">
+                    Your dinosaur description will appear here after generation.
+                </div>
+                
+                <button class="adopt-btn" id="adopt-btn" disabled>ADOPT THIS DINO</button>
+            </div>
+        </div>
+        
+        <div class="certificate" id="certificate">
+            <h2>OFFICIAL DINOSAUR ADOPTION CERTIFICATE</h2>
+            <div class="certificate-content">
+                <p>This certifies that</p>
+                <h3 id="cert-owner">[YOUR NAME]</h3>
+                <p>has officially adopted</p>
+                <div class="certificate-dino" id="cert-dino-name">DINO NAME</div>
+                <p id="cert-dino-desc">Dino Description</p>
+                <p>on <span id="cert-date"></span></p>
+            </div>
+            <button class="download-btn" id="download-btn">DOWNLOAD CERTIFICATE</button>
+            <button class="close-btn" id="close-btn">CLOSE</button>
+        </div>
+        
+        <div class="name-prompt" id="name-prompt">
+            <h3>ENTER YOUR NAME FOR THE CERTIFICATE</h3>
+            <div class="form-group">
+                <input type="text" id="user-name" placeholder="YOUR NAME">
+            </div>
+            <button id="submit-name">SUBMIT</button>
+        </div>
+        
+        <div class="overlay" id="overlay"></div>
+    </div>
+    
+    <footer>
+        <p>RETRO PIXEL DINO BUILDER &copy; 2023 | CREATED WITH 🦖</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generate-btn');
+            const adoptBtn = document.getElementById('adopt-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const submitNameBtn = document.getElementById('submit-name');
+            const dinoNameElement = document.getElementById('dino-name');
+            const dinoImageElement = document.getElementById('dino-img');
+            const dinoDescElement = document.getElementById('dino-description');
+            const certificate = document.getElementById('certificate');
+            const namePrompt = document.getElementById('name-prompt');
+            const overlay = document.getElementById('overlay');
+            const certOwner = document.getElementById('cert-owner');
+            const certDinoName = document.getElementById('cert-dino-name');
+            const certDinoDesc = document.getElementById('cert-dino-desc');
+            const certDate = document.getElementById('cert-date');
+            const userNameInput = document.getElementById('user-name');
+            
+            // Dinosaur image mapping
+            const dinoImages = {
+                'carnivore-land': '/static/images/carni-land.png',
+                'carnivore-forest': 'https://images.vexels.com/content/185881/preview/t-rex-dinosaur-pixel-art-3e8e60.png',
+                'carnivore-mountains': 'https://images.vexels.com/content/185881/preview/t-rex-dinosaur-pixel-art-3e8e60.png',
+                'carnivore-swamp': 'https://images.vexels.com/content/185881/preview/t-rex-dinosaur-pixel-art-3e8e60.png',
+                'carnivore-coastal': 'https://images.vexels.com/content/185881/preview/t-rex-dinosaur-pixel-art-3e8e60.png',
+                'herbivore-land': 'https://images.vexels.com/content/185877/preview/brachiosaurus-dinosaur-pixel-art-3e8e5c.png',
+                'herbivore-forest': 'https://images.vexels.com/content/185877/preview/brachiosaurus-dinosaur-pixel-art-3e8e5c.png',
+                'herbivore-mountains': 'https://images.vexels.com/content/185877/preview/brachiosaurus-dinosaur-pixel-art-3e8e5c.png',
+                'herbivore-swamp': 'https://images.vexels.com/content/185877/preview/brachiosaurus-dinosaur-pixel-art-3e8e5c.png',
+                'herbivore-coastal': 'https://images.vexels.com/content/185877/preview/brachiosaurus-dinosaur-pixel-art-3e8e5c.png',
+                'aquatic-land': 'https://images.vexels.com/content/185884/preview/mosasaurus-dinosaur-pixel-art-3e8e63.png',
+                'aquatic-forest': 'https://images.vexels.com/content/185884/preview/mosasaurus-dinosaur-pixel-art-3e8e63.png',
+                'aquatic-mountains': 'https://images.vexels.com/content/185884/preview/mosasaurus-dinosaur-pixel-art-3e8e63.png',
+                'aquatic-swamp': 'https://images.vexels.com/content/185884/preview/mosasaurus-dinosaur-pixel-art-3e8e63.png',
+                'aquatic-coastal': 'https://images.vexels.com/content/185884/preview/mosasaurus-dinosaur-pixel-art-3e8e63.png',
+                'flying-land': 'https://images.vexels.com/content/185882/preview/pterodactyl-dinosaur-pixel-art-3e8e61.png',
+                'flying-forest': 'https://images.vexels.com/content/185882/preview/pterodactyl-dinosaur-pixel-art-3e8e61.png',
+                'flying-mountains': 'https://images.vexels.com/content/185882/preview/pterodactyl-dinosaur-pixel-art-3e8e61.png',
+                'flying-swamp': 'https://images.vexels.com/content/185882/preview/pterodactyl-dinosaur-pixel-art-3e8e61.png',
+                'flying-coastal': 'https://images.vexels.com/content/185882/preview/pterodactyl-dinosaur-pixel-art-3e8e61.png'
+            };
+            
+            // Arrays for name generation
+            const prefixes = {
+                carnivore: ['CARNI', 'FANG', 'CLAW', 'TOOTH', 'SHARP'],
+                herbivore: ['HERBI', 'LEAF', 'PLANT', 'GREEN', 'VEGI'],
+                aquatic: ['AQUA', 'MARINE', 'DEEP', 'WAVE', 'OCEAN'],
+                flying: ['AERO', 'SKY', 'WING', 'SOAR', 'CLOUD']
+            };
+            
+            const suffixes = {
+                carnivore: ['RAPTOR', 'REX', 'ONYX', 'GNATHUS', 'VENATOR'],
+                herbivore: ['SAURUS', 'ODON', 'DOCUS', 'TITAN', 'PHYSIS'],
+                aquatic: ['DON', 'SAURUS', 'PLEX', 'DACTYL', 'MARINE'],
+                flying: ['DACTYL', 'PTERYX', 'WING', 'SOAR', 'SKY']
+            };
+            
+            const middles = ['O', 'I', 'A', 'E', 'U', 'IO', 'IA', 'AE'];
+            
+            // Descriptions based on traits
+            const sizeDesc = {
+                small: 'A small but mighty creature',
+                medium: 'A medium-sized dinosaur of impressive stature',
+                large: 'A massive and imposing dinosaur'
+            };
+            
+            const habitatDesc = {
+                land: 'that roams the open lands',
+                forest: 'that inhabits dense forests',
+                mountains: 'that dwells in rugged mountains',
+                swamp: 'that thrives in swampy environments',
+                coastal: 'that lives along coastal regions'
+            };
+            
+            const teethDesc = {
+                sharp: 'with razor-sharp teeth',
+                serrated: 'with serrated teeth for tearing',
+                flat: 'with strong flat teeth for grinding',
+                pointed: 'with pointed teeth for piercing',
+                none: 'with a toothless beak'
+            };
+            
+            let currentDino = {};
+            let userName = "";
+            
+            generateBtn.addEventListener('click', generateDinosaur);
+            adoptBtn.addEventListener('click', showNamePrompt);
+            closeBtn.addEventListener('click', closeCertificate);
+            downloadBtn.addEventListener('click', downloadCertificate);
+            submitNameBtn.addEventListener('click', submitUserName);
+            
+            function generateDinosaur() {
+                // Get form values
+                const type = document.getElementById('type').value;
+                const habitat = document.getElementById('habitat').value;
+                const teeth = document.getElementById('teeth').value;
+                const size = document.getElementById('size').value;
+                
+                // Generate name
+                const name = generateName(type);
+                dinoNameElement.textContent = name;
+                
+                // Set image based on type and habitat
+                const imageKey = `${type}-${habitat}`;
+                dinoImageElement.src = dinoImages[imageKey] || dinoImages['carnivore-land'];
+                
+                // Generate description
+                const description = `${sizeDesc[size]} ${habitatDesc[habitat]} ${teethDesc[teeth]}.`;
+                dinoDescElement.textContent = description;
+                
+                // Enable adopt button
+                adoptBtn.disabled = false;
+                
+                // Store current dino data
+                currentDino = {
+                    name,
+                    description,
+                    type,
+                    habitat,
+                    teeth,
+                    size
+                };
+            }
+            
+            function generateName(type) {
+                const prefix = prefixes[type][Math.floor(Math.random() * prefixes[type].length)];
+                const suffix = suffixes[type][Math.floor(Math.random() * suffixes[type].length)];
+                const middle = middles[Math.floor(Math.random() * middles.length)];
+                
+                return prefix + middle + suffix;
+            }
+            
+            function showNamePrompt() {
+                namePrompt.style.display = 'block';
+                overlay.style.display = 'block';
+            }
+            
+            function submitUserName() {
+                userName = userNameInput.value.trim();
+                
+                if (userName === "") {
+                    alert("Please enter your name for the certificate");
+                    return;
+                }
+                
+                namePrompt.style.display = 'none';
+                showCertificate();
+            }
+            
+            function showCertificate() {
+                certOwner.textContent = userName;
+                certDinoName.textContent = currentDino.name;
+                certDinoDesc.textContent = currentDino.description;
+                
+                // Set current date
+                const now = new Date();
+                certDate.textContent = now.toLocaleDateString();
+                
+                // Show certificate
+                certificate.style.display = 'block';
+            }
+            
+            function closeCertificate() {
+                certificate.style.display = 'none';
+                overlay.style.display = 'none';
+                userNameInput.value = "";
+            }
+            
+            function downloadCertificate() {
+                // In a real implementation, this would generate a PDF or image
+                // For this demo, we'll just show an alert
+                alert(`Certificate for ${userName} and ${currentDino.name} would be downloaded. In a real application, this would generate a PDF file.`);
+            }
+            
+            // Initialize with a dinosaur
+            generateDinosaur();
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+  const nextBtn = document.querySelector('.hero-btn[href*="next_verse"]');
+  const overlay = document.getElementById('transition-overlay');
+  const typewriter = document.getElementById('typewriter-text');
+
+  function typeText(text, element, speed, callback) {
+    let index = 0;
+    function typeChar() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeChar, speed);
+      } else {
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  if (nextBtn && overlay && typewriter) {
+    nextBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      overlay.style.opacity = "1";
+      overlay.style.pointerEvents = "auto";
+      typewriter.textContent = ""; // Clear any previous text
+
+      const fullText = "Travelling to next verse...";
+      const typingSpeed = 80; // in milliseconds
+
+      typeText(fullText, typewriter, typingSpeed, function () {
+        // Redirect after typing completes
+        setTimeout(() => {
+          window.location.href = nextBtn.href;
+        }, 500);
+      });
+    });
+  }
+});
+
+    </script>
+
+     <a href="{{ url_for('next_verse', current=current_file, r=random()) }}"
+   class="hero-btn next-verse-btn">
+  Next Verse
+</a>
+
+
+<!-- Transition Overlay -->
+<div id="transition-overlay">
+  <div id="typewriter-text"></div>
+</div>
+
+</body>
+</html>
