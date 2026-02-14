@@ -365,6 +365,102 @@
                 font-size: 1.8rem;
             }
         }
+
+        .next-verse-btn {
+  position: fixed;
+  bottom: 80px; /* Moved above the control bar */
+  right: 20px;
+  z-index: 10000;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.next-verse-btn:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+/* 📱 Responsive adjustments */
+@media (max-width: 600px) {
+  .next-verse-btn {
+    bottom: 85px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .next-verse-btn {
+    bottom: 90px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+#transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+#typewriter-text {
+  font-size: 5vw; /* Responsive font size */
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+}
+
+#typewriter-text::after {
+  content: '|';
+  position: absolute;
+  right: -0.2em;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 🔧 Optional fine-tuning with media queries */
+@media (min-width: 768px) {
+  #typewriter-text {
+    font-size: 3vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  #typewriter-text {
+    font-size: 2vw;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -652,6 +748,59 @@
             // Initialize with a dinosaur
             generateDinosaur();
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+  const nextBtn = document.querySelector('.hero-btn[href*="next_verse"]');
+  const overlay = document.getElementById('transition-overlay');
+  const typewriter = document.getElementById('typewriter-text');
+
+  function typeText(text, element, speed, callback) {
+    let index = 0;
+    function typeChar() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeChar, speed);
+      } else {
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  if (nextBtn && overlay && typewriter) {
+    nextBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      overlay.style.opacity = "1";
+      overlay.style.pointerEvents = "auto";
+      typewriter.textContent = ""; // Clear any previous text
+
+      const fullText = "Travelling to next verse...";
+      const typingSpeed = 80; // in milliseconds
+
+      typeText(fullText, typewriter, typingSpeed, function () {
+        // Redirect after typing completes
+        setTimeout(() => {
+          window.location.href = nextBtn.href;
+        }, 500);
+      });
+    });
+  }
+});
+
     </script>
+
+     <a href="{{ url_for('next_verse', current=current_file, r=random()) }}"
+   class="hero-btn next-verse-btn">
+  Next Verse
+</a>
+
+
+<!-- Transition Overlay -->
+<div id="transition-overlay">
+  <div id="typewriter-text"></div>
+</div>
+
 </body>
 </html>
