@@ -1,412 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: black;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flappy Ghost</title>
 
-            font-family: 'Creepster', cursive, Arial, sans-serif;
-            animation: spookyGlow 3s ease-in-out infinite alternate;
-        }
-    /*         
-            @keyframes spookyGlow {
-                0% { background: linear-gradient(to bottom, #1a0a2e, #16213e, #0f3460); }
-                100% { background: linear-gradient(to bottom, #2d1b4e, #1e2951, #153a6f); }
-            } */
-        
-        #gameContainer {
-            text-align: center;
-            background: rgba(20, 20, 30, 0.9);
-            border: 3px solid white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 0 30px rgba(240, 238, 237, 0.5), inset 0 0 20px rgba(0,0,0,0.7);
-        }
-        
-        canvas {
-            border: 3px solid white;
-            border-radius: 8px;
-            background: linear-gradient(to bottom, #1a0a2e, #16213e);
-            box-shadow: 0 0 20px rgba(240, 238,237, 0.3);
-        }
-        
-        #score {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(251, 247, 246, 0.8);
-        }
-        
-        #instructions {
-            margin-top: 10px;
-            color: white;
-            font-size: 14px;
-            text-shadow: 0 0 5px rgba(240, 238, 236, 0.5);
-        }
-        
-        .game-over {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(20, 20, 30, 0.95);
-            color: white;
-            padding: 25px;
-            border: 2px solid white;
-            border-radius: 15px;
-            text-align: center;
-            display: none;
-            box-shadow: 0 0 30px rgba(242, 241, 241, 0.7);
-            text-shadow: 0 0 10px rgba(232, 224, 220, 0.5);
-        }
-    </style>
+<style>
+
+/* ===== GLOBAL ===== */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: black;
+
+    background-image:
+        repeating-radial-gradient(circle at 0% 0%,
+            rgba(255,255,255,0.25) 0px,
+            rgba(255,255,255,0.25) 2px,
+            transparent 2px,
+            transparent 60px
+        ),
+        repeating-conic-gradient(from 0deg at 0% 0%,
+            rgba(255,255,255,0.2) 0deg,
+            rgba(255,255,255,0.2) 3deg,
+            transparent 3deg,
+            transparent 30deg
+        );
+
+    background-size: 100% 100%;
+}
+
+
+
+/* ===== NAVBAR ===== */
+.navbar {
+    height: 75px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+    padding: 0 30px;
+    background-color: #00000018;
+}
+
+.nav-icon {
+    height: 42px;
+    width: 42px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.nav-icon:hover {
+    transform: scale(1.1);
+}
+
+/* ===== GAME AREA ===== */
+#gameWrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== GAME CARD ===== */
+#gameContainer {
+    width: 800px;           /* 🔥 LESS WIDTH */
+    max-width: 90%;
+    height: 75vh;
+    background: rgba(20,20,30,0.95);
+    border: 3px solid white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* SCORE */
+#score {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 8px;
+}
+
+/* CANVAS */
+canvas {
+    flex: 1;
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* GAME OVER */
+.game-over {
+    position: absolute;
+    background: rgba(20,20,30,0.95);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    display: none;
+    text-align: center;
+    border: 2px solid white;
+}
+
+</style>
 </head>
+
 <body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <img src="{{ url_for('static', filename='images/witch.png') }}" class="nav-icon">
+    <img src="{{ url_for('static', filename='images/about-us.png') }}" class="nav-icon">
+    <img src="{{ url_for('static', filename='images/blackhole.png') }}" class="nav-icon">
+    <img src="{{ url_for('static', filename='images/coffee-cup.png') }}" class="nav-icon">
+</nav>
+
+<div id="gameWrapper">
     <div id="gameContainer">
         <div id="score">Score: 0</div>
-        <canvas id="gameCanvas" width="700" height="500"></canvas>
-        <div id="instructions">
-            Press SPACE or click to make the ghost float!<br>
-            Press R to restart when spooked
-        </div>
+        <canvas id="gameCanvas"></canvas>
+
         <div class="game-over" id="gameOver">
             <h2>Game Over!</h2>
             <p>Final Score: <span id="finalScore">0</span></p>
-            <p>Press R to restart</p>
+            <p>Press SPACE or Tap to restart</p>
         </div>
     </div>
+</div>
 
-    <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const scoreElement = document.getElementById('score');
-        const gameOverElement = document.getElementById('gameOver');
-        const finalScoreElement = document.getElementById('finalScore');
+<script>
 
-        // Game variables
-        let gameState = 'playing'; // 'playing' or 'gameOver'
-        let score = 0;
-        let frames = 0;
-        let ghostFloat = 0; // For ghost floating animation
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const scoreElement = document.getElementById('score');
+const gameOverElement = document.getElementById('gameOver');
+const finalScoreElement = document.getElementById('finalScore');
 
-        // Ghost object (formerly bird)
-        const ghost = {
-            x: 80,
-            y: canvas.height / 2,
-            width: 35,
-            height: 40,
-            velocity: 0,
-            gravity: 0.4,
-            jumpPower: -7,
-            
-            update() {
-                if (gameState === 'playing') {
-                    this.velocity += this.gravity;
-                    this.y += this.velocity;
-                    ghostFloat += 0.1; // For floating animation
-                    
-                    // Prevent ghost from going off screen
-                    if (this.y < 0) {
-                        this.y = 0;
-                        this.velocity = 0;
-                    }
-                    if (this.y + this.height > canvas.height) {
-                        this.y = canvas.height - this.height;
-                        this.gameOver();
-                    }
-                }
-            },
-            
-            jump() {
-                if (gameState === 'playing') {
-                    this.velocity = this.jumpPower;
-                }
-            },
-            
-            draw() {
-                const floatOffset = Math.sin(ghostFloat) * 3;
-                const drawY = this.y + floatOffset;
-                
-                // Draw ghost body with glow effect
-                ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
-                ctx.shadowBlur = 15;
-                
-                // Ghost body
-                ctx.fillStyle = 'rgba(240, 240, 255, 0.9)';
-                ctx.beginPath();
-                ctx.arc(this.x + this.width/2, drawY + this.height/3, this.width/2, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Ghost tail (wavy bottom)
-                ctx.beginPath();
-                ctx.moveTo(this.x + 5, drawY + this.height/2);
-                ctx.lineTo(this.x + 8, drawY + this.height - 5);
-                ctx.lineTo(this.x + 13, drawY + this.height - 8);
-                ctx.lineTo(this.x + 18, drawY + this.height - 2);
-                ctx.lineTo(this.x + 23, drawY + this.height - 7);
-                ctx.lineTo(this.x + 28, drawY + this.height - 3);
-                ctx.lineTo(this.x + this.width - 5, drawY + this.height/2);
-                ctx.arc(this.x + this.width/2, drawY + this.height/3, this.width/2, 0, Math.PI);
-                ctx.closePath();
-                ctx.fill();
-                
-                // Reset shadow
-                ctx.shadowBlur = 0;
-                
-                // Ghost eyes
-                ctx.fillStyle = '#1a0a2e';
-                ctx.beginPath();
-                ctx.arc(this.x + 12, drawY + 12, 4, 0, Math.PI * 2);
-                ctx.arc(this.x + 23, drawY + 12, 4, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Spooky eye glow
-                ctx.fillStyle = '#ff6b35';
-                ctx.beginPath();
-                ctx.arc(this.x + 12, drawY + 12, 1.5, 0, Math.PI * 2);
-                ctx.arc(this.x + 23, drawY + 12, 1.5, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Ghost mouth (spooky)
-                ctx.fillStyle = '#1a0a2e';
-                ctx.beginPath();
-                ctx.arc(this.x + this.width/2, drawY + 22, 3, 0, Math.PI);
-                ctx.fill();
-            },
-            
-            gameOver() {
-                gameState = 'gameOver';
-                gameOverElement.style.display = 'block';
-                finalScoreElement.textContent = score;
-            }
-        };
+function resizeCanvas(){
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
-        // Tombstones array (formerly pipes)
-        const tombstones = [];
-        const tombstoneWidth = 70;
-        const tombstoneGap = 160;
-        const tombstoneSpeed = 1.8;
+/* ===== GAME STATE ===== */
+let gameState = "playing";
+let score = 0;
+let frames = 0;
 
-        function createTombstone() {
-            const minHeight = 60;
-            const maxHeight = canvas.height - tombstoneGap - minHeight;
-            const topHeight = Math.random() * (maxHeight - minHeight) + minHeight;
-            
-            tombstones.push({
-                x: canvas.width,
-                topHeight: topHeight,
-                bottomY: topHeight + tombstoneGap,
-                bottomHeight: canvas.height - (topHeight + tombstoneGap),
-                passed: false
-            });
+/* ===== GHOST ===== */
+const ghost = {
+    x: 100,
+    y: 200,
+    width: 35,
+    height: 40,
+    velocity: 0,
+    gravity: 0.5,
+    jumpPower: -8,
+
+    update(){
+        if(gameState !== "playing") return;
+
+        this.velocity += this.gravity;
+        this.y += this.velocity;
+
+        if(this.y < 0){
+            this.y = 0;
+            this.velocity = 0;
         }
 
-        function updateTombstones() {
-            // Create new tombstones
-            if (frames % 140 === 0) { // Slightly slower spawn
-                createTombstone();
-            }
-            
-            // Update existing tombstones
-            for (let i = tombstones.length - 1; i >= 0; i--) {
-                const tombstone = tombstones[i];
-                tombstone.x -= tombstoneSpeed;
-                
-                // Check if ghost passed the tombstone
-                if (!tombstone.passed && tombstone.x + tombstoneWidth < ghost.x) {
-                    tombstone.passed = true;
-                    score++;
-                    scoreElement.textContent = `Score: ${score}`;
-                }
-                
-                // Check collision
-                if (checkCollision(ghost, tombstone)) {
-                    ghost.gameOver();
-                }
-                
-                // Remove tombstones that are off screen
-                if (tombstone.x + tombstoneWidth < 0) {
-                    tombstones.splice(i, 1);
-                }
-            }
+        if(this.y + this.height > canvas.height){
+            triggerGameOver();
+        }
+    },
+
+    jump(){
+        if(gameState === "playing"){
+            this.velocity = this.jumpPower;
+        }
+    },
+
+    draw(){
+    const x = this.x;
+    const y = this.y;
+
+    ctx.save();
+
+    // Glow
+    ctx.shadowColor = "rgba(255,255,255,0.8)";
+    ctx.shadowBlur = 15;
+
+    // Skull head
+    ctx.fillStyle = "#f2f2f2";
+    ctx.beginPath();
+    ctx.arc(x, y, 18, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Jaw
+    ctx.beginPath();
+    ctx.rect(x - 10, y + 5, 20, 12);
+    ctx.fill();
+
+    ctx.shadowBlur = 0;
+
+    // Eyes (black hollow)
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(x - 6, y - 5, 4, 0, Math.PI * 2);
+    ctx.arc(x + 6, y - 5, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Nose
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x - 3, y + 6);
+    ctx.lineTo(x + 3, y + 6);
+    ctx.closePath();
+    ctx.fill();
+
+    // Teeth lines
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(x - 6, y + 8);
+    ctx.lineTo(x - 6, y + 17);
+    ctx.moveTo(x, y + 8);
+    ctx.lineTo(x, y + 17);
+    ctx.moveTo(x + 6, y + 8);
+    ctx.lineTo(x + 6, y + 17);
+    ctx.stroke();
+
+    ctx.restore();
+}
+
+};
+
+/* ===== TOMBSTONES ===== */
+const pipes = [];
+const pipeWidth = 70;
+const gap = 170;
+const speed = 2;
+
+function createPipe(){
+    const topHeight = Math.random() * (canvas.height - gap - 100) + 50;
+    pipes.push({
+        x: canvas.width,
+        top: topHeight,
+        bottom: topHeight + gap,
+        passed:false
+    });
+}
+
+function updatePipes(){
+    if(frames % 120 === 0){
+        createPipe();
+    }
+
+    pipes.forEach(pipe => {
+        pipe.x -= speed;
+
+        if(!pipe.passed && pipe.x + pipeWidth < ghost.x){
+            pipe.passed = true;
+            score++;
+            scoreElement.textContent = "Score: " + score;
         }
 
-        function checkCollision(ghost, tombstone) {
-            // Check if ghost is horizontally aligned with tombstone
-            if (ghost.x < tombstone.x + tombstoneWidth && ghost.x + ghost.width > tombstone.x) {
-                // Check if ghost hits top or bottom tombstone
-                if (ghost.y < tombstone.topHeight || ghost.y + ghost.height > tombstone.bottomY) {
-                    return true;
-                }
-            }
-            return false;
+        if(
+            ghost.x + 15 > pipe.x &&
+            ghost.x - 15 < pipe.x + pipeWidth &&
+            (ghost.y - 15 < pipe.top || ghost.y + 15 > pipe.bottom)
+        ){
+            triggerGameOver();
         }
+    });
+}
 
-        function drawTombstones() {
-            tombstones.forEach(tombstone => {
-                // Draw top tombstone
-                ctx.fillStyle = '#2d2d2d';
-                ctx.fillRect(tombstone.x, 0, tombstoneWidth, tombstone.topHeight);
-                
-                // Top tombstone rounded top
-                ctx.beginPath();
-                ctx.arc(tombstone.x + tombstoneWidth/2, tombstone.topHeight - 20, tombstoneWidth/2, Math.PI, 0);
-                ctx.fill();
-                
-                // Draw bottom tombstone
-                ctx.fillRect(tombstone.x, tombstone.bottomY, tombstoneWidth, tombstone.bottomHeight);
-                
-                // Bottom tombstone rounded top
-                ctx.beginPath();
-                ctx.arc(tombstone.x + tombstoneWidth/2, tombstone.bottomY + 20, tombstoneWidth/2, 0, Math.PI);
-                ctx.fill();
-                
-                // Add spooky details
-                ctx.fillStyle = '#ff6b35';
-                ctx.font = '20px serif';
-                ctx.textAlign = 'center';
-                
-                // RIP text on tombstones
-                if (tombstone.topHeight > 40) {
-                    ctx.fillText('RIP', tombstone.x + tombstoneWidth/2, tombstone.topHeight - 15);
-                }
-                if (tombstone.bottomHeight > 40) {
-                    ctx.fillText('RIP', tombstone.x + tombstoneWidth/2, tombstone.bottomY + 35);
-                }
-                
-                // Tombstone borders/shadows
-                ctx.strokeStyle = '#1a1a1a';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(tombstone.x, 0, tombstoneWidth, tombstone.topHeight);
-                ctx.strokeRect(tombstone.x, tombstone.bottomY, tombstoneWidth, tombstone.bottomHeight);
-            });
-        }
+/* ===== DRAW ===== */
+function drawBackground(){
+    ctx.fillStyle = "black";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+}
 
-        function drawBackground() {
-            // Spooky night sky gradient
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, '#1a0a2e');
-            gradient.addColorStop(0.3, '#16213e');
-            gradient.addColorStop(1, '#0f3460');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw spooky moon
-            ctx.fillStyle = '#ffa500';
-            ctx.shadowColor = '#ffa500';
-            ctx.shadowBlur = 20;
-            ctx.beginPath();
-            ctx.arc(320, 80, 25, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            
-            // Draw some bats
-            const batPositions = [
-                {x: 50, y: 120}, {x: 150, y: 80}, {x: 250, y: 140}, 
-                {x: 350, y: 100}, {x: 180, y: 200}
-            ];
-            
-            ctx.fillStyle = '#1a1a1a';
-            batPositions.forEach((bat, index) => {
-                const wingFlap = Math.sin(frames * 0.3 + index) * 3;
-                
-                // Bat body
-                ctx.fillRect(bat.x, bat.y, 8, 4);
-                
-                // Bat wings
-                ctx.beginPath();
-                ctx.moveTo(bat.x - 5, bat.y + 2);
-                ctx.lineTo(bat.x - 8, bat.y + wingFlap);
-                ctx.lineTo(bat.x - 3, bat.y + 1);
-                ctx.lineTo(bat.x, bat.y + wingFlap + 1);
-                ctx.lineTo(bat.x + 3, bat.y + 1);
-                ctx.lineTo(bat.x + 8, bat.y + wingFlap);
-                ctx.lineTo(bat.x + 13, bat.y + 2);
-                ctx.fill();
-            });
-            
-            // Draw spooky fog at bottom
-            // ctx.fillStyle = 'rgba(100, 100, 120, 0.3)';
-            // for (let i = 0; i < 5; i++) {
-            //     ctx.beginPath();
-            //     ctx.arc(i * 100 - 20, canvas.height - 30 + Math.sin(frames * 0.05 + i) * 5, 40, 0, Math.PI);
-            //     ctx.fill();
-            // }
-            
-            // Add some stars
-            ctx.fillStyle = '#ffffff';
-            const stars = [
-                {x: 80, y: 60}, {x: 180, y: 40}, {x: 280, y: 70}, 
-                {x: 120, y: 90}, {x: 300, y: 45}
-            ];
-            
-            stars.forEach(star => {
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, 1, 0, Math.PI * 2);
-                ctx.fill();
-            });
-        }
 
-        function gameLoop() {
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw background
-            drawBackground();
-            
-            if (gameState === 'playing') {
-                frames++;
-                
-                // Update game objects
-                ghost.update();
-                updateTombstones();
-            }
-            
-            // Draw game objects
-            drawTombstones();
-            ghost.draw();
-            
-            requestAnimationFrame(gameLoop);
-        }
+function drawPipes(){
+    pipes.forEach(pipe => {
 
-        function resetGame() {
-            gameState = 'playing';
-            score = 0;
-            frames = 0;
-            ghostFloat = 0;
-            ghost.y = canvas.height / 2;
-            ghost.velocity = 0;
-            tombstones.length = 0;
-            scoreElement.textContent = 'Score: 0';
-            gameOverElement.style.display = 'none';
-        }
+        ctx.fillStyle = "#2d2d2d";
 
-        // Event listeners
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                e.preventDefault();
-                ghost.jump();
-            } else if (e.code === 'KeyR' && gameState === 'gameOver') {
-                resetGame();
-            }
-        });
+        // Top pillar
+        ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
 
-        canvas.addEventListener('click', () => {
+        // Bottom pillar
+        ctx.fillRect(pipe.x, pipe.bottom, pipeWidth, canvas.height - pipe.bottom);
+
+        // ONE RIP on top
+        ctx.fillStyle = "#ff6b35";
+        ctx.font = "20px serif";
+        ctx.textAlign = "center";
+
+        ctx.fillText("RIP", pipe.x + pipeWidth/2, pipe.top - 20);
+
+        // ONE RIP on bottom
+        ctx.fillText("RIP", pipe.x + pipeWidth/2, pipe.bottom + 30);
+
+        // Border
+        ctx.strokeStyle = "#111";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(pipe.x, 0, pipeWidth, pipe.top);
+        ctx.strokeRect(pipe.x, pipe.bottom, pipeWidth, canvas.height - pipe.bottom);
+    });
+}
+
+
+/* ===== GAME LOOP ===== */
+function loop(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    
+    drawBackground();
+
+    if(gameState === "playing"){
+        frames++;
+        ghost.update();
+        updatePipes();
+    }
+
+    drawPipes();
+    ghost.draw();
+
+    requestAnimationFrame(loop);
+}
+
+/* ===== GAME OVER ===== */
+function triggerGameOver(){
+    gameState = "gameOver";
+    finalScoreElement.textContent = score;
+    gameOverElement.style.display = "block";
+}
+
+/* ===== RESET ===== */
+function resetGame(){
+    gameState = "playing";
+    score = 0;
+    frames = 0;
+    pipes.length = 0;
+    ghost.y = canvas.height / 2;
+    ghost.velocity = 0;
+    scoreElement.textContent = "Score: 0";
+    gameOverElement.style.display = "none";
+}
+
+/* ===== CONTROLS ===== */
+document.addEventListener("keydown", e => {
+    if(e.code === "Space"){
+        if(gameState === "playing"){
             ghost.jump();
-        });
+        } else {
+            resetGame();
+        }
+    }
+});
 
-        // Start the game
-        gameLoop();
-    </script>
+/* Mobile Tap */
+canvas.addEventListener("touchstart", e => {
+    e.preventDefault();
+    if(gameState === "playing"){
+        ghost.jump();
+    } else {
+        resetGame();
+    }
+});
+
+/* Mouse Click */
+canvas.addEventListener("click", () => {
+    if(gameState === "playing"){
+        ghost.jump();
+    } else {
+        resetGame();
+    }
+});
+
+loop();
+
+</script>
+
 </body>
 </html>

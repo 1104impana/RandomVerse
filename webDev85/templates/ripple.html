@@ -7,42 +7,46 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/ripple.css') }}" />
 </head>
 <body>
+  
   <nav class="navbar">
-    <div class="nav-left">
-      <div class="nav-item">
-        <a href="{{ url_for('home') }}">
-          <img src="{{ url_for('static', filename='images/witch.png') }}" alt="icon" class="responsive-img" />
-        </a>
-        <span class="tooltip-text">Home</span>
-      </div>
+  <div class="nav-left">
+    
+  </div>
+ 
+  <div class="nav-right">
+    
+
+    <div class="nav-item">
+      <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/witch.png') }}" alt="Home" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Home</span>
     </div>
-    <div class="nav-right">
-      <div class="nav-item">
-        <a href="{{ url_for('ripple') }}">
-          <img src="{{ url_for('static', filename='images/galaxy.png') }}" alt="Paint" class="nav-icon" />
-        </a>
-        <span class="tooltip-text">Paint</span>
-      </div>
-      <div class="nav-item">
-        <a href="{{ url_for('crystal') }}">
-          <img src="{{ url_for('static', filename='images/crystal-ball.png') }}" alt="Crystal" class="nav-icon" />
-        </a>
-        <span class="tooltip-text">Crystal Ball</span>
-      </div>
-      <div class="nav-item">
-        <a href="{{ url_for('fortune') }}">
-          <img src="{{ url_for('static', filename='images/fornav.png') }}" alt="Fortune" class="nav-icon" />
-        </a>
-        <span class="tooltip-text">Fortune Cookie</span>
-      </div>
-      <div class="nav-item">
-        <a href="{{ url_for('meditation') }}">
-          <img src="{{ url_for('static', filename='images/relaxed.png') }}" alt="Meditation" class="nav-icon" />
-        </a>
-        <span class="tooltip-text">Calm Sounds</span>
-      </div>
+
+    <div class="nav-item">
+  <a href="#about-section">
+    <img src="{{ url_for('static', filename='images/about-us.png') }}" alt="About Us" class="nav-icon" />
+  </a>
+  <span class="tooltip-text">About Us</span>
+</div>
+    
+   <!-- 🟢 Explore -->
+    <div class="nav-item">
+      <a href="#portal-container">
+        <img src="{{ url_for('static', filename='images/blackhole.png') }}" alt="Explore" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Explore</span>
     </div>
-  </nav>
+    <div class="nav-item">
+      <a href="{{ url_for('meditation') }}">
+        <img src="{{ url_for('static', filename='images/coffee-cup.png') }}" alt="Meditation" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Support us</span>
+    </div>
+    
+  </div>
+</nav>
+
 
   <div class="bg-image"></div> 
   <canvas id="paintCanvas"></canvas>

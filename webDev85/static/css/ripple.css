@@ -204,6 +204,7 @@ canvas {
   bottom: -25px;
 }
 
+
 @media (max-width: 768px) {
   .controls-wrapper {
     flex-direction: row;
@@ -373,3 +374,52 @@ canvas {
   }
 }
 
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  background-color: #00000018;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.nav-left img {
+  height: 50px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-right a {
+  display: inline-block;
+  pointer-events: auto;
+}
+
+.nav-icon {
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  min-height: 35px;
+  min-width: 35px;
+   margin-top: 10px;
+}
+
+.nav-icon:hover {
+  transform: scale(1.15);
+}
+
+@media (hover: none) {
+  .nav-icon:hover {
+    transform: none;
+  }
+}

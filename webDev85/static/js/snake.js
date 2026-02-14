@@ -152,3 +152,35 @@ window.addEventListener('keydown', e => {
             break;
     }
 });
+let touchStartX = 0;
+let touchStartY = 0;
+
+window.addEventListener("touchstart", function(e){
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}, false);
+
+window.addEventListener("touchend", function(e){
+    let touchEndX = e.changedTouches[0].screenX;
+    let touchEndY = e.changedTouches[0].screenY;
+
+    let dx = touchEndX - touchStartX;
+    let dy = touchEndY - touchStartY;
+
+    // Determine swipe direction
+    if(Math.abs(dx) > Math.abs(dy)){
+        if(dx > 0){
+            inputDir = {x:1, y:0}; // Right
+        } else {
+            inputDir = {x:-1, y:0}; // Left
+        }
+    } else {
+        if(dy > 0){
+            inputDir = {x:0, y:1}; // Down
+        } else {
+            inputDir = {x:0, y:-1}; // Up
+        }
+    }
+    moveSound.play();
+}, false);
+

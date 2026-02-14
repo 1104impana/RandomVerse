@@ -69,6 +69,46 @@
     </style>
 </head>
 <body>
+
+     <nav class="navbar">
+  <div class="nav-left">
+    
+  </div>
+ 
+  <div class="nav-right">
+    
+
+    <div class="nav-item">
+      <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/witch.png') }}" alt="Home" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Home</span>
+    </div>
+
+    <div class="nav-item">
+  <a href="#about-section">
+    <img src="{{ url_for('static', filename='images/about-us.png') }}" alt="About Us" class="nav-icon" />
+  </a>
+  <span class="tooltip-text">About Us</span>
+</div>
+    
+   <!-- 🟢 Explore -->
+    <div class="nav-item">
+      <a href="#portal-container">
+        <img src="{{ url_for('static', filename='images/blackhole.png') }}" alt="Explore" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Explore</span>
+    </div>
+    <div class="nav-item">
+      <a href="{{ url_for('meditation') }}">
+        <img src="{{ url_for('static', filename='images/coffee-cup.png') }}" alt="Meditation" class="nav-icon" />
+      </a>
+      <span class="tooltip-text">Support us</span>
+    </div>
+    
+  </div>
+</nav>
+
     <h1>SNAKE GAME</h1>
     <div class="score">Score: <span id="score">0</span></div>
     <canvas class="game-board" id="game"></canvas>
@@ -252,5 +292,17 @@ resizeCanvas(); // Initial call
         // Initial draw
         draw();
     </script>
+    <a href="{{ url_for('next_verse', current=current_file, r=random()) }}"
+   class="hero-btn"
+   style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
+  Next Verse
+</a>
+
+
+<!-- Transition Overlay -->
+<div id="transition-overlay">
+  <div id="typewriter-text"></div>
+</div>
+
 </body>
 </html>
