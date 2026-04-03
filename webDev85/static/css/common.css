@@ -35,12 +35,7 @@
 
 @media (max-width: 768px) {
   .hint-box {
-    top: 65px;
-    left: 10px;
-
-    max-width: 180px;   /* smaller width */
-    font-size: 12px;
-
-    padding: 6px 10px;
+    left: 75px;   /* reset for mobile */
+    top: 20px;
   }
 }
