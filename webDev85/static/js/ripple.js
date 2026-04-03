@@ -27,7 +27,7 @@ let isErasing = false;
 let lastX = 0;
 let lastY = 0;
 
-// For smooth drawing
+// Smooth points
 function getSmoothPoints(e) {
   const rect = canvas.getBoundingClientRect();
   return {
@@ -38,18 +38,19 @@ function getSmoothPoints(e) {
 
 function startPosition(e) {
   if (!isDrawing && !isErasing) return;
+
   painting = true;
+
   const pos = getSmoothPoints(e);
   lastX = pos.x;
   lastY = pos.y;
+
   draw(pos.x, pos.y, true);
-  // Dispatch event to bg-image for ripple
   dispatchEventToBgImage(e);
 }
 
 function endPosition(e) {
   painting = false;
-  // Dispatch event to bg-image for ripple
   if (e) dispatchEventToBgImage(e);
 }
 
@@ -57,70 +58,77 @@ function draw(x, y, isStart = false) {
   if (!painting || (!isDrawing && !isErasing)) return;
 
   ctx.globalCompositeOperation = isErasing ? 'destination-out' : 'source-over';
-  
+
   ctx.beginPath();
+
   if (isStart) {
     ctx.moveTo(x, y);
   } else {
     const midX = (lastX + x) / 2;
     const midY = (lastY + y) / 2;
-    
+
     ctx.moveTo(lastX, lastY);
     ctx.quadraticCurveTo(lastX, lastY, midX, midY);
   }
-  
-  ctx.lineWidth = isErasing ? 20 : 10; // 20px for eraser, 10px for drawing
+
+  ctx.lineWidth = isErasing ? 20 : 10;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
-  // ctx.strokeStyle = currentColor;
+
   if (!isErasing) {
-  ctx.strokeStyle = currentColor;
+    ctx.strokeStyle = currentColor;
   }
+
   ctx.stroke();
-  
-   if (!isErasing && !isStart) {
-    const radius = 5; // Fixed radius for drawing (10px / 2)
+
+  // glow effect
+  if (!isErasing && !isStart) {
+    const radius = 5;
     const startX = Math.max(0, x - radius);
     const startY = Math.max(0, y - radius);
     const endX = Math.min(canvas.width, x + radius);
     const endY = Math.min(canvas.height, y + radius);
+
     const width = endX - startX;
     const height = endY - startY;
-    
+
     if (width > 0 && height > 0) {
       const imageData = ctx.getImageData(startX, startY, width, height);
       const data = imageData.data;
-      
+
       const colorMatch = currentColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+
       if (colorMatch) {
         const r = parseInt(colorMatch[1]);
         const g = parseInt(colorMatch[2]);
         const b = parseInt(colorMatch[3]);
-        const baseAlpha = parseFloat(colorMatch[4] || '0.3');
-        
+
         for (let i = 0; i < data.length; i += 4) {
-          if (Math.abs(data[i] - r) < 30 && 
-              Math.abs(data[i+1] - g) < 30 && 
-              Math.abs(data[i+2] - b) < 30) {
-            data[i+3] = Math.min(230, data[i+3] + 20);
+          if (
+            Math.abs(data[i] - r) < 30 &&
+            Math.abs(data[i + 1] - g) < 30 &&
+            Math.abs(data[i + 2] - b) < 30
+          ) {
+            data[i + 3] = Math.min(230, data[i + 3] + 20);
           }
         }
-        
+
         ctx.putImageData(imageData, startX, startY);
       }
     }
   }
+
   lastX = x;
   lastY = y;
 }
 
 function handleMove(e) {
   if (!painting) return;
-  
+
   const pos = getSmoothPoints(e);
+
   requestAnimationFrame(() => {
     draw(pos.x, pos.y);
-    // Dispatch event to bg-image for ripple
     dispatchEventToBgImage(e);
   });
 }
@@ -135,148 +143,134 @@ function dispatchEventToBgImage(e) {
   bgImage.dispatchEvent(clonedEvent);
 }
 
+// 🎨 COLOR SELECT
 document.querySelectorAll(".color").forEach(colorBtn => {
   colorBtn.addEventListener("click", (e) => {
     document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
+
     currentColor = colorBtn.getAttribute("data-color");
     colorBtn.classList.add('active');
+
     isDrawing = true;
     isErasing = false;
+
     body.classList.add('drawing-cursor');
     canvas.style.pointerEvents = 'auto';
+
     e.stopPropagation();
   });
 });
 
-
+// 🧽 ERASER
 document.querySelectorAll(".eraser").forEach(eraserBtn => {
   eraserBtn.addEventListener("click", (e) => {
     document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
+
     eraserBtn.classList.add('active');
+
     isDrawing = false;
     isErasing = true;
+
     body.classList.add('drawing-cursor');
     canvas.style.pointerEvents = 'auto';
+
     e.stopPropagation();
   });
 });
 
+// 🔄 RESET
 document.querySelectorAll(".reset").forEach(resetBtn => {
   resetBtn.addEventListener("click", (e) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
+
     isDrawing = false;
     isErasing = false;
+
     body.classList.remove('drawing-cursor');
     canvas.style.pointerEvents = 'none';
+
     e.stopPropagation();
   });
 });
 
+
 document.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('color') &&
-      !e.target.classList.contains('eraser') &&
-      !e.target.classList.contains('reset') &&
-      !e.target.closest('.controls-wrapper') &&
+  if (!e.target.closest('.controls-wrapper') &&
       !e.target.closest('.navbar')) {
-    isDrawing = false;
-    isErasing = false;
-    body.classList.remove('drawing-cursor');
-    document.querySelectorAll('.color, .eraser, .reset').forEach(c => c.classList.remove('active'));
-    canvas.style.pointerEvents = 'none';
+
+    // stop current stroke only
+    painting = false;
+
+    // ✅ KEEP canvas active so user can draw again
+    // ❌ DO NOT disable pointer events
+
     dispatchEventToBgImage(e);
   }
 });
 
+
+// MOUSE EVENTS
 canvas.addEventListener("mousedown", startPosition);
 canvas.addEventListener("mouseup", endPosition);
 canvas.addEventListener("mouseout", endPosition);
 canvas.addEventListener("mousemove", handleMove);
 
+// TOUCH EVENTS
 canvas.addEventListener("touchstart", (e) => {
   if (!isDrawing && !isErasing) return;
+
   e.preventDefault();
+
   const touch = e.touches[0];
+
   const mouseEvent = new MouseEvent("mousedown", {
     clientX: touch.clientX,
     clientY: touch.clientY
   });
+
   startPosition(mouseEvent);
 });
 
 canvas.addEventListener("touchend", (e) => {
   if (!isDrawing && !isErasing) return;
+
   e.preventDefault();
   endPosition();
 });
 
 canvas.addEventListener("touchmove", (e) => {
   if (!isDrawing && !isErasing || !painting) return;
+
   e.preventDefault();
+
   const touch = e.touches[0];
+
   const mouseEvent = new MouseEvent("mousemove", {
     clientX: touch.clientX,
     clientY: touch.clientY
   });
+
   handleMove(mouseEvent);
 });
 
+
+// DOWNLOAD
 document.getElementById("downloadBtn").addEventListener("click", function() {
   const tempCanvas = document.createElement('canvas');
   const tempCtx = tempCanvas.getContext('2d');
-  
+
   tempCanvas.width = canvas.width;
   tempCanvas.height = canvas.height;
-  
+
   tempCtx.fillStyle = 'black';
   tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-  
+
   tempCtx.drawImage(canvas, 0, 0);
-  
+
   const link = document.createElement('a');
   link.download = 'space-paint-' + new Date().getTime() + '.png';
   link.href = tempCanvas.toDataURL('image/png');
   link.click();
-});
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  const nextBtn = document.querySelector('.hero-btn[href*="next_verse"]');
-  const overlay = document.getElementById('transition-overlay');
-  const typewriter = document.getElementById('typewriter-text');
-
-  function typeText(text, element, speed, callback) {
-    let index = 0;
-    function typeChar() {
-      if (index < text.length) {
-        element.textContent += text.charAt(index);
-        index++;
-        setTimeout(typeChar, speed);
-      } else {
-        if (callback) callback();
-      }
-    }
-    typeChar();
-  }
-
-  if (nextBtn && overlay && typewriter) {
-    nextBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      overlay.style.opacity = "1";
-      overlay.style.pointerEvents = "auto";
-      typewriter.textContent = ""; // Clear any previous text
-
-      const fullText = "Travelling to next verse...";
-      const typingSpeed = 80; // in milliseconds
-
-      typeText(fullText, typewriter, typingSpeed, function () {
-        // Redirect after typing completes
-        setTimeout(() => {
-          window.location.href = nextBtn.href;
-        }, 500);
-      });
-    });
-  }
 });

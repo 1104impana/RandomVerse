@@ -427,3 +427,63 @@ canvas {
   }
 }
 
+/* DEFAULT (Desktop Sidebar) */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;              /* 🔽 reduced from 80px */
+  height: 100vh;
+  background-color: #00000023;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+}
+
+/* Smaller icons */
+.nav-icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* 🔥 MOBILE FIX */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row;          /* 🔁 horizontal */
+    justify-content: space-around;
+    width: 100%;                 /* full width */
+    height: 50px;                /* 🔥 thin navbar */
+    padding: 5px 10px;
+    bottom: 0;                   /* move to bottom (optional) */
+    top: auto;
+  }
+
+  .nav-left img {
+    display: none;               /* hide logo to save space */
+  }
+
+  .nav-right {
+    flex-direction: row;         /* icons in row */
+    gap: 15px;
+  }
+
+  .nav-icon {
+    width: 22px;                 /* 🔽 smaller icons */
+    height: 22px;
+  }
+}
+.hint-box {
+  left: 70px;
+}
+
+@media (max-width: 768px) {
+  .hint-box {
+    left: 10px;   /* reset for mobile */
+    top: 60px;
+  }
+}
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0,0,0,0.4);
+}
