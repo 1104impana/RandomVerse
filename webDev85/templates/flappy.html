@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flappy Bird</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
     <style>
         body {
             margin: 0;
@@ -197,6 +198,10 @@
             <p>Press R to restart</p>
         </div>
     </div>
+
+    <div class="hint-box">
+    Ask anything 🔮<br>The witch might answer...
+  </div>
 
     <script>
         const canvas = document.getElementById('gameCanvas');

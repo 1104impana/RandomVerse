@@ -7,9 +7,13 @@
   <title>Cookie Fortune Break</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/fortune.css') }}" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
 </head>
 
 <body>
+  <div class="hint-box">
+    Crack it open 🥠<br>Your fortune awaits!
+  </div>
   <nav class="navbar">
     <div class="nav-left">
       <div class="nav-item">
@@ -49,7 +53,7 @@
 
   <div class="content-wrapper">
     <div class="container">
-      <h1>Crack your Fortune</h1>
+     <h1>Fate is waiting to be cracked</h1>
     </div>
 
     <div class="cookie-container" id="cookieBox" onclick="breakCookie('')">

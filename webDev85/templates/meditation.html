@@ -8,7 +8,7 @@
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/meditation.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
   <style>
     .navbar {
       display: flex;
@@ -51,6 +51,7 @@
 </head>
 
 <body>
+  
 
   <nav class="navbar">
     <div class="nav-left">
@@ -88,6 +89,8 @@
       </div>
     </div>
   </nav>
+
+  
 
   <h1>Whispers of Peace</h1>
   <h2>Ambient sounds to wash away distraction</h2>
@@ -148,7 +151,9 @@
   <div id="typewriter-text"></div>
 </div>
 
-
+<div class="hint-box">
+    Mix sounds to relax 🌊<br>Adjust sliders and create your vibe
+  </div>
 
 </body>
 

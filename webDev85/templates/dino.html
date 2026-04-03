@@ -6,7 +6,7 @@
   <title>Dino Builder · Prehistoric Lab</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
   <style>
     :root {
       --bg:      #080f08;
@@ -542,6 +542,9 @@
   </style>
 </head>
 <body>
+    <div class="hint-box">
+    Channel your inner Dr. Grant🧬Engineer a creature the world has never seen
+  </div>
 <div class="scanlines"></div>
 
 <!-- ── Inline SVG dino library ── -->
@@ -684,6 +687,8 @@
     </symbol>
   </defs>
 </svg>
+
+
 
 <!-- ── Navbar ── -->
 <nav class="navbar">
