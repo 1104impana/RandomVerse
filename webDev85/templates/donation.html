@@ -134,7 +134,7 @@
   }
 
   .tip-btn {
-    background: var(--white);
+    background: var(--black);
     border: 1.5px solid var(--gray-200);
     border-radius: var(--radius);
     padding: 1.2rem 1rem;
@@ -145,10 +145,10 @@
     gap: 4px;
     transition: background 0.15s, border-color 0.15s, transform 0.1s;
     font-family: var(--sans);
-    color: var(--black);
+    color: var(--white);
     -webkit-tap-highlight-color: transparent;
   }
-  .tip-btn:hover { background: var(--gray-100); border-color: var(--gray-400); }
+  .tip-btn:hover { background: var(--gray-800); border-color: var(--gray-800); }
   .tip-btn:active { transform: scale(0.97); background: var(--gray-200); }
   .tip-btn.featured { background: var(--black); border-color: var(--black); color: var(--white); }
   .tip-btn.featured:hover { background: var(--gray-800); border-color: var(--gray-800); }
@@ -325,7 +325,7 @@
 <body>
 
 <header>
-  <a class="logo" href="#">Random <span>Verse</span></a>
+  <a class="logo" href="#">RandomVerse</a>
 </header>
 
 <main>
@@ -336,7 +336,16 @@
       </svg>
     </div>
     <h1>Support Random Verse</h1>
-    <p class="tagline">Words cost nothing to read, but everything to create. If our verses have moved you, consider buying us a chai — or two.</p>
+    <p class="tagline">You really came this far?<br><br>
+
+This site has no purpose.
+No productivity.
+No meaning.
+<br>
+And yet… you stayed.♡<br><br>
+
+If you liked wasting your time here,<br>
+you can help keep it alive !</p>
   </div>
 
   <div class="divider"></div>
@@ -349,17 +358,17 @@
     </div>
 
     <div class="tip-grid">
-      <button class="tip-btn" onclick="handlePay(10)">
-        <span class="tip-amt">₹10</span>
-        <span class="tip-sub">A chai</span>
+      <button class="tip-btn" onclick="handlePay(2)">
+        <span class="tip-amt">₹2</span>
+        <span class="tip-sub">accidental support</span>
       </button>
-      <button class="tip-btn featured" onclick="handlePay(20)">
-        <span class="tip-amt">₹20</span>
-        <span class="tip-sub">Popular</span>
+      <button class="tip-btn featured" onclick="handlePay(5)">
+        <span class="tip-amt">₹5</span>
+        <span class="tip-sub">okay… you like this</span>
       </button>
       <button class="tip-btn" onclick="handlePay(50)">
         <span class="tip-amt">₹50</span>
-        <span class="tip-sub">A poem</span>
+        <span class="tip-sub">you didn’t have to…♡</span>
       </button>
     </div>
 
@@ -389,12 +398,12 @@
 
   <div class="message-section">
     <p><strong>Why support us?</strong></p>
-    <p>Random Verse is an independent space kept alive by curiosity and coffee. No ads, no paywalls — just honest writing. Your tip, however small, helps keep this corner of the internet free and thoughtful.</p>
+    <p>Random Verse is an independent space kept alive by curiosity and love. Your tip, however small, helps keep this corner of the internet free and thoughtful.</p>
   </div>
 </main>
 
 <footer>
-  &copy; 2026 Random Verse &nbsp;·&nbsp; Made with words &amp; wonder
+  &copy; 2026 Random Verse &nbsp;·&nbsp; Made with love &amp; more love
 </footer>
 
 <!-- QR Modal -->
