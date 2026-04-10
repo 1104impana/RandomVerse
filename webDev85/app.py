@@ -95,6 +95,11 @@ def snake():
 def flappy():
     return render_template('flappy.html',current_file='flappy.html')
 
+@app.route('/donation')
+def donation():
+    return render_template('donation.html',current_file='donation.html')
+
+
 # Function to call Groq API
 def get_crystal_ball_llm_response(user_question):
     headers = {

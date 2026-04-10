@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support Us — Random Verse</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --gray-100: #f5f5f5;
+    --gray-200: #e5e5e5;
+    --gray-400: #a3a3a3;
+    --gray-600: #525252;
+    --gray-800: #262626;
+    --radius: 10px;
+    --font: 'Georgia', serif;
+    --sans: system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-family: var(--font);
+    color: var(--black);
+    text-decoration: none;
+  }
+  .logo span { font-weight: 300; font-style: italic; }
+
+  main {
+    width: 100%;
+    max-width: 680px;
+    padding: 3.5rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .hero {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .heart-icon {
+    width: 56px; height: 56px;
+    background: var(--black);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  .heart-icon svg { width: 26px; height: 26px; fill: var(--white); }
+
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    max-width: 480px;
+    font-family: var(--sans);
+  }
+
+  .divider {
+    width: 48px; height: 2px;
+    background: var(--black);
+    border-radius: 2px;
+  }
+
+  .tip-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .tip-label {
+    font-size: 0.85rem;
+    font-family: var(--sans);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    text-align: center;
+  }
+
+  .desktop-hint {
+    display: none;
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    font-family: var(--sans);
+    color: var(--gray-600);
+    text-align: center;
+    line-height: 1.6;
+    border-left: 3px solid var(--gray-400);
+  }
+
+  .tip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .tip-btn {
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 1.2rem 1rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    font-family: var(--sans);
+    color: var(--black);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tip-btn:hover { background: var(--gray-100); border-color: var(--gray-400); }
+  .tip-btn:active { transform: scale(0.97); background: var(--gray-200); }
+  .tip-btn.featured { background: var(--black); border-color: var(--black); color: var(--white); }
+  .tip-btn.featured:hover { background: var(--gray-800); border-color: var(--gray-800); }
+
+  .tip-amt { font-size: 1.5rem; font-weight: 700; font-family: var(--font); line-height: 1; }
+  .tip-sub { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.55; font-family: var(--sans); }
+
+  .custom-section { display: flex; flex-direction: column; gap: 10px; }
+  .custom-row { display: flex; gap: 10px; }
+  .custom-input-wrap { flex: 1; position: relative; }
+  .rupee-symbol {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    font-size: 1rem; color: var(--gray-600); font-family: var(--sans); pointer-events: none;
+  }
+
+  #custom-amount {
+    width: 100%; height: 52px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 0 14px 0 30px;
+    font-size: 1rem; font-family: var(--sans);
+    color: var(--black); background: var(--white);
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+  #custom-amount:focus { border-color: var(--black); }
+  #custom-amount::placeholder { color: var(--gray-400); }
+
+  .pay-btn {
+    height: 52px; padding: 0 1.5rem;
+    background: var(--black); color: var(--white);
+    border: none; border-radius: var(--radius);
+    font-size: 0.95rem; font-family: var(--sans); font-weight: 600;
+    cursor: pointer; letter-spacing: 0.03em;
+    transition: background 0.15s, transform 0.1s;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pay-btn:hover { background: var(--gray-800); }
+  .pay-btn:active { transform: scale(0.97); }
+
+  .upi-row {
+    display: flex; align-items: center; gap: 8px;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .upi-note { font-size: 0.78rem; color: var(--gray-400); font-family: var(--sans); text-align: center; }
+  .upi-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid var(--gray-200); border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.72rem; font-family: var(--sans); font-weight: 600;
+    color: var(--gray-600); letter-spacing: 0.04em;
+  }
+  .upi-badge::before {
+    content: ''; display: inline-block;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--black);
+  }
+
+  /* QR Modal */
+  .qr-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .qr-overlay.active { display: flex; }
+
+  .qr-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem 1.75rem 1.75rem;
+    max-width: 340px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    animation: popIn 0.2s ease;
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+
+  .qr-close {
+    position: absolute; top: 14px; right: 16px;
+    background: none; border: none;
+    font-size: 1.4rem; cursor: pointer;
+    color: var(--gray-400); line-height: 1;
+  }
+  .qr-close:hover { color: var(--black); }
+
+  .qr-title { font-size: 1.1rem; font-weight: 700; font-family: var(--font); }
+
+  .qr-amount {
+    font-size: 2.2rem; font-weight: 700;
+    font-family: var(--font); letter-spacing: -0.02em;
+  }
+
+  .qr-img-wrap {
+    width: 200px; height: 200px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: var(--white);
+    position: relative;
+  }
+
+  .qr-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
+
+  .qr-loading {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-family: var(--sans); color: var(--gray-400);
+  }
+
+  .qr-upi-id {
+    font-size: 0.8rem; font-family: var(--sans); color: var(--gray-600);
+    background: var(--gray-100); padding: 6px 14px;
+    border-radius: 100px; letter-spacing: 0.02em;
+  }
+
+  .qr-note {
+    font-size: 0.78rem; font-family: var(--sans);
+    color: var(--gray-400); text-align: center; line-height: 1.6;
+  }
+
+  .message-section {
+    width: 100%;
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .message-section p { font-size: 0.95rem; line-height: 1.7; font-family: var(--sans); color: var(--gray-600); }
+  .message-section p strong { color: var(--black); font-weight: 600; }
+
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--black); color: var(--white);
+    padding: 0.75rem 1.5rem; border-radius: 100px;
+    font-size: 0.88rem; font-family: var(--sans); font-weight: 500;
+    z-index: 999; opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none; white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  footer {
+    margin-top: auto; padding: 1.5rem;
+    border-top: 1px solid var(--gray-200);
+    width: 100%; text-align: center;
+    font-size: 0.78rem; color: var(--gray-400); font-family: var(--sans);
+  }
+
+  @media (max-width: 480px) {
+    main { padding: 2.5rem 1.25rem 4rem; }
+    .tip-grid { gap: 8px; }
+    .tip-amt { font-size: 1.3rem; }
+    .custom-row { flex-direction: column; }
+    .pay-btn { width: 100%; }
+    .toast { width: 90%; text-align: center; white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">Random <span>Verse</span></a>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="heart-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    </div>
+    <h1>Support Random Verse</h1>
+    <p class="tagline">Words cost nothing to read, but everything to create. If our verses have moved you, consider buying us a chai — or two.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="tip-section">
+    <p class="tip-label">Choose a tip</p>
+
+    <div class="desktop-hint" id="desktop-hint">
+      You're on desktop — clicking will show a QR code. Scan it with your phone's camera or any UPI app to pay instantly.
+    </div>
+
+    <div class="tip-grid">
+      <button class="tip-btn" onclick="handlePay(10)">
+        <span class="tip-amt">₹10</span>
+        <span class="tip-sub">A chai</span>
+      </button>
+      <button class="tip-btn featured" onclick="handlePay(20)">
+        <span class="tip-amt">₹20</span>
+        <span class="tip-sub">Popular</span>
+      </button>
+      <button class="tip-btn" onclick="handlePay(50)">
+        <span class="tip-amt">₹50</span>
+        <span class="tip-sub">A poem</span>
+      </button>
+    </div>
+
+    <div class="custom-section">
+      <p class="tip-label" style="margin-bottom:2px;">or enter your own</p>
+      <div class="custom-row">
+        <div class="custom-input-wrap">
+          <span class="rupee-symbol">₹</span>
+          <input type="number" id="custom-amount" placeholder="Amount" min="1" inputmode="numeric" />
+        </div>
+        <button class="pay-btn" onclick="payCustom()">Pay via UPI</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="upi-row">
+        <span class="upi-note" id="upi-method-note">Opens GPay, PhonePe, or any UPI app on your phone</span>
+      </div>
+      <div class="upi-row" style="margin-top:6px;">
+        <span class="upi-badge">GPay</span>
+        <span class="upi-badge">PhonePe</span>
+        <span class="upi-badge">Paytm</span>
+        <span class="upi-badge">Any UPI</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="message-section">
+    <p><strong>Why support us?</strong></p>
+    <p>Random Verse is an independent space kept alive by curiosity and coffee. No ads, no paywalls — just honest writing. Your tip, however small, helps keep this corner of the internet free and thoughtful.</p>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Random Verse &nbsp;·&nbsp; Made with words &amp; wonder
+</footer>
+
+<!-- QR Modal -->
+<div class="qr-overlay" id="qr-overlay" onclick="handleOverlayClick(event)">
+  <div class="qr-card" id="qr-card">
+    <button class="qr-close" onclick="closeQR()">&#x2715;</button>
+    <p class="qr-title">Scan to Pay</p>
+    <p class="qr-amount" id="qr-amount-display">₹20</p>
+    <div class="qr-img-wrap">
+      <div class="qr-loading" id="qr-loading">Generating QR…</div>
+      <img id="qr-img" src="" alt="UPI QR Code" style="display:none;" />
+    </div>
+    <span class="qr-upi-id" id="qr-upi-label"></span>
+    <p class="qr-note">Open your phone camera or any UPI app<br>and scan this code to pay.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── CONFIG: replace with your real UPI ID ──────────────────────
+  const UPI_ID     = '8073130492@axl';
+  const PAYEE_NAME = 'Random Verse';
+  // ───────────────────────────────────────────────────────────────
+
+  function isMobile() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Show desktop hint and update note if on desktop
+  if (!isMobile()) {
+    document.getElementById('desktop-hint').style.display = 'block';
+    document.getElementById('upi-method-note').textContent = 'QR code on desktop · Opens UPI app on mobile';
+  }
+
+  function buildUPIUrl(amount) {
+    return `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Support Random Verse')}`;
+  }
+
+  function buildQRImageUrl(amount) {
+    const upiStr = buildUPIUrl(amount);
+    return `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=${encodeURIComponent(upiStr)}`;
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function handlePay(amount) {
+    if (isMobile()) {
+      const a = document.createElement('a');
+      a.href = buildUPIUrl(amount);
+      a.click();
+      showToast('Opening UPI app for ₹' + amount + '…');
+    } else {
+      openQR(amount);
+    }
+  }
+
+  function openQR(amount) {
+    document.getElementById('qr-amount-display').textContent = '₹' + amount;
+    document.getElementById('qr-upi-label').textContent = UPI_ID;
+
+    const img = document.getElementById('qr-img');
+    const loading = document.getElementById('qr-loading');
+    img.style.display = 'none';
+    loading.style.display = 'flex';
+
+    img.onload = () => {
+      loading.style.display = 'none';
+      img.style.display = 'block';
+    };
+    img.onerror = () => {
+      loading.textContent = 'Could not load QR. Check your connection.';
+    };
+    img.src = buildQRImageUrl(amount);
+
+    document.getElementById('qr-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeQR() {
+    document.getElementById('qr-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('qr-overlay')) closeQR();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeQR();
+  });
+
+  function payCustom() {
+    const val = parseFloat(document.getElementById('custom-amount').value);
+    if (!val || val < 1) {
+      showToast('Please enter a valid amount');
+      document.getElementById('custom-amount').focus();
+      return;
+    }
+    handlePay(Math.round(val));
+  }
+
+  document.getElementById('custom-amount').addEventListener('keydown', e => {
+    if (e.key === 'Enter') payCustom();
+  });
+</script>
+</body>
+</html>
