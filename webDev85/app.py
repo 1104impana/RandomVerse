@@ -20,57 +20,53 @@ app.secret_key = 'supersecretkey123'
 load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
+EXCLUDED_PAGES = ['Homepage.html', 'donation.html']
+
 @app.route('/')
 def home():
     return render_template('Homepage.html', current_file='Homepage.html')
+
 @app.route('/random')
 def random_page():
     template_folder = app.template_folder or 'templates'
 
     html_files = [
         f for f in os.listdir(template_folder)
-        if f.endswith('.html') and not f.startswith('_') and f != 'Homepage.html'
+        if f.endswith('.html') and not f.startswith('_') and f not in EXCLUDED_PAGES
     ]
 
     if not html_files:
         return "No HTML files found!", 404
 
-    selected = random.choice(html_files)
+    # 🔥 Shuffle once and store order
+    order = random.sample(html_files, len(html_files))
+    session['order'] = order
+    session['index'] = 0
 
-    return render_template(selected, current_file=selected)
+    first_page = order[0]
+    session['index'] = 1  # move pointer forward
 
+    return render_template(first_page, current_file=first_page)
 
 @app.route('/next_verse')
 def next_verse():
-    current = request.args.get('current')  # e.g. meditation.html
-    template_folder = app.template_folder or 'templates'
+    order = session.get('order', [])
+    index = session.get('index', 0)
 
-    # Get all HTML files excluding Homepage and current
-    all_html_files = [
-        f for f in os.listdir(template_folder)
-        if f.endswith('.html') and f not in ['Homepage.html', current]
-    ]
+    # 🚨 If no session (user refreshed directly)
+    if not order:
+        return redirect(url_for('random_page'))
 
-    # Load visited files from session, or initialize
-    visited = session.get('visited', [])
+    # ✅ If finished all pages → show donation
+    if index >= len(order):
+        session.clear()  # optional reset
+        return render_template('donation.html')
 
-    # Get unvisited ones
-    unvisited = [f for f in all_html_files if f not in visited]
+    next_page = order[index]
+    session['index'] = index + 1
 
-    # If all visited, reset
-    if not unvisited:
-        visited = []
-        unvisited = all_html_files
-
-    # Pick next verse
-    next_file = random.choice(unvisited)
-
-    # Update session
-    visited.append(next_file)
-    session['visited'] = visited
-
-    return render_template(next_file, current_file=next_file)
-
+    return render_template(next_page, current_file=next_page)
+    
 @app.route('/ripple')
 def ripple():
     return render_template('ripple.html', current_file='ripple.html')

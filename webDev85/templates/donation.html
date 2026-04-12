@@ -304,7 +304,7 @@
     pointer-events: none; white-space: nowrap;
   }
   .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-
+  
   footer {
     margin-top: auto; padding: 1.5rem;
     border-top: 1px solid var(--gray-200);
@@ -319,6 +319,7 @@
     .custom-row { flex-direction: column; }
     .pay-btn { width: 100%; }
     .toast { width: 90%; text-align: center; white-space: normal; }
+
   }
 </style>
 </head>
@@ -400,6 +401,20 @@ you can help keep it alive !</p>
     <p><strong>Why support us?</strong></p>
     <p>Random Verse is an independent space kept alive by curiosity and love. Your tip, however small, helps keep this corner of the internet free and thoughtful.</p>
   </div>
+
+  <div style="margin: 30px auto; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+
+  <!-- Back to Home -->
+  <a href="{{ url_for('home') }}" style="text-decoration:none;">
+    <button class="pay-btn">Back to Home</button>
+  </a>
+
+  <!-- Restart Journey -->
+  <a href="{{ url_for('random_page') }}" style="text-decoration:none;">
+    <button class="pay-btn"> Jump into Verse Again</button>
+  </a>
+
+</div>
 </main>
 
 <footer>
