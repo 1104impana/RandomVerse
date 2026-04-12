@@ -1,10 +1,7 @@
 # RandomVerse
 
-RandomVerse is a playful, open digital space on the web designed for exploration, relaxation, and curiosity. Built as a creative portfolio project, it offers users a collection of random interactive experiences, mini spaces, and lighthearted digital environments that can be explored freely without any pressure, login, or commitment.
+RandomVerse is an interactive web experience designed to explore how curiosity, randomness, and minimal design can influence user engagement. Instead of structured navigation or goal-driven interaction, the platform offers a collection of dynamic “verses” — small, self-contained experiences that users can discover through simple actions.
 
-In a web filled with endless scrolling and structured platforms, RandomVerse aims to be different — a simple, enjoyable escape where users can click, explore, and discover unexpected experiences. Each section of the platform represents a unique “verse,” encouraging users to move through spaces that feel spontaneous, creative, and entertaining.
-
-This project focuses on combining clean front-end development with imaginative design to create an engaging and accessible experience for anyone looking to unwind or explore something new online.
 
 ## Concept
 
@@ -27,7 +24,7 @@ It is designed to demonstrate creativity, user interface design, and front-end d
 * HTML
 * CSS
 * JavaScript
-* Backend (python)
+* Backend (flask)
 * Groq API 
 
 ## Project Goals
@@ -80,4 +77,4 @@ See the LICENSE file for more details.
 ## Author
 
 Impana T and Varsha R
-Portfolio Project — RandomVerse
+Project — RandomVerse
