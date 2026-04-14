@@ -462,8 +462,14 @@
     return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
-  function buildUPIUrl(amount) {
-    return `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Support Random Verse')}`;
+  // ✅ Improved UPI builder (intent + fallback safe)
+  function buildUPILink(amount) {
+    const base = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Support Random Verse')}`;
+
+    return {
+      intent: `intent://${base.replace('upi://', '')}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`,
+      fallback: base
+    };
   }
 
   function showToast(msg) {
@@ -475,27 +481,39 @@
 
   function handlePay(amount) {
     if (isMobile()) {
-      // On mobile: open UPI deep link directly
-      window.location.href = buildUPIUrl(amount);
+      const links = buildUPILink(amount);
+
+      // Try intent (better success rate on Android)
+      window.location.href = links.intent;
+
+      // Fallback to normal UPI link
+      setTimeout(() => {
+        window.location.href = links.fallback;
+      }, 1200);
+
       showToast('Opening UPI app for ₹' + amount + '…');
     } else {
-      // On desktop: just remind them to scan the QR above
       showToast('Scan the QR code above with your phone to pay ₹' + amount);
-      document.getElementById('desktop-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('desktop-section').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
     }
   }
 
   function payCustom() {
     const val = parseFloat(document.getElementById('custom-amount').value);
+
     if (!val || val < 1) {
       showToast('Please enter a valid amount');
       document.getElementById('custom-amount').focus();
       return;
     }
+
     handlePay(Math.round(val));
   }
 
-  // On desktop: update the tip-section label to clarify buttons scroll to QR
+  // Desktop hint text stays same logic
   if (!isMobile()) {
     document.getElementById('upi-method-note').textContent =
       'On desktop, scan the QR code above · Buttons open UPI app on mobile';
