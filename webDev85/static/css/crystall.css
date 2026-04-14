@@ -15,13 +15,7 @@ body {
   height: 100vh;
   padding: 50px;
   font-family: 'Segoe UI', sans-serif;
-  background-image: url('../images/start.jpeg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   overflow: hidden;
-  padding-top: 70px; /* For navbar spacing */
 }
 .navbar {
     display: flex;

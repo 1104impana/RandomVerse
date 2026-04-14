@@ -56,10 +56,21 @@
       max-width: 280px;
       cursor: pointer;
     }
-
     h1 {
-      font-size: 50px;
-    }
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem); /* smaller + responsive */
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-align: center;
+  max-width: 520px;
+}
+
+    .text-container {
+      position: absolute;
+      top: 35%;
+      left: 8%;
+      transform: translateY(-50%);
+}
    
   </style>
 </head>
@@ -88,7 +99,7 @@
   </div>
 
   <div class="text-container">
-    <h1>THE VEIL IS THIN TONIGHT</h1>
+    <h1>THE VEIL IS THIN <br>TONIGHT</h1>
     
   </div>
 

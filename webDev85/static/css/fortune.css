@@ -22,11 +22,7 @@ html, body {
   justify-content: flex-start;
   padding-top: calc(var(--navbar-height) + var(--navbar-top));
   overflow: hidden;
-  background-image: url('../images/ab.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+ 
 }
 
 /* Wrapper */
