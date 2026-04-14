@@ -47,7 +47,6 @@
     color: var(--black);
     text-decoration: none;
   }
-  .logo span { font-weight: 300; font-style: italic; }
 
   main {
     width: 100%;
@@ -97,7 +96,7 @@
     border-radius: 2px;
   }
 
-  /* ── QR SECTION (desktop) ── */
+  /* QR SECTION */
   .qr-section {
     width: 100%;
     display: flex;
@@ -136,38 +135,17 @@
     color: var(--black);
   }
 
-  /* ── QR image placeholder ── */
   .qr-img-box {
-    width: 260px;
-    height: 260px;
-    border: 2px dashed var(--gray-400);
+    width: 220px;
+    height: 220px;
     border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--gray-100);
-    overflow: hidden;
-    position: relative;
-    padding: 5px;
   }
-
-  /* When you add your real image, replace the placeholder div below with:
-     <img src="your-qr-code.png" alt="UPI QR Code" style="width:100%;height:100%;object-fit:contain;" />
-     and remove the .qr-placeholder styles */
-
-  .qr-placeholder-icon {
-    width: 48px; height: 48px; opacity: 0.25;
-  }
-
-  .qr-placeholder-text {
-    font-size: 0.75rem;
-    font-family: var(--sans);
-    color: var(--gray-600);
-    text-align: center;
-    padding: 0 12px;
-    line-height: 1.5;
-  }
+  .qr-img-box img { width: 100%; height: 100%; object-fit: contain; }
 
   .qr-upi-id {
     font-size: 0.8rem;
@@ -177,7 +155,6 @@
     padding: 6px 14px;
     border-radius: 100px;
     letter-spacing: 0.02em;
-    display: none;/* Hide this if you don't want to show the UPI ID below the QR, or style as needed */
   }
 
   .qr-note {
@@ -188,7 +165,7 @@
     line-height: 1.6;
   }
 
-  /* ── MOBILE UPI BUTTON SECTION ── */
+  /* TIP BUTTONS */
   .tip-section {
     width: 100%;
     display: flex;
@@ -212,23 +189,22 @@
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    transition: background 0.15s, transform 0.1s;
     font-family: var(--sans);
     color: var(--white);
     -webkit-tap-highlight-color: transparent;
   }
-  .tip-btn:hover { background: var(--gray-800); border-color: var(--gray-800); }
+  .tip-btn:hover { background: var(--gray-800); }
   .tip-btn:active { transform: scale(0.97); }
-
   .tip-amt { font-size: 1.5rem; font-weight: 700; font-family: var(--font); line-height: 1; }
-  .tip-sub { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.55; font-family: var(--sans); }
+  .tip-sub { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.55; }
 
   .custom-section { display: flex; flex-direction: column; gap: 10px; }
   .custom-row { display: flex; gap: 10px; }
   .custom-input-wrap { flex: 1; position: relative; }
   .rupee-symbol {
     position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-    font-size: 1rem; color: var(--gray-600); font-family: var(--sans); pointer-events: none;
+    font-size: 1rem; color: var(--gray-600); pointer-events: none;
   }
 
   #custom-amount {
@@ -262,10 +238,7 @@
   .pay-btn:hover { background: var(--gray-800); }
   .pay-btn:active { transform: scale(0.97); }
 
-  .upi-row {
-    display: flex; align-items: center; gap: 8px;
-    justify-content: center; flex-wrap: wrap;
-  }
+  .upi-row { display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; }
   .upi-note { font-size: 0.78rem; color: var(--gray-400); font-family: var(--sans); text-align: center; }
   .upi-badge {
     display: inline-flex; align-items: center; gap: 5px;
@@ -280,6 +253,132 @@
     background: var(--black);
   }
 
+  /* MOBILE POPUP */
+  .popup-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 100;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .popup-overlay.active { display: flex; }
+
+  .popup-sheet {
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    padding: 1.25rem 1.5rem 2.5rem;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    animation: slideUp 0.22s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  .sheet-handle {
+    width: 36px; height: 4px;
+    background: var(--gray-200);
+    border-radius: 2px;
+    margin-bottom: 0.2rem;
+  }
+
+  .sheet-title {
+    font-size: 1.1rem; font-weight: 700;
+    font-family: var(--font); color: var(--black);
+  }
+
+  .sheet-amount {
+    font-size: 2.2rem; font-weight: 700;
+    font-family: var(--font);
+    letter-spacing: -0.02em;
+  }
+
+  .sheet-steps {
+    width: 100%;
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+  }
+
+  .sheet-step {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.87rem; font-family: var(--sans);
+    color: var(--gray-600); line-height: 1.5;
+  }
+
+  .step-num {
+    min-width: 20px; height: 20px;
+    background: var(--black); color: var(--white);
+    border-radius: 50%;
+    font-size: 0.68rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px; flex-shrink: 0;
+  }
+
+  .copy-row {
+    display: flex; align-items: center; gap: 8px; width: 100%;
+  }
+
+  .upi-pill {
+    flex: 1;
+    background: var(--gray-100);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 0.7rem 1rem;
+    font-size: 1rem; font-family: var(--sans); font-weight: 600;
+    color: var(--black); text-align: center;
+  }
+
+  .copy-btn {
+    height: 46px; padding: 0 1.1rem;
+    background: var(--black); color: var(--white);
+    border: none; border-radius: var(--radius);
+    font-size: 0.85rem; font-family: var(--sans); font-weight: 600;
+    cursor: pointer; flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .copy-btn:active { transform: scale(0.96); }
+  .copy-btn.copied { background: #166534; }
+
+  .or-divider {
+    font-size: 0.75rem; font-family: var(--sans);
+    color: var(--gray-400); text-align: center;
+  }
+
+  .apps-row { display: flex; gap: 8px; width: 100%; }
+
+  .app-btn {
+    flex: 1; height: 46px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    background: var(--white);
+    font-size: 0.82rem; font-family: var(--sans); font-weight: 600;
+    color: var(--black); cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.12s;
+  }
+  .app-btn:active { background: var(--gray-100); transform: scale(0.97); }
+
+  .sheet-close {
+    width: 100%; height: 46px;
+    background: none;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    font-size: 0.9rem; font-family: var(--sans);
+    color: var(--gray-600); cursor: pointer;
+    margin-top: 0.1rem;
+  }
+  .sheet-close:active { background: var(--gray-100); }
+
+  /* MISC */
   .message-section {
     width: 100%;
     background: var(--gray-100);
@@ -308,10 +407,6 @@
     width: 100%; text-align: center;
     font-size: 0.78rem; color: var(--gray-400); font-family: var(--sans);
   }
-
-  /* Show/hide sections based on device */
-  .desktop-only { display: flex; }
-  .mobile-only  { display: flex; }
 
   @media (max-width: 480px) {
     main { padding: 2.5rem 1.25rem 4rem; }
@@ -349,49 +444,21 @@
 
   <div class="divider"></div>
 
-  <!-- ───── DESKTOP: static QR card ───── -->
+  <!-- QR card — visible to everyone, primary for desktop -->
   <div class="qr-section" id="desktop-section">
-    <p class="section-label">Scan to pay (desktop)</p>
+    <p class="section-label" id="qr-label">Scan to pay</p>
     <div class="qr-static-card">
-      <p class="card-title">Scan & Pay via UPI</p>
-
-      <div class="qr-img-box" id="qr-img-box">
-        <!--
-          ╔══════════════════════════════════════════╗
-          ║  REPLACE THIS BLOCK with your QR image:  ║
-          ║                                           ║
-          ║  <img src="your-qr.png"                   ║
-          ║       alt="UPI QR Code"                   ║
-          ║       style="width:100%;height:100%;       ║
-          ║              object-fit:contain;" />       ║
-          ╚══════════════════════════════════════════╝
-        -->
-          <img src="{{ url_for('static', filename='images/gpay2.jpeg') }}" 
-            alt="UPI QR Code" 
-            style="width:100%;height:100%;object-fit:contain;" />
-        <svg class="qr-placeholder-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
-          <rect x="13" y="13" width="10" height="10" fill="#0a0a0a"/>
-          <rect x="48" y="4" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
-          <rect x="57" y="13" width="10" height="10" fill="#0a0a0a"/>
-          <rect x="4" y="48" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
-          <rect x="13" y="57" width="10" height="10" fill="#0a0a0a"/>
-          <rect x="48" y="48" width="8" height="8" fill="#0a0a0a"/>
-          <rect x="60" y="48" width="8" height="8" fill="#0a0a0a"/>
-          <rect x="48" y="60" width="8" height="8" fill="#0a0a0a"/>
-          <rect x="60" y="60" width="20" height="8" fill="#0a0a0a"/>
-          <rect x="72" y="48" width="8" height="8" fill="#0a0a0a"/>
-        </svg>
-        
+      <p class="card-title">Scan &amp; Pay via UPI</p>
+      <div class="qr-img-box">
+        <img src="{{ url_for('static', filename='images/gpay2.jpeg') }}" alt="UPI QR Code" />
       </div>
-
       <span class="qr-upi-id">impana05@oksbi</span>
-      <p class="qr-note">Open your phone camera or any UPI app<br>and scan to pay.</p>
+      <p class="qr-note">Open your camera or any UPI app<br>and scan to pay.</p>
     </div>
   </div>
 
-  <!-- ───── BOTH: tip amount buttons ───── -->
-  <div class="tip-section" id="tip-section">
+  <!-- Tip buttons -->
+  <div class="tip-section">
     <p class="section-label" id="tip-label">Choose a tip</p>
 
     <div class="tip-grid">
@@ -422,7 +489,7 @@
 
     <div>
       <div class="upi-row">
-        <span class="upi-note" id="upi-method-note">Opens GPay, PhonePe, or any UPI app on your phone</span>
+        <span class="upi-note" id="upi-method-note">Tap a tip → copy UPI ID → pay in any UPI app</span>
       </div>
       <div class="upi-row" style="margin-top:6px;">
         <span class="upi-badge">GPay</span>
@@ -438,7 +505,7 @@
     <p>Random Verse is an independent space kept alive by curiosity and love. Your tip, however small, helps keep this corner of the internet free and thoughtful.</p>
   </div>
 
-  <div style="margin: 30px auto; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+  <div style="margin:30px auto;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
     <a href="{{ url_for('home') }}" style="text-decoration:none;">
       <button class="pay-btn">Back to Home</button>
     </a>
@@ -452,75 +519,151 @@
   &copy; 2025 Random Verse &nbsp;·&nbsp; Made with love &amp; more love
 </footer>
 
+<!-- Mobile UPI bottom sheet -->
+<div class="popup-overlay" id="popup-overlay" onclick="handleOverlayClick(event)">
+  <div class="popup-sheet">
+    <div class="sheet-handle"></div>
+    <p class="sheet-title">Pay via UPI</p>
+    <p class="sheet-amount" id="sheet-amount">₹5</p>
+
+    <div class="sheet-steps">
+      <div class="sheet-step">
+        <span class="step-num">1</span>
+        <span>Copy the UPI ID below</span>
+      </div>
+      <div class="sheet-step">
+        <span class="step-num">2</span>
+        <span>Open GPay, PhonePe, Paytm or any UPI app</span>
+      </div>
+      <div class="sheet-step">
+        <span class="step-num">3</span>
+        <span>Tap "Pay by UPI ID", paste it &amp; enter the amount shown above</span>
+      </div>
+    </div>
+
+    <div class="copy-row">
+      <div class="upi-pill">impana05@oksbi</div>
+      <button class="copy-btn" id="copy-btn" onclick="copyUPI()">Copy</button>
+    </div>
+
+    <p class="or-divider">— or tap to open an app directly —</p>
+
+    <div class="apps-row">
+      <button class="app-btn" onclick="openApp('gpay')">GPay</button>
+      <button class="app-btn" onclick="openApp('phonepe')">PhonePe</button>
+      <button class="app-btn" onclick="openApp('paytm')">Paytm</button>
+    </div>
+
+    <button class="sheet-close" onclick="closePopup()">Close</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
   const UPI_ID     = 'impana05@oksbi';
   const PAYEE_NAME = 'Random Verse';
+  let   currentAmt = 0;
 
   function isMobile() {
     return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
-  // ✅ Improved UPI builder (intent + fallback safe)
-  function buildUPILink(amount) {
-    const base = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Support Random Verse')}`;
-
-    return {
-      intent: `intent://${base.replace('upi://', '')}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`,
-      fallback: base
-    };
+  // Tweak labels for desktop visitors
+  if (!isMobile()) {
+    document.getElementById('qr-label').textContent      = 'Scan to pay (desktop)';
+    document.getElementById('tip-label').textContent     = 'Quick-tip amounts (mobile)';
+    document.getElementById('upi-method-note').textContent = 'Desktop: scan the QR above · Mobile: tap a tip to get UPI ID';
   }
 
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+    setTimeout(() => t.classList.remove('show'), 3200);
   }
 
   function handlePay(amount) {
+    currentAmt = amount;
     if (isMobile()) {
-      const links = buildUPILink(amount);
-
-      // Try intent (better success rate on Android)
-      window.location.href = links.intent;
-
-      // Fallback to normal UPI link
-      setTimeout(() => {
-        window.location.href = links.fallback;
-      }, 1200);
-
-      showToast('Opening UPI app for ₹' + amount + '…');
+      // Show bottom sheet with UPI ID to copy
+      document.getElementById('sheet-amount').textContent = '₹' + amount;
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+      document.getElementById('popup-overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
     } else {
-      showToast('Scan the QR code above with your phone to pay ₹' + amount);
-      document.getElementById('desktop-section').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
+      // Desktop: scroll to QR
+      showToast('Scan the QR above with your phone to pay ₹' + amount);
+      document.getElementById('desktop-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  }
+
+  function closePopup() {
+    document.getElementById('popup-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('popup-overlay')) closePopup();
+  }
+
+  function copyUPI() {
+    const btn = document.getElementById('copy-btn');
+    const done = () => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      showToast('UPI ID copied — open your app and pay ₹' + currentAmt);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(UPI_ID).then(done).catch(() => fallbackCopy(done));
+    } else {
+      fallbackCopy(done);
+    }
+  }
+
+  function fallbackCopy(cb) {
+    const el = document.createElement('textarea');
+    el.value = UPI_ID;
+    el.style.position = 'fixed'; el.style.opacity = '0';
+    document.body.appendChild(el);
+    el.focus(); el.select();
+    try { document.execCommand('copy'); cb(); } catch(e) {}
+    document.body.removeChild(el);
+  }
+
+  function openApp(app) {
+    // App-specific intents — open the app; user enters amount manually
+    const base = `pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR&tn=${encodeURIComponent('Support Random Verse')}`;
+    const urls = {
+      gpay:    'gpay://upi/pay?'    + base,
+      phonepe: 'phonepe://pay?'     + base,
+      paytm:   'paytmmp://pay?'     + base,
+    };
+    const fallback = 'upi://pay?' + base;
+    const a = document.createElement('a');
+    a.href = urls[app] || fallback;
+    a.click();
+    showToast('Enter ₹' + currentAmt + ' when the app opens');
   }
 
   function payCustom() {
     const val = parseFloat(document.getElementById('custom-amount').value);
-
     if (!val || val < 1) {
       showToast('Please enter a valid amount');
       document.getElementById('custom-amount').focus();
       return;
     }
-
     handlePay(Math.round(val));
-  }
-
-  // Desktop hint text stays same logic
-  if (!isMobile()) {
-    document.getElementById('upi-method-note').textContent =
-      'On desktop, scan the QR code above · Buttons open UPI app on mobile';
   }
 
   document.getElementById('custom-amount').addEventListener('keydown', e => {
     if (e.key === 'Enter') payCustom();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePopup();
   });
 </script>
 </body>
