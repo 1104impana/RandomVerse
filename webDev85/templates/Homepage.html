@@ -1325,6 +1325,89 @@ body {
   z-index: 1;
 }
 
+/* 🚀 Rocket stays fixed ALWAYS */
+.rocket {
+  position: fixed;
+  top: 30px;
+  right: 5px;
+  width: 5px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* 👨‍🚀 Astronaut starts hidden at rocket position */
+.astronaut {
+  position: fixed;
+  top: 30px;
+  right: 5px;
+  width: 80px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 🚀 ONLY astronaut moves */
+.astronaut.fly {
+  opacity: 1;
+  animation: flyUp 7s ease-in forwards;
+}
+
+/* smooth upward motion */
+@keyframes flyUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh);
+    opacity: 1;
+  }
+}
+/* wrapper stays in hero section */
+.rocket-wrapper {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
+/* rocket stays still */
+.rocket {
+  width: 45px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+/* astronaut starts EXACTLY behind rocket */
+.astronaut {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  opacity: 0;
+  transform: translateY(0);
+  z-index: 1;
+}
+
+/* animation */
+.astronaut.fly {
+  opacity: 1;
+  animation: flyUp 7s ease-in forwards;
+}
+
+@keyframes flyUp {
+  0% {
+    transform: translateY(0) scale(0.9);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1);
+    opacity: 1;
+  }
+}
+
 
   </style>
 
@@ -1373,7 +1456,7 @@ body {
 
   <div class="floating-text-container hero-section" style="margin-top: -100px;">
     <div id="hero-space"></div>
-    <!-- Space background 
+     <!-- Space background 
   <div class="stars" id="stars"></div>-->
     <div>
       <h1 class="floating-text">
@@ -1420,7 +1503,14 @@ body {
 
    </div>
   </div>
+<div class="rocket-wrapper">
+    <img src="{{ url_for('static', filename='images/rocket.png') }}" 
+         id="rocket" class="rocket">
 
+    <img src="{{ url_for('static', filename='images/astronaut.png') }}" 
+         id="astronaut" class="astronaut">
+  </div>
+    
   
 
  <div class="portal-container" id="portal-container">
@@ -1533,6 +1623,7 @@ body {
         
     </div>
   </div>
+
 
   <footer class="footer py-4 mt-5">
     <div class="container">
@@ -1870,6 +1961,37 @@ function createHeroSpaceStars() {
 }
 
 createHeroSpaceStars();
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const rocket = document.getElementById('rocket');
+  const astronaut = document.getElementById('astronaut');
+
+  if (!rocket || !astronaut) return;
+
+  rocket.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    // reset animation if clicked again
+    astronaut.classList.remove('fly');
+    void astronaut.offsetWidth; // force reflow
+
+    // launch astronaut
+    astronaut.classList.add('fly');
+
+    // scroll to top (home effect)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // reset if user clicks anywhere else
+  document.addEventListener('click', () => {
+    astronaut.classList.remove('fly');
+  });
+});
 
   </script>
 
