@@ -97,14 +97,16 @@
     border-radius: 2px;
   }
 
-  .tip-section {
+  /* ── QR SECTION (desktop) ── */
+  .qr-section {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 1.25rem;
   }
 
-  .tip-label {
+  .section-label {
     font-size: 0.85rem;
     font-family: var(--sans);
     font-weight: 600;
@@ -114,17 +116,84 @@
     text-align: center;
   }
 
-  .desktop-hint {
-    display: none;
+  .qr-static-card {
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 1.75rem 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .qr-static-card p.card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font);
+    color: var(--black);
+  }
+
+  /* ── QR image placeholder ── */
+  .qr-img-box {
+    width: 260px;
+    height: 260px;
+    border: 2px dashed var(--gray-400);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: var(--gray-100);
-    border-radius: var(--radius);
-    padding: 0.75rem 1rem;
-    font-size: 0.82rem;
+    overflow: hidden;
+    position: relative;
+    padding: 5px;
+  }
+
+  /* When you add your real image, replace the placeholder div below with:
+     <img src="your-qr-code.png" alt="UPI QR Code" style="width:100%;height:100%;object-fit:contain;" />
+     and remove the .qr-placeholder styles */
+
+  .qr-placeholder-icon {
+    width: 48px; height: 48px; opacity: 0.25;
+  }
+
+  .qr-placeholder-text {
+    font-size: 0.75rem;
     font-family: var(--sans);
     color: var(--gray-600);
     text-align: center;
+    padding: 0 12px;
+    line-height: 1.5;
+  }
+
+  .qr-upi-id {
+    font-size: 0.8rem;
+    font-family: var(--sans);
+    color: var(--gray-600);
+    background: var(--gray-100);
+    padding: 6px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.02em;
+    display: none;/* Hide this if you don't want to show the UPI ID below the QR, or style as needed */
+  }
+
+  .qr-note {
+    font-size: 0.78rem;
+    font-family: var(--sans);
+    color: var(--gray-400);
+    text-align: center;
     line-height: 1.6;
-    border-left: 3px solid var(--gray-400);
+  }
+
+  /* ── MOBILE UPI BUTTON SECTION ── */
+  .tip-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
   }
 
   .tip-grid {
@@ -149,9 +218,7 @@
     -webkit-tap-highlight-color: transparent;
   }
   .tip-btn:hover { background: var(--gray-800); border-color: var(--gray-800); }
-  .tip-btn:active { transform: scale(0.97); background: var(--gray-200); }
-  .tip-btn.featured { background: var(--black); border-color: var(--black); color: var(--white); }
-  .tip-btn.featured:hover { background: var(--gray-800); border-color: var(--gray-800); }
+  .tip-btn:active { transform: scale(0.97); }
 
   .tip-amt { font-size: 1.5rem; font-weight: 700; font-family: var(--font); line-height: 1; }
   .tip-sub { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.55; font-family: var(--sans); }
@@ -187,6 +254,10 @@
     transition: background 0.15s, transform 0.1s;
     white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   .pay-btn:hover { background: var(--gray-800); }
   .pay-btn:active { transform: scale(0.97); }
@@ -207,80 +278,6 @@
     content: ''; display: inline-block;
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--black);
-  }
-
-  /* QR Modal */
-  .qr-overlay {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-  }
-  .qr-overlay.active { display: flex; }
-
-  .qr-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 2rem 1.75rem 1.75rem;
-    max-width: 340px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    position: relative;
-    animation: popIn 0.2s ease;
-  }
-
-  @keyframes popIn {
-    from { transform: scale(0.92); opacity: 0; }
-    to   { transform: scale(1);    opacity: 1; }
-  }
-
-  .qr-close {
-    position: absolute; top: 14px; right: 16px;
-    background: none; border: none;
-    font-size: 1.4rem; cursor: pointer;
-    color: var(--gray-400); line-height: 1;
-  }
-  .qr-close:hover { color: var(--black); }
-
-  .qr-title { font-size: 1.1rem; font-weight: 700; font-family: var(--font); }
-
-  .qr-amount {
-    font-size: 2.2rem; font-weight: 700;
-    font-family: var(--font); letter-spacing: -0.02em;
-  }
-
-  .qr-img-wrap {
-    width: 200px; height: 200px;
-    border: 1.5px solid var(--gray-200);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; background: var(--white);
-    position: relative;
-  }
-
-  .qr-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
-
-  .qr-loading {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem; font-family: var(--sans); color: var(--gray-400);
-  }
-
-  .qr-upi-id {
-    font-size: 0.8rem; font-family: var(--sans); color: var(--gray-600);
-    background: var(--gray-100); padding: 6px 14px;
-    border-radius: 100px; letter-spacing: 0.02em;
-  }
-
-  .qr-note {
-    font-size: 0.78rem; font-family: var(--sans);
-    color: var(--gray-400); text-align: center; line-height: 1.6;
   }
 
   .message-section {
@@ -304,13 +301,17 @@
     pointer-events: none; white-space: nowrap;
   }
   .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-  
+
   footer {
     margin-top: auto; padding: 1.5rem;
     border-top: 1px solid var(--gray-200);
     width: 100%; text-align: center;
     font-size: 0.78rem; color: var(--gray-400); font-family: var(--sans);
   }
+
+  /* Show/hide sections based on device */
+  .desktop-only { display: flex; }
+  .mobile-only  { display: flex; }
 
   @media (max-width: 480px) {
     main { padding: 2.5rem 1.25rem 4rem; }
@@ -319,7 +320,6 @@
     .custom-row { flex-direction: column; }
     .pay-btn { width: 100%; }
     .toast { width: 90%; text-align: center; white-space: normal; }
-
   }
 </style>
 </head>
@@ -338,43 +338,79 @@
     </div>
     <h1>Support Random Verse</h1>
     <p class="tagline">You really came this far?<br><br>
-
-This site has no purpose.
-No productivity.
-No meaning.
-<br>
-And yet… you stayed.♡<br><br>
-
-If you liked wasting your time here,<br>
-you can help keep it alive !</p>
+      This site has no purpose.
+      No productivity.
+      No meaning.<br>
+      And yet… you stayed.♡<br><br>
+      If you liked wasting your time here,<br>
+      you can help keep it alive !
+    </p>
   </div>
 
   <div class="divider"></div>
 
-  <div class="tip-section">
-    <p class="tip-label">Choose a tip</p>
+  <!-- ───── DESKTOP: static QR card ───── -->
+  <div class="qr-section" id="desktop-section">
+    <p class="section-label">Scan to pay (desktop)</p>
+    <div class="qr-static-card">
+      <p class="card-title">Scan & Pay via UPI</p>
 
-    <div class="desktop-hint" id="desktop-hint">
-      You're on desktop — clicking will show a QR code. Scan it with your phone's camera or any UPI app to pay instantly.
+      <div class="qr-img-box" id="qr-img-box">
+        <!--
+          ╔══════════════════════════════════════════╗
+          ║  REPLACE THIS BLOCK with your QR image:  ║
+          ║                                           ║
+          ║  <img src="your-qr.png"                   ║
+          ║       alt="UPI QR Code"                   ║
+          ║       style="width:100%;height:100%;       ║
+          ║              object-fit:contain;" />       ║
+          ╚══════════════════════════════════════════╝
+        -->
+          <img src="{{ url_for('static', filename='images/gpay2.jpeg') }}" 
+            alt="UPI QR Code" 
+            style="width:100%;height:100%;object-fit:contain;" />
+        <svg class="qr-placeholder-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
+          <rect x="13" y="13" width="10" height="10" fill="#0a0a0a"/>
+          <rect x="48" y="4" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
+          <rect x="57" y="13" width="10" height="10" fill="#0a0a0a"/>
+          <rect x="4" y="48" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
+          <rect x="13" y="57" width="10" height="10" fill="#0a0a0a"/>
+          <rect x="48" y="48" width="8" height="8" fill="#0a0a0a"/>
+          <rect x="60" y="48" width="8" height="8" fill="#0a0a0a"/>
+          <rect x="48" y="60" width="8" height="8" fill="#0a0a0a"/>
+          <rect x="60" y="60" width="20" height="8" fill="#0a0a0a"/>
+          <rect x="72" y="48" width="8" height="8" fill="#0a0a0a"/>
+        </svg>
+        
+      </div>
+
+      <span class="qr-upi-id">impana05@oksbi</span>
+      <p class="qr-note">Open your phone camera or any UPI app<br>and scan to pay.</p>
     </div>
+  </div>
+
+  <!-- ───── BOTH: tip amount buttons ───── -->
+  <div class="tip-section" id="tip-section">
+    <p class="section-label" id="tip-label">Choose a tip</p>
 
     <div class="tip-grid">
       <button class="tip-btn" onclick="handlePay(2)">
         <span class="tip-amt">₹2</span>
         <span class="tip-sub">accidental support</span>
       </button>
-      <button class="tip-btn featured" onclick="handlePay(5)">
+      <button class="tip-btn" onclick="handlePay(5)">
         <span class="tip-amt">₹5</span>
         <span class="tip-sub">okay… you like this</span>
       </button>
       <button class="tip-btn" onclick="handlePay(50)">
         <span class="tip-amt">₹50</span>
-        <span class="tip-sub">you didn’t have to…♡</span>
+        <span class="tip-sub">you didn't have to…♡</span>
       </button>
     </div>
 
     <div class="custom-section">
-      <p class="tip-label" style="margin-bottom:2px;">or enter your own</p>
+      <p class="section-label" style="margin-bottom:2px;">or enter your own</p>
       <div class="custom-row">
         <div class="custom-input-wrap">
           <span class="rupee-symbol">₹</span>
@@ -403,64 +439,31 @@ you can help keep it alive !</p>
   </div>
 
   <div style="margin: 30px auto; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
-
-  <!-- Back to Home -->
-  <a href="{{ url_for('home') }}" style="text-decoration:none;">
-    <button class="pay-btn">Back to Home</button>
-  </a>
-
-  <!-- Restart Journey -->
-  <a href="{{ url_for('random_page') }}" style="text-decoration:none;">
-    <button class="pay-btn"> Jump into Verse Again</button>
-  </a>
-
-</div>
+    <a href="{{ url_for('home') }}" style="text-decoration:none;">
+      <button class="pay-btn">Back to Home</button>
+    </a>
+    <a href="{{ url_for('random_page') }}" style="text-decoration:none;">
+      <button class="pay-btn">Jump into Verse Again</button>
+    </a>
+  </div>
 </main>
 
 <footer>
   &copy; 2025 Random Verse &nbsp;·&nbsp; Made with love &amp; more love
 </footer>
 
-<!-- QR Modal -->
-<div class="qr-overlay" id="qr-overlay" onclick="handleOverlayClick(event)">
-  <div class="qr-card" id="qr-card">
-    <button class="qr-close" onclick="closeQR()">&#x2715;</button>
-    <p class="qr-title">Scan to Pay</p>
-    <p class="qr-amount" id="qr-amount-display">₹20</p>
-    <div class="qr-img-wrap">
-      <div class="qr-loading" id="qr-loading">Generating QR…</div>
-      <img id="qr-img" src="" alt="UPI QR Code" style="display:none;" />
-    </div>
-    <span class="qr-upi-id" id="qr-upi-label" style="display:none;"></span>
-    <p class="qr-note">Open your phone camera or any UPI app<br>and scan this code to pay.</p>
-  </div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-  // ── CONFIG: replace with your real UPI ID ──────────────────────
   const UPI_ID     = 'impana05@oksbi';
   const PAYEE_NAME = 'Random Verse';
-  // ───────────────────────────────────────────────────────────────
 
   function isMobile() {
     return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
-  // Show desktop hint and update note if on desktop
-  if (!isMobile()) {
-    document.getElementById('desktop-hint').style.display = 'block';
-    document.getElementById('upi-method-note').textContent = 'QR code on desktop · Opens UPI app on mobile';
-  }
-
   function buildUPIUrl(amount) {
     return `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Support Random Verse')}`;
-  }
-
-  function buildQRImageUrl(amount) {
-    const upiStr = buildUPIUrl(amount);
-    return `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=${encodeURIComponent(upiStr)}`;
   }
 
   function showToast(msg) {
@@ -472,49 +475,15 @@ you can help keep it alive !</p>
 
   function handlePay(amount) {
     if (isMobile()) {
-      const a = document.createElement('a');
-      a.href = buildUPIUrl(amount);
-      a.click();
+      // On mobile: open UPI deep link directly
+      window.location.href = buildUPIUrl(amount);
       showToast('Opening UPI app for ₹' + amount + '…');
     } else {
-      openQR(amount);
+      // On desktop: just remind them to scan the QR above
+      showToast('Scan the QR code above with your phone to pay ₹' + amount);
+      document.getElementById('desktop-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
-
-  function openQR(amount) {
-    document.getElementById('qr-amount-display').textContent = '₹' + amount;
-    document.getElementById('qr-upi-label').textContent = UPI_ID;
-
-    const img = document.getElementById('qr-img');
-    const loading = document.getElementById('qr-loading');
-    img.style.display = 'none';
-    loading.style.display = 'flex';
-
-    img.onload = () => {
-      loading.style.display = 'none';
-      img.style.display = 'block';
-    };
-    img.onerror = () => {
-      loading.textContent = 'Could not load QR. Check your connection.';
-    };
-    img.src = buildQRImageUrl(amount);
-
-    document.getElementById('qr-overlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeQR() {
-    document.getElementById('qr-overlay').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  function handleOverlayClick(e) {
-    if (e.target === document.getElementById('qr-overlay')) closeQR();
-  }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeQR();
-  });
 
   function payCustom() {
     const val = parseFloat(document.getElementById('custom-amount').value);
@@ -524,6 +493,12 @@ you can help keep it alive !</p>
       return;
     }
     handlePay(Math.round(val));
+  }
+
+  // On desktop: update the tip-section label to clarify buttons scroll to QR
+  if (!isMobile()) {
+    document.getElementById('upi-method-note').textContent =
+      'On desktop, scan the QR code above · Buttons open UPI app on mobile';
   }
 
   document.getElementById('custom-amount').addEventListener('keydown', e => {
