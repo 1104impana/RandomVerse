@@ -104,6 +104,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
+    padding-top: 35px;
   }
 
   .section-label {
@@ -194,6 +195,8 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    padding-top: 2px;
+    padding-bottom: 5px;
   }
 
   .tip-grid {
@@ -230,6 +233,25 @@
     position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
     font-size: 1rem; color: var(--gray-600); font-family: var(--sans); pointer-events: none;
   }
+  .tip-card {
+  background: var(--black);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--sans);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  color: var(--white);
+}
+
+/* subtle hover (feels premium, not clickable) */
+.tip-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
 
   #custom-amount {
     width: 100%; height: 52px;
@@ -349,11 +371,33 @@
 
   <div class="divider"></div>
 
+  <!-- ───── BOTH: tip amount buttons ───── -->
+  <div class="tip-section" id="tip-section">
+    <p class="section-label" id="tip-label">If you did'nt hate this...</p>
+
+    <div class="tip-grid">
+  <div class="tip-card">
+    <span class="tip-amt">₹2</span>
+    <span class="tip-sub">accidental support</span>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-amt">₹5</span>
+    <span class="tip-sub">okay… you like this</span>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-amt">₹50</span>
+    <span class="tip-sub">you didn't have to…♡</span>
+  </div>
+</div>
+
+
   <!-- ───── DESKTOP: static QR card ───── -->
   <div class="qr-section" id="desktop-section">
-    <p class="section-label">Scan to pay (desktop)</p>
+    <p class="section-label">Scan to pay </p>
     <div class="qr-static-card">
-      <p class="card-title">Scan & Pay via UPI</p>
+      
 
       <div class="qr-img-box" id="qr-img-box">
         <!--
@@ -393,26 +437,7 @@
     </div>
   </div>
 
-  <!-- ───── BOTH: tip amount buttons ───── -->
-  <div class="tip-section" id="tip-section">
-    <p class="section-label" id="tip-label">Choose a tip</p>
-
-    <div class="tip-grid">
-      <button class="tip-btn" onclick="handlePay(2)">
-        <span class="tip-amt">₹2</span>
-        <span class="tip-sub">accidental support</span>
-      </button>
-      <button class="tip-btn" onclick="handlePay(5)">
-        <span class="tip-amt">₹5</span>
-        <span class="tip-sub">okay… you like this</span>
-      </button>
-      <button class="tip-btn" onclick="handlePay(50)">
-        <span class="tip-amt">₹50</span>
-        <span class="tip-sub">you didn't have to…♡</span>
-      </button>
-    </div>
-
-
+  
     <div>
       <div class="upi-row">
         <span class="upi-note" id="upi-method-note">Opens GPay, PhonePe, or any UPI app on your phone</span>
