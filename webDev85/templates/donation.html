@@ -4,347 +4,199 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Support Us — Random Verse</title>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --black: #0a0a0a;
-    --white: #ffffff;
-    --gray-100: #f5f5f5;
-    --gray-200: #e5e5e5;
-    --gray-400: #a3a3a3;
-    --gray-600: #525252;
-    --gray-800: #262626;
-    --radius: 10px;
-    --font: 'Georgia', serif;
-    --sans: system-ui, -apple-system, sans-serif;
-  }
+:root {
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --gray-100: #f7f7f7;
+  --gray-200: #eaeaea;
+  --gray-600: #525252;
+  --radius: 14px;
+  --font: 'Georgia', serif;
+  --sans: system-ui, -apple-system, sans-serif;
+}
 
-  body {
-    background: var(--white);
-    color: var(--black);
-    font-family: var(--font);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  header {
-    width: 100%;
-    border-bottom: 1px solid var(--gray-200);
-    padding: 1.25rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .logo {
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    font-family: var(--font);
-    color: var(--black);
-    text-decoration: none;
-  }
-  .logo span { font-weight: 300; font-style: italic; }
-
-  main {
-    width: 100%;
-    max-width: 680px;
-    padding: 3.5rem 1.5rem 5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-  }
-
-  .hero {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .heart-icon {
-    width: 56px; height: 56px;
-    background: var(--black);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 0.5rem;
-  }
-  .heart-icon svg { width: 26px; height: 26px; fill: var(--white); }
-
-  h1 {
-    font-size: clamp(1.8rem, 5vw, 2.6rem);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-  }
-
-  .tagline {
-    font-size: 1.05rem;
-    color: var(--gray-600);
-    line-height: 1.7;
-    max-width: 480px;
-    font-family: var(--sans);
-  }
-
-  .divider {
-    width: 48px; height: 2px;
-    background: var(--black);
-    border-radius: 2px;
-  }
-
-  /* ── QR SECTION (desktop) ── */
-  .qr-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    padding-top: 35px;
-  }
-
-  .section-label {
-    font-size: 0.85rem;
-    font-family: var(--sans);
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gray-600);
-    text-align: center;
-  }
-
-  .qr-static-card {
-    background: var(--white);
-    border: 1.5px solid var(--gray-200);
-    border-radius: 16px;
-    padding: 1.75rem 1.75rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .qr-static-card p.card-title {
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: var(--font);
-    color: var(--black);
-  }
-
-  /* ── QR image placeholder ── */
-  .qr-img-box {
-    width: 260px;
-    height: 260px;
-    border: 2px dashed var(--gray-400);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: var(--gray-100);
-    overflow: hidden;
-    position: relative;
-    padding: 5px;
-  }
-
-  /* When you add your real image, replace the placeholder div below with:
-     <img src="your-qr-code.png" alt="UPI QR Code" style="width:100%;height:100%;object-fit:contain;" />
-     and remove the .qr-placeholder styles */
-
-  .qr-placeholder-icon {
-    width: 48px; height: 48px; opacity: 0.25;
-  }
-
-  .qr-placeholder-text {
-    font-size: 0.75rem;
-    font-family: var(--sans);
-    color: var(--gray-600);
-    text-align: center;
-    padding: 0 12px;
-    line-height: 1.5;
-  }
-
-  .qr-upi-id {
-    font-size: 0.8rem;
-    font-family: var(--sans);
-    color: var(--gray-600);
-    background: var(--gray-100);
-    padding: 6px 14px;
-    border-radius: 100px;
-    letter-spacing: 0.02em;
-    display: none;/* Hide this if you don't want to show the UPI ID below the QR, or style as needed */
-  }
-
-  .qr-note {
-    font-size: 0.78rem;
-    font-family: var(--sans);
-    color: var(--gray-400);
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  /* ── MOBILE UPI BUTTON SECTION ── */
-  .tip-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    padding-top: 2px;
-    padding-bottom: 5px;
-  }
-
-  .tip-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
-  .tip-btn {
-    background: var(--black);
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 1.2rem 1rem;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    transition: background 0.15s, border-color 0.15s, transform 0.1s;
-    font-family: var(--sans);
-    color: var(--white);
-    -webkit-tap-highlight-color: transparent;
-  }
-  .tip-btn:hover { background: var(--gray-800); border-color: var(--gray-800); }
-  .tip-btn:active { transform: scale(0.97); }
-
-  .tip-amt { font-size: 1.5rem; font-weight: 700; font-family: var(--font); line-height: 1; }
-  .tip-sub { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.55; font-family: var(--sans); }
-
-  .custom-section { display: flex; flex-direction: column; gap: 10px; }
-  .custom-row { display: flex; gap: 10px; }
-  .custom-input-wrap { flex: 1; position: relative; }
-  .rupee-symbol {
-    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-    font-size: 1rem; color: var(--gray-600); font-family: var(--sans); pointer-events: none;
-  }
-  .tip-card {
-  background: var(--black);
-  border: 1.5px solid var(--gray-200);
-  border-radius: var(--radius);
-  padding: 1.2rem 1rem;
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+}
+
+/* HEADER */
+header {
+  width: 100%;
+  border-bottom: 1px solid var(--gray-200);
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--black);
+}
+
+/* MAIN */
+main {
+  width: 100%;
+  max-width: 640px;
+  padding: 3rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+/* HERO */
+.hero { text-align: center; }
+
+.heart-icon {
+  width: 54px;
+  height: 54px;
+  background: var(--black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+
+.heart-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: var(--white);
+}
+
+h1 {
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  margin-bottom: 12px;
+}
+
+.tagline {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.8;
+  max-width: 420px;
+  margin: 0 auto;
   font-family: var(--sans);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* DIVIDER */
+.divider {
+  width: 40px;
+  height: 2px;
+  background: var(--black);
+  margin: 0 auto;
+}
+
+/* CTA */
+.copy-section { text-align: center; }
+
+.copy-btn {
+  height: 52px;
+  padding: 0 2rem;
+  background: var(--black);
   color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  cursor: pointer;
+  width: 240px;
 }
 
-/* subtle hover (feels premium, not clickable) */
-.tip-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+.copy-btn:hover { background: #262626; }
+
+.upi-id {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  margin-top: 8px;
+  font-family: var(--sans);
 }
 
-  #custom-amount {
-    width: 100%; height: 52px;
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 0 14px 0 30px;
-    font-size: 1rem; font-family: var(--sans);
-    color: var(--black); background: var(--white);
-    outline: none;
-    transition: border-color 0.15s;
-    -webkit-appearance: none;
-  }
-  #custom-amount:focus { border-color: var(--black); }
-  #custom-amount::placeholder { color: var(--gray-400); }
+/* CARD */
+.card {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.6rem;
+  border-radius: var(--radius);
+  background: var(--gray-100);
+  font-family: var(--sans);
+  color: var(--gray-600);
+  line-height: 1.75;
+  text-align: left;
+}
 
-  .pay-btn {
-    height: 52px; padding: 0 1.5rem;
-    background: var(--black); color: var(--white);
-    border: none; border-radius: var(--radius);
-    font-size: 0.95rem; font-family: var(--sans); font-weight: 600;
-    cursor: pointer; letter-spacing: 0.03em;
-    transition: background 0.15s, transform 0.1s;
-    white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .pay-btn:hover { background: var(--gray-800); }
-  .pay-btn:active { transform: scale(0.97); }
+/* TITLE */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
 
-  .upi-row {
-    display: flex; align-items: center; gap: 8px;
-    justify-content: center; flex-wrap: wrap;
-  }
-  .upi-note { font-size: 0.78rem; color: var(--gray-400); font-family: var(--sans); text-align: center; }
-  .upi-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    border: 1px solid var(--gray-200); border-radius: 20px;
-    padding: 3px 10px;
-    font-size: 0.72rem; font-family: var(--sans); font-weight: 600;
-    color: var(--gray-600); letter-spacing: 0.04em;
-  }
-  .upi-badge::before {
-    content: ''; display: inline-block;
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--black);
-  }
+/* LINKS */
+.links {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
 
-  .message-section {
-    width: 100%;
-    background: var(--gray-100);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    display: flex; flex-direction: column; gap: 0.6rem;
-  }
-  .message-section p { font-size: 0.95rem; line-height: 1.7; font-family: var(--sans); color: var(--gray-600); }
-  .message-section p strong { color: var(--black); font-weight: 600; }
+.links a {
+  text-decoration: none;
+  background: var(--black);
+  color: var(--white);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  transition: 0.2s;
+}
 
-  .toast {
-    position: fixed; bottom: 2rem; left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--black); color: var(--white);
-    padding: 0.75rem 1.5rem; border-radius: 100px;
-    font-size: 0.88rem; font-family: var(--sans); font-weight: 500;
-    z-index: 999; opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    pointer-events: none; white-space: nowrap;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.links a:hover {
+  opacity: 0.85;
+}
 
-  footer {
-    margin-top: auto; padding: 1.5rem;
-    border-top: 1px solid var(--gray-200);
-    width: 100%; text-align: center;
-    font-size: 0.78rem; color: var(--gray-400); font-family: var(--sans);
-  }
+/* FOOTER */
+footer {
+  margin-top: auto;
+  padding: 1.5rem;
+  border-top: 1px solid var(--gray-200);
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--gray-600);
+  font-family: var(--sans);
+}
 
-  /* Show/hide sections based on device */
-  .desktop-only { display: flex; }
-  .mobile-only  { display: flex; }
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(60px);
+  background: var(--black);
+  color: white;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: 0.3s;
+}
 
-  @media (max-width: 480px) {
-    main { padding: 2.5rem 1.25rem 4rem; }
-    .tip-grid { gap: 8px; }
-    .tip-amt { font-size: 1.3rem; }
-    .custom-row { flex-direction: column; }
-    .pay-btn { width: 100%; }
-    .toast { width: 90%; text-align: center; white-space: normal; }
-  }
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -352,165 +204,111 @@
 </header>
 
 <main>
+
   <div class="hero">
     <div class="heart-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
       </svg>
     </div>
+
     <h1>Support Random Verse</h1>
-    <p class="tagline">You really came this far?<br><br>
-      This site has no purpose.
-      No productivity.
-      No meaning.<br>
-      And yet… you stayed.♡<br><br>
-      If you liked wasting your time here,<br>
-      you can help keep it alive !
+
+    <p class="tagline">
+      This site has no purpose. No productivity. No meaning.<br>
+      And yet… you stayed.<br><br>
+      If something about that made you smile,<br>
+      you can help keep it alive.
     </p>
   </div>
 
   <div class="divider"></div>
 
-  <!-- ───── BOTH: tip amount buttons ───── -->
-  <div class="tip-section" id="tip-section">
-    <p class="section-label" id="tip-label">If you did'nt hate this...</p>
-
-    <div class="tip-grid">
-  <div class="tip-card">
-    <span class="tip-amt">₹2</span>
-    <span class="tip-sub">accidental support</span>
+  <div class="copy-section">
+    <button class="copy-btn" id="copyBtn" onclick="copyUPI()">
+      Support this space
+    </button>
+    <div class="upi-id">Tap to copy UPI ID and pay in any app</div>
   </div>
 
-  <div class="tip-card">
-    <span class="tip-amt">₹5</span>
-    <span class="tip-sub">okay… you like this</span>
+  <!-- WHY SUPPORT -->
+  <div class="card">
+    <div class="card-title">Why Support?</div>
+
+    <p>
+      Random Verse exists for no real reason — and maybe that’s the point.
+    </p>
+
+    <p>
+      It’s a small corner of the internet where nothing is expected of you.
+      No pressure, no productivity, no noise.
+    </p>
+
+    <p>
+      If that felt refreshing, your support helps keep it that way.
+    </p>
   </div>
 
-  <div class="tip-card">
-    <span class="tip-amt">₹50</span>
-    <span class="tip-sub">you didn't have to…♡</span>
-  </div>
-</div>
+  <!-- COLLAB -->
+  <div class="card">
+    <div class="card-title">Collaborate & Grow</div>
 
+    <p>
+      Random Verse isn’t meant to be built alone.
+    </p>
 
-  <!-- ───── DESKTOP: static QR card ───── -->
-  <div class="qr-section" id="desktop-section">
-    <p class="section-label">Scan to pay </p>
-    <div class="qr-static-card">
-      
+    <p>
+      If you like strange ideas, quiet corners of the internet,
+      or building things that don’t need a reason — you’ll fit right in.
+    </p>
 
-      <div class="qr-img-box" id="qr-img-box">
-        <!--
-          ╔══════════════════════════════════════════╗
-          ║  REPLACE THIS BLOCK with your QR image:  ║
-          ║                                           ║
-          ║  <img src="your-qr.png"                   ║
-          ║       alt="UPI QR Code"                   ║
-          ║       style="width:100%;height:100%;       ║
-          ║              object-fit:contain;" />       ║
-          ╚══════════════════════════════════════════╝
-        -->
-          <img src="{{ url_for('static', filename='images/gpay2.jpeg') }}" 
-            alt="UPI QR Code" 
-            style="width:100%;height:100%;object-fit:contain;" />
-        <svg class="qr-placeholder-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
-          <rect x="13" y="13" width="10" height="10" fill="#0a0a0a"/>
-          <rect x="48" y="4" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
-          <rect x="57" y="13" width="10" height="10" fill="#0a0a0a"/>
-          <rect x="4" y="48" width="28" height="28" rx="3" stroke="#0a0a0a" stroke-width="5"/>
-          <rect x="13" y="57" width="10" height="10" fill="#0a0a0a"/>
-          <rect x="48" y="48" width="8" height="8" fill="#0a0a0a"/>
-          <rect x="60" y="48" width="8" height="8" fill="#0a0a0a"/>
-          <rect x="48" y="60" width="8" height="8" fill="#0a0a0a"/>
-          <rect x="60" y="60" width="20" height="8" fill="#0a0a0a"/>
-          <rect x="72" y="48" width="8" height="8" fill="#0a0a0a"/>
-        </svg>
-        
-      </div>
+    <p>
+      You can contribute code, suggest ideas, improve the experience,
+      or simply be part of shaping what this becomes.
+    </p>
 
-      <span class="qr-upi-id">impana05@oksbi</span>
-      <p class="qr-note">Open your phone camera or any UPI app<br>and scan to pay.</p>
-      <p id="copy-upi" style="display:none; font-size:0.8rem; color:#525252; cursor:pointer;">
-            Tap to copy UPI ID
-      </p>
+    <p><strong>No pressure. No expectations. Just curiosity.</strong></p>
+
+    <div class="links">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=impana05@gmail.com" target="_blank">
+  Email
+</a>
+      <a href="https://github.com/1104impana/RandomVerse" target="_blank">GitHub</a>
     </div>
   </div>
 
-  
-    <div>
-      <div class="upi-row">
-        <span class="upi-note" id="upi-method-note">Opens GPay, PhonePe, or any UPI app on your phone</span>
-      </div>
-      <div class="upi-row" style="margin-top:6px;">
-        <span class="upi-badge">GPay</span>
-        <span class="upi-badge">PhonePe</span>
-        <span class="upi-badge">Paytm</span>
-        <span class="upi-badge">Any UPI</span>
-      </div>
-    </div>
-  </div>
-  
-
-  <div class="message-section">
-    <p><strong>Why support us?</strong></p>
-    <p>Random Verse is an independent space kept alive by curiosity and love. Your tip, however small, helps keep this corner of the internet free and thoughtful.</p>
-  </div>
-
-  <div style="margin: 30px auto; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
-    <a href="{{ url_for('home') }}" style="text-decoration:none;">
-      <button class="pay-btn">Back to Home</button>
-    </a>
-    <a href="{{ url_for('random_page') }}" style="text-decoration:none;">
-      <button class="pay-btn">Jump into Verse Again</button>
-    </a>
-  </div>
 </main>
 
 <footer>
-  &copy; 2025 Random Verse &nbsp;·&nbsp; Made with love &amp; more love
+  &copy; 2025 Random Verse · Made with love
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
-  const UPI_ID = 'impana05@oksbi';
+const UPI_ID = "impana05@oksbi";
 
-  function isMobile() {
-    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  }
+function copyUPI() {
+  navigator.clipboard.writeText(UPI_ID)
+    .then(() => {
+      showToast("UPI ID copied");
+      const btn = document.getElementById("copyBtn");
+      btn.textContent = "Copied ✓";
 
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
+      setTimeout(() => {
+        btn.textContent = "Support this space";
+      }, 2000);
+    })
+    .catch(() => showToast("Failed to copy"));
+}
 
-  // ✅ Copy UPI (mobile only)
-  function copyUPI() {
-    navigator.clipboard.writeText(UPI_ID)
-      .then(() => showToast('UPI ID copied'))
-      .catch(() => showToast('Failed to copy'));
-  }
-
-  // ✅ Show copy option only on mobile
-  if (isMobile()) {
-    const el = document.getElementById('copy-upi');
-    if (el) {
-      el.style.display = 'block';
-      el.addEventListener('click', copyUPI);
-    }
-  }
-
-  // ✅ Update instruction text
-  if (!isMobile()) {
-    document.getElementById('upi-method-note').textContent =
-      'Scan the QR code above to pay';
-  } else {
-    document.getElementById('upi-method-note').textContent =
-      'Scan QR or tap to copy UPI ID to pay';
-  }
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
+}
 </script>
+
 </body>
 </html>
