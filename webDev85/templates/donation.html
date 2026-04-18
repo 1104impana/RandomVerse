@@ -194,6 +194,31 @@ footer {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.nav-btn {
+  height: 48px;
+  padding: 0 1.4rem;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.nav-btn:hover {
+  background: #262626;
+}
 </style>
 </head>
 
@@ -278,6 +303,16 @@ footer {
   </div>
 
 </main>
+
+<div class="nav-buttons">
+  <a href="{{ url_for('home') }}">
+    <button class="nav-btn">Back to Home</button>
+  </a>
+
+  <a href="{{ url_for('random_page') }}">
+    <button class="nav-btn">Jump into Verse Again</button>
+  </a>
+</div>
 
 <footer>
   &copy; 2025 Random Verse · Made with love
