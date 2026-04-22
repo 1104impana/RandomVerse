@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lost in RandomVerse</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at 50% 40%, #0a0a0f, #000000 70%);
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 🌌 floating particles */
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* main container */
+.container {
+  text-align: center;
+  padding: 20px;
+  max-width: 650px;
+  z-index: 2;
+}
+
+/* glowing heading */
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  animation: glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 10px rgba(99,102,241,0.2)); }
+  to { filter: drop-shadow(0 0 25px rgba(168,85,247,0.6)); }
+}
+
+/* typewriter text */
+.typewriter {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: #9ca3af;
+  min-height: 70px;
+  margin-bottom: 35px;
+  line-height: 1.6;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; filter: blur(6px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+/* glass buttons */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+button {
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #e5e7eb;
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  background: rgba(99,102,241,0.2);
+  border-color: #6366f1;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 20px rgba(99,102,241,0.3);
+}
+
+/* primary button */
+.primary {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border: none;
+}
+
+.primary:hover {
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+}
+
+/* mobile */
+@media (max-width: 480px) {
+  .buttons {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container">
+  <h1>Oh no...</h1>
+  <div class="typewriter" id="typeText"></div>
+
+  <div class="buttons">
+    <button class="primary" onclick="goBack()">↩ Jump Back</button>
+    <button onclick="support()">☕ Support</button>
+    <button onclick="collab()">🤝 Collaborate</button>
+    <button onclick="contact()">✉ Write to Us</button>
+  </div>
+</div>
+
+<script>
+/* ✨ typewriter with smooth flow */
+const lines = [
+  "You’ve reached the edge of RandomVerse.",
+  "Every path has been explored...",
+  "Every possibility... experienced.",
+  "But this isn’t the end.",
+  "New verses are already forming in the void ✨"
+];
+
+let l = 0, c = 0;
+const el = document.getElementById("typeText");
+
+function type() {
+  if (l < lines.length) {
+    if (c < lines[l].length) {
+      el.innerHTML += lines[l][c++];
+      setTimeout(type, 35);
+    } else {
+      el.innerHTML += "<br/>";
+      l++; c = 0;
+      setTimeout(type, 700);
+    }
+  }
+}
+type();
+
+/* 🌌 particle stars */
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = Array.from({length: 120}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 1.2,
+  d: Math.random() * 0.5
+}));
+
+function drawStars() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "white";
+
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  moveStars();
+}
+
+function moveStars() {
+  stars.forEach(s => {
+    s.y += s.d;
+    if (s.y > canvas.height) {
+      s.y = 0;
+      s.x = Math.random() * canvas.width;
+    }
+  });
+}
+
+setInterval(drawStars, 33);
+
+/* buttons */
+function goBack() { window.history.back(); }
+function support() { window.location.href = "https://buymeacoffee.com/your-link"; }
+function collab() { window.location.href = "https://github.com/1104impana/RandomVerse"; }
+function contact() { window.location.href = "mailto:your@email.com"; }
+</script>
+
+</body>
+</html>
