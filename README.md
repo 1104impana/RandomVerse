@@ -2,6 +2,7 @@
 
 RandomVerse is an interactive web experience designed to explore how curiosity, randomness, and minimal design can influence user engagement. Instead of structured navigation or goal-driven interaction, the platform offers a collection of dynamic “verses” — small, self-contained experiences that users can discover through simple actions.
 
+https://randomverse.onrender.com/
 
 ## Concept
 
